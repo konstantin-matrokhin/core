@@ -8,7 +8,6 @@ import net.enot.darta.data.Proxy;
 import net.enot.darta.data.Server;
 import net.enot.darta.logger.LoggerColor;
 import net.enot.dartasystem.packets.Packet;
-import net.enot.dartasystem.packets.TestINPacket;
 import net.enot.dartasystem.packets.commands.*;
 import net.enot.dartasystem.packets.player.*;
 import net.enot.dartasystem.packets.proxy.ProxyAddServerPacket;

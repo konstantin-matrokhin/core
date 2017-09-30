@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Darta/Darta.iml" filepath="$PROJECT_DIR$/Darta/Darta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DartaBukkit/DartaBukkit.iml" filepath="$PROJECT_DIR$/DartaBukkit/DartaBukkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DartaBungee/DartaBungee.iml" filepath="$PROJECT_DIR$/DartaBungee/DartaBungee.iml" />
       <module fileurl="file://$PROJECT_DIR$/DartaProject.iml" filepath="$PROJECT_DIR$/DartaProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DartaSystem/DartaSystem.iml" filepath="$PROJECT_DIR$/DartaSystem/DartaSystem.iml" />
     </modules>
   </component>
 </project>

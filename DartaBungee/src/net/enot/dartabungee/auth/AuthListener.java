@@ -1,7 +1,6 @@
 package net.enot.dartabungee.auth;
 
 import net.enot.dartabungee.DartaBungee;
-import net.enot.dartasystem.packets.TestOUTPacket;
 import net.enot.dartasystem.utils.MessageUtil;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;

@@ -7,7 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="spigot_1.8" level="project" />
-    <orderEntry type="library" name="DartaSystem" level="project" />
+    <orderEntry type="module" module-name="DartaSystem" />
+    <orderEntry type="library" name="spigot_1_81" level="project" />
+    <orderEntry type="library" name="netty-all-4.0.52.Final" level="project" />
   </component>
 </module>
