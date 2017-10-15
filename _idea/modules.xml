@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/Core.iml" filepath="$PROJECT_DIR$/.idea/Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/CoreAPI/CoreAPI.iml" filepath="$PROJECT_DIR$/CoreAPI/CoreAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/CoreBukkit/CoreBukkit.iml" filepath="$PROJECT_DIR$/CoreBukkit/CoreBukkit.iml" />
       <module fileurl="file://$PROJECT_DIR$/CoreBungee/CoreBungee.iml" filepath="$PROJECT_DIR$/CoreBungee/CoreBungee.iml" />
       <module fileurl="file://$PROJECT_DIR$/CoreCLI/CoreCLI.iml" filepath="$PROJECT_DIR$/CoreCLI/CoreCLI.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/Darta/Darta.iml" filepath="$PROJECT_DIR$/Darta/Darta.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DartaBukkit/DartaBukkit.iml" filepath="$PROJECT_DIR$/DartaBukkit/DartaBukkit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DartaBungee/DartaBungee.iml" filepath="$PROJECT_DIR$/DartaBungee/DartaBungee.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DartaProject.iml" filepath="$PROJECT_DIR$/DartaProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DartaSystem/DartaSystem.iml" filepath="$PROJECT_DIR$/DartaSystem/DartaSystem.iml" />
->>>>>>> origin/master
     </modules>
   </component>
 </project>
