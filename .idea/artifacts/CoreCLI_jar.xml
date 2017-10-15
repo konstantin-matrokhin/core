@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CoreCLI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CoreCLI_jar</output-path>
+    <root id="archive" name="CoreCLI.jar">
+      <element id="module-output" name="CoreCLI" />
+      <element id="library" level="project" name="netty-all-4.1.16.Final" />
+      <element id="module-output" name="CoreAPI" />
+    </root>
+  </artifact>
+</component>

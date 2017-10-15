@@ -1,0 +1,6 @@
+name: Core
+version: 0.0.1
+main: org.kvlt.core.bukkit.CorePlugin
+commands:
+  kek:
+    usage: /kek

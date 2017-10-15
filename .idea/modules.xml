@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Core.iml" filepath="$PROJECT_DIR$/.idea/Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoreAPI/CoreAPI.iml" filepath="$PROJECT_DIR$/CoreAPI/CoreAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoreBukkit/CoreBukkit.iml" filepath="$PROJECT_DIR$/CoreBukkit/CoreBukkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoreBungee/CoreBungee.iml" filepath="$PROJECT_DIR$/CoreBungee/CoreBungee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CoreCLI/CoreCLI.iml" filepath="$PROJECT_DIR$/CoreCLI/CoreCLI.iml" />
+    </modules>
+  </component>
+</project>

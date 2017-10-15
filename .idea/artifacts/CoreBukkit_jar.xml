@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CoreBukkit:jar">
+    <output-path>$PROJECT_DIR$/../lc-server/plugins</output-path>
+    <root id="archive" name="CoreBukkit.jar">
+      <element id="module-output" name="CoreBukkit" />
+      <element id="library" level="project" name="netty-all-4.1.16.Final" />
+      <element id="module-output" name="CoreAPI" />
+    </root>
+  </artifact>
+</component>
