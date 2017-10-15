@@ -14,10 +14,5 @@ public class PingCommand extends Command {
 
     @Override
     public void execute(CommandSender commandSender, String[] strings) {
-        /*ProxyLoginPacket packet = new ProxyLoginPacket(
-                new ServerPlayer("suka"),
-                CoreBungee.get().getServerName()
-        );
-        CoreBungee.get().getCoreServer().writeAndFlush(packet);*/
     }
 }
