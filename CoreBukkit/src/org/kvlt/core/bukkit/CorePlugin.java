@@ -43,7 +43,7 @@ public class CorePlugin extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("kek")) {
+        if (cmd.getName().equalsIgnoreCase("ping")) {
 
             return true;
         }
