@@ -1,6 +1,8 @@
 package org.kvlt.core;
 
 import org.kvlt.core.entities.ServerPlayer;
+import org.kvlt.core.net.ClientManager;
+import org.kvlt.core.packets.ProxyPingDataPacket;
 import org.kvlt.core.utils.Log;
 
 import java.util.Scanner;
@@ -22,9 +24,8 @@ public class CommandListener {
 
     protected void listenCommands(String cmd) {
         if (cmd.equalsIgnoreCase("who")) {
-            for (ServerPlayer player: CoreServer.get().getServerPlayers()) {
-                Log.$(player.getName() + " | " + player.getUUID().toString());
-            }
+            ClientManager.getClients().writeAndFlush(new ProxyPingDataPacket("test2"));
+            Log.$("Отсылаю MOTD: test2");
         }
     }
 

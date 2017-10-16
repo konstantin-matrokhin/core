@@ -9,5 +9,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="netty-all-4.1.16.Final" level="project" />
     <orderEntry type="module" module-name="CoreCLI" scope="PROVIDED" />
+    <orderEntry type="module" module-name="CoreBungee" scope="PROVIDED" />
+    <orderEntry type="module" module-name="CoreBukkit" scope="PROVIDED" />
+    <orderEntry type="library" scope="PROVIDED" name="BungeeCord" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spigot" level="project" />
   </component>
 </module>

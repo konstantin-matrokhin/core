@@ -17,6 +17,7 @@ public class CoreBungee extends Plugin {
     private Configuration config;
     private String serverName;
     private Channel server;
+    private PingEventListener pingEventListener;
 
     @Override
     public void onEnable() {
@@ -32,8 +33,10 @@ public class CoreBungee extends Plugin {
         }
 
         serverName = config.getString("client-name");
+        pingEventListener = new PingEventListener();
 
         getProxy().getPluginManager().registerListener(this, new ProxyEventListener());
+        getProxy().getPluginManager().registerListener(this, pingEventListener);
         getProxy().getPluginManager().registerCommand(this, new PingCommand());
 
         ConnectionManager.get().startClient();
@@ -70,6 +73,10 @@ public class CoreBungee extends Plugin {
 
     public Configuration getConfig() {
         return config;
+    }
+
+    public PingEventListener getPingEventListener() {
+        return pingEventListener;
     }
 
     public static synchronized CoreBungee get() {

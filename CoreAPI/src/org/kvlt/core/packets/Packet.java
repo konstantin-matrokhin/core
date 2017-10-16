@@ -4,21 +4,20 @@ import java.io.Serializable;
 
 public abstract class Packet implements Serializable {
 
+    private static final String CORE_CLASS = "org.kvlt.core.CoreCLI";
+    private static final String SERVER_CLASS = "org.kvlt.core.bukkit.CorePlugin";
+    private static final String PROXY_CLASS = "org.kvlt.core.bungee.CoreBungee";
+
     private boolean isCore() {
-        try {
-            Class.forName("org.kvlt.core.CoreCLI");
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return checkClass(CORE_CLASS);
     }
 
     private boolean isServer() {
-        return false;
+        return checkClass(SERVER_CLASS);
     }
 
     private boolean isProxy() {
-        return false;
+        return checkClass(PROXY_CLASS);
     }
 
     protected abstract void onCore();
@@ -28,12 +27,24 @@ public abstract class Packet implements Serializable {
     public void execute() {
         if (isCore()) {
             onCore();
-        } else { //TODO: check if is bukkit server
+        }
+
+        if (isServer()) {
             onServer();
         }
 
         if (isProxy()) {
             onProxy();
+        }
+
+    }
+
+    private boolean checkClass(String apiClass) {
+        try {
+            Class.forName(apiClass);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
