@@ -5,6 +5,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.kvlt.core.net.CoreInitializer;
+import org.kvlt.core.nodes.Proxies;
 import org.kvlt.core.utils.Log;
 
 public class CoreServer {
@@ -13,9 +14,11 @@ public class CoreServer {
 
     private static CoreServer instance;
     private ServerPlayers serverPlayers;
+    private Proxies proxies;
 
     private CoreServer() {
         serverPlayers = new ServerPlayers();
+        proxies = new Proxies();
     }
 
     public void start() {
@@ -48,6 +51,10 @@ public class CoreServer {
 
     public ServerPlayers getServerPlayers() {
         return serverPlayers;
+    }
+
+    public Proxies getProxies() {
+        return proxies;
     }
 
     public static synchronized CoreServer get() {

@@ -6,6 +6,10 @@
     "db": "core",
     "user": "root",
     "password": "12345"
+  },
+
+  "bungee": {
+    "motd": "&c[&7 bungeecord proxy server &c] &r"
   }
 
 }

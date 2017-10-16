@@ -27,11 +27,9 @@ public class MySQLConnection {
                 "useLegacyDatetimeCode=false&" +
                 "serverTimezone=UTC";
 
-        String dbUrl = new StringBuilder(String.format(
-                "jdbc:mysql://%s:%s/%s",
-                host, port, db))
-                    .append("?")
-                    .append(dbParams).toString();
+        String dbUrl = String.format("jdbc:mysql://%s:%s/%s", host, port, db)
+                .concat("?")
+                .concat(dbParams);
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

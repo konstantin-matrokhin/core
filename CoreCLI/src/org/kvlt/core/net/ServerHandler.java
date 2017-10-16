@@ -25,7 +25,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         Log.$("Произошла ошибка с сервером: " + ctx.channel().remoteAddress());
-        cause.printStackTrace();
         ClientManager.remove(ctx.channel());
         ctx.close();
     }
