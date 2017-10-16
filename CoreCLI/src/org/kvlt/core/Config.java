@@ -48,10 +48,15 @@ public class Config {
         mysqlMap = gson.fromJson(mysqlSet.toString(), property);
     }
 
-    public static String getMysqlConfig(String key) {
-        return mysqlMap.get(key);
+    public static String getMySQL(String key) {
+        String val = mysqlMap.get(key);
+        if (val == null) {
+            throw new NullPointerException("Вероятно, поле " + key + " отсутсвует в конфиге.");
+        }
+        return val;
     }
 
+    //TODO: Fix
     private static boolean createConfig() throws Exception {
         if (config.createNewFile()) {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();

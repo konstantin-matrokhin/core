@@ -1,10 +1,11 @@
 {
 
   "mysql": {
-    "host": "localhost",
+    "host": "build.huesos228.com",
     "port": 3306,
+    "db": "core",
     "user": "root",
-    "password": ""
+    "password": "12345"
   }
 
 }
