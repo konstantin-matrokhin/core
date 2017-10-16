@@ -5,6 +5,9 @@
       <element id="module-output" name="CoreCLI" />
       <element id="library" level="project" name="netty-all-4.1.16.Final" />
       <element id="module-output" name="CoreAPI" />
+      <element id="library" level="project" name="mysql:mysql-connector-java:6.0.6" />
+      <element id="library" level="project" name="com.google.code.gson:gson:2.8.2" />
+      <element id="dir-copy" path="$PROJECT_DIR$/CoreCLI/res" />
     </root>
   </artifact>
 </component>

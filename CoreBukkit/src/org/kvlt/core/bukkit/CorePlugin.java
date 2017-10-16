@@ -1,14 +1,11 @@
 package org.kvlt.core.bukkit;
 
 import io.netty.channel.Channel;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.events.EventManager;
 import org.kvlt.core.bukkit.net.ConnectionManager;
-import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.packets.PlayerJoinPacket;
 
 public class CorePlugin extends JavaPlugin {
 

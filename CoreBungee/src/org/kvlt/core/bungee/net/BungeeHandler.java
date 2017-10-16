@@ -1,9 +1,7 @@
 package org.kvlt.core.bungee.net;
 
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import net.md_5.bungee.BungeeCord;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.packets.Packet;
 

@@ -1,9 +1,6 @@
 package org.kvlt.core;
 
-import io.netty.channel.Channel;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.net.ClientManager;
-import org.kvlt.core.packets.PlayerJoinPacket;
 import org.kvlt.core.utils.Log;
 
 import java.util.Scanner;

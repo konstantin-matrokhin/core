@@ -31,7 +31,7 @@ public class CoreServer {
                     .childHandler(new CoreInitializer());
 
             ChannelFuture future = bootstrap.bind(PORT).sync();
-            future.addListener((ChannelFutureListener) (channelFuture) -> {
+            future.addListener((channelFuture) -> {
                 Log.$(
                         channelFuture.isSuccess()
                                 ? "Сервер запущен по адресу " + future.channel().remoteAddress()

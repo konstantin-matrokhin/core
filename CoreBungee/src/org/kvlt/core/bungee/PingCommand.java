@@ -2,9 +2,6 @@ package org.kvlt.core.bungee;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
-import org.kvlt.core.bungee.utils.Log;
-import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.packets.ProxyLoginPacket;
 
 public class PingCommand extends Command {
 
