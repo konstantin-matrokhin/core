@@ -8,7 +8,7 @@
     "password": "12345"
   },
 
-  "bungee": {
+  "proxy": {
     "motd": "&c[&7 bungeecord proxy server &c] &r"
   }
 

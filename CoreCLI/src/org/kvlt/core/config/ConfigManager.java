@@ -1,55 +1,53 @@
-package org.kvlt.core;
+package org.kvlt.core.config;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.kvlt.core.utils.Log;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.HashMap;
-import java.util.List;
 
-public class Config {
+public class ConfigManager {
 
-    private static final String FILE_NAME = "config.json";
-    private static File config;
-    private static Gson gson;
-    private static JsonObject mysqlSet;
-    public static HashMap<String, String> mysqlMap;
+    private String fileName;
+    private File config;
+    private Gson gson;
+    private JsonParser parser;
 
-    public static void init() {
+    public void init(String fileName) {
+        this.fileName = fileName;
+
         try {
-            config = new File(FILE_NAME);
+            config = new File(fileName);
+            gson = new Gson();
+            parser = new JsonParser();
             if (!config.exists()) {
                 Log.$(createConfig()
                         ? "Создан новый файл конфигурации"
                         : "Файл конфигурации не создан."
                 );
             }
-            loadConfig();
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
-
     }
 
-    private static void loadConfig() throws Exception {
-        gson = new Gson();
-
-        JsonReader reader = new JsonReader(new FileReader(FILE_NAME));
-        JsonParser parser = new JsonParser();
-        mysqlSet = parser.parse(reader).getAsJsonObject().getAsJsonObject("mysql");
-
+    public HashMap<String, String> loadSection(String section) throws Exception {
+        JsonObject jsonSection = parser.parse(new JsonReader(new FileReader(fileName))).getAsJsonObject().getAsJsonObject(section);
         Type property = new TypeToken<HashMap<String, String>>(){}.getType();
-        mysqlMap = gson.fromJson(mysqlSet.toString(), property);
+        return gson.fromJson(jsonSection.toString(), property);
     }
 
-    public static String getMySQL(String key) {
-        String val = mysqlMap.get(key);
+    public String getValue(HashMap<String, String> map, String key) {
+        String val = map.get(key);
         if (val == null) {
             throw new NullPointerException("Вероятно, поле " + key + " отсутсвует в конфиге.");
         }
@@ -57,10 +55,10 @@ public class Config {
     }
 
     //TODO: Fix
-    private static boolean createConfig() throws Exception {
+    public boolean createConfig() throws Exception {
         if (config.createNewFile()) {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream is = Config.class.getClass().getResourceAsStream("/" + FILE_NAME);
+            InputStream is = Config.class.getClass().getResourceAsStream("/" + fileName);
 
             Files.copy(is, config.toPath());
             return true;

@@ -1,6 +1,6 @@
 package org.kvlt.core.db;
 
-import org.kvlt.core.Config;
+import org.kvlt.core.config.Config;
 import org.kvlt.core.utils.Log;
 
 import java.sql.Connection;

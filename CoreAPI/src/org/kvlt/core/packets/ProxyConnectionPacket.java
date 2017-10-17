@@ -1,22 +1,24 @@
 package org.kvlt.core.packets;
 
 import io.netty.channel.Channel;
+import org.kvlt.core.config.Config;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.utils.Log;
 
 public class ProxyConnectionPacket extends Packet<Channel> {
 
-    private String name;
+    private String serverName;
 
-    public ProxyConnectionPacket(String name) {
-        this.name = name;
+    public ProxyConnectionPacket(String serverName) {
+        this.serverName = serverName;
     }
 
     @Override
     protected void onCore(Channel channel) {
-        Proxy proxy = new Proxy(name, channel);
-        Log.$("Connected Bungee > " + name);
+        Proxy proxy = new Proxy(serverName, channel);
+        Log.$("Connected Bungee > " + serverName);
+        proxy.send(new ProxyPingDataPacket(Config.getProxy("motd")));
         CoreServer.get().getProxies().add(proxy);
     }
 

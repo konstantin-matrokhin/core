@@ -35,11 +35,12 @@ public class CoreBungee extends Plugin {
         serverName = config.getString("client-name");
         pingEventListener = new PingEventListener();
 
+        ConnectionManager.get().startClient();
+
         getProxy().getPluginManager().registerListener(this, new ProxyEventListener());
         getProxy().getPluginManager().registerListener(this, pingEventListener);
         getProxy().getPluginManager().registerCommand(this, new PingCommand());
 
-        ConnectionManager.get().startClient();
     }
 
     @Override

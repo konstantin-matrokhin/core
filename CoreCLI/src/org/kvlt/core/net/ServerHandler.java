@@ -19,7 +19,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Packet packet) throws Exception {
-        packet.execute();
+        packet.execute(ctx.channel());
     }
 
     @Override
