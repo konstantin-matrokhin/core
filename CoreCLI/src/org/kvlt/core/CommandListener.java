@@ -24,8 +24,7 @@ public class CommandListener {
 
     protected void listenCommands(String cmd) {
         if (cmd.equalsIgnoreCase("who")) {
-            ClientManager.getClients().writeAndFlush(new ProxyPingDataPacket("test2"));
-            Log.$("Отсылаю MOTD: test2");
+
         }
     }
 

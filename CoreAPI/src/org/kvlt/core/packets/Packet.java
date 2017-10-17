@@ -2,7 +2,7 @@ package org.kvlt.core.packets;
 
 import java.io.Serializable;
 
-public abstract class Packet implements Serializable {
+public abstract class Packet<T> implements Serializable {
 
     private static final String CORE_CLASS = "org.kvlt.core.CoreCLI";
     private static final String SERVER_CLASS = "org.kvlt.core.bukkit.CorePlugin";
@@ -23,6 +23,16 @@ public abstract class Packet implements Serializable {
     protected abstract void onCore();
     protected abstract void onServer();
     protected abstract void onProxy();
+
+    protected void onCore(T t) {
+
+    }
+
+    public void execute(T t) {
+        if (isCore()) {
+            onCore(t);
+        }
+    }
 
     public void execute() {
         if (isCore()) {
