@@ -17,7 +17,6 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Packet packet) {
-        CoreBungee.get().getLogger().info("SOME PACKET: " + packet.toString());
         packet.execute();
     }
 
