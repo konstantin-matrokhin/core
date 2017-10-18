@@ -3,9 +3,9 @@ package org.kvlt.core;
 import org.kvlt.core.db.DB;
 import org.kvlt.core.entities.ServerPlayer;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
-public class ServerPlayers extends ArrayList<ServerPlayer> {
+public class ServerPlayers extends LinkedHashSet<ServerPlayer> {
 
     @Override
     public boolean add(ServerPlayer p) {
