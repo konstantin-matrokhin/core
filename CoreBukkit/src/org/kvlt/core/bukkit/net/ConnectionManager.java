@@ -10,34 +10,54 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.utils.Log;
 
+import java.util.concurrent.TimeUnit;
+
 public class ConnectionManager {
 
     private static ConnectionManager instance;
 
     private EventLoopGroup eventLoopGroup;
+    private Bootstrap bootstrap;
     private Channel channel;
+    private String host;
+    private int port;
+    private boolean isConnected;
 
     private ConnectionManager() {}
 
     public void startClient() {
-        String host = ConfigManager.config().getString("host");
-        int port = ConfigManager.config().getInt("port");
-
+        host = ConfigManager.config().getString("host");
+        port = ConfigManager.config().getInt("port");
         eventLoopGroup = new NioEventLoopGroup();
+
         try {
-            Bootstrap bootstrap = new Bootstrap();
+            bootstrap = new Bootstrap()
+                    .group(eventLoopGroup)
+                    .channel(NioSocketChannel.class)
+                    .option(ChannelOption.TCP_NODELAY, true)
+                    .option(ChannelOption.SO_KEEPALIVE, true)
+                    .handler(new ClientInitializer());
 
-            bootstrap.group(eventLoopGroup)
-                .channel(NioSocketChannel.class)
-                .option(ChannelOption.TCP_NODELAY, true)
-                .option(ChannelOption.SO_KEEPALIVE, true)
-                .handler(new ClientInitializer());
+            connect();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void connect() {
+        if (isConnected) return;
+        try {
             ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
             channel = channelFuture.channel();
-            channelFuture.addListener((future) -> {
-                if (future.isSuccess()) {
-                    //
+            channelFuture.addListener((ChannelFuture future) -> {
+                isConnected = future.isSuccess();
+                if (!isConnected) {
+                    Log.$("Нет связи с главным сервером. Переподключение через 3 сек..");
+                    future.channel().eventLoop().schedule(this::connect, 3L, TimeUnit.SECONDS);
+                } else {
+                    Log.$("Подключено!");
                 }
             });
         } catch (Exception e) {
