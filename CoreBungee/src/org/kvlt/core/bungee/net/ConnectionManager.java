@@ -16,6 +16,8 @@ import static java.lang.Thread.sleep;
 
 public class ConnectionManager {
 
+    public static final long RECONNECT_DELAY = 3L;
+
     private static ConnectionManager instance;
 
     private EventLoopGroup eventLoopGroup;
@@ -57,7 +59,7 @@ public class ConnectionManager {
                 isConnected = future.isSuccess();
                 if (!isConnected) {
                     Log.$("Нет связи с главным сервером. Переподключение через 3 сек..");
-                    future.channel().eventLoop().schedule(this::connect, 3L, TimeUnit.SECONDS);
+                    future.channel().eventLoop().schedule(this::connect, RECONNECT_DELAY, TimeUnit.SECONDS);
                 } else {
                     Log.$("Подключено!");
                 }
