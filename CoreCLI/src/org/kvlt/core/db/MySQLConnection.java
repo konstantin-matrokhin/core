@@ -9,11 +9,7 @@ import java.sql.ResultSet;
 
 public class MySQLConnection {
 
-    private static MySQLConnection instance;
-
     private Connection connection;
-
-    private MySQLConnection() {}
 
     public void connect() {
         String host = Config.getMySQL("host");
@@ -43,8 +39,17 @@ public class MySQLConnection {
         }
     }
 
-    public static MySQLConnection get() {
-        return instance == null ? instance = new MySQLConnection() : instance;
+    public Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                wait(3000); //TODO fix
+                Log.$("Соединение с БД отстуствует, переподключаюсь");
+                connect();
+            }
+        } catch (Exception e) {
+            return getConnection();
+        }
+        return connection;
     }
 
 }

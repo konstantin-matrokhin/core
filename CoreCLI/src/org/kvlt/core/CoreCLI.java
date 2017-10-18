@@ -1,6 +1,7 @@
 package org.kvlt.core;
 
 import org.kvlt.core.config.Config;
+import org.kvlt.core.db.DB;
 import org.kvlt.core.db.MySQLConnection;
 
 public class CoreCLI {
@@ -9,7 +10,7 @@ public class CoreCLI {
 
     public static void main(String[] args) {
         Config.init();
-        MySQLConnection.get().connect();
+        DB.get().getMySQLConnection().connect();
         CoreServer.get().start();
     }
 

@@ -9,7 +9,7 @@ import net.md_5.bungee.event.EventHandler;
 
 public class PingEventListener implements Listener {
 
-    private final String DEFAULT_MOTD = "Нет соединения с главным сервером";
+    private final String DEFAULT_MOTD = "&cНет соединения с главным сервером&r";
     private String motd = "";
 
     @EventHandler

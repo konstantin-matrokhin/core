@@ -10,7 +10,7 @@ public class CorePlayer implements ServerPlayer, Serializable {
 
     public CorePlayer() {}
     public CorePlayer(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public CorePlayer(ServerPlayer player) {
@@ -29,7 +29,7 @@ public class CorePlayer implements ServerPlayer, Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public void setUuid(UUID uuid) {

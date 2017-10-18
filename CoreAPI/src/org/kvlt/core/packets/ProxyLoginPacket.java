@@ -40,6 +40,7 @@ public class ProxyLoginPacket extends Packet implements Serializable {
     public ServerPlayer getServerPlayer() {
         return player;
     }
+
     public String getServer() {
         return server;
     }
