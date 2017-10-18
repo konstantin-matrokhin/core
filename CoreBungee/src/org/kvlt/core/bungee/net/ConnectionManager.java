@@ -16,7 +16,7 @@ import static java.lang.Thread.sleep;
 
 public class ConnectionManager {
 
-    public static final long RECONNECT_DELAY = 3L;
+    public static final long RECONNECT_DELAY = 8L;
 
     private static ConnectionManager instance;
 
@@ -65,6 +65,7 @@ public class ConnectionManager {
                 }
             });
         } catch (Exception e) {
+
         }
     }
 

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConnectionManager {
 
-    public static final long RECONNECT_DELAY = 3L;
+    public static final long RECONNECT_DELAY = 8L;
 
     private static ConnectionManager instance;
 
@@ -48,7 +48,7 @@ public class ConnectionManager {
 
     }
 
-    private void connect() {
+    public void connect() {
         if (isConnected) return;
         try {
             ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
@@ -63,7 +63,7 @@ public class ConnectionManager {
                 }
             });
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
 

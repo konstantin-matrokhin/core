@@ -21,8 +21,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable error) {
-        error.printStackTrace();
-        ctx.close();
+        ConnectionManager.get().connect();
     }
 
 }
