@@ -12,6 +12,7 @@ public class Config {
     private static ConfigManager configManager;
     private static HashMap<String, String> mysqlData;
     private static HashMap<String, String> proxyData;
+    private static HashMap<String, String> bukkitData;
 
     public static void init() {
         configManager = new ConfigManager();
@@ -20,6 +21,7 @@ public class Config {
         try {
             mysqlData = configManager.loadSection(MYSQL_SECTION);
             proxyData = configManager.loadSection(PROXY_SECTION);
+            bukkitData = configManager.loadSection(SERVER_SECTION);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,6 +33,10 @@ public class Config {
 
     public static String getProxy(String key) {
         return configManager.getValue(proxyData, key);
+    }
+
+    public static String getServer(String key) {
+        return configManager.getValue(bukkitData, key);
     }
 
 }

@@ -10,7 +10,8 @@ public class CoreCLI {
 
     public static void main(String[] args) {
         Config.init();
-        DB.get().getMySQLConnection().connect();
+        DB.getMySQLConnection().connect();
+
         CoreServer.get().start();
     }
 

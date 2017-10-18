@@ -20,9 +20,7 @@ public class ProxyLoginPacket extends Packet implements Serializable {
     @Override
     protected void onCore() {
         CorePlayer player = new CorePlayer(getServerPlayer());
-        player.setName(player.getName().toLowerCase());
-
-        CoreServer.get().getServerPlayers().add(getServerPlayer());
+        CoreServer.get().getServerPlayers().add(player);
 
         Log.$(getServerPlayer().getName() + " присоединился к " + getServer());
     }

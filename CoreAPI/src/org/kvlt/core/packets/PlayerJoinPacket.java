@@ -2,6 +2,7 @@ package org.kvlt.core.packets;
 
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.ServerPlayer;
+import org.kvlt.core.utils.Log;
 
 import java.io.Serializable;
 
@@ -17,9 +18,7 @@ public class PlayerJoinPacket extends Packet implements Serializable {
 
     @Override
     public void onCore() {
-        if (CoreServer.get().getServerPlayers().contains(player)) {
 
-        }
     }
 
     @Override

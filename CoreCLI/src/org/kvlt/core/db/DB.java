@@ -5,26 +5,31 @@ import java.sql.SQLException;
 
 public class DB {
 
-    private static DB instance;
-    private MySQLConnection mySQLConnection;
+    private static MySQLConnection mySQLConnection = new MySQLConnection();;
+    private static PlayerDB playerDB = new PlayerDB();
 
-    private DB() {
-        mySQLConnection = new MySQLConnection();
+    public static PlayerDB getPlayerDB() {
+        return playerDB;
     }
 
-    public void querySend(String sql) throws SQLException {
-        mySQLConnection.getConnection().createStatement().execute(sql);
+    public static void query(String sql) {
+        try {
+            mySQLConnection.getConnection().createStatement().execute(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public ResultSet queryData(String sql) throws SQLException {
-        return mySQLConnection.getConnection().createStatement().executeQuery(sql);
+    public static ResultSet queryData(String sql) {
+        try {
+            return mySQLConnection.getConnection().createStatement().executeQuery(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public static synchronized DB get() {
-        return instance == null ? instance = new DB() : instance;
-    }
-
-    public MySQLConnection getMySQLConnection() {
+    public static MySQLConnection getMySQLConnection() {
         return mySQLConnection;
     }
 

@@ -1,25 +1,20 @@
 package org.kvlt.core;
 
+import org.kvlt.core.db.DB;
 import org.kvlt.core.entities.ServerPlayer;
 
 import java.util.ArrayList;
 
 public class ServerPlayers extends ArrayList<ServerPlayer> {
 
-    private ArrayList<ServerPlayer> serverPlayers;
-
-    public ServerPlayers() {
-        serverPlayers = new ArrayList<>();
-    }
-
     @Override
-    public boolean add(ServerPlayer serverPlayer) {
-        return serverPlayers.add(serverPlayer);
-    }
-
-    @Override
-    public boolean remove(Object serverPlayer) {
-        return serverPlayers.remove(serverPlayer);
+    public boolean add(ServerPlayer p) {
+        try {
+            DB.getPlayerDB().addPlayer(p);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }

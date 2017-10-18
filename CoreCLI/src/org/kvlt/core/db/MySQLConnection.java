@@ -30,10 +30,6 @@ public class MySQLConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            ResultSet set = connection.createStatement().executeQuery("SELECT * FROM test WHERE id=1");
-            set.next();
-            String name = set.getString("name");
-            Log.$(name);
         } catch (Exception e) {
             e.printStackTrace();
         }

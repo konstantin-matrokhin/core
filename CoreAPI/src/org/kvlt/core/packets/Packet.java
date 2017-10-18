@@ -31,6 +31,7 @@ public abstract class Packet<T> implements Serializable {
     public void execute(T t) {
         if (isCore()) {
             onCore(t);
+            onCore();
         }
     }
 
