@@ -1,6 +1,5 @@
 package org.kvlt.core.nodes;
 
-import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.Packet;
 
 import java.util.ArrayList;

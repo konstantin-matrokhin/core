@@ -3,8 +3,11 @@ package org.kvlt.core.bungee.net;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.kvlt.core.bungee.CoreBungee;
+import org.kvlt.core.bungee.utils.Log;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.packets.ProxyConnectionPacket;
+
+import java.util.concurrent.TimeUnit;
 
 public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
 
@@ -18,6 +21,11 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Packet packet) {
         packet.execute();
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        ConnectionManager.get().connect();
     }
 
 }

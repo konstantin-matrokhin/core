@@ -1,10 +1,5 @@
 package org.kvlt.core;
 
-import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.net.ClientManager;
-import org.kvlt.core.packets.ProxyPingDataPacket;
-import org.kvlt.core.utils.Log;
-
 import java.util.Scanner;
 
 public class CommandListener {

@@ -41,7 +41,11 @@ public class ConfigManager {
     }
 
     public HashMap<String, String> loadSection(String section) throws Exception {
-        JsonObject jsonSection = parser.parse(new JsonReader(new FileReader(fileName))).getAsJsonObject().getAsJsonObject(section);
+        JsonObject jsonSection = parser.parse(
+                new JsonReader(new FileReader(fileName)))
+                    .getAsJsonObject()
+                    .getAsJsonObject(section);
+
         Type property = new TypeToken<HashMap<String, String>>(){}.getType();
         return gson.fromJson(jsonSection.toString(), property);
     }

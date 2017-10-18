@@ -3,7 +3,6 @@ package org.kvlt.core.bungee;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
-import org.kvlt.core.bungee.utils.Log;
 
 public class PingCommand extends Command {
 

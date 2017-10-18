@@ -8,40 +8,61 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.kvlt.core.bungee.CoreBungee;
-import static org.kvlt.core.bungee.utils.Log.$;
+import org.kvlt.core.bungee.utils.Log;
+
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
 
 public class ConnectionManager {
 
     private static ConnectionManager instance;
 
     private EventLoopGroup eventLoopGroup;
+    private Bootstrap bootstrap;
     private Channel channel;
+    private String host;
+    private int port;
+    private boolean isConnected;
 
     private ConnectionManager() {}
 
     public void startClient() {
-        String host = CoreBungee.get().getConfig().getString("host");
-        int port = CoreBungee.get().getConfig().getInt("port");
-
+        host = CoreBungee.get().getConfig().getString("host");
+        port = CoreBungee.get().getConfig().getInt("port");
         eventLoopGroup = new NioEventLoopGroup();
-        try {
-            Bootstrap bootstrap = new Bootstrap();
 
-            bootstrap.group(eventLoopGroup)
+        try {
+            bootstrap = new Bootstrap()
+                    .group(eventLoopGroup)
                     .channel(NioSocketChannel.class)
                     .option(ChannelOption.TCP_NODELAY, true)
                     .option(ChannelOption.SO_KEEPALIVE, true)
                     .handler(new ProxyInitializer());
 
-            ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
+            connect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void connect() {
+        if (isConnected) return;
+
+        try {
+            ChannelFuture channelFuture = bootstrap.connect(host, port);
             channel = channelFuture.channel();
-            channelFuture.addListener((future) -> {
-                if (future.isSuccess()) {
-                    //
+            channelFuture.addListener((ChannelFuture future) -> {
+                isConnected = future.isSuccess();
+                if (!isConnected) {
+                    Log.$("Нет связи с главным сервером. Переподключение через 3 сек..");
+                    future.channel().eventLoop().schedule(this::connect, 3L, TimeUnit.SECONDS);
+                } else {
+                    Log.$("Подключено!");
                 }
             });
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -56,7 +77,7 @@ public class ConnectionManager {
     public void disconnect() {
         try {
             if (eventLoopGroup.shutdownGracefully().sync().isSuccess()) {
-                $("Отключено от главного сервера");
+                Log.$("Отключено от главного сервера");
             }
         } catch (Exception e) {
             e.printStackTrace();

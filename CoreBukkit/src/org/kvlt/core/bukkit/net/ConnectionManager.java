@@ -8,8 +8,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.kvlt.core.bukkit.ConfigManager;
-
-import static org.kvlt.core.bukkit.utils.Log.*;
+import org.kvlt.core.bukkit.utils.Log;
 
 public class ConnectionManager {
 
@@ -57,7 +56,7 @@ public class ConnectionManager {
     public void disconnect() {
         try {
             if (eventLoopGroup.shutdownGracefully().sync().isSuccess()) {
-                $("Отключено от главного сервера");
+                Log.$("Отключено от главного сервера");
             }
         } catch (Exception e) {
             e.printStackTrace();
