@@ -1,5 +1,9 @@
 {
 
+  "core": {
+    "port": 3030
+  },
+
   "mysql": {
     "host": "build.huesos228.com",
     "port": 3306,

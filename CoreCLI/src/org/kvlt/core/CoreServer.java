@@ -4,21 +4,22 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.kvlt.core.config.Config;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.Proxies;
 import org.kvlt.core.utils.Log;
 
 public class CoreServer {
 
-    public static final int PORT = 3030;
-
     private static CoreServer instance;
     private ServerPlayers serverPlayers;
     private Proxies proxies;
+    private int port;
 
     private CoreServer() {
         serverPlayers = new ServerPlayers();
         proxies = new Proxies();
+        port = Integer.valueOf(Config.getCore("port"));
     }
 
     public void start() {
@@ -33,11 +34,11 @@ public class CoreServer {
                     .childOption(ChannelOption.TCP_NODELAY, true)
                     .childHandler(new CoreInitializer());
 
-            ChannelFuture future = bootstrap.bind(PORT).sync();
+            ChannelFuture future = bootstrap.bind(port).sync();
             future.addListener((channelFuture) -> {
                 Log.$(
                         channelFuture.isSuccess()
-                                ? "Сервер запущен по адресу " + future.channel().remoteAddress()
+                                ? "Сервер запущен с портом " + port
                                 : "Не удалось запустить сервер"
                 );
             });
