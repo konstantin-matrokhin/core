@@ -4,6 +4,9 @@ import org.kvlt.core.entities.ServerPlayer;
 
 import java.sql.ResultSet;
 
+/**
+ * Для управления записями игрокамов в БД
+ */
 public class PlayerDB {
 
     private static final String PLAYER_TABLE = "players";

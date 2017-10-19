@@ -5,6 +5,9 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
+/**
+ * Хранит все соединения. Немного бесполезный, но это исправимо
+ */
 public class ClientManager {
 
     private static ChannelGroup clients;

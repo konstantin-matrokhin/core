@@ -3,6 +3,9 @@ package org.kvlt.core.entities;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * Абстрактный класс, от которого наследуются все классы, хранящие данные об игроке
+ */
 public abstract class ServerPlayer implements Serializable {
 
     private String name;

@@ -5,6 +5,10 @@ import org.kvlt.core.packets.Packet;
 
 import java.io.Serializable;
 
+/**
+ * Сущность, представляющая собой прокси-сервер
+ * Хранит имя и канал, по которому можно отправить пакет
+ */
 public class Proxy implements Node, Serializable {
 
     private String name;

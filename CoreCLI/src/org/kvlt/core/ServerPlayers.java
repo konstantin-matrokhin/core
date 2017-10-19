@@ -7,6 +7,9 @@ import java.util.LinkedHashSet;
 
 public class ServerPlayers extends LinkedHashSet<ServerPlayer> {
 
+    /**
+     * Добавляет и в спиком и в БД игрока
+     */
     @Override
     public boolean add(ServerPlayer p) {
         if (contains(p)) return false;

@@ -2,6 +2,7 @@ package org.kvlt.core.entities;
 
 import java.util.UUID;
 
+@Deprecated
 public class SimplePlayer extends ServerPlayer {
 
     private String name;

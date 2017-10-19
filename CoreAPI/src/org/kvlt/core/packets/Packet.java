@@ -2,6 +2,10 @@ package org.kvlt.core.packets;
 
 import java.io.Serializable;
 
+/**
+ * Пакет - абстрактный класс, методы которого могут исполняться как на сервере, так и на клиенте
+ * Если передан шаблон, то контекст будет передан главному серверу. Обычно используется Channel для обратной связи
+ */
 public abstract class Packet<T> implements Serializable {
 
     private static final String CORE_CLASS = "org.kvlt.core.CoreCLI";

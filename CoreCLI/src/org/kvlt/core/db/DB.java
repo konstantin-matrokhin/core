@@ -1,8 +1,11 @@
 package org.kvlt.core.db;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
+/**
+ * Класс для доступа к БД.
+ * TODO: перекрыть прямой доступ к запросам
+ */
 public class DB {
 
     private static MySQLConnection mySQLConnection = new MySQLConnection();;

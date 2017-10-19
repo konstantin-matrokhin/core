@@ -3,6 +3,7 @@ package org.kvlt.core.entities;
 import java.io.Serializable;
 import java.util.UUID;
 
+@Deprecated
 public class CorePlayer extends ServerPlayer implements Serializable {
 
     private String name;

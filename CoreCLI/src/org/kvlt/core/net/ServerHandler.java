@@ -17,9 +17,11 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
         });
     }
 
+    /**
+     * Выполняет, принимая контекст пакета
+     */
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Packet packet) throws Exception {
-        Log.$(packet.getClass().getSimpleName());
         packet.execute(ctx.channel());
     }
 

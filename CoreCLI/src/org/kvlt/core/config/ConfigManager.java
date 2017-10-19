@@ -14,6 +14,9 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.util.HashMap;
 
+/**
+ * Класс, позволяющий создавать конфиги
+ */
 public class ConfigManager {
 
     private String fileName;

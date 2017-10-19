@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
+/**
+ * Создает соединение с БД с данными из конфига
+ */
 public class MySQLConnection {
 
     private Connection connection;

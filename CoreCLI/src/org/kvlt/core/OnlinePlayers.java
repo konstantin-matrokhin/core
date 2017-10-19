@@ -6,6 +6,9 @@ import java.util.LinkedList;
 
 public class OnlinePlayers extends LinkedList<OnlinePlayer> {
 
+    /**
+     * Ищет по всему списку подходящего по UUID и имени игрока и удаляет его
+     */
     @Override
     public boolean remove(Object o) {
         OnlinePlayer target = (OnlinePlayer) o;

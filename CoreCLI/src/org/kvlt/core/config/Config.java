@@ -2,6 +2,9 @@ package org.kvlt.core.config;
 
 import java.util.HashMap;
 
+/**
+ * Класс главного конфига, дающий доступ к <b>чтению</b> его полей
+ */
 public class Config {
 
     private static final String FILE_NAME = "config.json";

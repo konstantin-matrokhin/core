@@ -4,6 +4,9 @@ import org.kvlt.core.packets.Packet;
 
 import java.util.ArrayList;
 
+/**
+ * Контейнер, хранящий в себе сущности прокси-серверов
+ */
 public class Proxies extends ArrayList<Proxy> implements NodeContainer {
 
     @Override

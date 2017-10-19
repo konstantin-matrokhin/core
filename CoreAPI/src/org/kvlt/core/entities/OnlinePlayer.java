@@ -1,7 +1,8 @@
 package org.kvlt.core.entities;
 
-import java.util.UUID;
-
+/**
+ * Класс, который является сущностью игрока на сервере
+ */
 public class OnlinePlayer extends ServerPlayer {
 
     private String currentServer;
