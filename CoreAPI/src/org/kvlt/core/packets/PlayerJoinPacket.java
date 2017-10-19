@@ -1,24 +1,22 @@
 package org.kvlt.core.packets;
 
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.utils.Log;
 
 import java.io.Serializable;
 
 public class PlayerJoinPacket extends Packet implements Serializable {
 
-    private ServerPlayer player;
-    private String server;
+    private OnlinePlayer player;
 
-    public PlayerJoinPacket(ServerPlayer p, String server) {
+    public PlayerJoinPacket(OnlinePlayer p) {
         this.player = p;
-        this.server = server;
     }
 
     @Override
     public void onCore() {
-        Log.$(player.getName());
+        CoreServer.get().getOnlinePlayers().add(player);
     }
 
     @Override

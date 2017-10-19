@@ -28,6 +28,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
         Log.$("Произошла ошибка с сервером: " + ctx.channel().remoteAddress());
         ClientManager.remove(ctx.channel());
         ctx.close();
+        cause.printStackTrace();
     }
 
 }

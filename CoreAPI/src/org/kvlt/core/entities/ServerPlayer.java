@@ -5,9 +5,23 @@ import java.util.UUID;
 
 public abstract class ServerPlayer implements Serializable {
 
-    public abstract String getName();
-    public abstract UUID getUUID();
-    public abstract void setName(String name);
-    public abstract void setUUID(UUID uuid);
+    private String name;
+    private UUID uuid;
+
+    public String getName() {
+        return name;
+    }
+
+    public UUID getUUID() {
+        return  uuid;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUUID(UUID uuid) {
+        this.uuid = uuid;
+    }
 
 }
