@@ -22,7 +22,6 @@ public class ProxyPingDataPacket extends Packet {
 
     @Override
     protected void onProxy() {
-        CoreBungee.get().getLogger().info("GET: " + getMotd());
         CoreBungee.get().getPingEventListener().setMotd(getMotd());
     }
 

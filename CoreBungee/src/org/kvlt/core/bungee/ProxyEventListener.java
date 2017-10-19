@@ -14,15 +14,10 @@ public class ProxyEventListener implements Listener {
     @EventHandler
     public void onPostLogin(PostLoginEvent event) {
         ProxiedPlayer p = event.getPlayer();
-        Log.$(PlayerAdapter.asServerPlayer(p).getName() + ")))))))))))))))))))");
-        try {
-            ServerPlayer player = PlayerAdapter.asServerPlayer(p);
-            String serverName = CoreBungee.get().getServerName();
-            ProxyLoginPacket plp = new ProxyLoginPacket(player, serverName);
-            CoreBungee.get().getCoreServer().writeAndFlush(plp);
-        } catch (Exception e) {
-
-        }
+        ServerPlayer player = PlayerAdapter.asServerPlayer(p);
+        String serverName = CoreBungee.get().getServerName();
+        ProxyLoginPacket plp = new ProxyLoginPacket(player, serverName);
+        CoreBungee.get().getCoreServer().writeAndFlush(plp);
     }
 
 }

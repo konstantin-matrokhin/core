@@ -22,7 +22,6 @@ public class PlayerBasicEventListener implements Listener {
        cp.setUUID(p.getUniqueId());
 
        PlayerJoinPacket joinPacket = new PlayerJoinPacket(cp, ConfigManager.getClientName());
-       Bukkit.getLogger().info(cp.getName() + " is name");
        CorePlugin.get().getCoreServer().writeAndFlush(joinPacket);
    }
 

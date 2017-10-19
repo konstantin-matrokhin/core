@@ -14,6 +14,6 @@ public class PingCommand extends Command {
 
     @Override
     public void execute(CommandSender commandSender, String[] strings) {
-        CoreBungee.get().getCoreServer().writeAndFlush(new ProxyLoginPacket(new SimplePlayer(), "a"));
+
     }
 }
