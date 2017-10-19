@@ -23,6 +23,9 @@ public class CoreServer {
     }
 
     public void start() {
+
+        Log.$("Прослушиваю порт " + port + "..");
+
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 

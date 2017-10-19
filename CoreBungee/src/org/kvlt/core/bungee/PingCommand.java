@@ -3,6 +3,8 @@ package org.kvlt.core.bungee;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
+import org.kvlt.core.entities.SimplePlayer;
+import org.kvlt.core.packets.ProxyLoginPacket;
 
 public class PingCommand extends Command {
 
@@ -12,6 +14,6 @@ public class PingCommand extends Command {
 
     @Override
     public void execute(CommandSender commandSender, String[] strings) {
-        BungeeCord.getInstance().getLogger().info(CoreBungee.get().getPingEventListener().getMotd());
+        CoreBungee.get().getCoreServer().writeAndFlush(new ProxyLoginPacket(new SimplePlayer(), "a"));
     }
 }

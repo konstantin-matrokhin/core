@@ -1,8 +1,8 @@
 package org.kvlt.core.packets;
 
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.entities.CorePlayer;
 import org.kvlt.core.entities.ServerPlayer;
+import org.kvlt.core.entities.SimplePlayer;
 import org.kvlt.core.utils.Log;
 
 import java.io.Serializable;
@@ -19,10 +19,12 @@ public class ProxyLoginPacket extends Packet implements Serializable {
 
     @Override
     protected void onCore() {
-        CorePlayer player = new CorePlayer(getServerPlayer());
+        ServerPlayer player = new SimplePlayer();
+        player.setName(getServerPlayer().getName());
+        player.setUUID(getServerPlayer().getUUID());
         CoreServer.get().getServerPlayers().add(player);
 
-        Log.$(getServerPlayer().getName() + " присоединился к " + getServer());
+        Log.$(getServerPlayer().getName() + " " + getServerPlayer().getUUID() + " присоединился к " + getServer());
     }
 
     @Override

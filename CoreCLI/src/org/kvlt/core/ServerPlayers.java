@@ -9,6 +9,8 @@ public class ServerPlayers extends LinkedHashSet<ServerPlayer> {
 
     @Override
     public boolean add(ServerPlayer p) {
+        if (contains(p)) return false;
+
         try {
             DB.getPlayerDB().addPlayer(p);
         } catch (Exception e) {

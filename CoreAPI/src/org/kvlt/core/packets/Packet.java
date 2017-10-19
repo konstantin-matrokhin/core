@@ -20,34 +20,37 @@ public abstract class Packet<T> implements Serializable {
         return checkClass(PROXY_CLASS);
     }
 
-    protected abstract void onCore();
-    protected abstract void onServer();
-    protected abstract void onProxy();
+    protected abstract void onCore() throws Exception;
+    protected abstract void onServer() throws Exception;
+    protected abstract void onProxy() throws Exception;
 
-    protected void onCore(T t) {
+    protected void onCore(T t) throws Exception {
 
     }
 
     public void execute(T t) {
-        if (isCore()) {
-            onCore(t);
-            onCore();
+        try {
+            if (isCore()) {
+                onCore(t);
+                onCore();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public void execute() {
-        if (isCore()) {
-            onCore();
-        }
+        try {
+            if (isServer()) {
+                onServer();
+            }
 
-        if (isServer()) {
-            onServer();
-        }
+            if (isProxy()) {
+                onProxy();
+            }
+        } catch (Exception e) {
 
-        if (isProxy()) {
-            onProxy();
         }
-
     }
 
     private boolean checkClass(String apiClass) {

@@ -6,7 +6,7 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.entities.PlayerAdapter;
 import org.kvlt.core.bungee.utils.Log;
-import org.kvlt.core.entities.CorePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.ProxyLoginPacket;
 
 public class ProxyEventListener implements Listener {
@@ -14,10 +14,15 @@ public class ProxyEventListener implements Listener {
     @EventHandler
     public void onPostLogin(PostLoginEvent event) {
         ProxiedPlayer p = event.getPlayer();
-        Log.$("proxy login packet");
-        CoreBungee.get().getCoreServer().writeAndFlush(
-                new ProxyLoginPacket(PlayerAdapter.asCorePlayer(p), CoreBungee.get().getServerName())
-        );
+        Log.$(PlayerAdapter.asServerPlayer(p).getName() + ")))))))))))))))))))");
+        try {
+            ServerPlayer player = PlayerAdapter.asServerPlayer(p);
+            String serverName = CoreBungee.get().getServerName();
+            ProxyLoginPacket plp = new ProxyLoginPacket(player, serverName);
+            CoreBungee.get().getCoreServer().writeAndFlush(plp);
+        } catch (Exception e) {
+
+        }
     }
 
 }

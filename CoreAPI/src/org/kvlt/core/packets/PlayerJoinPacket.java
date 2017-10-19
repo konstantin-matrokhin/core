@@ -18,7 +18,7 @@ public class PlayerJoinPacket extends Packet implements Serializable {
 
     @Override
     public void onCore() {
-
+        Log.$(player.getName());
     }
 
     @Override

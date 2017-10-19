@@ -47,6 +47,7 @@ public class ConfigManager {
                     .getAsJsonObject(section);
 
         Type property = new TypeToken<HashMap<String, String>>(){}.getType();
+        Log.$("Конфигурация " + section + " загружена");
         return gson.fromJson(jsonSection.toString(), property);
     }
 

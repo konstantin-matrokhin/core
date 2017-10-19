@@ -12,6 +12,9 @@ public class MySQLConnection {
     private Connection connection;
 
     public void connect() {
+
+        Log.$("Подключение к MySQL..");
+
         String host = Config.getMySQL("host");
         String port = Config.getMySQL("port");
         String db = Config.getMySQL("db");
@@ -30,6 +33,7 @@ public class MySQLConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            Log.$("Подключено к MySQL базе " + db);
         } catch (Exception e) {
             e.printStackTrace();
         }

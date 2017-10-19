@@ -1,10 +1,13 @@
 package org.kvlt.core.entities;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public interface ServerPlayer {
+public abstract class ServerPlayer implements Serializable {
 
-    String getName();
-    UUID getUUID();
+    public abstract String getName();
+    public abstract UUID getUUID();
+    public abstract void setName(String name);
+    public abstract void setUUID(UUID uuid);
 
 }

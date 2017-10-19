@@ -3,7 +3,7 @@ package org.kvlt.core.entities;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class CorePlayer implements ServerPlayer, Serializable {
+public class CorePlayer extends ServerPlayer implements Serializable {
 
     private String name;
     private UUID uuid;
@@ -28,11 +28,14 @@ public class CorePlayer implements ServerPlayer, Serializable {
         return uuid;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name.toLowerCase();
     }
 
-    public void setUuid(UUID uuid) {
+    @Override
+    public void setUUID(UUID uuid) {
         this.uuid = uuid;
     }
+
 }
