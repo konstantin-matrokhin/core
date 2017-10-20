@@ -34,9 +34,7 @@ public abstract class Packet<T> implements Serializable {
     protected abstract void onServer();
     protected abstract void onProxy();
 
-    protected void onCore(T t) {
-
-    }
+    protected void onCore(T t) {}
 
     public void execute(T t) {
         if (isCore()) {

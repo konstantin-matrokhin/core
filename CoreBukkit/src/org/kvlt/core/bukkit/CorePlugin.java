@@ -43,7 +43,7 @@ public class CorePlugin extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("ping")) {
             if (args.length == 0) return false;
-            BroadcastPacket bc = new BroadcastPacket(args[0]);
+            BroadcastPacket bc = new BroadcastPacket(args[0], ConfigManager.getClientName(), sender.getName());
             ConnectionManager.get().getChannel().writeAndFlush(bc);
             return true;
         }

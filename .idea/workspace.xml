@@ -20,24 +20,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Proxies.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/Proxies.java">
+      <file leaf-file-name="BroadcastCommand.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/BroadcastCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="18" />
+            <state relative-caret-position="238">
+              <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerBasicEventListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/events/PlayerBasicEventListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BroadcastCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/BroadcastCommand.java">
+      <file leaf-file-name="CorePlugin.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/CorePlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="271">
+              <caret line="45" column="111" lean-forward="false" selection-start-line="45" selection-start-column="111" selection-end-line="45" selection-end-column="111" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -56,12 +66,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Command.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Command.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/Command.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="304">
               <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameServers.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/GameServers.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,60 +98,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConfigManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/ConfigManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding>
-                <element signature="e#163#164#0" expanded="false" />
-                <element signature="e#214#215#0" expanded="false" />
-                <element signature="e#253#254#0" expanded="false" />
-                <element signature="e#305#306#0" expanded="false" />
-                <element signature="e#349#350#0" expanded="false" />
-                <element signature="e#405#406#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CorePlugin.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/CorePlugin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="46" column="67" lean-forward="true" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BroadcastPacket.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/BroadcastPacket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="146">
+              <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#354#355#0" expanded="true" />
+                <element signature="e#384#385#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/net/ServerHandler.java">
+      <file leaf-file-name="WhoCommand.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/WhoCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="136">
+              <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#210#211#0" expanded="true" />
+                <element signature="e#238#239#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Proxy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/Proxy.java">
+      <file leaf-file-name="Packet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/Packet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="14" column="28" lean-forward="true" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+            <state relative-caret-position="268">
+              <caret line="36" column="33" lean-forward="false" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -212,15 +213,15 @@
         <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/CommandListener.java" />
         <option value="$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/Proxies.java" />
         <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/WhoCommand.java" />
-        <option value="$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/Packet.java" />
-        <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/BroadcastCommand.java" />
         <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/CoreServer.java" />
         <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/CommandListener.java" />
-        <option value="$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/CorePlugin.java" />
         <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/utils/LogType.java" />
-        <option value="$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/BroadcastPacket.java" />
         <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/utils/Log.java" />
         <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/Command.java" />
+        <option value="$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/Packet.java" />
+        <option value="$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/BroadcastCommand.java" />
+        <option value="$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/BroadcastPacket.java" />
+        <option value="$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/CorePlugin.java" />
       </list>
     </option>
   </component>
@@ -904,14 +905,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CoreBungee/src/org/kvlt/core/bungee/PingEventListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CoreBungee/src/org/kvlt/core/bungee/ProxyEventListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1077,14 +1070,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/Packet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/GameServer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -1152,16 +1137,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/GameServers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/ServerConnectionPacket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1177,18 +1152,6 @@
         <state relative-caret-position="234">
           <caret line="57" column="17" lean-forward="false" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/WhoCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#210#211#0" expanded="true" />
-            <element signature="e#238#239#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1246,14 +1209,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/CorePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="46" column="67" lean-forward="true" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/Proxy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1289,16 +1244,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/BroadcastPacket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/net/ServerHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -1327,10 +1272,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/BroadcastCommand.java">
+    <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/Packet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state relative-caret-position="268">
+          <caret line="36" column="33" lean-forward="false" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/nodes/GameServers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="19" column="30" lean-forward="true" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1339,8 +1292,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/Command.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
+        <state relative-caret-position="304">
           <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/WhoCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#238#239#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreCLI/src/org/kvlt/core/commands/BroadcastCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/events/PlayerBasicEventListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreAPI/src/org/kvlt/core/packets/BroadcastPacket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#354#355#0" expanded="true" />
+            <element signature="e#384#385#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CoreBukkit/src/org/kvlt/core/bukkit/CorePlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="45" column="111" lean-forward="false" selection-start-line="45" selection-start-column="111" selection-end-line="45" selection-end-column="111" />
           <folding />
         </state>
       </provider>

@@ -2,6 +2,8 @@ package org.kvlt.core.commands;
 
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.packets.BroadcastPacket;
+import org.kvlt.core.utils.Log;
+import org.kvlt.core.utils.LogType;
 
 public class BroadcastCommand extends Command {
 
@@ -16,6 +18,7 @@ public class BroadcastCommand extends Command {
 
         BroadcastPacket bp = new BroadcastPacket(str);
         CoreServer.get().getGameServers().send(bp);
+        Log.$(LogType.BROADCAST, str);
         return false;
     }
 }
