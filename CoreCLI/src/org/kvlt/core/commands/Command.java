@@ -30,7 +30,7 @@ public abstract class Command {
     }
 
     public String getArg(int index) {
-        if (index < 0 || index > args.length) return "";
+        if (index < 0 || index > args.length || args.length == 0) return "";
         return args[index];
     }
 

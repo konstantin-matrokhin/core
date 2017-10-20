@@ -2,6 +2,9 @@ package org.kvlt.core.packets;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.kvlt.core.CoreServer;
+import org.kvlt.core.utils.Log;
+import org.kvlt.core.utils.LogType;
 
 public class BroadcastPacket extends Packet {
 
@@ -13,7 +16,8 @@ public class BroadcastPacket extends Packet {
 
     @Override
     protected void onCore() {
-
+        Log.$(LogType.BROADCAST, str);
+        CoreServer.get().getGameServers().send(this);
     }
 
     @Override

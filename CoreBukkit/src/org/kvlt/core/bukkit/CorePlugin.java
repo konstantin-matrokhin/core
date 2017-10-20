@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.events.EventManager;
 import org.kvlt.core.bukkit.net.ConnectionManager;
+import org.kvlt.core.packets.BroadcastPacket;
 
 public class CorePlugin extends JavaPlugin {
 
@@ -41,7 +42,9 @@ public class CorePlugin extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("ping")) {
-
+            if (args.length == 0) return false;
+            BroadcastPacket bc = new BroadcastPacket(args[0]);
+            ConnectionManager.get().getChannel().writeAndFlush(bc);
             return true;
         }
         return false;
