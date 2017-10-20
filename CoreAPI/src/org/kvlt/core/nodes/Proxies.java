@@ -3,33 +3,43 @@ package org.kvlt.core.nodes;
 import org.kvlt.core.packets.Packet;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Контейнер, хранящий в себе сущности прокси-серверов
  */
-public class Proxies extends ArrayList<Proxy> implements NodeContainer {
+public class Proxies implements NodeContainer<Proxy> {
 
-    private LinkedList<>
+    private LinkedList<Proxy> proxies;
+
+    {
+        proxies = new LinkedList<>();
+    }
 
     @Override
     public void send(Packet packet) {
-        for (Proxy proxy: this) {
+        for (Proxy proxy: proxies) {
             proxy.send(packet);
         }
     }
 
     @Override
-    public void addNode(Node node) {
-
+    public void addNode(Proxy proxy) {
+        proxies.add(proxy);
     }
 
     @Override
-    public void removeNode(Node node) {
-
+    public void removeNode(Proxy proxy) {
+        proxies.remove(proxy);
     }
 
     @Override
-    public Node getNode(String nodeName) {
+    public Proxy getNode(String nodeName) {
+        for (Proxy proxy: proxies) {
+            if (proxy.getName().equalsIgnoreCase(nodeName)) {
+                return proxy;
+            }
+        }
         return null;
     }
 

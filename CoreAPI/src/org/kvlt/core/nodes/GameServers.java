@@ -1,10 +1,12 @@
 package org.kvlt.core.nodes;
 
+import com.sun.istack.internal.NotNull;
 import org.kvlt.core.packets.Packet;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
-public class GameServers implements NodeContainer<GameServer> {
+public class GameServers implements NodeContainer<GameServer>, Iterable<GameServer> {
 
     private LinkedList<GameServer> gameServers;
 
@@ -37,5 +39,10 @@ public class GameServers implements NodeContainer<GameServer> {
             }
         }
         return null;
+    }
+
+    @Override
+    public Iterator<GameServer> iterator() {
+        return gameServers.iterator();
     }
 }

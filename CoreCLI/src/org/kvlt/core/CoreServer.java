@@ -8,6 +8,7 @@ import org.kvlt.core.config.Config;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.net.ClientManager;
 import org.kvlt.core.net.CoreInitializer;
+import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.nodes.Proxies;
 import org.kvlt.core.utils.Log;
 
@@ -17,12 +18,14 @@ public class CoreServer {
     private ServerPlayers serverPlayers;
     private OnlinePlayers onlinePlayers;
     private Proxies proxies;
+    private GameServers gameServers;
     private int port;
 
     private CoreServer() {
         serverPlayers = new ServerPlayers();
         onlinePlayers = new OnlinePlayers();
         proxies = new Proxies();
+        gameServers = new GameServers();
         port = Integer.valueOf(Config.getCore("port"));
     }
 
@@ -61,15 +64,20 @@ public class CoreServer {
         return serverPlayers;
     }
 
+    public OnlinePlayers getOnlinePlayers() {
+        return onlinePlayers;
+    }
+
     public Proxies getProxies() {
         return proxies;
+    }
+
+    public GameServers getGameServers() {
+        return gameServers;
     }
 
     public static synchronized CoreServer get() {
         return instance == null ? instance = new CoreServer() : instance;
     }
 
-    public OnlinePlayers getOnlinePlayers() {
-        return onlinePlayers;
-    }
 }

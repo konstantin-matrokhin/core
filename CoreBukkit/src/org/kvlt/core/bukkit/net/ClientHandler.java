@@ -2,9 +2,13 @@ package org.kvlt.core.bukkit.net;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import net.minecraft.server.v1_12_R1.ServerCommand;
 import org.bukkit.Bukkit;
+import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
+import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.ServerConnectionPacket;
 
 public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
 
@@ -12,6 +16,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
     public void channelActive(ChannelHandlerContext ctx) {
         Bukkit.getLogger().info("Соединено с главным сервером!");
         CorePlugin.get().setServer(ctx.channel());
+        ctx.writeAndFlush(new ServerConnectionPacket(ConfigManager.getClientName()));
     }
 
     @Override

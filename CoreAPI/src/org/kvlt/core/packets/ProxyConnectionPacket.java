@@ -20,7 +20,7 @@ public class ProxyConnectionPacket extends Packet<Channel> {
         Proxy proxy = new Proxy(serverName, channel);
         Log.$("Connected Bungee > " + serverName);
         proxy.send(new ProxyPingDataPacket(Config.getProxy("motd")));
-        CoreServer.get().getProxies().add(proxy);
+        CoreServer.get().getProxies().addNode(proxy);
     }
 
     @Override

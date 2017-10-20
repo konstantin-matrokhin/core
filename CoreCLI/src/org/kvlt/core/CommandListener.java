@@ -1,6 +1,7 @@
 package org.kvlt.core;
 
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.utils.Log;
 
 import java.util.Scanner;
@@ -30,6 +31,12 @@ public class CommandListener {
                         + op.getUUID();
 
                 Log.$(data);
+            }
+        }
+        if (cmd.equalsIgnoreCase("servers")) {
+            Log.$("SERVERS:");
+            for (GameServer gs: CoreServer.get().getGameServers()) {
+                Log.$("- " + gs.getName());
             }
         }
     }
