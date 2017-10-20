@@ -51,7 +51,7 @@ public class ConnectionManager {
     public void connect() {
         if (isConnected) return;
         try {
-            ChannelFuture channelFuture = bootstrap.connect(host, port).sync();
+            ChannelFuture channelFuture = bootstrap.connect(host, port);
             channel = channelFuture.channel();
             channelFuture.addListener((ChannelFuture future) -> {
                 isConnected = future.isSuccess();
