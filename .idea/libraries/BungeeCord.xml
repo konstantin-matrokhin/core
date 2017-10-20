@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="BungeeCord">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../lc-proxy/BungeeCord.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
