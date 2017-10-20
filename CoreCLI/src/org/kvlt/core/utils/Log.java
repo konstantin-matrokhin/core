@@ -5,12 +5,17 @@ import java.util.Date;
 
 public class Log {
 
+    private static SimpleDateFormat simpleDateFormat;
+
+    static {
+        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+    }
+
     public static void $(String str) {
         $(LogType.INFO, str);
     }
 
     public static void $(LogType level, String str) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String time = simpleDateFormat.format(new Date());
         System.out.println("[" + level + "][" + time + "] " + str);
     }
