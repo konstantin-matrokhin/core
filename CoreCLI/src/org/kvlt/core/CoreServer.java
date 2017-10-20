@@ -41,7 +41,7 @@ public class CoreServer {
                     .childOption(ChannelOption.TCP_NODELAY, true)
                     .childHandler(new CoreInitializer());
 
-            ChannelFuture future = bootstrap.bind(port).sync();
+            ChannelFuture future = bootstrap.bind(port);
             future.addListener((channelFuture) -> {
                 Log.$(
                         channelFuture.isSuccess()
