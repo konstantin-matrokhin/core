@@ -17,7 +17,8 @@ public class CommandListener {
     public CommandListener() {
         commands = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        registerCommand(this, new WhoCommand());
+        registerCommand(new WhoCommand());
+        registerCommand(new BroadcastCommand());
         try {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -28,7 +29,7 @@ public class CommandListener {
         }
     }
 
-    public void registerCommand(CommandListener listener, Command command) {
+    public void registerCommand(Command command) {
         commands.add(command);
     }
 
@@ -45,10 +46,7 @@ public class CommandListener {
         }
 
         for (Command c: commands) {
-            boolean executed = c.passInput(cmd, args);
-            if (!executed) {
-                Log.$("Команда не выполена.");
-            }
+            c.passInput(cmd, args);
         }
     }
 

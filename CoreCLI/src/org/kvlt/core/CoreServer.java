@@ -4,7 +4,10 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.kvlt.core.commands.BroadcastCommand;
+import org.kvlt.core.commands.Command;
 import org.kvlt.core.commands.CommandListener;
+import org.kvlt.core.commands.WhoCommand;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.GameServers;
@@ -52,7 +55,8 @@ public class CoreServer {
                 );
             });
 
-            new CommandListener();
+            CommandListener cl = new CommandListener();
+
 
         } catch (Exception e) {
             e.printStackTrace();

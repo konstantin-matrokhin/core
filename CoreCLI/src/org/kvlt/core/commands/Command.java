@@ -15,15 +15,13 @@ public abstract class Command {
         this.name = name;
     }
 
-    public boolean passInput(String name, String[] args) {
+    public void passInput(String name, String[] args) {
 
         if (getName().equalsIgnoreCase(name)) {
             this.name = name;
             this.args = args;
-            return execute();
+            execute();
         }
-
-        return false;
 
     }
 
