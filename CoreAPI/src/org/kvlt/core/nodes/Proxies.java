@@ -3,12 +3,13 @@ package org.kvlt.core.nodes;
 import org.kvlt.core.packets.Packet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
  * Контейнер, хранящий в себе сущности прокси-серверов
  */
-public class Proxies implements NodeContainer<Proxy> {
+public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
 
     private LinkedList<Proxy> proxies;
 
@@ -43,4 +44,8 @@ public class Proxies implements NodeContainer<Proxy> {
         return null;
     }
 
+    @Override
+    public Iterator<Proxy> iterator() {
+        return proxies.iterator();
+    }
 }
