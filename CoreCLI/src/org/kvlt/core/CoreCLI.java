@@ -14,7 +14,7 @@ public class CoreCLI {
 
     private CoreCLI() {}
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Config.init();
         DB.getMySQLConnection().connect();
 
