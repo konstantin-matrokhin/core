@@ -15,4 +15,4 @@
 java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
 ```
 
-__TODO: Добавить библиотеки в репозиторий__
+_TODO: use maven dependencies_
