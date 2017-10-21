@@ -8,7 +8,7 @@ import java.sql.ResultSet;
  */
 public class DB {
 
-    private static MySQLConnection mySQLConnection = new MySQLConnection();;
+    private static MySQLConnection mySQLConnection = new MySQLConnection();
     private static PlayerDB playerDB = new PlayerDB();
 
     public static PlayerDB getPlayerDB() {

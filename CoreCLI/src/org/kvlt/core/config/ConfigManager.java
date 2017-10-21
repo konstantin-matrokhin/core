@@ -5,9 +5,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import org.kvlt.core.CoreServer;
 import org.kvlt.core.utils.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.lang.reflect.Type;
@@ -62,16 +64,12 @@ public class ConfigManager {
         return val;
     }
 
-    //TODO: Fix
     public boolean createConfig() throws Exception {
-        if (config.createNewFile()) {
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream is = Config.class.getClass().getResourceAsStream("/" + fileName);
-
-            Files.copy(is, config.toPath());
-            return true;
-        }
-        return false;
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classLoader.getResourceAsStream("./" + fileName);
+        Log.$(is.toString());
+        Files.copy(is, config.toPath());
+        return true;
     }
 
 }

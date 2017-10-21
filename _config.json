@@ -1,0 +1,23 @@
+{
+
+  "core": {
+    "port": 3030
+  },
+
+  "mysql": {
+    "host": "build.huesos228.com",
+    "port": 3306,
+    "db": "core",
+    "user": "root",
+    "password": "12345"
+  },
+
+  "proxy": {
+    "motd": "&c[&7 bungeecord proxy server &c] &r"
+  },
+
+  "bukkit": {
+    "test": "test"
+  }
+
+}
