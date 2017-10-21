@@ -16,7 +16,7 @@ java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
 ```
 
 ### Завимиости (Maven):
-```
+```xml
 <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
 <dependency>
     <groupId>io.netty</groupId>
