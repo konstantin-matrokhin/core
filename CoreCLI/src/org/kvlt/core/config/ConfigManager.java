@@ -5,11 +5,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import org.kvlt.core.CoreServer;
 import org.kvlt.core.utils.Log;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.lang.reflect.Type;

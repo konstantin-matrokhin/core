@@ -12,7 +12,7 @@
 ## ColeCLI
 Для запуска используйте
 ```
-java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
+java -cp CoreCLI.jar;lib/* CoreCLI
 ```
 
 ### Зависимости (Maven):

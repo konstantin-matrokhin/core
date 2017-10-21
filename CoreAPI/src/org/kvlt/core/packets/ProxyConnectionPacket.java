@@ -3,7 +3,6 @@ package org.kvlt.core.packets;
 import io.netty.channel.Channel;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.entities.CorePlayer;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.utils.Log;
 

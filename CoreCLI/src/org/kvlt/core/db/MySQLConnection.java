@@ -5,7 +5,6 @@ import org.kvlt.core.utils.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 
 /**
  * Создает соединение с БД с данными из конфига
