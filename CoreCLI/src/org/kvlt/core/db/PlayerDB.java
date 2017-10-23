@@ -56,7 +56,7 @@ public class PlayerDB {
         }
     }
 
-    public void setPlayerBan(boolean toBan, ServerPlayer p, String by, Date time, String reason) {
+    public boolean setPlayerBan(boolean toBan, ServerPlayer p, String by, Date time, String reason) {
         int inc = toBan ? 1 : 0;
         try {
             String banSQL = String.format("UPDATE %s SET\n" +
@@ -77,8 +77,10 @@ public class PlayerDB {
             ps.setString(5, reason);
             ps.setString(6, p.getName());
             ps.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 
