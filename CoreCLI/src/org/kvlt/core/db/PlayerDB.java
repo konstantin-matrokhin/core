@@ -56,8 +56,30 @@ public class PlayerDB {
         }
     }
 
-    public void banPlayer(ServerPlayer p, Date time, String reason) {
+    public void setPlayerBan(boolean toBan, ServerPlayer p, String by, Date time, String reason) {
+        int inc = toBan ? 1 : 0;
+        try {
+            String banSQL = String.format("UPDATE %s SET\n" +
+                    "is_banned=?," +
+                    "banned_by=?," +
+                    "ban_amount=ban_amount + ?," +
+                    "banned_until=?" +
+                    "ban_reason=? " +
+                    "WHERE name=?",
 
+                    PLAYER_TABLE);
+
+            PreparedStatement ps = connection.prepareStatement(banSQL);
+            ps.setBoolean(1, toBan);
+            ps.setString(2, by);
+            ps.setInt(3, inc);
+            ps.setDate(4, time);
+            ps.setString(5, reason);
+            ps.setString(6, p.getName());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
