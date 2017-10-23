@@ -93,4 +93,12 @@ public abstract class ServerPlayer implements Serializable {
     public void setPlayedTime(Date playedTime) {
         this.playedTime = playedTime;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

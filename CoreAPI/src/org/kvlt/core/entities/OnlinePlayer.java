@@ -15,4 +15,12 @@ public class OnlinePlayer extends ServerPlayer {
     public void setCurrentServer(String currentServer) {
         this.currentServer = currentServer;
     }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 }

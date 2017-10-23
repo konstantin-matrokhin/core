@@ -41,14 +41,17 @@ public class MySQLConnection {
         }
     }
 
+    //TODO адекватно переписать
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                wait(3000); //TODO fix
                 Log.$("Соединение с БД отстуствует, переподключаюсь");
                 connect();
             }
         } catch (Exception e) {
+            try {
+                wait(3000);
+            } catch (Exception we) {}
             return getConnection();
         }
         return connection;
