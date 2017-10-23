@@ -2,9 +2,10 @@ package org.kvlt.core;
 
 import org.kvlt.core.entities.OnlinePlayer;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class OnlinePlayers extends LinkedList<OnlinePlayer> {
+public class OnlinePlayers extends ArrayList<OnlinePlayer> {
 
     /**
      * Ищет по всему списку подходящего по UUID и имени игрока и удаляет его

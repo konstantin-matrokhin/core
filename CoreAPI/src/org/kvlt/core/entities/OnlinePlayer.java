@@ -6,6 +6,7 @@ package org.kvlt.core.entities;
 public class OnlinePlayer extends ServerPlayer {
 
     private String currentServer;
+    private String ip;
 
     public String getCurrentServer() {
         return currentServer;
