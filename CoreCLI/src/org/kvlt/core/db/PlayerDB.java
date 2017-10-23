@@ -3,6 +3,7 @@ package org.kvlt.core.db;
 import org.kvlt.core.entities.ServerPlayer;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -53,6 +54,10 @@ public class PlayerDB {
         if (id < 1) {
             DB.query(addPlayerQuery);
         }
+    }
+
+    public void banPlayer(ServerPlayer p, Date time, String reason) {
+
     }
 
 }
