@@ -34,12 +34,7 @@ public class GameServers implements NodeContainer<GameServer>, Iterable<GameServ
 
     @Override
     public GameServer getNode(String nodeName) {
-        for (GameServer node: gameServers) {
-            if (node.getName().equalsIgnoreCase(nodeName)) {
-                return node;
-            }
-        }
-        return null;
+        return gameServers.stream().filter(node -> node.getName().equalsIgnoreCase(nodeName)).findFirst().get();
     }
 
     @Override

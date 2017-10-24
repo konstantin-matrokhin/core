@@ -19,9 +19,7 @@ public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
 
     @Override
     public void send(Packet packet) {
-        for (Proxy proxy: proxies) {
-            proxy.send(packet);
-        }
+        proxies.forEach(proxy -> proxy.send(packet));
     }
 
     @Override
@@ -36,12 +34,7 @@ public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
 
     @Override
     public Proxy getNode(String nodeName) {
-        for (Proxy proxy: proxies) {
-            if (proxy.getName().equalsIgnoreCase(nodeName)) {
-                return proxy;
-            }
-        }
-        return null;
+        return proxies.stream().filter(node -> node.getName().equalsIgnoreCase(nodeName)).findFirst().get();
     }
 
     @Override

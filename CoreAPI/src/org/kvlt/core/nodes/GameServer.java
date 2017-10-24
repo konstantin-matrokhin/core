@@ -4,13 +4,14 @@ import io.netty.channel.Channel;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class GameServer implements Node {
 
     private Channel channel;
     private String name;
-    private LinkedList<OnlinePlayer> onlinePlayers;
+    private ArrayList<OnlinePlayer> onlinePlayers;
 
     @Override
     public void send(Packet packet) {
@@ -37,7 +38,7 @@ public class GameServer implements Node {
         return channel;
     }
 
-    public LinkedList<OnlinePlayer> getOnlinePlayers() {
+    public ArrayList<OnlinePlayer> getOnlinePlayers() {
         return onlinePlayers;
     }
 
