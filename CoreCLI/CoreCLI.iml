@@ -12,5 +12,6 @@
     <orderEntry type="library" exported="" name="mysql:mysql-connector-java:Release" level="project" />
     <orderEntry type="module" module-name="CoreAPI" exported="" />
     <orderEntry type="library" exported="" name="netty-all-4.1.16.Final" level="project" />
+    <orderEntry type="library" name="groovy-all-2.4.11" level="project" />
   </component>
 </module>
