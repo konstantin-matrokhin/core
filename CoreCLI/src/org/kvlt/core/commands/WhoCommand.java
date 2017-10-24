@@ -12,14 +12,11 @@ public class WhoCommand extends Command {
 
     @Override
     public boolean execute() {
-        String players = "";
-        for (OnlinePlayer op: CoreServer.get().getOnlinePlayers()) {
-            players.concat(players + " ");
-        }
-        if (players.isEmpty()) players = "Никого нет";
+        final String players = "";
+        CoreServer.get().getOnlinePlayers().forEach(op -> players.concat(op + " "));
 
         Log.$("Подключенные игроки:");
-        Log.$(players);
+        Log.$(players.isEmpty() ? "Никого нет" : players);
         return true;
     }
 
