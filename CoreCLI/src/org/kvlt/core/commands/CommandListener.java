@@ -15,8 +15,11 @@ public class CommandListener {
     public CommandListener() {
         commands = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+
         registerCommand(new WhoCommand());
         registerCommand(new BroadcastCommand());
+        registerCommand(new StopCommand());
+
         try {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

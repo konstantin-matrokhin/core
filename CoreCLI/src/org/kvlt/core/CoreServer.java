@@ -18,6 +18,7 @@ public class CoreServer {
     private OnlinePlayers onlinePlayers;
     private Proxies proxies;
     private GameServers gameServers;
+    private ChannelFuture future;
     private int port;
 
     private CoreServer() {
@@ -43,20 +44,27 @@ public class CoreServer {
                     .childOption(ChannelOption.TCP_NODELAY, true)
                     .childHandler(new CoreInitializer());
 
-            ChannelFuture future = bootstrap.bind(port);
-            future.addListener((channelFuture) -> {
-                Log.$(
-                        channelFuture.isSuccess()
-                                ? "Сервер запущен с портом " + port
-                                : "Не удалось запустить сервер"
-                );
-            });
+            future = bootstrap.bind(port);
+            future.addListener((channelFuture) -> Log.$(
+                    channelFuture.isSuccess()
+                            ? "Сервер запущен с портом " + port
+                            : "Не удалось запустить сервер"
+            ));
 
             CommandListener cl = new CommandListener();
 
-
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void stop() {
+        Log.$("Остановка сервера...");
+        try {
+            future.channel().close().sync();
+            Log.$("Сервер выключен.");
+        } catch (Exception e) {
+
         }
     }
 
