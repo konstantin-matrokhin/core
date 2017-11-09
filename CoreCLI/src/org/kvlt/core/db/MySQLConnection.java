@@ -2,9 +2,8 @@ package org.kvlt.core.db;
 
 import org.kvlt.core.config.Config;
 import org.kvlt.core.utils.Log;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 /**
  * Создает соединение с БД с данными из конфига
@@ -32,19 +31,15 @@ public class MySQLConnection {
                 .concat("?")
                 .concat(dbParams);
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            Log.$("Подключено к MySQL базе " + db);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Sql2o sql = new Sql2o(dbUrl, dbUser, dbPassword);
+        connection = sql.open();
+        Log.$("Подключено к MySQL базе " + db);
     }
 
     //TODO адекватно переписать
     public Connection getConnection() {
         try {
-            if (connection == null || connection.isClosed()) {
+            if (connection == null || connection.getJdbcConnection().isClosed()) {
                 Log.$("Соединение с БД отстуствует, переподключаюсь");
                 connect();
             }

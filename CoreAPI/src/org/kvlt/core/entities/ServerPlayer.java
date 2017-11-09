@@ -11,31 +11,47 @@ import java.util.UUID;
  */
 public abstract class ServerPlayer implements Serializable {
 
-    private String name;
-    private UUID uuid;
     private int id;
+    private String name;
+    private String password;
     private Group group;
+    private UUID uuid;
     private String lastIp;
     private String lastJoin;
     private GameServer lastServer;
+    private String mutedBy;
+    private String bannedBy;
     private boolean banned;
     private boolean muted;
-    private Date playedTime;
+    private int muteAmount;
+    private int banAmount;
+    private Date totalTime;
+    private Date bannedUntil;
+    private Date mutedUntil;
+    private Date banReason;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public UUID getUUID() {
-        return  uuid;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setUUID(UUID uuid) {
-        this.uuid = uuid;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Group getGroup() {
@@ -44,6 +60,14 @@ public abstract class ServerPlayer implements Serializable {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getLastIp() {
@@ -70,6 +94,22 @@ public abstract class ServerPlayer implements Serializable {
         this.lastServer = lastServer;
     }
 
+    public String getMutedBy() {
+        return mutedBy;
+    }
+
+    public void setMutedBy(String mutedBy) {
+        this.mutedBy = mutedBy;
+    }
+
+    public String getBannedBy() {
+        return bannedBy;
+    }
+
+    public void setBannedBy(String bannedBy) {
+        this.bannedBy = bannedBy;
+    }
+
     public boolean isBanned() {
         return banned;
     }
@@ -86,19 +126,51 @@ public abstract class ServerPlayer implements Serializable {
         this.muted = muted;
     }
 
-    public Date getPlayedTime() {
-        return playedTime;
+    public int getMuteAmount() {
+        return muteAmount;
     }
 
-    public void setPlayedTime(Date playedTime) {
-        this.playedTime = playedTime;
+    public void setMuteAmount(int muteAmount) {
+        this.muteAmount = muteAmount;
     }
 
-    public int getId() {
-        return id;
+    public int getBanAmount() {
+        return banAmount;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setBanAmount(int banAmount) {
+        this.banAmount = banAmount;
+    }
+
+    public Date getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(Date totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    public Date getBannedUntil() {
+        return bannedUntil;
+    }
+
+    public void setBannedUntil(Date bannedUntil) {
+        this.bannedUntil = bannedUntil;
+    }
+
+    public Date getMutedUntil() {
+        return mutedUntil;
+    }
+
+    public void setMutedUntil(Date mutedUntil) {
+        this.mutedUntil = mutedUntil;
+    }
+
+    public Date getBanReason() {
+        return banReason;
+    }
+
+    public void setBanReason(Date banReason) {
+        this.banReason = banReason;
     }
 }

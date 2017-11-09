@@ -12,7 +12,7 @@ public class SimplePlayer extends ServerPlayer {
 
     public SimplePlayer(ServerPlayer player) {
         setName(player.getName());
-        setUUID(player.getUUID());
+        setUuid(player.getUuid());
     }
 
     @Override
@@ -21,7 +21,7 @@ public class SimplePlayer extends ServerPlayer {
     }
 
     @Override
-    public UUID getUUID() {
+    public UUID getUuid() {
         return uuid;
     }
 
@@ -31,7 +31,7 @@ public class SimplePlayer extends ServerPlayer {
     }
 
     @Override
-    public void setUUID(UUID uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 

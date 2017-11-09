@@ -8,7 +8,7 @@ public class PlayerAdapter {
 
     public static ServerPlayer asServerPlayer(ProxiedPlayer pp) {
         ServerPlayer cp = new SimplePlayer();
-        cp.setUUID(pp.getUniqueId());
+        cp.setUuid(pp.getUniqueId());
         cp.setName(pp.getName());
         return cp;
     }

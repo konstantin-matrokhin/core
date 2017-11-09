@@ -4,6 +4,9 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.utils.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WhoCommand extends Command {
 
     public WhoCommand() {
@@ -12,10 +15,12 @@ public class WhoCommand extends Command {
 
     @Override
     public boolean execute() {
-        final String players = "";
-        CoreServer.get().getOnlinePlayers().forEach(op -> players.concat(op + " "));
+        String players = "";
+        for (OnlinePlayer op: CoreServer.get().getOnlinePlayers()) {
+            players += op.getName() + " ";
+        }
 
-        Log.$("Подключенные игроки:");
+        Log.$("Подключенные игроки (" + CoreServer.get().getOnlinePlayers().size() + " ):");
         Log.$(players.isEmpty() ? "Никого нет" : players);
         return true;
     }

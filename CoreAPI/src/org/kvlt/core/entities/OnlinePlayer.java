@@ -23,4 +23,5 @@ public class OnlinePlayer extends ServerPlayer {
     public void setIp(String ip) {
         this.ip = ip;
     }
+
 }

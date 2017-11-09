@@ -8,7 +8,7 @@ public class BukkitPlayerAdapter {
     public static OnlinePlayer asOnlinePlayer(Player p) {
         OnlinePlayer op = new OnlinePlayer();
         op.setName(p.getName());
-        op.setUUID(p.getUniqueId());
+        op.setUuid(p.getUniqueId());
         return op;
     }
 }

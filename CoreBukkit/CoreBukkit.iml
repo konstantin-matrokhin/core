@@ -9,6 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="netty-all-4.1.16.Final" level="project" />
     <orderEntry type="library" name="spigot" level="project" />
-    <orderEntry type="module" module-name="CoreAPI" />
+    <orderEntry type="module" module-name="CoreAPI" exported="" />
   </component>
 </module>
