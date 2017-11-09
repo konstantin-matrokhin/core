@@ -15,13 +15,13 @@ public class WhoCommand extends Command {
 
     @Override
     public boolean execute() {
-        String players = "";
-        for (OnlinePlayer op: CoreServer.get().getOnlinePlayers()) {
-            players += op.getName() + " ";
-        }
+        final StringBuilder players = new StringBuilder();
+        CoreServer.get().getOnlinePlayers().forEach(p -> {
+            players.append(p.getName()).append(" ");
+        });
 
-        Log.$("Подключенные игроки (" + CoreServer.get().getOnlinePlayers().size() + " ):");
-        Log.$(players.isEmpty() ? "Никого нет" : players);
+        Log.$("Подключенные игроки (" + CoreServer.get().getOnlinePlayers().size() + ") :");
+        Log.$(players.toString().isEmpty() ? "Никого нет" : players.toString());
         return true;
     }
 
