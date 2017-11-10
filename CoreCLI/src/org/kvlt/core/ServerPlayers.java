@@ -19,7 +19,6 @@ public class ServerPlayers extends HashSet<ServerPlayer> {
             int id = PlayerDB.initId(p.getName());
             p.setId(id);
             super.add(p);
-            Log.$(id + " | " + p.getName() + " joined.");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -30,6 +30,11 @@ public abstract class ServerPlayer implements Serializable {
     private Date mutedUntil;
     private Date banReason;
 
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
+
     public int getId() {
         return id;
     }
