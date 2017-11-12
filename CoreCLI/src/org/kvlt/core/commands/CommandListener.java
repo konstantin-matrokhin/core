@@ -19,6 +19,7 @@ public class CommandListener {
         registerCommand(new WhoCommand());
         registerCommand(new BroadcastCommand());
         registerCommand(new StopCommand());
+        registerCommand(new WhoisCommand());
 
         try {
             while (scanner.hasNextLine()) {
