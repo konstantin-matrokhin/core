@@ -25,6 +25,7 @@ public class PlayerDB {
 
 
     public static void loadOnlinePlayer(OnlinePlayer player) {
+
         //TODO: use model
     }
 }
