@@ -16,4 +16,5 @@ public class PingCommand extends Command {
     public void execute(CommandSender commandSender, String[] strings) {
 
     }
+
 }
