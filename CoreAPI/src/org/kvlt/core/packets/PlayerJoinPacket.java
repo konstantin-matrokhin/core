@@ -1,6 +1,7 @@
 package org.kvlt.core.packets;
 
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.utils.Log;
 
@@ -16,6 +17,7 @@ public class PlayerJoinPacket extends Packet implements Serializable {
 
     @Override
     public void onCore() {
+        PlayerDB.loadOnlinePlayer(player);
         CoreServer.get().getOnlinePlayers().add(player);
     }
 

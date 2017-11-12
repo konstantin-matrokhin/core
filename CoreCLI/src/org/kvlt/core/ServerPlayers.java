@@ -11,18 +11,8 @@ public class ServerPlayers extends HashSet<ServerPlayer> {
     /**
      * Добавляет и в спиком и в БД игрока
      */
-    @Override
-    public boolean add(ServerPlayer p) {
-        if (contains(p)) return false;
-
-        try {
-            int id = PlayerDB.initId(p.getName());
-            p.setId(id);
-            super.add(p);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
+//    @Override
+//    public boolean add(ServerPlayer p) {
+//    }
 
 }

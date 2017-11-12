@@ -1,6 +1,6 @@
 package org.kvlt.core.db;
 
-/**
+import org.kvlt.core.entities.OnlinePlayer; /**
  * Для управления записями игрокамов в БД
  */
 public class PlayerDB {
@@ -24,4 +24,7 @@ public class PlayerDB {
     }
 
 
+    public static void loadOnlinePlayer(OnlinePlayer player) {
+        //TODO: use model
+    }
 }
