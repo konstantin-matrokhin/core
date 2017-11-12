@@ -14,26 +14,16 @@ public class OnlinePlayers extends ArrayList<OnlinePlayer> {
     @Override
     public boolean remove(Object o) {
         OnlinePlayer target = (OnlinePlayer) o;
+        target.setLeaveTime(System.currentTimeMillis());
+        PlayerDB.save(target);
         return removeIf(p -> p.getName().equalsIgnoreCase(target.getName()));
     }
 
     @Override
     public boolean add(OnlinePlayer p) {
         if (contains(p)) return false;
-
-        loadInfo(p);
         super.add(p);
-
         return true;
-    }
-
-    public void loadInfo(OnlinePlayer p) {
-        try {
-            int id = PlayerDB.initId(p.getName());
-            p.setId(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public OnlinePlayer get(String name){

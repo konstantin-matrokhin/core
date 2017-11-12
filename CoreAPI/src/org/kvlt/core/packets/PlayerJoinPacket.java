@@ -17,6 +17,7 @@ public class PlayerJoinPacket extends Packet implements Serializable {
 
     @Override
     public void onCore() {
+        //TODO: make loading
         PlayerDB.loadOnlinePlayer(player);
         CoreServer.get().getOnlinePlayers().add(player);
     }

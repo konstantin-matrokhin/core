@@ -23,9 +23,38 @@ public class PlayerDB {
                 .executeAndFetchFirst(Integer.class);
     }
 
+    public static void save(OnlinePlayer player) {
+        int id = player.getId();
+        long playedNow = player.getLeaveTime() - player.getJoinTime();
+
+        String sql1 = "UPDATE join_info SET online_time = online_time + " + playedNow + " WHERE id = " + id;
+        String sql2 = "UPDATE join_info SET last_online = " + playedNow + " WHERE  id = " + id;
+
+        DAO.getConnection()
+                .createQuery(sql1)
+                .executeUpdate()
+                .createQuery(sql2)
+                .executeUpdate();
+    }
 
     public static void loadOnlinePlayer(OnlinePlayer player) {
+        player.setJoinTime(System.currentTimeMillis());
 
-        //TODO: use model
+        String existSql = "SELECT id FROM identifier WHERE id = " + player.getId();
+        int id = DAO.getConnection().createQuery(existSql).executeScalar(Integer.class);
+        if (id < 1) {
+            createPlayerModel(player);
+        } else {
+            loadPlayerModel(player);
+        }
     }
+
+    private static void createPlayerModel(OnlinePlayer player) {
+
+    }
+
+    private static void loadPlayerModel(OnlinePlayer player) {
+
+    }
+
 }

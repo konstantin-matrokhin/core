@@ -34,10 +34,6 @@ public abstract class Command {
     protected void addAliases(String... aliases) {
         this.aliases.addAll(Arrays.asList(aliases));
     }
-//
-//    protected void addAliases(String[] a) {
-//
-//    }
 
     public String getName() {
         return name;
