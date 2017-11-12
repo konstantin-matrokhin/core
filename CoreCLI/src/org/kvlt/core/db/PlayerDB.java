@@ -1,6 +1,12 @@
 package org.kvlt.core.db;
 
-import org.kvlt.core.entities.OnlinePlayer; /**
+import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.utils.Log;
+import org.sql2o.Query;
+
+import java.math.BigInteger;
+
+/**
  * Для управления записями игрокамов в БД
  */
 public class PlayerDB {
@@ -9,6 +15,7 @@ public class PlayerDB {
     private static final String NAME_COLUMN = "name";
     private static final String UUID_COLUMN = "uuid";
 
+    @Deprecated
     public static int initId(String playerName) {
         String sql1 = "INSERT INTO identifier (player_name) VALUES (:name)\n" +
                 "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), player_name = :name;";
@@ -38,10 +45,19 @@ public class PlayerDB {
     }
 
     public static void loadOnlinePlayer(OnlinePlayer player) {
-        player.setJoinTime(System.currentTimeMillis());
+        String existSql = "SELECT id FROM identifier WHERE name = :name";
 
-        String existSql = "SELECT id FROM identifier WHERE id = " + player.getId();
-        int id = DAO.getConnection().createQuery(existSql).executeScalar(Integer.class);
+        int id;
+
+        try {
+            id = DAO.getConnection()
+                    .createQuery(existSql)
+                    .addParameter("name", player.getName())
+                    .executeScalar(Integer.class);
+        } catch (Exception e) {
+            id = -1;
+        }
+
         if (id < 1) {
             createPlayerModel(player);
         } else {
@@ -50,6 +66,34 @@ public class PlayerDB {
     }
 
     private static void createPlayerModel(OnlinePlayer player) {
+        String playerName = player.getName();
+        String insertIdSql = "INSERT INTO identifier (player_name) VALUES (:name) ON DUPLICATE KEY UPDATE id=id";
+
+        BigInteger bigId = (BigInteger) DAO.getConnection()
+                .createQuery(insertIdSql, true)
+                .addParameter("name", playerName)
+                .executeUpdate()
+                .getKey();
+
+        int id = bigId.intValue();
+
+//        String[] queries = {
+//                "INSERT INTO join_info (id) VALUES (:id)",
+//                "INSERT INTO authentication (id) VALUES (:id)",
+//                "INSERT INTO friends (id) VALUES (:id)",
+//                "INSERT INTO ignores (id) VALUES (:id)",
+//                "INSERT INTO infractions (id) VALUES (:id)",
+//                "INSERT INTO players_groups (id) VALUES (:id)",
+//                "INSERT INTO reporters (id) VALUES (:id)",
+//                "INSERT INTO selected_skins (id) VALUES (:id)",
+//                "INSERT INTO settings (id) VALUES (:id)"
+//        };
+//
+//        for (String q : queries) {
+//            DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+//        }
+
+        player.setId(id);
 
     }
 
