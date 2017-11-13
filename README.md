@@ -9,7 +9,7 @@
 Отсюда и задается поведение пакетов, пришедших на один из серверов (__CLI, Bukkit, Proxy__).
 ## CoreCLI
 Для запуска используйте
-```
+```bash
 java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
 ```
 А проще всего запустить скрипт из директории Compiled
