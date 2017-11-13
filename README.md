@@ -26,9 +26,6 @@ ServerPlayer serverPlayer = PlayerDB.loadServerPlayer(name);
 // Получить все игровые серверы
 GameServer gameServer = CoreServer().get().getGameServers();
 
-// Получить данные из конфига
-String valueFromConfig = ConfigManager.getValue(sectionFromConfig, key);
-
 // Получить данных из секции конфига
 String bukkitSectionValue = Config.getServer("key");
 
