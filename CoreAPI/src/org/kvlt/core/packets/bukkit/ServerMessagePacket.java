@@ -1,7 +1,8 @@
-package org.kvlt.core.packets;
+package org.kvlt.core.packets.bukkit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.kvlt.core.packets.Packet;
 
 public class ServerMessagePacket extends Packet {
 

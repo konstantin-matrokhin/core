@@ -7,7 +7,7 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.entities.PlayerAdapter;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.packets.ProxyLoginPacket;
+import org.kvlt.core.packets.proxy.ProxyLoginPacket;
 
 public class ProxyEventListener implements Listener {
 

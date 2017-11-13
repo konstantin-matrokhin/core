@@ -1,6 +1,7 @@
-package org.kvlt.core.packets;
+package org.kvlt.core.packets.proxy;
 
 import org.kvlt.core.bungee.CoreBungee;
+import org.kvlt.core.packets.Packet;
 
 public class ProxyPingDataPacket extends Packet {
 

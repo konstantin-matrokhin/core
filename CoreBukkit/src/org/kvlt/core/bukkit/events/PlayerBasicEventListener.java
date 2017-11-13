@@ -1,6 +1,5 @@
 package org.kvlt.core.bukkit.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,8 +8,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.bukkit.utils.Log;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.PlayerJoinPacket;
-import org.kvlt.core.packets.PlayerQuitServerPacket;
+import org.kvlt.core.packets.player.PlayerJoinPacket;
+import org.kvlt.core.packets.player.PlayerQuitServerPacket;
 
 public class PlayerBasicEventListener implements Listener {
 

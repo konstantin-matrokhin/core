@@ -1,6 +1,7 @@
-package org.kvlt.core.packets;
+package org.kvlt.core.packets.player;
 
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.packets.Packet;
 import org.kvlt.core.utils.Log;
 import org.kvlt.core.entities.OnlinePlayer;
 

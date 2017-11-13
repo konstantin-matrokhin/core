@@ -2,13 +2,11 @@ package org.kvlt.core.bukkit.net;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import net.minecraft.server.v1_12_R1.ServerCommand;
 import org.bukkit.Bukkit;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Packet;
-import org.kvlt.core.packets.ServerConnectionPacket;
+import org.kvlt.core.packets.bukkit.ServerConnectionPacket;
 
 public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
 

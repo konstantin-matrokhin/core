@@ -6,8 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.events.EventManager;
 import org.kvlt.core.bukkit.net.ConnectionManager;
-import org.kvlt.core.packets.BroadcastPacket;
-import org.kvlt.core.packets.PlayerMessagePacket;
+import org.kvlt.core.packets.bukkit.BroadcastPacket;
+import org.kvlt.core.packets.player.PlayerMessagePacket;
 
 public class CorePlugin extends JavaPlugin {
 

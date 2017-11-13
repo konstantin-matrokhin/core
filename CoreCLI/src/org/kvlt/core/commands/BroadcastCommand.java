@@ -1,7 +1,7 @@
 package org.kvlt.core.commands;
 
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.packets.BroadcastPacket;
+import org.kvlt.core.packets.bukkit.BroadcastPacket;
 import org.kvlt.core.utils.Log;
 import org.kvlt.core.utils.LogType;
 
