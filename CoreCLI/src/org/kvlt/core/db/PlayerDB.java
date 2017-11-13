@@ -1,10 +1,11 @@
 package org.kvlt.core.db;
 
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.models.AuthModel;
 import org.kvlt.core.utils.Log;
-import org.sql2o.Query;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 
 /**
  * Для управления записями игрокамов в БД
@@ -56,6 +57,7 @@ public class PlayerDB {
         if (id == 0) {
             createPlayerModel(player);
         } else {
+            player.setId(id);
             loadPlayerModel(player);
         }
     }
@@ -93,6 +95,19 @@ public class PlayerDB {
     }
 
     private static void loadPlayerModel(OnlinePlayer player) {
+        int id = player.getId();
+        String authSql = "SELECT * FROM authentication WHERE id = :id";
+
+        AuthModel authModel = DAO.getConnection()
+                .createQuery(authSql)
+                .addParameter("id", id)
+                .setColumnMappings(AuthModel.cols)
+                .throwOnMappingFailure(false)
+                .executeAndFetchFirst(AuthModel.class);
+
+        Log.$("MODEL");
+        Log.$("PASSWORD IS " + authModel.getPassword());
+        Log.$("REG IP IS " + authModel.getRegisterIp());
 
     }
 
