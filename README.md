@@ -36,39 +36,38 @@ java -cp CoreCLI.jar;lib/* CoreCLI
 #### Зависимости (Maven):
 ```xml
 <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
-        <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.16.Final</version>
-        </dependency>
+<dependency>
+    <groupId>io.netty</groupId>
+    <artifactId>netty-all</artifactId>
+    <version>4.1.16.Final</version>
+</dependency>
 
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
-        </dependency>
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>6.0.6</version>
+</dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.sql2o/sql2o -->
-        <dependency>
-            <groupId>org.sql2o</groupId>
-            <artifactId>sql2o</artifactId>
-            <version>1.6.0-RC3</version>
-        </dependency>
+<!-- https://mvnrepository.com/artifact/org.sql2o/sql2o -->
+<dependency>
+    <groupId>org.sql2o</groupId>
+    <artifactId>sql2o</artifactId>
+    <version>1.6.0-RC3</version>
+</dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.8.2</version>
-        </dependency>
+<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+<dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.8.2</version>
+</dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.11</version>
-        </dependency>
+<!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
+<dependency>
+    <groupId>org.codehaus.groovy</groupId>
+    <artifactId>groovy-all</artifactId>
+    <version>2.4.11</version>
+</dependency>
 ```
 Используйте Maven только для загрузки зависимостей, для компиляции он не подходит из-за циклических зависимостей.
