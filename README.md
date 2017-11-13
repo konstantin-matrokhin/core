@@ -7,12 +7,32 @@
 ## CoreAPI
 Содержит все необходимые общие для всех проектов элементы.
 Отсюда и задается поведение пакетов, пришедших на один из серверов (__CLI, Bukkit, Proxy__).
+### Хочу потрогать API
+Не трогай, рано. Потрогай CLI.
 ## CoreCLI
 Для запуска используйте
 ```bash
 java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
 ```
 А проще всего запустить скрипт из директории Compiled
+### Хочу подергать API (CoreCLI)
+```java
+// Онлайн-игрок
+OnlinePlayer onlinePlayer = CoreServer().get().getOnlinePlayers().get("Steve");
+
+// Любой игрок
+ServerPlayer serverPlayer = PlayerDB.loadServerPlayer(name);
+
+// Получить все игровые серверы
+GameServer gameServer = CoreServer().get().getGameServers();
+
+// Получить данные из конфига
+String valueFromConfig = ConfigManager.getValue(sectionFromConfig, key);
+
+// Получить данных из секции конфига
+String bukkitSectionValue = Config.getServer("key");
+
+```
 #### Что сделано:
 * Отправка пакетов между серверами
 * Соответственно их получение и обработка
