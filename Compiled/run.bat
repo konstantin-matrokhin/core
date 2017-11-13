@@ -1,2 +1,2 @@
-java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
+java -cp CoreCLI.jar;libs/* org.kvlt.core.CoreCLI
 PAUSE

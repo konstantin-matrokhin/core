@@ -12,7 +12,7 @@
 ## CoreCLI
 Для запуска используйте
 ```bash
-java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
+java -cp CoreCLI.jar;libs/* org.kvlt.core.CoreCLI
 ```
 А проще всего запустить скрипт из директории Compiled
 ### Хочу подергать API (CoreCLI)
