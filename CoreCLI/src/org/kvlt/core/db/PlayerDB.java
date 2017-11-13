@@ -1,20 +1,16 @@
 package org.kvlt.core.db;
 
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.models.AuthModel;
+import org.kvlt.core.models.*;
 import org.kvlt.core.utils.Log;
+import org.sql2o.Connection;
 
 import java.math.BigInteger;
-import java.util.HashMap;
 
 /**
  * Для управления записями игрокамов в БД
  */
 public class PlayerDB {
-
-    private static final String PLAYER_TABLE = "players";
-    private static final String NAME_COLUMN = "name";
-    private static final String UUID_COLUMN = "uuid";
 
     @Deprecated
     public static int initId(String playerName) {
@@ -96,19 +92,21 @@ public class PlayerDB {
 
     private static void loadPlayerModel(OnlinePlayer player) {
         int id = player.getId();
-        String authSql = "SELECT * FROM authentication WHERE id = :id";
+        Connection conn = DAO.getConnection();
 
-        AuthModel authModel = DAO.getConnection()
-                .createQuery(authSql)
+        AuthModel authModel = loadModel(AuthModel.class, new AuthParams(), conn, id);
+
+        Log.$(authModel.getPassword());
+
+    }
+
+    private static <T extends Model> T loadModel(Class<T> fetchClass, ModelParams modelParams, Connection conn, int id) {
+        return conn
+                .createQuery(modelParams.selectSQL())
                 .addParameter("id", id)
-                .setColumnMappings(AuthModel.cols)
+                .setColumnMappings(modelParams.getCols())
                 .throwOnMappingFailure(false)
-                .executeAndFetchFirst(AuthModel.class);
-
-        Log.$("MODEL");
-        Log.$("PASSWORD IS " + authModel.getPassword());
-        Log.$("REG IP IS " + authModel.getRegisterIp());
-
+                .executeAndFetchFirst(fetchClass);
     }
 
 }

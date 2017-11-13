@@ -1,6 +1,6 @@
 package org.kvlt.core.models;
 
-public class IdentifierModel {
+public class IdentifierModel implements Model {
 
     private int id;
     private String playerName;
