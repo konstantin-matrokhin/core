@@ -10,6 +10,7 @@ public class PlayerAdapter {
         ServerPlayer cp = new SimplePlayer();
         cp.setUuid(pp.getUniqueId());
         cp.setName(pp.getName());
+
         return cp;
     }
 

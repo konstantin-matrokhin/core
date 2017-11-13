@@ -1,10 +1,15 @@
 package org.kvlt.core.commands;
 
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.PlayerModel;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.utils.Log;
+import org.kvlt.core.utils.Printer;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class WhoisCommand extends Command {
 
@@ -21,27 +26,24 @@ public class WhoisCommand extends Command {
         if (getArgs().length != 1) return false;
 
         String name = getArg(0);
-        /*ServerPlayer player = new PlayerModel(name);*/
-        OnlinePlayer player = CoreServer.get().getOnlinePlayers().get(name);
-        if (player != null) {
-            printOnlineInfo(player);
-        } else {
-            printOfflineInfo(player.getName());
-        }
+        ServerPlayer player = PlayerDB.loadServerPlayer(name);
+
+        printInfo(player);
+
         return true;
     }
 
-    private void printOfflineInfo(String playerName) {
-        ServerPlayer player = new PlayerModel(playerName);
-    }
+    private void printInfo(ServerPlayer player) {
+        SimpleDateFormat format = new SimpleDateFormat("HH чаcов, mm минут, ss секунд");
+        String totalPlayed = format.format(new Date(player.getPlayedTotal() * 1000));
+        String lastTimePlayed = format.format(new Date(player.getPlayedLastTime() * 1000));
 
-    private void printOnlineInfo(OnlinePlayer player) {
-        Log.$("_____________________________________");
-        Log.$("ИГРОК: " + player.getName());
-        Log.$("ID: " + player.getId());
-        Log.$("СЕРВЕР: "  + player.getCurrentServer());
-        Log.$("IP: " + player.getIp());
-        Log.$("_____________________________________");
+        Printer.$("_____________________________________");
+        Printer.$("ИГРОК: " + player.getName());
+        Printer.$("ID: " + player.getId());
+        Printer.$("ВСЕГО СЫГРАНО: " + totalPlayed);
+        Printer.$("ПОСЛЕДНЕЕ ВРЕМЯ ОНЛАЙНА: " + lastTimePlayed);
+        Printer.$("_____________________________________");
     }
 
 }

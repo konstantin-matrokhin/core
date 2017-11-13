@@ -1,9 +1,10 @@
 package org.kvlt.core.db;
 
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.PlayerModel;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.models.*;
-import org.kvlt.core.utils.Log;
 import org.sql2o.Connection;
 
 import java.math.BigInteger;
@@ -13,7 +14,7 @@ import java.math.BigInteger;
  */
 public class PlayerDB {
 
-    @Deprecated
+/*    @Deprecated
     public static int initId(String playerName) {
         String sql1 = "INSERT INTO identifier (player_name) VALUES (:name)\n" +
                 "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), player_name = :name;";
@@ -26,7 +27,7 @@ public class PlayerDB {
                 .executeUpdate()
                 .createQuery(sql2)
                 .executeAndFetchFirst(Integer.class);
-    }
+    }*/
 
     public static void save(OnlinePlayer player) {
         int id = player.getId();
@@ -42,19 +43,26 @@ public class PlayerDB {
                 .addParameter("now", playedNow)
                 .executeUpdate()
                 .createQuery(sql2)
+                .withParams()
                 .addParameter("id", id)
                 .addParameter("now", playedNow)
                 .executeUpdate();
     }
 
-    public static void loadOnlinePlayer(OnlinePlayer player) {
+    public static int loadId(String name) {
         int id;
         String existSql = "SELECT IF(COUNT(id) = 0, 0, id) AS id FROM identifier WHERE player_name = :name";
 
         id = DAO.getConnection()
                 .createQuery(existSql)
-                .addParameter("name", player.getName())
+                .addParameter("name", name)
                 .executeScalar(Integer.class);
+        return id;
+    }
+
+    public static void loadOnlinePlayer(OnlinePlayer player) {
+
+        int id = loadId(player.getName());
 
         if (id == 0) {
             createPlayerModel(player);
@@ -98,13 +106,15 @@ public class PlayerDB {
 
     }
 
-    private static void loadPlayerModel(OnlinePlayer player) {
+    private static void loadPlayerModel(ServerPlayer player) {
         int id = player.getId();
         Connection conn = DAO.getConnection();
 
         AuthModel authModel = loadModel(AuthModel.class, new AuthParams(), conn, id);
         JoinInfoModel joinInfoModel = loadModel(JoinInfoModel.class, new JoinInfoParams(), conn, id);
 
+        player.setPlayedLastTime(joinInfoModel.getLastOnline());
+        player.setPlayedTotal(joinInfoModel.getOnlineTime());
 
     }
 
@@ -115,6 +125,14 @@ public class PlayerDB {
                 .setColumnMappings(modelParams.getCols())
                 .throwOnMappingFailure(false)
                 .executeAndFetchFirst(fetchClass);
+    }
+
+    public static ServerPlayer loadServerPlayer(String name) {
+        ServerPlayer player = new PlayerModel(name);
+        int id = loadId(name);
+        player.setId(id);
+        loadPlayerModel(player);
+        return player;
     }
 
 }

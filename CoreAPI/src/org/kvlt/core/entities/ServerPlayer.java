@@ -3,7 +3,6 @@ package org.kvlt.core.entities;
 import org.kvlt.core.nodes.GameServer;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.UUID;
 
 /**
@@ -25,10 +24,11 @@ public abstract class ServerPlayer implements Serializable {
     private boolean muted;
     private int muteAmount;
     private int banAmount;
-    private Date totalTime;
-    private Date bannedUntil;
-    private Date mutedUntil;
-    private Date banReason;
+    private long bannedUntil;
+    private long mutedUntil;
+    private String banReason;
+    private long playedLastTime;
+    private long playedTotal;
 
     @Override
     public String toString() {
@@ -147,35 +147,43 @@ public abstract class ServerPlayer implements Serializable {
         this.banAmount = banAmount;
     }
 
-    public Date getTotalTime() {
-        return totalTime;
-    }
-
-    public void setTotalTime(Date totalTime) {
-        this.totalTime = totalTime;
-    }
-
-    public Date getBannedUntil() {
+    public long getBannedUntil() {
         return bannedUntil;
     }
 
-    public void setBannedUntil(Date bannedUntil) {
+    public void setBannedUntil(long bannedUntil) {
         this.bannedUntil = bannedUntil;
     }
 
-    public Date getMutedUntil() {
+    public long getMutedUntil() {
         return mutedUntil;
     }
 
-    public void setMutedUntil(Date mutedUntil) {
+    public void setMutedUntil(long mutedUntil) {
         this.mutedUntil = mutedUntil;
     }
 
-    public Date getBanReason() {
+    public String getBanReason() {
         return banReason;
     }
 
-    public void setBanReason(Date banReason) {
+    public void setBanReason(String banReason) {
         this.banReason = banReason;
+    }
+
+    public long getPlayedLastTime() {
+        return playedLastTime;
+    }
+
+    public void setPlayedLastTime(long playedLastTime) {
+        this.playedLastTime = playedLastTime;
+    }
+
+    public long getPlayedTotal() {
+        return playedTotal;
+    }
+
+    public void setPlayedTotal(long playedTotal) {
+        this.playedTotal = playedTotal;
     }
 }
