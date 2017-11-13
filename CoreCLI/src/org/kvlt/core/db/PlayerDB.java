@@ -1,8 +1,8 @@
 package org.kvlt.core.db;
 
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.entities.PlayerModel;
 import org.kvlt.core.entities.ServerPlayer;
+import org.kvlt.core.entities.SimplePlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.models.*;
 import org.sql2o.Connection;
@@ -13,21 +13,6 @@ import java.math.BigInteger;
  * Для управления записями игрокамов в БД
  */
 public class PlayerDB {
-
-/*    @Deprecated
-    public static int initId(String playerName) {
-        String sql1 = "INSERT INTO identifier (player_name) VALUES (:name)\n" +
-                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id), player_name = :name;";
-
-        String sql2 = "SELECT LAST_INSERT_ID() AS id;";
-
-        return DAO.getConnection()
-                .createQuery(sql1)
-                .addParameter("name", playerName)
-                .executeUpdate()
-                .createQuery(sql2)
-                .executeAndFetchFirst(Integer.class);
-    }*/
 
     public static void save(OnlinePlayer player) {
         int id = player.getId();
@@ -41,9 +26,9 @@ public class PlayerDB {
                 .createQuery(sql1)
                 .addParameter("id", id)
                 .addParameter("now", playedNow)
-                .executeUpdate()
+                .executeUpdate();
+        DAO.getConnection()
                 .createQuery(sql2)
-                .withParams()
                 .addParameter("id", id)
                 .addParameter("now", playedNow)
                 .executeUpdate();
@@ -61,7 +46,6 @@ public class PlayerDB {
     }
 
     public static void loadOnlinePlayer(OnlinePlayer player) {
-
         int id = loadId(player.getName());
 
         if (id == 0) {
@@ -115,7 +99,6 @@ public class PlayerDB {
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());
-
     }
 
     private static <T extends Model> T loadModel(Class<T> fetchClass, ModelParams modelParams, Connection conn, int id) {
@@ -128,10 +111,12 @@ public class PlayerDB {
     }
 
     public static ServerPlayer loadServerPlayer(String name) {
-        ServerPlayer player = new PlayerModel(name);
+        ServerPlayer player = new SimplePlayer(name);
         int id = loadId(name);
+
         player.setId(id);
         loadPlayerModel(player);
+
         return player;
     }
 

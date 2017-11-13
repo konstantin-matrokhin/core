@@ -1,4 +1,4 @@
-package org.kvlt.core.bukkit.events;
+package org.kvlt.core.bukkit.utils;
 
 import org.bukkit.entity.Player;
 import org.kvlt.core.bukkit.ConfigManager;
@@ -12,6 +12,7 @@ public class BukkitPlayerAdapter {
         op.setUuid(p.getUniqueId());
         op.setIp(p.getAddress().getHostString());
         op.setCurrentServer(ConfigManager.getClientName());
+
         return op;
     }
 }

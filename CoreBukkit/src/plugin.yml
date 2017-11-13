@@ -2,8 +2,8 @@ name: Core
 version: 0.0.1
 main: org.kvlt.core.bukkit.CorePlugin
 commands:
-  ping:
-    usage: /ping
+  broadcast:
+    usage: /broadcast
   msg:
-    usage: /tell
+    usage: /msg
     aliases: [tell, m, w, t, whisper, pm, message]

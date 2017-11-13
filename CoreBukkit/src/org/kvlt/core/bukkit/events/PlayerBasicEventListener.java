@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.bukkit.utils.Log;
+import org.kvlt.core.bukkit.utils.BukkitPlayerAdapter;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.player.PlayerJoinPacket;
 import org.kvlt.core.packets.player.PlayerQuitServerPacket;
@@ -29,7 +29,6 @@ public class PlayerBasicEventListener implements Listener {
 
        PlayerQuitServerPacket leavePacket = new PlayerQuitServerPacket(op);
        CorePlugin.get().getCoreServer().writeAndFlush(leavePacket);
-       Log.$("DISCONNECT");
    }
 
 }

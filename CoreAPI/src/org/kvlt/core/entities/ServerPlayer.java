@@ -13,7 +13,7 @@ public abstract class ServerPlayer implements Serializable {
     private int id;
     private String name;
     private String password;
-    private Group group;
+    private int group;
     private UUID uuid;
     private String lastIp;
     private String lastJoin;
@@ -59,11 +59,11 @@ public abstract class ServerPlayer implements Serializable {
         this.password = password;
     }
 
-    public Group getGroup() {
+    public int getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(int group) {
         this.group = group;
     }
 

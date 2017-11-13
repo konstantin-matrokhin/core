@@ -1,9 +1,8 @@
 package org.kvlt.core.packets.player;
 
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.packets.Packet;
-import org.kvlt.core.utils.Log;
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.packets.Packet;
 
 public class PlayerQuitServerPacket extends Packet {
 
@@ -16,7 +15,6 @@ public class PlayerQuitServerPacket extends Packet {
     @Override
     protected void onCore() {
         CoreServer.get().getOnlinePlayers().remove(player);
-        Log.$("disconnect " + player.getName());
     }
 
     @Override

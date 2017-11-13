@@ -4,8 +4,6 @@ import org.kvlt.core.entities.OnlinePlayer;
 
 public class PlayedTimeCounter {
 
-
-
     public static void start(OnlinePlayer op) {
         op.setJoinTime(System.currentTimeMillis());
     }

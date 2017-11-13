@@ -2,9 +2,7 @@ package org.kvlt.core.packets.proxy;
 
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.entities.SimplePlayer;
 import org.kvlt.core.packets.Packet;
-import org.kvlt.core.utils.Log;
 
 import java.io.Serializable;
 

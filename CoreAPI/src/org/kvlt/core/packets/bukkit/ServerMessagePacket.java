@@ -8,11 +8,11 @@ public class ServerMessagePacket extends Packet {
 
     private static final String msgFormat = "&c(SERVER): %msg%";
 
-    private String recepient;
+    private String recipient;
     private String msg;
 
     public ServerMessagePacket(String recepient, String msg) {
-        this.recepient = recepient;
+        this.recipient = recepient;
         this.msg = msg;
     }
 
@@ -25,7 +25,7 @@ public class ServerMessagePacket extends Packet {
     protected void onServer() {
         String formattedStr = ChatColor.translateAlternateColorCodes('&',
                 msgFormat.replaceAll("%msg%", msg));
-        Bukkit.getPlayer(recepient).sendMessage(formattedStr);
+        Bukkit.getPlayer(recipient).sendMessage(formattedStr);
     }
 
     @Override

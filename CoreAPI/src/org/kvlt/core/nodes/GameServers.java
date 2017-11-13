@@ -1,11 +1,9 @@
 package org.kvlt.core.nodes;
 
-import com.sun.istack.internal.NotNull;
 import org.kvlt.core.packets.Packet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class GameServers implements NodeContainer<GameServer>, Iterable<GameServer> {
 

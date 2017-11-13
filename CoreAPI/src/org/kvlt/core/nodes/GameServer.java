@@ -5,7 +5,6 @@ import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class GameServer implements Node {
 

@@ -4,7 +4,6 @@ import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class OnlinePlayers extends ArrayList<OnlinePlayer> {
 
@@ -14,7 +13,7 @@ public class OnlinePlayers extends ArrayList<OnlinePlayer> {
     @Override
     public boolean remove(Object o) {
         OnlinePlayer target = (OnlinePlayer) o;
-        OnlinePlayer player = null;
+        OnlinePlayer player;
 
         try {
             player = stream().filter(p -> p.getName().equalsIgnoreCase(target.getName())).findFirst().get();
@@ -23,13 +22,6 @@ public class OnlinePlayers extends ArrayList<OnlinePlayer> {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    @Override
-    public boolean add(OnlinePlayer p) {
-        if (contains(p)) return false;
-        super.add(p);
-        return true;
     }
 
     public OnlinePlayer get(String name){

@@ -1,7 +1,5 @@
 package org.kvlt.core.models;
 
-import java.util.HashMap;
-
 public class AuthModel implements Model {
 
     private int id;

@@ -20,7 +20,7 @@ public class ServerConnectionPacket extends Packet<Channel> {
         gs.setName(serverName);
         gs.setChannel(channel);
         CoreServer.get().getGameServers().addNode(gs);
-        Log.$("connected " + gs.getName());
+        Log.$("Подклчен сервер " + gs.getName());
     }
 
     @Override

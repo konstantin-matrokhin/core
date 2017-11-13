@@ -15,14 +15,14 @@ public class MsgCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (args.length < 2) return false;
 
-        String recepient = args[0];
+        String recipient = args[0];
         String[] words = Arrays.copyOfRange(args, 1, args.length);
         String message = String.join(" ", words);
 
         PlayerMessagePacket pmp = new PlayerMessagePacket(
                 ConfigManager.getClientName(),
                 sender.getName(),
-                recepient,
+                recipient,
                 message);
         ConnectionManager.get().getChannel().writeAndFlush(pmp);
         return true;

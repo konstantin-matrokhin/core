@@ -2,7 +2,6 @@ package org.kvlt.core.nodes;
 
 import org.kvlt.core.packets.Packet;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 

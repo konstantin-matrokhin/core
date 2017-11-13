@@ -12,8 +12,6 @@ import org.kvlt.core.bungee.utils.Log;
 
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.Thread.sleep;
-
 public class ConnectionManager {
 
     public static final long RECONNECT_DELAY = 8L;

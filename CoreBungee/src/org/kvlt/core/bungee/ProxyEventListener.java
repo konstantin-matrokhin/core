@@ -16,6 +16,7 @@ public class ProxyEventListener implements Listener {
         ProxiedPlayer p = event.getPlayer();
         ServerPlayer player = PlayerAdapter.asServerPlayer(p);
         String serverName = CoreBungee.get().getServerName();
+
         ProxyLoginPacket plp = new ProxyLoginPacket(player, serverName);
         CoreBungee.get().getCoreServer().writeAndFlush(plp);
     }
