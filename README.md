@@ -10,8 +10,9 @@
 ## CoreCLI
 Для запуска используйте
 ```
-java -cp CoreCLI.jar;lib/* CoreCLI
+java -cp CoreCLI.jar;lib/* org.kvlt.core.CoreCLI
 ```
+А проще всего запустить скрипт из директории Compiled
 #### Что сделано:
 * Отправка пакетов между серверами
 * Соответственно их получение и обработка
