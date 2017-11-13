@@ -4,5 +4,6 @@ main: org.kvlt.core.bukkit.CorePlugin
 commands:
   ping:
     usage: /ping
-  tell:
+  msg:
     usage: /tell
+    aliases: [tell, m, w, t, whisper, pm, message]
