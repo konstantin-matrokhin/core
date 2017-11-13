@@ -14,9 +14,15 @@ public class OnlinePlayers extends ArrayList<OnlinePlayer> {
     @Override
     public boolean remove(Object o) {
         OnlinePlayer target = (OnlinePlayer) o;
-        OnlinePlayer player = stream().filter(p -> p.getName().equalsIgnoreCase(target.getName())).findFirst().get();
-        PlayerDB.save(player);
-        return removeIf(p -> p.getName().equalsIgnoreCase(target.getName()));
+        OnlinePlayer player = null;
+
+        try {
+            player = stream().filter(p -> p.getName().equalsIgnoreCase(target.getName())).findFirst().get();
+            PlayerDB.save(player);
+            return removeIf(p -> p.getName().equalsIgnoreCase(target.getName()));
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

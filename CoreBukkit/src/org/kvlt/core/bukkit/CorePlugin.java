@@ -49,13 +49,14 @@ public class CorePlugin extends JavaPlugin {
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("tell")) {
-            if (args.length != 2) return false;
+            if (args.length < 2) return false;
             PlayerMessagePacket pmp = new PlayerMessagePacket(
                     ConfigManager.getClientName(),
                     sender.getName(),
                     args[0],
                     args[1]);
             ConnectionManager.get().getChannel().writeAndFlush(pmp);
+            return true;
         }
         return false;
     }
