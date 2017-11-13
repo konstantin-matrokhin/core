@@ -13,16 +13,6 @@ public class AuthModel implements Model {
     private long emailCodeTimestamp;
     private long lastAuth;
 
-    public static final String SELECT_SQL = "SELECT * FROM authentication WHERE id = :id";
-
-    public static HashMap<String, String> cols = new HashMap<String, String>(){{
-        put("registration_ip", "registerIp");
-        put("email_confirmed", "isEmailConfirmed");
-        put("email_confirmation_code", "emailConfirmationCode");
-        put("email_code_timestamp", "emailCodeTimestamp");
-        put("last_authenticated", "lastAuth");
-    }};
-
     public int getId() {
         return id;
     }
