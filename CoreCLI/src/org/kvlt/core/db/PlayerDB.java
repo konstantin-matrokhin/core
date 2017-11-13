@@ -45,20 +45,15 @@ public class PlayerDB {
     }
 
     public static void loadOnlinePlayer(OnlinePlayer player) {
-        String existSql = "SELECT id FROM identifier WHERE name = :name";
-
         int id;
+        String existSql = "SELECT IF(COUNT(id) = 0, 0, id) AS id FROM identifier WHERE player_name = :name";
 
-        try {
-            id = DAO.getConnection()
-                    .createQuery(existSql)
-                    .addParameter("name", player.getName())
-                    .executeScalar(Integer.class);
-        } catch (Exception e) {
-            id = -1;
-        }
+        id = DAO.getConnection()
+                .createQuery(existSql)
+                .addParameter("name", player.getName())
+                .executeScalar(Integer.class);
 
-        if (id < 1) {
+        if (id == 0) {
             createPlayerModel(player);
         } else {
             loadPlayerModel(player);
@@ -77,21 +72,21 @@ public class PlayerDB {
 
         int id = bigId.intValue();
 
-//        String[] queries = {
-//                "INSERT INTO join_info (id) VALUES (:id)",
-//                "INSERT INTO authentication (id) VALUES (:id)",
-//                "INSERT INTO friends (id) VALUES (:id)",
-//                "INSERT INTO ignores (id) VALUES (:id)",
-//                "INSERT INTO infractions (id) VALUES (:id)",
-//                "INSERT INTO players_groups (id) VALUES (:id)",
-//                "INSERT INTO reporters (id) VALUES (:id)",
-//                "INSERT INTO selected_skins (id) VALUES (:id)",
-//                "INSERT INTO settings (id) VALUES (:id)"
-//        };
-//
-//        for (String q : queries) {
-//            DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
-//        }
+        String[] queries = {
+                "INSERT INTO join_info (id) VALUES (:id)",
+                "INSERT INTO authentication (id) VALUES (:id)",
+                "INSERT INTO friends (id) VALUES (:id)",
+                "INSERT INTO ignores (id) VALUES (:id)",
+                "INSERT INTO infractions (id) VALUES (:id)",
+                "INSERT INTO players_groups (id) VALUES (:id)",
+                "INSERT INTO reporters (id) VALUES (:id)",
+                "INSERT INTO selected_skins (id) VALUES (:id)",
+                "INSERT INTO settings (id) VALUES (:id)"
+        };
+
+        for (String q : queries) {
+            DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+        }
 
         player.setId(id);
 

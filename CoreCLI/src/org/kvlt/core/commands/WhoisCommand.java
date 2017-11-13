@@ -23,15 +23,23 @@ public class WhoisCommand extends Command {
         String name = getArg(0);
         /*ServerPlayer player = new PlayerModel(name);*/
         OnlinePlayer player = CoreServer.get().getOnlinePlayers().get(name);
-        printInfo(player);
+        if (player != null) {
+            printOnlineInfo(player);
+        } else {
+            printOfflineInfo(player.getName());
+        }
         return true;
     }
 
-    private void printInfo(OnlinePlayer player) {
+    private void printOfflineInfo(String playerName) {
+        ServerPlayer player = new PlayerModel(playerName);
+    }
+
+    private void printOnlineInfo(OnlinePlayer player) {
         Log.$("_____________________________________");
         Log.$("ИГРОК: " + player.getName());
         Log.$("ID: " + player.getId());
-        Log.$("СЕРВЕР:"  + player.getCurrentServer());
+        Log.$("СЕРВЕР: "  + player.getCurrentServer());
         Log.$("IP: " + player.getIp());
         Log.$("_____________________________________");
     }

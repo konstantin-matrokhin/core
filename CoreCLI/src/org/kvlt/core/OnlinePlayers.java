@@ -27,7 +27,11 @@ public class OnlinePlayers extends ArrayList<OnlinePlayer> {
     }
 
     public OnlinePlayer get(String name){
-        return stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().get();
+        try {
+            return stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
