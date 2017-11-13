@@ -4,3 +4,5 @@ main: org.kvlt.core.bukkit.CorePlugin
 commands:
   ping:
     usage: /ping
+  tell:
+    usage: /tell

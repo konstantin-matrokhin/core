@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.events.EventManager;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 import org.kvlt.core.packets.BroadcastPacket;
+import org.kvlt.core.packets.PlayerMessagePacket;
 
 public class CorePlugin extends JavaPlugin {
 
@@ -46,6 +47,15 @@ public class CorePlugin extends JavaPlugin {
             BroadcastPacket bc = new BroadcastPacket(args[0], ConfigManager.getClientName(), sender.getName());
             ConnectionManager.get().getChannel().writeAndFlush(bc);
             return true;
+        }
+        if (cmd.getName().equalsIgnoreCase("tell")) {
+            if (args.length != 2) return false;
+            PlayerMessagePacket pmp = new PlayerMessagePacket(
+                    ConfigManager.getClientName(),
+                    sender.getName(),
+                    args[0],
+                    args[1]);
+            ConnectionManager.get().getChannel().writeAndFlush(pmp);
         }
         return false;
     }
