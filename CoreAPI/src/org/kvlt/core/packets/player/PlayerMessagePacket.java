@@ -28,11 +28,13 @@ public class PlayerMessagePacket extends Packet {
         OnlinePlayer coreSender = CoreServer.get().getOnlinePlayers().get(sender);
 
         if (coreRecepient != null) {
-            CoreServer.get().getGameServers().send(this);
+            coreRecepient.getCurrentProxy().send(this);
         } else {
             String errorMsg = "Такого игрока нет онлайн.";
             ServerMessagePacket smp = new ServerMessagePacket(sender, errorMsg);
-            CoreServer.get().getGameServers().getNode(coreSender.getCurrentServer()).send(smp);
+            coreSender.getCurrentProxy().send(this);
+            //TODO remove
+            //CoreServer.get().getGameServers().getNode(coreSender.getCurrentServer()).send(smp);
         }
     }
 

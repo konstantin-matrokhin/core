@@ -8,7 +8,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.bukkit.utils.BukkitPlayerAdapter;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.player.PlayerJoinPacket;
 import org.kvlt.core.packets.player.PlayerQuitServerPacket;
 
 public class PlayerBasicEventListener implements Listener {
@@ -18,8 +17,8 @@ public class PlayerBasicEventListener implements Listener {
        Player p = event.getPlayer();
        OnlinePlayer op = BukkitPlayerAdapter.asOnlinePlayer(p);
 
-       PlayerJoinPacket joinPacket = new PlayerJoinPacket(op);
-       CorePlugin.get().getCoreServer().writeAndFlush(joinPacket);
+       //PlayerJoinPacket joinPacket = new PlayerJoinPacket(op, ConfigManager.getClientName());
+       //CorePlugin.get().getCoreServer().writeAndFlush(joinPacket);
    }
 
    @EventHandler

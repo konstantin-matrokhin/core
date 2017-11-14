@@ -1,20 +1,24 @@
 package org.kvlt.core.entities;
 
+import org.kvlt.core.nodes.GameServer;
+import org.kvlt.core.nodes.Proxy;
+
 /**
  * Класс, который является сущностью игрока на сервере
  */
 public class OnlinePlayer extends ServerPlayer {
 
-    private String currentServer;
+    private GameServer currentServer;
+    private Proxy currentProxy;
     private String ip;
     private long joinTime;
     private long leaveTime;
 
-    public String getCurrentServer() {
+    public GameServer getCurrentServer() {
         return currentServer;
     }
 
-    public void setCurrentServer(String currentServer) {
+    public void setCurrentServer(GameServer currentServer) {
         this.currentServer = currentServer;
     }
 
@@ -40,5 +44,13 @@ public class OnlinePlayer extends ServerPlayer {
 
     public void setLeaveTime(long leaveTime) {
         this.leaveTime = leaveTime;
+    }
+
+    public Proxy getCurrentProxy() {
+        return currentProxy;
+    }
+
+    public void setCurrentProxy(Proxy currentProxy) {
+        this.currentProxy = currentProxy;
     }
 }

@@ -11,7 +11,6 @@ public class BukkitPlayerAdapter {
         op.setName(p.getName());
         op.setUuid(p.getUniqueId());
         op.setIp(p.getAddress().getHostString());
-        op.setCurrentServer(ConfigManager.getClientName());
 
         return op;
     }
