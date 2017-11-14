@@ -22,7 +22,7 @@ public class CorePlugin extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerBasicEventListener(), this);
 
-        getCommand("ping").setExecutor(new PingCommand());
+        getCommand("broadcast").setExecutor(new PingCommand());
         getCommand("msg").setExecutor(new MsgCommand());
 
         ConfigManager.initConfig();

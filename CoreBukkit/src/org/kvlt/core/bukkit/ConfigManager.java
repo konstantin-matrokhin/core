@@ -1,6 +1,9 @@
 package org.kvlt.core.bukkit;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import java.io.File;
 
 public class ConfigManager {
 
@@ -13,7 +16,8 @@ public class ConfigManager {
     }
 
     public static String getClientName() {
-        return config().getString("client-name");
+        String path = new File(Bukkit.getWorldContainer().getAbsolutePath()).getParentFile().getName();
+        return path;
     }
 
 }
