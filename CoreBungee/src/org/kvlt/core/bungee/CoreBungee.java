@@ -1,6 +1,7 @@
 package org.kvlt.core.bungee;
 
 import io.netty.channel.Channel;
+import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -32,7 +33,7 @@ public class CoreBungee extends Plugin {
             e.printStackTrace();
         }
 
-        serverName = config.getString("client-name");
+        serverName = new File(getDataFolder().getParentFile().getAbsolutePath()).getParentFile().getName();
         pingEventListener = new PingEventListener();
 
         ConnectionManager.get().startClient();
