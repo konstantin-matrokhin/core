@@ -26,8 +26,8 @@ public class PlayerBasicEventListener implements Listener {
        Player p = event.getPlayer();
        OnlinePlayer op = BukkitPlayerAdapter.asOnlinePlayer(p);
 
-       PlayerQuitServerPacket leavePacket = new PlayerQuitServerPacket(op);
-       CorePlugin.get().getCoreServer().writeAndFlush(leavePacket);
+//       PlayerQuitServerPacket leavePacket = new PlayerQuitServerPacket(op);
+//       CorePlugin.get().getCoreServer().writeAndFlush(leavePacket);
    }
 
 }

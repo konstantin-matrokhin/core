@@ -4,6 +4,7 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 
+@Deprecated
 public class PlayerQuitServerPacket extends Packet {
 
     private OnlinePlayer player;
