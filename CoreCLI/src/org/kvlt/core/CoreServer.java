@@ -8,6 +8,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.config.Config;
+import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.PlayerList;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.nodes.Proxies;
@@ -16,16 +19,16 @@ import org.kvlt.core.utils.Log;
 public class CoreServer {
 
     private static CoreServer instance;
-    private ServerPlayers serverPlayers;
-    private OnlinePlayers onlinePlayers;
+    private PlayerList<ServerPlayer> serverPlayers;
+    private PlayerList<OnlinePlayer> onlinePlayers;
     private Proxies proxies;
     private GameServers gameServers;
     private ChannelFuture future;
     private int port;
 
     private CoreServer() {
-        serverPlayers = new ServerPlayers();
-        onlinePlayers = new OnlinePlayers();
+        serverPlayers = new PlayerList<>();
+        onlinePlayers = new PlayerList<>();
         proxies = new Proxies();
         gameServers = new GameServers();
         port = Integer.valueOf(Config.getCore("port"));
@@ -70,11 +73,11 @@ public class CoreServer {
         }
     }
 
-    public ServerPlayers getServerPlayers() {
+    public PlayerList<ServerPlayer> getServerPlayers() {
         return serverPlayers;
     }
 
-    public OnlinePlayers getOnlinePlayers() {
+    public PlayerList<OnlinePlayer> getOnlinePlayers() {
         return onlinePlayers;
     }
 

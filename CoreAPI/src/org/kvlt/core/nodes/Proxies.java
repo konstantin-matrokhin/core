@@ -1,6 +1,7 @@
 package org.kvlt.core.nodes;
 
 import org.kvlt.core.packets.Packet;
+import org.kvlt.core.nodes.Proxy;
 
 import java.util.Iterator;
 import java.util.LinkedList;

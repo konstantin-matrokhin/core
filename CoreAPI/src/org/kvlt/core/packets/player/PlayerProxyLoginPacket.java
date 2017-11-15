@@ -1,6 +1,7 @@
 package org.kvlt.core.packets.player;
 
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.Packet;
@@ -22,9 +23,7 @@ public class PlayerProxyLoginPacket extends Packet implements Serializable {
     protected void onCore() {
         CoreServer.get().getProxies().getNode(proxy).getPlayers().add(player);
         CoreServer.get().getOnlinePlayers().add(player);
-
-        Log.$(CoreServer.get().getProxies().getNode(proxy).getPlayers().get(0) + "");
-        Log.$(CoreServer.get().getGameServers().getNode(proxy).getOnlinePlayers().get(0) + "");
+        player.setCurrentProxy(CoreServer.get().getProxies().getNode(proxy));
     }
 
     @Override
@@ -34,11 +33,6 @@ public class PlayerProxyLoginPacket extends Packet implements Serializable {
 
     @Override
     protected void onProxy() {
-
-    }
-
-    public ServerPlayer getServerPlayer() {
-        return player;
     }
 
 }

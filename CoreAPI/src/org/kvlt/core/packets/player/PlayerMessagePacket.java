@@ -1,10 +1,15 @@
 package org.kvlt.core.packets.player;
 
-import org.bukkit.Bukkit;
+import net.md_5.bungee.BungeeCord;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
+
+import java.awt.*;
 
 public class PlayerMessagePacket extends Packet {
 
@@ -33,23 +38,24 @@ public class PlayerMessagePacket extends Packet {
             String errorMsg = "Такого игрока нет онлайн.";
             ServerMessagePacket smp = new ServerMessagePacket(sender, errorMsg);
             coreSender.getCurrentProxy().send(this);
-            //TODO remove
-            //CoreServer.get().getGameServers().getNode(coreSender.getCurrentServer()).send(smp);
         }
     }
 
     @Override
     protected void onServer() {
+    }
+
+    @Override
+    protected void onProxy() {
         String formattedMsg = msgFormat
                 .replaceAll("%from%", server)
                 .replaceAll("%sender%", sender)
                 .replaceAll("%msg%", message);
 
-        Bukkit.getPlayer(recipient).sendMessage(formattedMsg);
-    }
+        CoreBungee.get().getProxy().getLogger().info(formattedMsg);
 
-    @Override
-    protected void onProxy() {
-
+        BungeeCord.getInstance().getPlayer(recipient)
+                .sendMessage(ChatMessageType.CHAT,
+                        TextComponent.fromLegacyText(formattedMsg));
     }
 }
