@@ -21,6 +21,7 @@ public class PlayerJoinPacket extends Packet implements Serializable {
     public void onCore() {
         player.setCurrentServer(CoreServer.get().getGameServers().getNode(serverName));
         PlayerDB.loadOnlinePlayer(player);
+
         CoreServer.get().getOnlinePlayers().add(player);
     }
 

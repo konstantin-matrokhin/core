@@ -16,6 +16,7 @@ public class PlayerQuitServerPacket extends Packet {
     @Override
     protected void onCore() {
         CoreServer.get().getOnlinePlayers().remove(player);
+
     }
 
     @Override
