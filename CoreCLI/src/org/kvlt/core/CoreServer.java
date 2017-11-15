@@ -4,7 +4,13 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.epoll.Epoll;
+import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.epoll.EpollServerSocketChannel;
+import io.netty.channel.epoll.EpollSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.ServerSocketChannel;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.config.Config;
@@ -36,15 +42,28 @@ public class CoreServer {
 
     public void start() {
 
-        Log.$("Прослушиваю порт " + port + "");
+        boolean hasEpoll = Epoll.isAvailable();
 
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup;
+        EventLoopGroup workerGroup;
+        Class<? extends ServerSocketChannel> socketChannelClass;
+
+        if (hasEpoll) {
+            bossGroup = new EpollEventLoopGroup();
+            workerGroup = new EpollEventLoopGroup();
+            socketChannelClass = EpollServerSocketChannel.class;
+        } else {
+            bossGroup = new NioEventLoopGroup();
+            workerGroup = new NioEventLoopGroup();
+            socketChannelClass = NioServerSocketChannel.class;
+        }
 
         try {
+            Log.$("Прослушиваю порт " + port + " | Сокет: " + socketChannelClass.getSimpleName());
+
             ServerBootstrap bootstrap = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
-                    .channel(NioServerSocketChannel.class)
+                    .channel(socketChannelClass)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childOption(ChannelOption.TCP_NODELAY, true)
                     .childHandler(new CoreInitializer());
