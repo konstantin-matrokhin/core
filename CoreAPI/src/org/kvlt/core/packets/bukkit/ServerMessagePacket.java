@@ -6,7 +6,7 @@ import org.kvlt.core.packets.Packet;
 
 public class ServerMessagePacket extends Packet {
 
-    private static final String msgFormat = "&c(SERVER): %msg%";
+    private static final String msgFormat = "&c(CORE): &e%msg%";
 
     private String recipient;
     private String msg;

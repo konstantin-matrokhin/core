@@ -8,20 +8,23 @@ import org.kvlt.core.db.DAO;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
+import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.player.PlayerProxyLoginPacket;
 
 public class TestOne {
 
+    private String name = "kvlt";
+    private CoreServer cs;
+
     @Test
     public void test1() {
-        String name = "kvlt";
         String proxyName = "proxy-1";
         Object dummy = null;
 
         Config.init();
         DAO.connect();
-        CoreServer cs = CoreServer.get();
+        cs = CoreServer.get();
 
         Proxy proxy = new Proxy(proxyName, null);
         cs.getProxies().addNode(proxy);
@@ -39,6 +42,12 @@ public class TestOne {
 
         Assert.assertEquals(op.getId(), 34);
         Assert.assertEquals(size, 1);
+    }
+
+    @Test
+    public void test2() {
+        long playedTime = PlayerDB.loadServerPlayer(name).getPlayedTotal();
+        Assert.assertEquals("07:00:00", PlayedTimeCounter.getFormatedTime(playedTime));
     }
 
 }

@@ -14,6 +14,12 @@ public class OnlinePlayer extends ServerPlayer {
     private long joinTime;
     private long leaveTime;
 
+    public OnlinePlayer() {}
+
+    public OnlinePlayer(String name) {
+        setName(name);
+    }
+
     public GameServer getCurrentServer() {
         return currentServer;
     }

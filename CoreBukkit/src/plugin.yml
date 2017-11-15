@@ -7,3 +7,5 @@ commands:
   msg:
     usage: /msg
     aliases: [tell, m, w, t, whisper, pm, message]
+  time:
+    usage: /time

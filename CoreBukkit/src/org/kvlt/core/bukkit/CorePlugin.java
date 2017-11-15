@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.MsgCommand;
 import org.kvlt.core.bukkit.commands.PingCommand;
+import org.kvlt.core.bukkit.commands.TimeCommand;
 import org.kvlt.core.bukkit.events.PlayerBasicEventListener;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 
@@ -24,6 +25,7 @@ public class CorePlugin extends JavaPlugin {
 
         getCommand("broadcast").setExecutor(new PingCommand());
         getCommand("msg").setExecutor(new MsgCommand());
+        getCommand("time").setExecutor(new TimeCommand());
 
         ConfigManager.initConfig();
         ConnectionManager.get().startClient();
