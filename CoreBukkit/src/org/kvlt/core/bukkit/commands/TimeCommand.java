@@ -12,7 +12,7 @@ public class TimeCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        Player p = null;
+        Player p;
         if (commandSender instanceof Player) {
             p = (Player) commandSender;
         } else {
