@@ -9,3 +9,6 @@ commands:
     aliases: [tell, m, w, t, whisper, pm, message]
   time:
     usage: /time
+  hub:
+    alises: [lobby]
+    usage: /hub

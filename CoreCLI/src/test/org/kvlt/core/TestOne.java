@@ -1,5 +1,6 @@
 package test.org.kvlt.core;
 
+import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.kvlt.core.CoreServer;
@@ -12,7 +13,7 @@ import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.player.PlayerProxyLoginPacket;
 
-public class TestOne {
+public class TestOne extends TestCase {
 
     private String name = "kvlt";
     private CoreServer cs;
