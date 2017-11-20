@@ -75,6 +75,14 @@ public class ConnectionManager {
         return instance == null ? instance = new ConnectionManager() : instance;
     }
 
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected) {
+        isConnected = connected;
+    }
+
     public void disconnect() {
         try {
             if (eventLoopGroup.shutdownGracefully().sync().isSuccess()) {

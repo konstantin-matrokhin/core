@@ -5,6 +5,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
+import org.kvlt.core.bungee.entities.commands.ConnectCommand;
 import org.kvlt.core.bungee.entities.commands.PingCommand;
 import org.kvlt.core.bungee.net.ConnectionManager;
 
@@ -40,7 +41,9 @@ public class CoreBungee extends Plugin {
 
         getProxy().getPluginManager().registerListener(this, new ProxyEventListener());
         getProxy().getPluginManager().registerListener(this, pingEventListener);
+
         getProxy().getPluginManager().registerCommand(this, new PingCommand());
+        getProxy().getPluginManager().registerCommand(this, new ConnectCommand());
 
     }
 

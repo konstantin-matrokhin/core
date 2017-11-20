@@ -16,6 +16,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
+        ConnectionManager.get().setConnected(false);
         ConnectionManager.get().connect();
     }
 
@@ -26,7 +27,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
+        ConnectionManager.get().setConnected(false);
         ConnectionManager.get().connect();
     }
 
