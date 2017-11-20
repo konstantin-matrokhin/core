@@ -5,7 +5,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.player.PlayerTimePacket;
 
 public class TimeCommand implements CommandExecutor {
@@ -19,7 +18,7 @@ public class TimeCommand implements CommandExecutor {
             return false;
         }
 
-        PlayerTimePacket ptp = new PlayerTimePacket(new OnlinePlayer(p.getName()));
+        PlayerTimePacket ptp = new PlayerTimePacket(p.getName());
         CorePlugin.get().getCoreServer().writeAndFlush(ptp);
 
         return true;

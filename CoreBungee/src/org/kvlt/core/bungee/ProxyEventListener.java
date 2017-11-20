@@ -1,13 +1,13 @@
 package org.kvlt.core.bungee;
 
-import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.*;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.md_5.bungee.api.event.ServerConnectedEvent;
+import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.entities.PlayerAdapter;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.player.PlayerProxyLoginPacket;
 import org.kvlt.core.packets.player.PlayerProxyQuitPacket;
 import org.kvlt.core.packets.player.PlayerSwitchServerPacket;
@@ -25,6 +25,7 @@ public class ProxyEventListener implements Listener {
 
         PlayerProxyLoginPacket plp = new PlayerProxyLoginPacket(player, proxyName, serverName);
         CoreBungee.get().getCoreServer().writeAndFlush(plp);
+        System.out.println("sent " + p.getName());
     }
 
     @EventHandler
@@ -39,7 +40,7 @@ public class ProxyEventListener implements Listener {
     @EventHandler
     public void onDisconnect(PlayerDisconnectEvent event) {
         ProxiedPlayer p = event.getPlayer();
-        PlayerProxyQuitPacket ppqp = new PlayerProxyQuitPacket(PlayerAdapter.asOnlinePlayer(p));
+        PlayerProxyQuitPacket ppqp = new PlayerProxyQuitPacket(p.getName());
         CoreBungee.get().getCoreServer().writeAndFlush(ppqp);
     }
 

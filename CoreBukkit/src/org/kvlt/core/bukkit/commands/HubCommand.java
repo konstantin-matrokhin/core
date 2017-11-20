@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.player.PlayerSwitchServerPacket;
 import org.kvlt.core.packets.proxy.ProxySwitchServerPacket;
 
 public class HubCommand implements CommandExecutor {

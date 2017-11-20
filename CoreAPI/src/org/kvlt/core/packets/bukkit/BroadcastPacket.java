@@ -9,6 +9,8 @@ import org.kvlt.core.utils.LogType;
 
 public class BroadcastPacket extends Packet {
 
+    private final String PREFIX = "&7[&cОБЪЯВЛЕНИЕ&7]&r ";
+
     private String str;
     private String server;
     private String sender;
@@ -32,7 +34,7 @@ public class BroadcastPacket extends Packet {
     @Override
     protected void onServer() {
         Bukkit.broadcastMessage(
-                ChatColor.translateAlternateColorCodes('&', str));
+                ChatColor.translateAlternateColorCodes('&', PREFIX + str));
     }
 
     @Override

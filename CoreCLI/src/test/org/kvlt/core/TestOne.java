@@ -8,8 +8,6 @@ import org.kvlt.core.config.Config;
 import org.kvlt.core.db.DAO;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.player.PlayerProxyLoginPacket;
 

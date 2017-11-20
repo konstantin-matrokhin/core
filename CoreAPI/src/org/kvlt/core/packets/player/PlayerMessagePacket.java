@@ -1,6 +1,7 @@
 package org.kvlt.core.packets.player;
 
 import net.md_5.bungee.BungeeCord;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.kvlt.core.CoreServer;
@@ -8,13 +9,10 @@ import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
-import org.kvlt.core.utils.Log;
-
-import java.awt.*;
 
 public class PlayerMessagePacket extends Packet {
 
-    private static final String msgFormat = "(PM) [%from%] %sender%: %msg%";
+    private static final String msgFormat = "[%from%] %sender% -> вам %msg%";
 
     private String sender;
     private String recipient;
@@ -32,26 +30,31 @@ public class PlayerMessagePacket extends Packet {
     protected void onCore() {
         OnlinePlayer coreRecipient = CoreServer.get().getOnlinePlayers().get(recipient);
         OnlinePlayer coreSender = CoreServer.get().getOnlinePlayers().get(sender);
+        String response;
 
         if (coreRecipient != null) {
             coreRecipient.getCurrentProxy().send(this);
+            response = "[" + server + "] я -> " + recipient + ": " + message;
         } else {
-            String errorMsg = "Такого игрока нет онлайн.";
-            ServerMessagePacket smp = new ServerMessagePacket(sender, errorMsg);
-            coreSender.getCurrentProxy().send(smp);
+            response = "Такого игрока нет онлайн.";
         }
+        ServerMessagePacket smp = new ServerMessagePacket(sender, response);
+        coreSender.getCurrentProxy().send(smp);
     }
 
     @Override
     protected void onServer() {
+
     }
 
     @Override
     protected void onProxy() {
-        String formattedMsg = msgFormat
-                .replaceAll("%from%", server)
-                .replaceAll("%sender%", sender)
-                .replaceAll("%msg%", message);
+        String formattedMsg = ChatColor
+                .translateAlternateColorCodes('&',msgFormat
+                    .replaceAll("%from%", server)
+                    .replaceAll("%sender%", sender)
+                    .replaceAll("%msg%", message)
+                );
 
         CoreBungee.get().getProxy().getLogger().info(formattedMsg);
 

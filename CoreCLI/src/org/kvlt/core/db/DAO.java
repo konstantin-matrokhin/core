@@ -23,7 +23,8 @@ public class DAO {
         String dbParams = "useUnicode=true&" +
                 "useJDBCCompliantTimezoneShift=true&" +
                 "useLegacyDatetimeCode=false&" +
-                "serverTimezone=UTC";
+                "serverTimezone=UTC&" +
+                "autoReconnect=true";
 
         String dbUrl = String.format("jdbc:mysql://%s:%s/%s", host, port, db)
                 .concat("?")

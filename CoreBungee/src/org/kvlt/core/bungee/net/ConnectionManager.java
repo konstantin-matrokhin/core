@@ -23,13 +23,13 @@ public class ConnectionManager {
     private Channel channel;
     private String host;
     private int port;
-    private boolean isConnected;
+    private volatile boolean isConnected;
 
     private ConnectionManager() {}
 
     public void startClient() {
-        host = CoreBungee.get().getConfig().getString("host");
-        port = CoreBungee.get().getConfig().getInt("port");
+        host = CoreBungee.get().getConfigManager().getConfig().getString("host");
+        port = CoreBungee.get().getConfigManager().getConfig().getInt("port");
         eventLoopGroup = new NioEventLoopGroup();
 
         try {

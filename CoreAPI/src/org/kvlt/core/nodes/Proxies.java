@@ -1,20 +1,20 @@
 package org.kvlt.core.nodes;
 
 import org.kvlt.core.packets.Packet;
-import org.kvlt.core.nodes.Proxy;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Контейнер, хранящий в себе сущности прокси-серверов
  */
 public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
 
-    private LinkedList<Proxy> proxies;
+    private List<Proxy> proxies;
 
     {
-        proxies = new LinkedList<>();
+        proxies = new ArrayList<>();
     }
 
     @Override

@@ -10,12 +10,11 @@ public class PlayerList<T extends ServerPlayer> extends HashSet<T> {
     @Override
     public boolean remove(Object o) {
         T target = (T) o;
+        return removeIf(p -> p.getName().equalsIgnoreCase(target.getName()));
+    }
 
-        try {
-            return removeIf(p -> p.getName().equalsIgnoreCase(target.getName()));
-        } catch (Exception e) {
-            return false;
-        }
+    public boolean remove(String name) {
+        return removeIf(p -> p.getName().equalsIgnoreCase(name));
     }
 
     public boolean contains(String name) {
@@ -27,8 +26,6 @@ public class PlayerList<T extends ServerPlayer> extends HashSet<T> {
 
     @Override
     public boolean contains(Object o) {
-        if (super.contains(o)) return true;
-
         T target = (T) o;
         T pc = stream().filter(p -> p.getName().equalsIgnoreCase(target.getName())).findFirst().orElse(null);
 
@@ -36,12 +33,8 @@ public class PlayerList<T extends ServerPlayer> extends HashSet<T> {
     }
 
     public T get(String name){
-        try {
-            return stream().filter(p ->
-                    p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
-        } catch (Exception e) {
-            return null;
-        }
+        return stream().filter(p ->
+                p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 
 }

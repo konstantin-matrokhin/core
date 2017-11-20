@@ -2,7 +2,6 @@ package org.kvlt.core.packets.proxy;
 
 import net.md_5.bungee.BungeeCord;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Packet;

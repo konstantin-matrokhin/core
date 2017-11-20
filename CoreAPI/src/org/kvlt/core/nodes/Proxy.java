@@ -52,7 +52,4 @@ public class Proxy implements Node, Serializable {
         return players;
     }
 
-    public void setPlayers(PlayerList<OnlinePlayer> players) {
-        this.players = players;
-    }
 }

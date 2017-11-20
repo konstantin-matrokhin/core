@@ -1,7 +1,6 @@
 package org.kvlt.core.metrics;
 
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.utils.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +17,7 @@ public class PlayedTimeCounter {
     }
 
     public static String getFormatedTime(long time) {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("k:mm:ss");
         Date date = new Date(time);
         return sdf.format(date);
     }

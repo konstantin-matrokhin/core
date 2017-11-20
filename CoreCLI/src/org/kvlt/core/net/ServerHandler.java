@@ -13,6 +13,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
         Channel channel = ctx.channel();
         Log.$("Новое подключение: " + channel.remoteAddress());
         ClientManager.add(channel);
+
         channel.closeFuture().addListener((future) -> {
             ClientManager.remove(channel);
             Log.$("Разорвано соединение: " + channel.remoteAddress());
@@ -36,6 +37,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         Log.$("Произошла ошибка с подключением: " + ctx.channel().remoteAddress());
+        cause.printStackTrace();
         channelInactive(ctx);
     }
 

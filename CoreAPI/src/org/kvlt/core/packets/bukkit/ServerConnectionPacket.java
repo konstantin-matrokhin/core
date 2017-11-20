@@ -1,7 +1,6 @@
 package org.kvlt.core.packets.bukkit;
 
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.utils.Log;
@@ -16,10 +15,7 @@ public class ServerConnectionPacket extends Packet<Channel> {
 
     @Override
     public void onCore(Channel channel) {
-        GameServer gs = new GameServer();
-        gs.setName(serverName);
-        gs.setChannel(channel);
-        CoreServer.get().getGameServers().addNode(gs);
+        GameServer gs = new GameServer(serverName, channel);
         Log.$("Подключен сервер " + gs.getName());
     }
 

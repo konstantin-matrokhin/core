@@ -25,8 +25,10 @@ public class ServerMessagePacket extends Packet {
 
     @Override
     protected void onServer() {
-        String formattedStr = ChatColor.translateAlternateColorCodes('&',
-                msgFormat.replaceAll("%msg%", msg));
+        String formattedStr = ChatColor
+                .translateAlternateColorCodes('&',
+                    msgFormat.replaceAll("%msg%", msg));
+
         Bukkit.getPlayer(recipient).sendMessage(formattedStr);
     }
 

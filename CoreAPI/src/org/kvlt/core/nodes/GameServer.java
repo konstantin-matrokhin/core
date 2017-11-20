@@ -1,16 +1,26 @@
 package org.kvlt.core.nodes;
 
 import io.netty.channel.Channel;
+import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.packets.Packet;
-
-import java.util.ArrayList;
 
 public class GameServer implements Node {
 
     private Channel channel;
     private String name;
-    private ArrayList<OnlinePlayer> onlinePlayers;
+    private PlayerList<OnlinePlayer> onlinePlayers;
+
+    {
+        onlinePlayers = new PlayerList<>();
+    }
+
+    public GameServer(String name, Channel channel) {
+        this.name = name;
+        this.channel = channel;
+        CoreServer.get().getGameServers().addNode(this);
+    }
 
     @Override
     public void send(Packet packet) {
@@ -37,7 +47,7 @@ public class GameServer implements Node {
         return channel;
     }
 
-    public ArrayList<OnlinePlayer> getOnlinePlayers() {
+    public PlayerList<OnlinePlayer> getOnlinePlayers() {
         return onlinePlayers;
     }
 

@@ -8,5 +8,4 @@ public class SimplePlayer extends ServerPlayer {
         setName(name);
     }
 
-
 }

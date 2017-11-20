@@ -1,7 +1,5 @@
 package org.kvlt.core.models;
 
-import org.kvlt.core.models.ModelParams;
-
 public class JoinInfoParams extends ModelParams {
 
     @Override

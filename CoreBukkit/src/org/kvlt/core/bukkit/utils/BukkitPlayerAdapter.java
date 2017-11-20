@@ -1,7 +1,6 @@
 package org.kvlt.core.bukkit.utils;
 
 import org.bukkit.entity.Player;
-import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.entities.OnlinePlayer;
 
 public class BukkitPlayerAdapter {

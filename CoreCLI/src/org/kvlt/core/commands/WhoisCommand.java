@@ -4,8 +4,6 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.utils.Log;
-import org.kvlt.core.utils.LogType;
 import org.kvlt.core.utils.Printer;
 
 import java.text.SimpleDateFormat;
@@ -36,7 +34,7 @@ public class WhoisCommand extends Command {
                 if (player != null) {
                     printInfo(player);
                 } else {
-                    Log.$(LogType.ERROR, "Игрок не найден в БД.");
+                    Printer.$("Игрок не найден в БД.");
                 }
             }
         };
@@ -63,8 +61,8 @@ public class WhoisCommand extends Command {
         Printer.$("ПОСЛЕДНЕЕ ВРЕМЯ ОНЛАЙНА: " + lastTimePlayed);
         if (isOnline) {
             Printer.$("ОНЛАЙН: ДА");
-            Printer.$("СЕРВЕР: " + op.getCurrentServer());
-            Printer.$("ПРОКСИ: " + op.getCurrentProxy());
+            Printer.$("СЕРВЕР: " + op.getCurrentServer().getName());
+            Printer.$("ПРОКСИ: " + op.getCurrentProxy().getName());
             Printer.$("IP: " + op.getIp());
         } else {
             Printer.$("ОНЛАЙН: НЕТ");

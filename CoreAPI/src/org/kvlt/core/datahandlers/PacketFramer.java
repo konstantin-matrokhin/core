@@ -1,6 +1,5 @@
 package org.kvlt.core.datahandlers;
 
-public class PacketFramer
-{
+public class PacketFramer {
 
 }

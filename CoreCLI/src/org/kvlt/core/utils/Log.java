@@ -17,7 +17,7 @@ public class Log {
 
     public static void $(LogType level, String str) {
         String time = simpleDateFormat.format(new Date());
-        System.out.println("[" + level + "][" + time + "] " + str);
+        System.out.println("[" + time + "][" + level + "] " + str);
     }
 
 }

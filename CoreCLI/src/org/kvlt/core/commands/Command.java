@@ -1,5 +1,7 @@
 package org.kvlt.core.commands;
 
+import org.kvlt.core.utils.Printer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,13 +24,14 @@ public abstract class Command {
     }
 
     public void passInput(String name, String[] args) {
-
         if (getName().equalsIgnoreCase(name) || aliases.contains(name.toLowerCase())) {
             this.name = name;
             this.args = args;
-            execute();
-        }
 
+            if (!execute()) {
+                Printer.$("Команда не выполнена.");
+            }
+        }
     }
 
     protected void addAliases(String... aliases) {

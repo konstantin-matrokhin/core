@@ -8,20 +8,20 @@ import org.kvlt.core.packets.bukkit.ServerMessagePacket;
 
 public class PlayerTimePacket extends Packet {
 
-    public OnlinePlayer player;
+    public String playerName;
 
-    public PlayerTimePacket(OnlinePlayer player) {
-        this.player = player;
+    public PlayerTimePacket(String playerName) {
+        this.playerName = playerName;
     }
 
     @Override
     protected void onCore() {
-        OnlinePlayer realPlayer = CoreServer.get().getOnlinePlayers().get(player.getName());
-        String recipient = realPlayer.getName();
-        String time = PlayedTimeCounter.getFormatedTime(realPlayer.getPlayedTotal());
+        OnlinePlayer player = CoreServer.get().getOnlinePlayers().get(playerName);
+        String recipient = playerName;
+        String time = PlayedTimeCounter.getFormatedTime(player.getPlayedTotal());
 
         ServerMessagePacket smp = new ServerMessagePacket(recipient, time);
-        realPlayer.getCurrentServer().send(smp);
+        player.getCurrentServer().send(smp);
     }
 
     @Override

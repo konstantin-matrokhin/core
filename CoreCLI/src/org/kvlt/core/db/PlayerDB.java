@@ -1,5 +1,6 @@
 package org.kvlt.core.db;
 
+import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.SimplePlayer;
@@ -25,8 +26,10 @@ public class PlayerDB {
 
     public static void save(OnlinePlayer player) {
         int id = player.getId();
-
         long playedNow = PlayedTimeCounter.stop(player);
+
+        PlayedTimeCounter.stop(player);
+        CoreServer.get().getOnlinePlayers().remove(player);
 
         String sql1 = "UPDATE join_info SET online_time = online_time + :now WHERE id = :id";
         String sql2 = "UPDATE join_info SET last_online = :now WHERE  id = :id";
