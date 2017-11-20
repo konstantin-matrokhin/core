@@ -8,12 +8,12 @@ import org.kvlt.core.packets.Packet;
 import java.io.Serializable;
 
 @Deprecated
-public class PlayerJoinPacket extends Packet implements Serializable {
+public class PlayerProxyJoinPacket extends Packet implements Serializable {
 
     private OnlinePlayer player;
     private String serverName;
 
-    public PlayerJoinPacket(OnlinePlayer p, String serverName) {
+    public PlayerProxyJoinPacket(OnlinePlayer p, String serverName) {
         this.player = p;
     }
 

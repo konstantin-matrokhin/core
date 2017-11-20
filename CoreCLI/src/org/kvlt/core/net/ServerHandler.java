@@ -19,6 +19,12 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
         });
     }
 
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        ctx.close();
+        ClientManager.remove(ctx.channel());
+    }
+
     /**
      * Выполняет, принимая контекст пакета
      */
@@ -30,9 +36,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         Log.$("Произошла ошибка с подключением: " + ctx.channel().remoteAddress());
-        ClientManager.remove(ctx.channel());
-        ctx.close();
-        cause.printStackTrace();
+        channelInactive(ctx);
     }
 
 }

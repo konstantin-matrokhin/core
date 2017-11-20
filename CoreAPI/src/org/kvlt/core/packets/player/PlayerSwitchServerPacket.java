@@ -18,9 +18,12 @@ public class PlayerSwitchServerPacket extends Packet {
     @Override
     protected void onCore() {
         OnlinePlayer p = CoreServer.get().getOnlinePlayers().get(playerName);
+        if (p.getCurrentServer() == null) {
+            System.out.println(playerName + " зашел на сервер " + to);
+        } else {
+            System.out.println(playerName + " сменил сервер с " + p.getCurrentServer().getName() + " на " + to);
+        }
         p.setCurrentServer(CoreServer.get().getGameServers().getNode(to));
-
-        Log.$(playerName + " сменил сервер с " + p.getCurrentServer().getName() + " на " + to);
     }
 
     @Override

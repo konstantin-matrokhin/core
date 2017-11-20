@@ -5,14 +5,23 @@ import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.SimplePlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.models.*;
+import org.kvlt.core.utils.Log;
 import org.sql2o.Connection;
 
 import java.math.BigInteger;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Для управления записями игрокамов в БД
  */
 public class PlayerDB {
+
+    public static ExecutorService executor;
+
+    static {
+        executor = Executors.newSingleThreadExecutor();
+    }
 
     public static void save(OnlinePlayer player) {
         int id = player.getId();
@@ -21,17 +30,33 @@ public class PlayerDB {
 
         String sql1 = "UPDATE join_info SET online_time = online_time + :now WHERE id = :id";
         String sql2 = "UPDATE join_info SET last_online = :now WHERE  id = :id";
+        String sql3 = "UPDATE join_info SET ip = :ip WHERE  id = :id";
+        String sql4 = "UPDATE join_info SET server = :server WHERE  id = :id";
 
-        DAO.getConnection()
-                .createQuery(sql1)
-                .addParameter("id", id)
-                .addParameter("now", playedNow)
-                .executeUpdate();
-        DAO.getConnection()
-                .createQuery(sql2)
-                .addParameter("id", id)
-                .addParameter("now", playedNow)
-                .executeUpdate();
+        Runnable r = () -> {
+            Log.$("saving " + player.getName()  + " | " + playedNow);
+            DAO.getConnection()
+                    .createQuery(sql1)
+                    .addParameter("id", id)
+                    .addParameter("now", playedNow)
+                    .executeUpdate();
+            DAO.getConnection()
+                    .createQuery(sql2)
+                    .addParameter("id", id)
+                    .addParameter("now", playedNow)
+                    .executeUpdate();
+            DAO.getConnection()
+                    .createQuery(sql3)
+                    .addParameter("id", id)
+                    .addParameter("ip", player.getIp())
+                    .executeUpdate();
+            DAO.getConnection()
+                    .createQuery(sql4)
+                    .addParameter("id", id)
+                    .addParameter("server", player.getCurrentServer().getName())
+                    .executeUpdate();
+        };
+        executor.execute(r);
     }
 
     public static int loadId(String name) {
@@ -46,16 +71,30 @@ public class PlayerDB {
     }
 
     public static void loadOnlinePlayer(OnlinePlayer player) {
-        int id = loadId(player.getName());
+        Runnable r = () -> {
+            int id = loadId(player.getName());
 
-        if (id == 0) {
-            createPlayerModel(player);
-        } else {
-            player.setId(id);
-            loadPlayerModel(player);
-        }
+            if (id == 0) {
+                createPlayerModel(player);
+            } else {
+                player.setId(id);
+                loadPlayerModel(player);
+            }
 
-        PlayedTimeCounter.start(player);
+            PlayedTimeCounter.start(player);
+        };
+
+        executor.execute(r);
+    }
+
+    public static ServerPlayer loadServerPlayer(String name) {
+        ServerPlayer player = new SimplePlayer(name);
+        int id = loadId(name);
+
+        player.setId(id);
+        loadPlayerModel(player);
+
+        return player;
     }
 
     private static void createPlayerModel(OnlinePlayer player) {
@@ -91,6 +130,8 @@ public class PlayerDB {
     }
 
     private static void loadPlayerModel(ServerPlayer player) {
+        if (player == null) return;
+
         int id = player.getId();
         Connection conn = DAO.getConnection();
 
@@ -108,16 +149,7 @@ public class PlayerDB {
                 .setColumnMappings(modelParams.getCols())
                 .throwOnMappingFailure(false)
                 .executeAndFetchFirst(fetchClass);
-    }
 
-    public static ServerPlayer loadServerPlayer(String name) {
-        ServerPlayer player = new SimplePlayer(name);
-        int id = loadId(name);
-
-        player.setId(id);
-        loadPlayerModel(player);
-
-        return player;
     }
 
 }

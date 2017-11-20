@@ -8,6 +8,7 @@ import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
+import org.kvlt.core.utils.Log;
 
 import java.awt.*;
 
@@ -20,24 +21,24 @@ public class PlayerMessagePacket extends Packet {
     private String message;
     private String server;
 
-    public PlayerMessagePacket(String from, String sender, String recepient, String message) {
+    public PlayerMessagePacket(String from, String sender, String recipient, String message) {
         this.sender = sender;
-        this.recipient = recepient;
+        this.recipient = recipient;
         this.message = message;
         this.server = from;
     }
 
     @Override
     protected void onCore() {
-        OnlinePlayer coreRecepient = CoreServer.get().getOnlinePlayers().get(recipient);
+        OnlinePlayer coreRecipient = CoreServer.get().getOnlinePlayers().get(recipient);
         OnlinePlayer coreSender = CoreServer.get().getOnlinePlayers().get(sender);
 
-        if (coreRecepient != null) {
-            coreRecepient.getCurrentProxy().send(this);
+        if (coreRecipient != null) {
+            coreRecipient.getCurrentProxy().send(this);
         } else {
             String errorMsg = "Такого игрока нет онлайн.";
             ServerMessagePacket smp = new ServerMessagePacket(sender, errorMsg);
-            coreSender.getCurrentProxy().send(this);
+            coreSender.getCurrentProxy().send(smp);
         }
     }
 

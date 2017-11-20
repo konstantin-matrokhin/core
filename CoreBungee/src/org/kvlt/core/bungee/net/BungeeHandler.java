@@ -15,6 +15,11 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
     }
 
     @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        ConnectionManager.get().connect();
+    }
+
+    @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Packet packet) {
         packet.execute();
     }

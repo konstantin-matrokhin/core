@@ -1,4 +1,4 @@
-package org.kvlt.core.db;
+package org.kvlt.core.models;
 
 import org.kvlt.core.models.ModelParams;
 

@@ -1,11 +1,11 @@
 package org.kvlt.core.bungee;
 
 import io.netty.channel.Channel;
-import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
+import org.kvlt.core.bungee.entities.commands.PingCommand;
 import org.kvlt.core.bungee.net.ConnectionManager;
 
 import java.io.File;

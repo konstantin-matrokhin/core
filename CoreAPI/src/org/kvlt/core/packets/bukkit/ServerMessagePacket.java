@@ -1,5 +1,7 @@
 package org.kvlt.core.packets.bukkit;
 
+import net.md_5.bungee.BungeeCord;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.kvlt.core.packets.Packet;
@@ -30,6 +32,13 @@ public class ServerMessagePacket extends Packet {
 
     @Override
     protected void onProxy() {
+        String formattedStr = msgFormat
+                .replaceAll("%msg%",
+                        net.md_5.bungee.api.ChatColor
+                                .translateAlternateColorCodes('&', msg));
 
+        BungeeCord.getInstance()
+                .getPlayer(recipient)
+                .sendMessage(TextComponent.fromLegacyText(formattedStr));
     }
 }
