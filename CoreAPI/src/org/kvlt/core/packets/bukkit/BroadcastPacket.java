@@ -3,6 +3,7 @@ package org.kvlt.core.packets.bukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.utils.Log;
 import org.kvlt.core.utils.LogType;

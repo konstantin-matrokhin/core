@@ -6,13 +6,15 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.bungee.CoreBungee;
+import org.kvlt.core.bungee.storages.ReplyStorage;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
+import org.kvlt.core.utils.Log;
 
 public class PlayerMessagePacket extends Packet {
 
-    private static final String msgFormat = "[%from%] %sender% -> вам %msg%";
+    private static final String msgFormat = "&7[&e%from%&7] %sender% -> вам: &e%msg%";
 
     private String sender;
     private String recipient;
@@ -32,6 +34,7 @@ public class PlayerMessagePacket extends Packet {
         OnlinePlayer coreSender = CoreServer.get().getOnlinePlayers().get(sender);
         String response;
 
+        if (coreSender == null) return;
         if (coreRecipient != null) {
             coreRecipient.getCurrentProxy().send(this);
             response = "[" + server + "] я -> " + recipient + ": " + message;
@@ -49,14 +52,14 @@ public class PlayerMessagePacket extends Packet {
 
     @Override
     protected void onProxy() {
+        ReplyStorage.setLastInterlocutor(sender, recipient);
+
         String formattedMsg = ChatColor
                 .translateAlternateColorCodes('&',msgFormat
                     .replaceAll("%from%", server)
                     .replaceAll("%sender%", sender)
                     .replaceAll("%msg%", message)
                 );
-
-        CoreBungee.get().getProxy().getLogger().info(formattedMsg);
 
         BungeeCord.getInstance().getPlayer(recipient)
                 .sendMessage(ChatMessageType.CHAT,

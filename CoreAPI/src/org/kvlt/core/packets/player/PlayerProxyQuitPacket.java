@@ -16,7 +16,9 @@ public class PlayerProxyQuitPacket extends Packet {
     @Override
     protected void onCore() {
         OnlinePlayer player = CoreServer.get().getOnlinePlayers().get(playerName);
-        PlayerDB.save(player);
+        if (player != null) {
+            PlayerDB.save(player);
+        }
     }
 
     @Override

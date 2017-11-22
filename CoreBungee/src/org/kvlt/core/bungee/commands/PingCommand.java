@@ -1,4 +1,4 @@
-package org.kvlt.core.bungee.entities.commands;
+package org.kvlt.core.bungee.commands;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;

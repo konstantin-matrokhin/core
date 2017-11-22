@@ -12,12 +12,10 @@ public class PlayerProxyLoginPacket extends Packet implements Serializable {
 
     private OnlinePlayer player;
     private String proxy;
-    private String server;
 
-    public PlayerProxyLoginPacket(OnlinePlayer player, String proxy, String server) {
+    public PlayerProxyLoginPacket(OnlinePlayer player, String proxy) {
         this.player = player;
         this.proxy = proxy;
-        this.server = server;
     }
 
     @Override
@@ -26,7 +24,6 @@ public class PlayerProxyLoginPacket extends Packet implements Serializable {
         PlayerDB.loadOnlinePlayer(player);
         CoreServer.get().getOnlinePlayers().add(player);
         player.setCurrentProxy(CoreServer.get().getProxies().getNode(proxy));
-        player.setCurrentServer(CoreServer.get().getGameServers().getNode(server));
         Log.$(player.getName() + " joined proxy: " + proxy);
     }
 

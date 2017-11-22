@@ -34,7 +34,7 @@ public class TestOne extends TestCase {
         op.setName(name);
 
         PlayerProxyLoginPacket playerProxyLoginPacket;
-        playerProxyLoginPacket = new PlayerProxyLoginPacket(op, proxy.getName(), null);
+        playerProxyLoginPacket = new PlayerProxyLoginPacket(op, proxy.getName());
 
         playerProxyLoginPacket.execute(dummy);
 

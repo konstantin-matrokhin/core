@@ -4,6 +4,7 @@ import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.kvlt.core.bungee.storages.ReplyStorage;
 import org.kvlt.core.packets.Packet;
 
 public class ServerMessagePacket extends Packet {
@@ -25,19 +26,18 @@ public class ServerMessagePacket extends Packet {
 
     @Override
     protected void onServer() {
+        String replaced = msgFormat.replace("%msg%", msg);
         String formattedStr = ChatColor
-                .translateAlternateColorCodes('&',
-                    msgFormat.replaceAll("%msg%", msg));
+                .translateAlternateColorCodes('&', replaced);
 
         Bukkit.getPlayer(recipient).sendMessage(formattedStr);
     }
 
     @Override
     protected void onProxy() {
-        String formattedStr = msgFormat
-                .replaceAll("%msg%",
-                        net.md_5.bungee.api.ChatColor
-                                .translateAlternateColorCodes('&', msg));
+        String replaced = msgFormat.replaceAll("%msg%", msg);
+        String formattedStr = net.md_5.bungee.api.ChatColor
+                .translateAlternateColorCodes('&', replaced);
 
         BungeeCord.getInstance()
                 .getPlayer(recipient)

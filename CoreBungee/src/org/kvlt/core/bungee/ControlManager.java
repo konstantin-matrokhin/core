@@ -1,8 +1,9 @@
 package org.kvlt.core.bungee;
 
 import net.md_5.bungee.api.plugin.Plugin;
-import org.kvlt.core.bungee.entities.commands.ConnectCommand;
-import org.kvlt.core.bungee.entities.commands.PingCommand;
+import org.kvlt.core.bungee.commands.ConnectCommand;
+import org.kvlt.core.bungee.commands.PingCommand;
+import org.kvlt.core.bungee.commands.ReplyCommand;
 
 public class ControlManager {
 
@@ -22,6 +23,7 @@ public class ControlManager {
     public void registerCoreCommands() {
         plugin.getProxy().getPluginManager().registerCommand(plugin, new PingCommand());
         plugin.getProxy().getPluginManager().registerCommand(plugin, new ConnectCommand());
+        plugin.getProxy().getPluginManager().registerCommand(plugin, new ReplyCommand());
     }
 
     public PingEventListener getPingEventListener() {

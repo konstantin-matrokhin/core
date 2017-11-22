@@ -3,12 +3,15 @@ version: 0.0.1
 main: org.kvlt.core.bukkit.CorePlugin
 commands:
   broadcast:
-    usage: /broadcast
+    usage: /broadcast <text>
   msg:
-    usage: /msg
+    usage: /msg <to> <text>
     aliases: [tell, m, w, t, whisper, pm, message]
   time:
-    usage: /time
+    usage: /time [player]
   hub:
     alises: [lobby]
     usage: /hub
+  sendcommand:
+    aliases: [sc]
+    usage: /sc <server> <command>

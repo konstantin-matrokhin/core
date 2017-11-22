@@ -3,10 +3,7 @@ package org.kvlt.core.bukkit;
 import io.netty.channel.Channel;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.kvlt.core.bukkit.commands.HubCommand;
-import org.kvlt.core.bukkit.commands.MsgCommand;
-import org.kvlt.core.bukkit.commands.PingCommand;
-import org.kvlt.core.bukkit.commands.TimeCommand;
+import org.kvlt.core.bukkit.commands.*;
 import org.kvlt.core.bukkit.events.PlayerBasicEventListener;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 
@@ -28,6 +25,7 @@ public class CorePlugin extends JavaPlugin {
         getCommand("msg").setExecutor(new MsgCommand());
         getCommand("time").setExecutor(new TimeCommand());
         getCommand("hub").setExecutor(new HubCommand());
+        getCommand("sendcommand").setExecutor(new SendCommandCommand());
 
         ConfigManager.initConfig();
         ConnectionManager.get().startClient();
