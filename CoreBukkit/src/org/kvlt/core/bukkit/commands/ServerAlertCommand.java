@@ -3,6 +3,7 @@ package org.kvlt.core.bukkit.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.packets.bukkit.BroadcastPacket;
 
 import java.util.Arrays;
@@ -19,6 +20,7 @@ public class ServerAlertCommand implements CommandExecutor {
         String msg = String.join(" ", msgArr);
 
         BroadcastPacket bp = new BroadcastPacket(msg, server, senderName);
+        CorePlugin.get().getCoreServer().writeAndFlush(bp);
 
         return false;
     }
