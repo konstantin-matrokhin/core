@@ -4,7 +4,7 @@ import io.netty.channel.Channel;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.*;
-import org.kvlt.core.bukkit.events.PlayerBasicEventListener;
+import org.kvlt.core.bukkit.events.AuthEventsListener;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 
 public class CorePlugin extends JavaPlugin {
@@ -19,7 +19,7 @@ public class CorePlugin extends JavaPlugin {
             instance = this;
         }
 
-        Bukkit.getPluginManager().registerEvents(new PlayerBasicEventListener(), this);
+        Bukkit.getPluginManager().registerEvents(new AuthEventsListener(), this);
 
         getCommand("alert").setExecutor(new AlertCommand());
         getCommand("salert").setExecutor(new ServerAlertCommand());
