@@ -62,6 +62,10 @@ public class PlayerDB {
         executor.execute(r);
     }
 
+    public static boolean correctPassword(OnlinePlayer op, String password) {
+        return op.getPassword() != null && op.getPassword().equals(password);
+    }
+
     public static int loadId(String name) {
         int id;
         String existSql = "SELECT IF(COUNT(id) = 0, 0, id) AS id FROM identifier WHERE player_name = :name";
@@ -140,6 +144,8 @@ public class PlayerDB {
 
         AuthModel authModel = loadModel(AuthModel.class, new AuthParams(), conn, id);
         JoinInfoModel joinInfoModel = loadModel(JoinInfoModel.class, new JoinInfoParams(), conn, id);
+
+        player.setPassword(authModel.getPassword());
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());
