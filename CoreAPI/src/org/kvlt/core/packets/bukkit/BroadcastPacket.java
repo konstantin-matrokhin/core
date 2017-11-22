@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.bukkit.CorePlugin;
+import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.utils.Log;
 import org.kvlt.core.utils.LogType;
@@ -20,6 +21,11 @@ public class BroadcastPacket extends Packet {
         this.str = str;
     }
 
+    public BroadcastPacket(String str, String sender) {
+        this.str = str;
+        this.sender = sender;
+    }
+
     public BroadcastPacket(String str, String server, String sender) {
         this.str = str;
         this.server = server;
@@ -28,8 +34,16 @@ public class BroadcastPacket extends Packet {
 
     @Override
     protected void onCore() {
-        Log.$(LogType.BROADCAST, "(" + sender + " @ " + server + ") " + str);
-        CoreServer.get().getGameServers().send(this);
+        Log.$(LogType.BROADCAST, "(" + sender + ") " + str);
+
+        if (server != null) {
+            GameServer to = CoreServer.get().getGameServers().getNode(server);
+            if (to != null) {
+                to.send(this);
+            }
+        } else {
+            CoreServer.get().getGameServers().send(this);
+        }
     }
 
     @Override

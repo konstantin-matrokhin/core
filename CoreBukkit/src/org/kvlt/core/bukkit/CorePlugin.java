@@ -21,7 +21,8 @@ public class CorePlugin extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerBasicEventListener(), this);
 
-        getCommand("broadcast").setExecutor(new PingCommand());
+        getCommand("alert").setExecutor(new AlertCommand());
+        getCommand("salert").setExecutor(new ServerAlertCommand());
         getCommand("msg").setExecutor(new MsgCommand());
         getCommand("time").setExecutor(new TimeCommand());
         getCommand("hub").setExecutor(new HubCommand());
