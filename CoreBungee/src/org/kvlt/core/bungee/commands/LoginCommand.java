@@ -21,6 +21,6 @@ public class LoginCommand extends Command {
         String password = args[0];
 
         PlayerAuthPacket pap = new PlayerAuthPacket(p.getName(), password);
-        CoreBungee.get().getCoreServer().writeAndFlush(pap);
+        CoreBungee.get().sendPacket(pap);
     }
 }

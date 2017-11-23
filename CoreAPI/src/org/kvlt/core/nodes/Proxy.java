@@ -40,13 +40,13 @@ public class Proxy implements Node, Serializable {
 
     @Override
     public void send(Packet packet) {
-        getChannel().writeAndFlush(packet);
+        channel.writeAndFlush(packet, channel.voidPromise());
     }
 
     @Override
     public void send(Packet... packets) {
         for (Packet packet: packets) {
-            channel.write(packet);
+            channel.write(packet, channel.voidPromise());
         }
         channel.flush();
     }

@@ -13,7 +13,7 @@ public class AlertCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (args.length == 0) return false;
         BroadcastPacket bc = new BroadcastPacket(args[0], sender.getName());
-        ConnectionManager.get().getChannel().writeAndFlush(bc);
+        ConnectionManager.get().sendPacket(bc);
         return true;
     }
 }

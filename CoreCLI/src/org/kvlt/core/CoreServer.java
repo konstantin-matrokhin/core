@@ -38,7 +38,7 @@ public class CoreServer {
         port = Integer.valueOf(Config.getCore("port"));
     }
 
-    public void start() {
+    void start() {
 
         boolean hasEpoll = Epoll.isAvailable();
 

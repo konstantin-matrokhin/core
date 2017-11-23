@@ -29,6 +29,6 @@ public class RegisterCommand extends Command {
         }
 
         PlayerRegisterPacket prp = new PlayerRegisterPacket(p.getName(), password);
-        CoreBungee.get().getCoreServer().writeAndFlush(prp);
+        CoreBungee.get().sendPacket(prp);
     }
 }

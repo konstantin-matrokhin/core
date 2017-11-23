@@ -24,7 +24,7 @@ public class ProxyEventListener implements Listener {
         player.setIp(p.getAddress().getHostString());
 
         PlayerProxyLoginPacket plp = new PlayerProxyLoginPacket(player, proxyName);
-        CoreBungee.get().getCoreServer().writeAndFlush(plp);
+        CoreBungee.get().sendPacket(plp);
         System.out.println("sent " + p.getName());
     }
 
@@ -34,14 +34,14 @@ public class ProxyEventListener implements Listener {
         String to = player.getServer().getInfo().getName();
 
         PlayerSwitchServerPacket packet = new PlayerSwitchServerPacket(player.getName(), to);
-        CoreBungee.get().getCoreServer().writeAndFlush(packet);
+        CoreBungee.get().sendPacket(packet);
     }
 
     @EventHandler
     public void onDisconnect(PlayerDisconnectEvent event) {
         ProxiedPlayer p = event.getPlayer();
         PlayerProxyQuitPacket ppqp = new PlayerProxyQuitPacket(p.getName());
-        CoreBungee.get().getCoreServer().writeAndFlush(ppqp);
+        CoreBungee.get().sendPacket(ppqp);
     }
 
 }
