@@ -30,9 +30,8 @@ public class AuthEventsListener implements Listener {
         Player p = event.getPlayer();
         String cmd = event.getMessage();
 
-        if (!LoggedPlayers.isLogged(p) && !isAllowedCommand(cmd)) {
+        if (!LoggedPlayers.isLogged(p.getName()) && !isAllowedCommand(cmd)) {
             p.sendMessage(LOGIN_PLEASE);
-            p.sendMessage(cmd);
             event.setCancelled(true);
         }
     }

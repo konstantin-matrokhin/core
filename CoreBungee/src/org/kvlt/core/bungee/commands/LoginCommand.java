@@ -13,7 +13,10 @@ public class LoginCommand extends Command {
 
     @Override
     public void execute(CommandSender commandSender, String[] args) {
-        PlayerAuthPacket pap = new PlayerAuthPacket(commandSender.getName(), args[0]);
+        if (args.length != 1) return;
+        String password = args[0];
+
+        PlayerAuthPacket pap = new PlayerAuthPacket(commandSender.getName(), password);
         CoreBungee.get().getCoreServer().writeAndFlush(pap);
     }
 }

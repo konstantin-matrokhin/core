@@ -129,7 +129,9 @@ public class PlayerDB {
         };
 
         for (String q : queries) {
-            DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+            executor.execute(() -> {
+                DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+            });
         }
 
         player.setId(id);

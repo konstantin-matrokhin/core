@@ -13,6 +13,7 @@ public class OnlinePlayer extends ServerPlayer {
     private String ip;
     private long joinTime;
     private long leaveTime;
+    private boolean isLogged;
 
     public OnlinePlayer() {}
 
@@ -58,5 +59,13 @@ public class OnlinePlayer extends ServerPlayer {
 
     public void setCurrentProxy(Proxy currentProxy) {
         this.currentProxy = currentProxy;
+    }
+
+    public boolean isLogged() {
+        return isLogged;
+    }
+
+    public void setLogged(boolean logged) {
+        isLogged = logged;
     }
 }
