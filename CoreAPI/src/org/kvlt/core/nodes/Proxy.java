@@ -44,6 +44,14 @@ public class Proxy implements Node, Serializable {
     }
 
     @Override
+    public void send(Packet... packets) {
+        for (Packet packet: packets) {
+            channel.write(packet);
+        }
+        channel.flush();
+    }
+
+    @Override
     public void setName(String name) {
         this.name = name;
     }

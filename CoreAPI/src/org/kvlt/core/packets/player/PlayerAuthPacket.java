@@ -27,6 +27,10 @@ public class PlayerAuthPacket extends Packet {
     @Override
     protected void onCore() {
         OnlinePlayer op = CoreServer.get().getOnlinePlayers().get(playerName);
+
+        if (op == null) return;
+        if (op.isLogged()) return;
+
         successful = PlayerDB.correctPassword(op, password);
         if (successful) {
             op.setLogged(true);

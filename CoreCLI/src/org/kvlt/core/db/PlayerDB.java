@@ -62,6 +62,30 @@ public class PlayerDB {
         executor.execute(r);
     }
 
+    public static void register(OnlinePlayer player, String password) {
+        Runnable r = () -> {
+            int id = player.getId();
+            String ip = player.getIp();
+            long now = System.currentTimeMillis();
+
+            String registerSql = "UPDATE authentication SET\n" +
+                    "password = :pass,\n" +
+                    "registration_ip = :ip,\n" +
+                    "last_authenticated = :now\n" +
+                    "WHERE id = :id";
+
+            DAO.getConnection()
+                    .createQuery(registerSql)
+                    .addParameter("pass", password)
+                    .addParameter("ip", ip)
+                    .addParameter("now", now)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        };
+
+        executor.execute(r);
+    }
+
     public static boolean correctPassword(OnlinePlayer op, String password) {
         return op.getPassword() != null && op.getPassword().equals(password);
     }
@@ -147,7 +171,9 @@ public class PlayerDB {
         AuthModel authModel = loadModel(AuthModel.class, new AuthParams(), conn, id);
         JoinInfoModel joinInfoModel = loadModel(JoinInfoModel.class, new JoinInfoParams(), conn, id);
 
-        player.setPassword(authModel.getPassword());
+        if (authModel != null && authModel.getPassword() != null) {
+            player.setRegistered(true);
+        }
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());

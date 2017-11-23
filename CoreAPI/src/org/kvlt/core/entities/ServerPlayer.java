@@ -29,6 +29,7 @@ public abstract class ServerPlayer implements Serializable {
     private String banReason;
     private long playedLastTime;
     private long playedTotal;
+    private boolean isRegistered;
 
     @Override
     public String toString() {
@@ -185,5 +186,13 @@ public abstract class ServerPlayer implements Serializable {
 
     public void setPlayedTotal(long playedTotal) {
         this.playedTotal = playedTotal;
+    }
+
+    public boolean isRegistered() {
+        return isRegistered;
+    }
+
+    public void setRegistered(boolean registered) {
+        isRegistered = registered;
     }
 }
