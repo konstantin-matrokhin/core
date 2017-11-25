@@ -37,7 +37,6 @@ public class PlayerDB {
         String sql4 = "UPDATE join_info SET server = :server WHERE  id = :id";
 
         Runnable r = () -> {
-            Log.$("saving " + player.getName()  + " | " + playedNow);
             DAO.getConnection()
                     .createQuery(sql1)
                     .addParameter("id", id)
@@ -173,7 +172,10 @@ public class PlayerDB {
 
         if (authModel != null && authModel.getPassword() != null) {
             player.setRegistered(true);
+            player.setPassword(authModel.getPassword());
         }
+
+        Log.$(player.getName() + " reg = " + player.getPassword());
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());

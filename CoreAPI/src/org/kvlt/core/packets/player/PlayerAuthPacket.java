@@ -1,14 +1,18 @@
 package org.kvlt.core.packets.player;
 
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFutureListener;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.bukkit.datastorage.LoggedPlayers;
+import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.utils.Log;
 
-public class PlayerAuthPacket extends Packet {
+public class PlayerAuthPacket extends Packet<Channel> {
 
     private String playerName;
     private String password;
@@ -26,6 +30,11 @@ public class PlayerAuthPacket extends Packet {
 
     @Override
     protected void onCore() {
+
+    }
+
+    @Override
+    protected void onCore(Channel channel) {
         OnlinePlayer op = CoreServer.get().getOnlinePlayers().get(playerName);
 
         if (op == null) return;
@@ -35,21 +44,33 @@ public class PlayerAuthPacket extends Packet {
         if (successful) {
             op.setLogged(true);
         }
-        op.getCurrentServer().send(this);
+
+        CoreServer.get().getGameServers().send(this);
+        CoreServer.get().getProxies().send(this);
     }
 
     @Override
     protected void onServer() {
+        Player p = Bukkit.getPlayer(playerName);
+
+        if (p == null) return;
+        if (LoggedPlayers.isLogged(playerName)) {
+            p.sendMessage("Сессия активна.");
+            return;
+        }
+
         if (successful) {
             LoggedPlayers.logIn(playerName);
-            Bukkit.getPlayer(playerName).sendMessage("Вы успешно вошли!");
+            p.sendMessage("Вы успешно вошли!");
         } else {
-            Bukkit.getPlayer(playerName).sendMessage("Неверный пароль!");
+            p.sendMessage("Неверный пароль!");
         }
     }
 
     @Override
     protected void onProxy() {
-
+        if (successful) {
+            ProxyLoggedPlayers.logIn(playerName);
+        }
     }
 }

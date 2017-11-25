@@ -8,25 +8,22 @@ import java.util.List;
 
 public class LoggedPlayers {
 
-    private static List<Player> loggedPlayers;
+    private static List<String> loggedPlayers;
 
     static {
         loggedPlayers = new ArrayList<>();
     }
 
     public static void logIn(String playerName) {
-        Player p = Bukkit.getPlayer(playerName);
-        loggedPlayers.add(p);
+        if (loggedPlayers.stream().noneMatch(p -> p.equalsIgnoreCase(playerName))) loggedPlayers.add(playerName);
     }
 
     public static void logOut(String playerName) {
-        Player p = Bukkit.getPlayer(playerName);
-        loggedPlayers.remove(p);
+        loggedPlayers.removeIf(p -> p.equalsIgnoreCase(playerName));
     }
 
     public static boolean isLogged(String playerName) {
-        Player p = Bukkit.getPlayer(playerName);
-        return loggedPlayers.contains(p);
+        return loggedPlayers.stream().anyMatch(p -> p.equalsIgnoreCase(playerName));
     }
 
 }

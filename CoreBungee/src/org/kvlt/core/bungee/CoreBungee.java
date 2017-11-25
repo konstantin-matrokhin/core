@@ -3,6 +3,7 @@ package org.kvlt.core.bungee;
 import io.netty.channel.Channel;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.net.ConnectionManager;
+import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.packets.Packet;
 
 import java.io.File;

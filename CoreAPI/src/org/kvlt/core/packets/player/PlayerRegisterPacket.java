@@ -9,7 +9,7 @@ import org.kvlt.core.utils.Log;
 
 public class PlayerRegisterPacket extends Packet {
 
-    static final String SUCCESSFUL_REGISRATION = "Вы успешно зарегистрировались";
+    private static final String SUCCESSFUL_REGISRATION = "Вы успешно зарегистрировались";
 
     private String playerName;
     private String password;
@@ -35,8 +35,8 @@ public class PlayerRegisterPacket extends Packet {
 
                 PlayerAuthPacket pap  = new PlayerAuthPacket(playerName, true);
                 ServerMessagePacket smp = new ServerMessagePacket(playerName, SUCCESSFUL_REGISRATION);
-                op.getCurrentProxy().send(pap, smp);
-                Log.$(playerName + " registered");
+                op.getCurrentServer().send(pap, smp);
+                Log.$(playerName + " registered / " + password);
 
                 return;
             } else {

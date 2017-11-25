@@ -1,7 +1,11 @@
 package org.kvlt.core.bungee;
 
+import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.commands.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControlManager {
 
@@ -14,17 +18,24 @@ public class ControlManager {
 
     public void registerCoreEvents() {
         pingEventListener = new PingEventListener();
+
         plugin.getProxy().getPluginManager().registerListener(plugin, new ProxyEventListener());
         plugin.getProxy().getPluginManager().registerListener(plugin, pingEventListener);
     }
 
     public void registerCoreCommands() {
-        plugin.getProxy().getPluginManager().registerCommand(plugin, new PingCommand());
-        plugin.getProxy().getPluginManager().registerCommand(plugin, new ConnectCommand());
-        plugin.getProxy().getPluginManager().registerCommand(plugin, new LoginCommand());
-        plugin.getProxy().getPluginManager().registerCommand(plugin, new RegisterCommand());
-        plugin.getProxy().getPluginManager().registerCommand(plugin, new EmailCommand());
-        plugin.getProxy().getPluginManager().registerCommand(plugin, new ReplyCommand());
+        List<Command> cmds = new ArrayList<Command>() {{
+            add(new PingCommand());
+            add(new ConnectCommand());
+            add(new LoginCommand());
+            add(new RegisterCommand());
+            add(new EmailCommand());
+            add(new ReplyCommand());
+        }};
+
+        cmds.forEach(c -> {
+            plugin.getProxy().getPluginManager().registerCommand(plugin, c);
+        });
     }
 
     public PingEventListener getPingEventListener() {
