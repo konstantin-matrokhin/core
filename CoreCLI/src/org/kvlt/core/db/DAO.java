@@ -5,14 +5,16 @@ import org.kvlt.core.utils.Log;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.concurrent.TimeUnit;
+
 public class DAO {
 
     private static Sql2o sql;
     private static Connection c;
 
     public static void connect() {
-
         Log.$("Подключение к MySQL..");
+        long conStart = System.currentTimeMillis();
 
         String host = Config.getMySQL("host");
         String port = Config.getMySQL("port");
@@ -32,10 +34,15 @@ public class DAO {
 
         sql = new Sql2o(dbUrl, dbUser, dbPassword);
         c = sql.open();
+
+        long conTime = System.currentTimeMillis() - conStart;
+        String totalTime = String.format("%d", TimeUnit.MILLISECONDS.toSeconds(conTime));
+
+        Log.$("Подключено к MySQL (" + db + ") за " + totalTime + " сек.");
     }
 
     public static Connection getConnection() {
-        return sql.open();
+        return c;
     }
 
 }

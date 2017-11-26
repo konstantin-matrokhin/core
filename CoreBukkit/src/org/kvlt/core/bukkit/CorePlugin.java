@@ -4,7 +4,7 @@ import io.netty.channel.Channel;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.*;
-import org.kvlt.core.bukkit.events.PlayerBasicEventListener;
+import org.kvlt.core.bukkit.events.AuthEventsListener;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 
 public class CorePlugin extends JavaPlugin {
@@ -19,9 +19,10 @@ public class CorePlugin extends JavaPlugin {
             instance = this;
         }
 
-        Bukkit.getPluginManager().registerEvents(new PlayerBasicEventListener(), this);
+        Bukkit.getPluginManager().registerEvents(new AuthEventsListener(), this);
 
-        getCommand("broadcast").setExecutor(new PingCommand());
+        getCommand("alert").setExecutor(new AlertCommand());
+        getCommand("salert").setExecutor(new ServerAlertCommand());
         getCommand("msg").setExecutor(new MsgCommand());
         getCommand("time").setExecutor(new TimeCommand());
         getCommand("hub").setExecutor(new HubCommand());

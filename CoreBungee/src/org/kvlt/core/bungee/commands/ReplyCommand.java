@@ -29,7 +29,7 @@ public class ReplyCommand extends Command {
             String interlocutorName = interlocutor.getName();
             PlayerMessagePacket pmp = new PlayerMessagePacket(serverName, myName, interlocutorName, message);
 
-            CoreBungee.get().getCoreServer().writeAndFlush(pmp);
+            CoreBungee.get().sendPacket(pmp);
         } else {
             me.sendMessage(new TextComponent("Некому отвечать."));
         }

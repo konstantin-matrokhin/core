@@ -11,7 +11,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         CoreBungee.get().setCoreServer(ctx.channel());
-        ctx.channel().writeAndFlush(new ProxyConnectionPacket(CoreBungee.get().getServerName()));
+        ctx.channel().writeAndFlush(new ProxyConnectionPacket(CoreBungee.get().getServerName()), ctx.voidPromise());
     }
 
     @Override

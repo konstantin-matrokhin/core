@@ -6,7 +6,6 @@ import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.SimplePlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.models.*;
-import org.kvlt.core.utils.Log;
 import org.sql2o.Connection;
 
 import java.math.BigInteger;
@@ -31,35 +30,51 @@ public class PlayerDB {
         PlayedTimeCounter.stop(player);
         CoreServer.get().getOnlinePlayers().remove(player);
 
-        String sql1 = "UPDATE join_info SET online_time = online_time + :now WHERE id = :id";
-        String sql2 = "UPDATE join_info SET last_online = :now WHERE  id = :id";
-        String sql3 = "UPDATE join_info SET ip = :ip WHERE  id = :id";
-        String sql4 = "UPDATE join_info SET server = :server WHERE  id = :id";
+        String sql = "UPDATE join_info SET\n" +
+                "online_time = online_time + :now,\n" +
+                "last_online = :now,\n" +
+                "ip = :ip,\n" +
+                "server = :server\n" +
+                "WHERE id = :id";
 
         Runnable r = () -> {
-            Log.$("saving " + player.getName()  + " | " + playedNow);
             DAO.getConnection()
-                    .createQuery(sql1)
+                    .createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("now", playedNow)
-                    .executeUpdate();
-            DAO.getConnection()
-                    .createQuery(sql2)
-                    .addParameter("id", id)
-                    .addParameter("now", playedNow)
-                    .executeUpdate();
-            DAO.getConnection()
-                    .createQuery(sql3)
-                    .addParameter("id", id)
                     .addParameter("ip", player.getIp())
-                    .executeUpdate();
-            DAO.getConnection()
-                    .createQuery(sql4)
-                    .addParameter("id", id)
                     .addParameter("server", player.getCurrentServer().getName())
                     .executeUpdate();
         };
         executor.execute(r);
+    }
+
+    public static void register(OnlinePlayer player, String password) {
+        Runnable r = () -> {
+            int id = player.getId();
+            String ip = player.getIp();
+            long now = System.currentTimeMillis();
+
+            String registerSql = "UPDATE authentication SET\n" +
+                    "password = :pass,\n" +
+                    "registration_ip = :ip,\n" +
+                    "last_authenticated = :now\n" +
+                    "WHERE id = :id";
+
+            DAO.getConnection()
+                    .createQuery(registerSql)
+                    .addParameter("pass", password)
+                    .addParameter("ip", ip)
+                    .addParameter("now", now)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        };
+
+        executor.execute(r);
+    }
+
+    public static boolean correctPassword(OnlinePlayer op, String password) {
+        return op.getPassword() != null && op.getPassword().equals(password);
     }
 
     public static int loadId(String name) {
@@ -90,6 +105,8 @@ public class PlayerDB {
         executor.execute(r);
     }
 
+
+    //TODO MAKE IN THREAD!
     public static ServerPlayer loadServerPlayer(String name) {
         ServerPlayer player = new SimplePlayer(name);
         int id = loadId(name);
@@ -125,7 +142,9 @@ public class PlayerDB {
         };
 
         for (String q : queries) {
-            DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+            executor.execute(() -> {
+                DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+            });
         }
 
         player.setId(id);
@@ -140,6 +159,11 @@ public class PlayerDB {
 
         AuthModel authModel = loadModel(AuthModel.class, new AuthParams(), conn, id);
         JoinInfoModel joinInfoModel = loadModel(JoinInfoModel.class, new JoinInfoParams(), conn, id);
+
+        if (authModel != null && authModel.getPassword() != null) {
+            player.setRegistered(true);
+            player.setPassword(authModel.getPassword());
+        }
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());

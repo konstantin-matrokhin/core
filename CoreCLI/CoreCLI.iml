@@ -13,5 +13,7 @@
     <orderEntry type="library" exported="" name="netty-all-4.1.16.Final" level="project" />
     <orderEntry type="library" exported="" name="org.sql2o:sql2o:1.6.0-RC3" level="project" />
     <orderEntry type="library" name="mysql-connector-java-6.0.6" level="project" />
+    <orderEntry type="library" exported="" name="jline:jline:3.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="jansi-1.11" level="project" />
   </component>
 </module>

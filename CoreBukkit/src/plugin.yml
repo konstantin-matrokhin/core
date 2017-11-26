@@ -1,9 +1,11 @@
 name: Core
-version: 0.0.1
+version: 0.7.0
 main: org.kvlt.core.bukkit.CorePlugin
 commands:
-  broadcast:
-    usage: /broadcast <text>
+  alert:
+    usage: /alert <text>
+  salert:
+    usge: /salert <server> <message>
   msg:
     usage: /msg <to> <text>
     aliases: [tell, m, w, t, whisper, pm, message]

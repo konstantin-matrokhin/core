@@ -20,6 +20,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Packet packet) throws Exception {
         packet.execute();
+        System.out.println("new packet: " + packet.getClass().getSimpleName());
     }
 
     @Override

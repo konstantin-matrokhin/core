@@ -24,7 +24,7 @@ public class MsgCommand implements CommandExecutor {
                 sender.getName(),
                 recipient,
                 message);
-        ConnectionManager.get().getChannel().writeAndFlush(pmp);
+        ConnectionManager.get().sendPacket(pmp);
         return true;
     }
 }

@@ -24,7 +24,14 @@ public class GameServer implements Node {
 
     @Override
     public void send(Packet packet) {
-        channel.writeAndFlush(packet);
+        channel.writeAndFlush(packet, channel.voidPromise());
+    }
+
+    public void send(Packet... packets) {
+        for (Packet packet: packets) {
+            channel.write(packet, channel.voidPromise());
+        }
+        channel.flush();
     }
 
     @Override

@@ -7,13 +7,17 @@ import java.io.Serializable;
  * Если передан шаблон, то контекст будет передан главному серверу. Обычно используется Channel для обратной связи
  *
  * Чтобы отправить пакет, запишите его экземпляр в буфер канала и просто отправьте
- * <b>Channel#writeAndFlush(new SomeTypeOfPacket(params));</b>
+ * <b>Channel#writeAndFlush(Packet packet);</b>
  *
  * Обрабатывайте данные в onCore, onServer, onProxy в зависимости от того, куда пришел пакет
  *
  */
 public abstract class Packet<T> implements Serializable {
 
+    /**
+     * Пути до классов для проверки окружения
+     * Убедитесь, что IDE не заменила полный путь до класса на обычной имя класса
+     */
     private static final String CORE_CLASS = "org.kvlt.core.CoreCLI";
     private static final String SERVER_CLASS = "org.kvlt.core.bukkit.CorePlugin";
     private static final String PROXY_CLASS = "org.kvlt.core.bungee.CoreBungee";

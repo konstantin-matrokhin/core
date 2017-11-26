@@ -1,12 +1,13 @@
 package org.kvlt.core.packets.bukkit;
 
-import org.bukkit.Bukkit;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.bukkit.corehandlers.CoreHandler;
+import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.type.Spigot;
 
+@Spigot
 public class ServerCommandPacket extends Packet {
 
     private String sender;
@@ -21,7 +22,11 @@ public class ServerCommandPacket extends Packet {
 
     @Override
     protected void onCore() {
+        OnlinePlayer player = CoreServer.get().getOnlinePlayers().get(sender);
         GameServer toServer = CoreServer.get().getGameServers().getNode(to);
+
+        if (player == null) return;
+        if (player.getGroup() < 1) return;
 
         if (toServer != null) {
             toServer.send(this);

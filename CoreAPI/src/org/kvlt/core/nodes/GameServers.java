@@ -19,6 +19,11 @@ public class GameServers implements NodeContainer<GameServer>, Iterable<GameServ
     }
 
     @Override
+    public void send(Packet... packets) {
+        gameServers.forEach(node -> node.send(packets));
+    }
+
+    @Override
     public void addNode(GameServer node) {
         gameServers.add(node);
     }

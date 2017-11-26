@@ -19,6 +19,6 @@ public class BroadcastCommand extends Command {
         BroadcastPacket bp = new BroadcastPacket(str);
         CoreServer.get().getGameServers().send(bp);
         Log.$(LogType.BROADCAST, str);
-        return false;
+        return true;
     }
 }

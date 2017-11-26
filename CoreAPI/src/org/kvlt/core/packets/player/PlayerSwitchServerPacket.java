@@ -1,10 +1,11 @@
 package org.kvlt.core.packets.player;
 
+import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 
-public class PlayerSwitchServerPacket extends Packet {
+public class PlayerSwitchServerPacket extends Packet<Channel> {
 
     private String playerName;
     private String to;
@@ -15,12 +16,27 @@ public class PlayerSwitchServerPacket extends Packet {
     }
 
     @Override
-    protected void onCore() {
+    public void onCore() {
+
+    }
+
+    @Override
+    protected void onCore(Channel channel) {
         OnlinePlayer p = CoreServer.get().getOnlinePlayers().get(playerName);
-        if (p.getCurrentServer() == null) {
-            System.out.println(playerName + " зашел на сервер " + to);
-        } else {
-            System.out.println(playerName + " сменил сервер с " + p.getCurrentServer().getName() + " на " + to);
+        if (p == null) return;
+
+        if (p.isLogged()) {
+            PlayerAuthPacket pap = new PlayerAuthPacket(p.getName(), true);
+            CoreServer.get().getGameServers().getNode(to).send(pap);
+        }
+
+        if (p.getCurrentServer() != null) {
+            if (p.isLogged()) {
+                PlayerAuthPacket pap = new PlayerAuthPacket(playerName, true);
+                CoreServer.get().getGameServers().send(pap);
+            } else {
+                return;
+            }
         }
         p.setCurrentServer(CoreServer.get().getGameServers().getNode(to));
     }

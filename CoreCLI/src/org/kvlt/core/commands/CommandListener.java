@@ -7,13 +7,11 @@ import java.util.Scanner;
 
 public class CommandListener {
 
-    private String command;
-    private String[] args;
-
     private List<Command> commands;
 
     public CommandListener() {
         commands = new ArrayList<>();
+
         Scanner scanner = new Scanner(System.in);
 
         registerCommand(new WhoCommand());
@@ -29,6 +27,7 @@ public class CommandListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void registerCommand(Command command) {
@@ -52,11 +51,4 @@ public class CommandListener {
         }
     }
 
-    public String[] getArgs() {
-        return args;
-    }
-
-    public String getCommand() {
-        return command;
-    }
 }

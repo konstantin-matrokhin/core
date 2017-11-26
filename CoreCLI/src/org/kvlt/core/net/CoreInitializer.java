@@ -16,7 +16,6 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
 
         pipeline.addLast(
                 new ObjectEncoder(),
-                //new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(getClass().getClassLoader())),
                 new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.weakCachingConcurrentResolver(Packet.class.getClassLoader())),
                 new ServerHandler()
         );
