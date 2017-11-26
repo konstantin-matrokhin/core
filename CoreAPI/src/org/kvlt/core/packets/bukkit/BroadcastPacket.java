@@ -3,12 +3,17 @@ package org.kvlt.core.packets.bukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.type.Spigot;
 import org.kvlt.core.utils.Log;
 import org.kvlt.core.utils.LogType;
 
+/**
+ * Пакет для показа объявления для всех игроков
+ * Может быть отправлено как на конкретный сервер, так и на все
+ */
+@Spigot
 public class BroadcastPacket extends Packet {
 
     private final String PREFIX = "&7[&cОБЪЯВЛЕНИЕ&7]&r ";

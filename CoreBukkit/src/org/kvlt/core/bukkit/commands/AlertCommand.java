@@ -3,7 +3,6 @@ package org.kvlt.core.bukkit.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 import org.kvlt.core.packets.bukkit.BroadcastPacket;
 

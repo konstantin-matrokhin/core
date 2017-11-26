@@ -4,9 +4,12 @@ import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.kvlt.core.bungee.storages.ReplyStorage;
 import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.type.Bungee;
+import org.kvlt.core.packets.type.Spigot;
 
+@Bungee
+@Spigot
 public class ServerMessagePacket extends Packet {
 
     private static final String msgFormat = "&c(CORE): &e%msg%";

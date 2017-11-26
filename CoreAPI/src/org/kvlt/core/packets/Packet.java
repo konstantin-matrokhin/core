@@ -14,6 +14,10 @@ import java.io.Serializable;
  */
 public abstract class Packet<T> implements Serializable {
 
+    /**
+     * Пути до классов для проверки окружения
+     * Убедитесь, что IDE не заменила полный путь до класса на обычной имя класса
+     */
     private static final String CORE_CLASS = "org.kvlt.core.CoreCLI";
     private static final String SERVER_CLASS = "org.kvlt.core.bukkit.CorePlugin";
     private static final String PROXY_CLASS = "org.kvlt.core.bungee.CoreBungee";

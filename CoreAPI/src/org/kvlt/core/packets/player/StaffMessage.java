@@ -1,7 +1,6 @@
 package org.kvlt.core.packets.player;
 
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 

@@ -8,6 +8,7 @@ public class PlayerAdapter {
         OnlinePlayer cp = new OnlinePlayer();
         cp.setUuid(pp.getUniqueId());
         cp.setName(pp.getName());
+        cp.setIp(pp.getAddress().getHostString());
 
         return cp;
     }

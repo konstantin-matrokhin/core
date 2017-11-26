@@ -1,7 +1,6 @@
 package org.kvlt.core.packets.player;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFutureListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.kvlt.core.CoreServer;
@@ -10,7 +9,7 @@ import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
-import org.kvlt.core.utils.Log;
+import org.kvlt.core.packets.bukkit.ServerMessagePacket;
 
 public class PlayerAuthPacket extends Packet<Channel> {
 
@@ -36,17 +35,24 @@ public class PlayerAuthPacket extends Packet<Channel> {
     @Override
     protected void onCore(Channel channel) {
         OnlinePlayer op = CoreServer.get().getOnlinePlayers().get(playerName);
+        String response = null;
 
         if (op == null) return;
-        if (op.isLogged()) return;
-
-        successful = PlayerDB.correctPassword(op, password);
-        if (successful) {
-            op.setLogged(true);
+        if (!op.isRegistered()) {
+            response = "Вы не зарегистрированы!";
+        }
+        if (op.isLogged()) {
+            response = "Вы уже в игре!";
+        } else {
+            successful = PlayerDB.correctPassword(op, password);
+            if (successful) {
+                op.setLogged(true);
+            }
         }
 
-        CoreServer.get().getGameServers().send(this);
-        CoreServer.get().getProxies().send(this);
+        ServerMessagePacket smp = new ServerMessagePacket(playerName, response);
+        CoreServer.get().getGameServers().send(this, smp);
+        CoreServer.get().getProxies().send(this); //MAYBE NOT NEEDED!
     }
 
     @Override

@@ -23,6 +23,11 @@ public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
     }
 
     @Override
+    public void send(Packet... packets) {
+        proxies.forEach(proxy -> proxy.send(packets));
+    }
+
+    @Override
     public void addNode(Proxy proxy) {
         proxies.add(proxy);
     }

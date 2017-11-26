@@ -57,7 +57,8 @@ public class CoreServer {
         }
 
         try {
-            Log.$("Прослушиваю порт " + port + " | Сокет: " + socketChannelClass.getSimpleName());
+            Log.$("Прослушиваю порт " + port + "...");
+            Log.$("Сокет: " + socketChannelClass.getSimpleName());
 
             ServerBootstrap bootstrap = new ServerBootstrap()
                     .group(bossGroup, workerGroup)

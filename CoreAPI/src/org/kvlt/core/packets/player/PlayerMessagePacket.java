@@ -5,12 +5,10 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.storages.ReplyStorage;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.Packet;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
-import org.kvlt.core.utils.Log;
 
 public class PlayerMessagePacket extends Packet {
 

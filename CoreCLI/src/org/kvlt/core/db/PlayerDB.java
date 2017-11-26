@@ -6,7 +6,6 @@ import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.SimplePlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.models.*;
-import org.kvlt.core.utils.Log;
 import org.sql2o.Connection;
 
 import java.math.BigInteger;
@@ -31,30 +30,19 @@ public class PlayerDB {
         PlayedTimeCounter.stop(player);
         CoreServer.get().getOnlinePlayers().remove(player);
 
-        String sql1 = "UPDATE join_info SET online_time = online_time + :now WHERE id = :id";
-        String sql2 = "UPDATE join_info SET last_online = :now WHERE  id = :id";
-        String sql3 = "UPDATE join_info SET ip = :ip WHERE  id = :id";
-        String sql4 = "UPDATE join_info SET server = :server WHERE  id = :id";
+        String sql = "UPDATE join_info SET\n" +
+                "online_time = online_time + :now,\n" +
+                "last_online = :now,\n" +
+                "ip = :ip,\n" +
+                "server = :server\n" +
+                "WHERE id = :id";
 
         Runnable r = () -> {
             DAO.getConnection()
-                    .createQuery(sql1)
+                    .createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("now", playedNow)
-                    .executeUpdate();
-            DAO.getConnection()
-                    .createQuery(sql2)
-                    .addParameter("id", id)
-                    .addParameter("now", playedNow)
-                    .executeUpdate();
-            DAO.getConnection()
-                    .createQuery(sql3)
-                    .addParameter("id", id)
                     .addParameter("ip", player.getIp())
-                    .executeUpdate();
-            DAO.getConnection()
-                    .createQuery(sql4)
-                    .addParameter("id", id)
                     .addParameter("server", player.getCurrentServer().getName())
                     .executeUpdate();
         };
@@ -117,6 +105,8 @@ public class PlayerDB {
         executor.execute(r);
     }
 
+
+    //TODO MAKE IN THREAD!
     public static ServerPlayer loadServerPlayer(String name) {
         ServerPlayer player = new SimplePlayer(name);
         int id = loadId(name);
@@ -174,8 +164,6 @@ public class PlayerDB {
             player.setRegistered(true);
             player.setPassword(authModel.getPassword());
         }
-
-        Log.$(player.getName() + " reg = " + player.getPassword());
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());

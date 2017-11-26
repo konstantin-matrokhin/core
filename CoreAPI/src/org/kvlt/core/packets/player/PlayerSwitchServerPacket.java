@@ -30,13 +30,10 @@ public class PlayerSwitchServerPacket extends Packet<Channel> {
             CoreServer.get().getGameServers().getNode(to).send(pap);
         }
 
-        if (p.getCurrentServer() == null) {
-            System.out.println(playerName + " зашел на сервер " + to);
-        } else {
+        if (p.getCurrentServer() != null) {
             if (p.isLogged()) {
                 PlayerAuthPacket pap = new PlayerAuthPacket(playerName, true);
                 CoreServer.get().getGameServers().send(pap);
-                System.out.println(playerName + " сменил сервер с " + p.getCurrentServer().getName() + " на " + to);
             } else {
                 return;
             }

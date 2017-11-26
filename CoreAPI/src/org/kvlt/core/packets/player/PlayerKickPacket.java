@@ -1,5 +1,7 @@
 package org.kvlt.core.packets.player;
 
+import net.md_5.bungee.BungeeCord;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
@@ -9,6 +11,10 @@ public class PlayerKickPacket extends Packet {
 
     private String initiator;
     private String victim;
+
+    public PlayerKickPacket(String victim) {
+        this.victim = victim;
+    }
 
     public PlayerKickPacket(String initiator, String victim) {
         this.initiator = initiator;
@@ -20,9 +26,9 @@ public class PlayerKickPacket extends Packet {
         OnlinePlayer victimPlayer = CoreServer.get().getOnlinePlayers().get(victim);
         OnlinePlayer initiatorPlayer = CoreServer.get().getOnlinePlayers().get(initiator);
 
-        if (victimPlayer == null || initiatorPlayer == null) return;
+        if (victimPlayer == null) return;
 
-        if (initiatorPlayer.getGroup() > 1) {
+        if (initiatorPlayer == null || initiatorPlayer.getGroup() > 1) {
             victimPlayer.getCurrentServer().send(this);
         }
     }
@@ -35,6 +41,6 @@ public class PlayerKickPacket extends Packet {
 
     @Override
     protected void onProxy() {
-
+        BungeeCord.getInstance().getPlayer(victim).disconnect(TextComponent.fromLegacyText("kicked"));
     }
 }
