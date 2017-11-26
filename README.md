@@ -1,5 +1,3 @@
-###!!!Обращение к себе: исправь все обращения к getOnlinePlayers!!!
-
 # LastCraft Core
 Проект состоит из 4 частей:
 * **CoreAPI** - API для взаимодействия
@@ -9,8 +7,6 @@
 ## CoreAPI
 Содержит все необходимые общие для всех проектов элементы.
 Отсюда и задается поведение пакетов, пришедших на один из серверов (__CLI, Bukkit, Proxy__).
-### Хочу потрогать API
-Не трогай, рано. Потрогай CLI.
 ## CoreCLI
 Для запуска используйте
 ```bash
@@ -20,16 +16,51 @@ java -cp CoreCLI.jar;libs/* org.kvlt.core.CoreCLI
 ### Хочу подергать API (CoreCLI)
 ```java
 // Онлайн-игрок
-OnlinePlayer onlinePlayer = CoreServer().get().getOnlinePlayers().get("Steve");
+OnlinePlayer onlinePlayer = CoreServer.get().getOnlinePlayers().get("Steve");
 
 // Любой игрок
 ServerPlayer serverPlayer = PlayerDB.loadServerPlayer(name);
 
 // Получить все игровые серверы
-GameServer gameServer = CoreServer().get().getGameServers();
+GameServer gameServer = CoreServer.get().getGameServers();
+
+//Получить прокси по имени
+Proxy proxy = CoreServer.get().getProxies().get("swlobby-1");
+
+//Отправка пакета
+BroadcastPacket bp = new BroadbastPacket("Hello World");
+
+CorePlugin.get().sendPacket(bp); //из баккита
+CoreBungee.get().sendPacket(bp); //из прокси
+
+GameServer#send(Packet p); //в баккит
+Proxy#send(Packet p); //в прокси
 
 // Получить данных из секции конфига
 String bukkitSectionValue = Config.getServer("key");
+
+/**
+* Создать пакет можно унаследовав класс Packet и имплементировав методы из него
+*/
+public class TestPacket extends Packet {
+    @Override
+    protected void onCore() {
+        //Если пакет пришел на кор
+    }
+
+    @Override
+    protected void onServer() {
+        //... и если на баккит
+        
+        /* !!Используйте только методы из CoreAPI/CoreBungee/CoreBukkit!! */
+        /* Использование методов из Spigot или BungeeCord напрямую может вызвать ошибку */
+    }
+
+    @Override
+    protected void onProxy() {
+        //... и если на прокси
+    }
+}
 
 ```
 #### Что сделано:
@@ -47,11 +78,24 @@ String bukkitSectionValue = Config.getServer("key");
 * Отправка личных сообщений между игроками
 * Модели таблиц базы данных и маппинг данных MySQL --> POJO!
 * Получение информации об игроке (Пример: /whois <name>)
+* Отправка объявлений (/alert <msg> или /salert <server> <msg>)
+* Регистрация (/register <pass> <pass>)
+* Авторизация (/login <pass>)
+* Время игры за всё время (/time)
+* Ответочка (/r <msg>)
+* /hub | /lobby
+* Куча пакетов
+* Отправка комманд /sendcommand <server> <cmd>
 #### TODO
-* Бизнес-логика
-* Новые пакеты
-* Взаимодействие с игроками, регистрация, лицензия и тд и тп
-* Очень много всего
+* Доделать авторизацию и вход по лицензии
+* Система банов
+* Стафф-чат
+* Email restore
+* Антиспам
+* Автосообщения (реализовать таймер)
+* заюзать Groups
+* доделать все модели из бд и их загрузку/выгрузку
+* и тп
 #### Зависимости (Maven):
 ```xml
 <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
