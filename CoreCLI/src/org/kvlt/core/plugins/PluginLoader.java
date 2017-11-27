@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import org.kvlt.core.utils.Log;
+import org.kvlt.core.utils.LogType;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,9 +26,23 @@ public class PluginLoader {
     }
 
     public void loadPlugins() {
+        File dir = new File(PLUGINS_PATH);
+        if (!dir.exists() || !dir.isDirectory()) {
+            if (!dir.mkdir()) {
+                Log.err("Не удалось создать папку plugins!");
+                return;
+            } else {
+                Log.$("Создана папка plugins!");
+            }
+        }
+
         File[] plugins = parsePluginDir();
-        for (File plugin: plugins) {
-            loadJar(plugin);
+        if (plugins.length > 0) {
+            for (File plugin : plugins) {
+                loadJar(plugin);
+            }
+        } else {
+            Log.warn("Ни одного плагина не найдено!");
         }
     }
 
@@ -43,19 +58,19 @@ public class PluginLoader {
 
             Class c = loader.loadClass(mainClass);
             CorePlugin p = (CorePlugin) c.newInstance();
+
             PluginData pd = new PluginData();
             pd.setName(name);
             pd.setMainClass(mainClass);
-
             p.setPluginData(pd);
 
             boolean added = pm.addPlugin(p);
 
             if (added) {
                 pm.loadPlugin(p);
+            } else {
+                Log.$(LogType.ERROR, "Плагин " + name + " не загружен!");
             }
-
-            Log.$(c.getSimpleName() + " -- name");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,10 +79,12 @@ public class PluginLoader {
     private JsonObject readPluginJson(File plugin) throws IOException {
         JarFile jar = new JarFile(plugin);
         ZipEntry entry = jar.getEntry("plugin.json");
+        if (entry == null) {
+            throw new IOException("plugins.json не найден в" + plugin.getName());
+        }
         InputStream stream = jar.getInputStream(entry);
         JsonReader reader = new JsonReader(new InputStreamReader(stream));
-        JsonObject json = new JsonParser().parse(reader).getAsJsonObject();
-        return json;
+        return new JsonParser().parse(reader).getAsJsonObject();
     }
 
     private File[] parsePluginDir() {

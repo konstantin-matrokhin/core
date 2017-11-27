@@ -35,6 +35,7 @@ public class CoreServer {
     private PluginManager pluginManager;
 
     private CoreServer() {
+
         serverPlayers = new PlayerList<>();
         onlinePlayers = new PlayerList<>();
         proxies = new Proxies();

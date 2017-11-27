@@ -15,6 +15,14 @@ public class Log {
         $(LogType.INFO, str);
     }
 
+    public static void err(String str) {
+        $(LogType.ERROR, str);
+    }
+
+    public static void warn(String str) {
+        $(LogType.WARN, str);
+    }
+
     public static void $(LogType level, String str) {
         String time = simpleDateFormat.format(new Date());
         System.out.println("[" + time + "][" + level + "] " + str);

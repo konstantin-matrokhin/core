@@ -18,6 +18,8 @@ public class CommandListener {
         registerCommand(new BroadcastCommand());
         registerCommand(new StopCommand());
         registerCommand(new WhoisCommand());
+        registerCommand(new ReloadCommand());
+        registerCommand(new PluginsCommand());
 
         try {
             while (scanner.hasNextLine()) {
