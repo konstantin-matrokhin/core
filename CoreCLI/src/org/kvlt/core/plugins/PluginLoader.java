@@ -1,12 +1,14 @@
 package org.kvlt.core.plugins;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import org.kvlt.core.utils.Log;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.jar.JarFile;
@@ -15,6 +17,12 @@ import java.util.zip.ZipEntry;
 public class PluginLoader {
 
     private static final String PLUGINS_PATH = "./plugins/";
+
+    private PluginManager pm;
+
+    public PluginLoader(PluginManager pm) {
+        this.pm = pm;
+    }
 
     public void loadPlugins() {
         File[] plugins = parsePluginDir();
@@ -35,7 +43,18 @@ public class PluginLoader {
 
             Class c = loader.loadClass(mainClass);
             CorePlugin p = (CorePlugin) c.newInstance();
-            p.onEnable();
+            PluginData pd = new PluginData();
+            pd.setName(name);
+            pd.setMainClass(mainClass);
+
+            p.setPluginData(pd);
+
+            boolean added = pm.addPlugin(p);
+
+            if (added) {
+                pm.loadPlugin(p);
+            }
+
             Log.$(c.getSimpleName() + " -- name");
         } catch (Exception e) {
             e.printStackTrace();

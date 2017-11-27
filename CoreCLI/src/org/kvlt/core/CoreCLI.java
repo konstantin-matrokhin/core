@@ -10,7 +10,6 @@ public class CoreCLI {
 
     public static void main(String[] args) {
         Config.init();
-        new PluginLoader().loadPlugins();
         DAO.connect();
         CoreServer.get().start();
     }

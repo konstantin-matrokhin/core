@@ -18,6 +18,8 @@ import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.nodes.Proxies;
+import org.kvlt.core.plugins.PluginLoader;
+import org.kvlt.core.plugins.PluginManager;
 import org.kvlt.core.utils.Log;
 
 public class CoreServer {
@@ -29,6 +31,8 @@ public class CoreServer {
     private GameServers gameServers;
     private ChannelFuture future;
     private int port;
+    private PluginLoader pluginLoader;
+    private PluginManager pluginManager;
 
     private CoreServer() {
         serverPlayers = new PlayerList<>();
@@ -36,6 +40,11 @@ public class CoreServer {
         proxies = new Proxies();
         gameServers = new GameServers();
         port = Integer.valueOf(Config.getCore("port"));
+
+        pluginManager = new PluginManager();
+
+        pluginLoader = new PluginLoader(pluginManager);
+        pluginLoader.loadPlugins();
     }
 
     void start() {
@@ -68,11 +77,13 @@ public class CoreServer {
                     .childHandler(new CoreInitializer());
 
             future = bootstrap.bind(port);
-            future.addListener((channelFuture) -> Log.$(
-                    channelFuture.isSuccess()
-                            ? "Сервер запущен с портом " + port
-                            : "Не удалось запустить сервер"
-            ));
+            future.addListener((channelFuture) -> {
+                Log.$(
+                        channelFuture.isSuccess()
+                                ? "Сервер запущен с портом " + port
+                                : "Не удалось запустить сервер"
+                );
+            });
 
             new CommandListener();
 
@@ -111,4 +122,11 @@ public class CoreServer {
         return instance == null ? instance = new CoreServer() : instance;
     }
 
+    public PluginLoader getPluginLoader() {
+        return pluginLoader;
+    }
+
+    public PluginManager getPluginManager() {
+        return pluginManager;
+    }
 }
