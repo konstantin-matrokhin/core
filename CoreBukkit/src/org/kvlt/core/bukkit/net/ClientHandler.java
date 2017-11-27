@@ -14,7 +14,12 @@ public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
     public void channelActive(ChannelHandlerContext ctx) {
         Bukkit.getLogger().info("Соединено с главным сервером!");
         CorePlugin.get().setServer(ctx.channel());
-        ctx.writeAndFlush(new ServerConnectionPacket(ConfigManager.getClientName()));
+
+        String name = ConfigManager.getClientName();
+        int port = Bukkit.getPort();
+        String ip = Bukkit.getIp();
+
+        ctx.writeAndFlush(new ServerConnectionPacket(name, ip, port));
     }
 
     @Override
