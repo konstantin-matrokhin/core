@@ -2,6 +2,7 @@ package org.kvlt.core;
 
 import org.kvlt.core.config.Config;
 import org.kvlt.core.db.DAO;
+import org.kvlt.core.plugins.PluginLoader;
 
 public class CoreCLI {
 
@@ -9,6 +10,7 @@ public class CoreCLI {
 
     public static void main(String[] args) {
         Config.init();
+        new PluginLoader().loadPlugins();
         DAO.connect();
         CoreServer.get().start();
     }
