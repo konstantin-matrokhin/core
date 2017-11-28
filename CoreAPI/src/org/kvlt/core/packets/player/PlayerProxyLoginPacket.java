@@ -33,6 +33,7 @@ public class PlayerProxyLoginPacket extends Packet {
         PlayerDB.loadOnlinePlayer(player);
         CoreServer.get().getOnlinePlayers().add(player);
         player.setCurrentProxy(CoreServer.get().getProxies().getNode(proxy));
+
     }
 
     @Override

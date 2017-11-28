@@ -25,6 +25,7 @@ import org.kvlt.core.utils.Log;
 public class CoreServer {
 
     private static CoreServer instance;
+
     private PlayerList<ServerPlayer> serverPlayers;
     private PlayerList<OnlinePlayer> onlinePlayers;
     private Proxies proxies;
@@ -34,7 +35,9 @@ public class CoreServer {
     private PluginLoader pluginLoader;
     private PluginManager pluginManager;
 
-    private CoreServer() {
+    private CoreServer() {}
+
+    void start() {
 
         serverPlayers = new PlayerList<>();
         onlinePlayers = new PlayerList<>();
@@ -46,10 +49,11 @@ public class CoreServer {
 
         pluginLoader = new PluginLoader(pluginManager);
         pluginLoader.loadPlugins();
+
+        runServer();
     }
 
-    void start() {
-
+    private void runServer() {
         boolean hasEpoll = Epoll.isAvailable();
 
         EventLoopGroup bossGroup;
