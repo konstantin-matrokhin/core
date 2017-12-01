@@ -4,6 +4,7 @@ import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.events.CoreListener;
 import org.kvlt.core.utils.Log;
 
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,11 +15,12 @@ public class PluginManager {
 
     public PluginManager() {
         plugins = new HashSet<>();
-        eventManager = new EventManager();
-    }
 
-    public void registerListener(CoreListener listener) {
-        eventManager.getPlayerCoreJoinEvent().addListener(listener);
+        eventManager = new EventManager();
+        eventManager.registerListener(new TestEventListener());
+        eventManager.registerListener(new TestEventListener());
+
+        eventManager.invokeEvent(new TestEventListener(), new TestEvent());
     }
 
     public boolean addPlugin(CorePlugin p) {

@@ -3,6 +3,7 @@ package org.kvlt.core.packets.player;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.events.PlayerCoreJoinEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.Packet;
 
@@ -33,7 +34,6 @@ public class PlayerProxyLoginPacket extends Packet {
         PlayerDB.loadOnlinePlayer(player);
         CoreServer.get().getOnlinePlayers().add(player);
         player.setCurrentProxy(CoreServer.get().getProxies().getNode(proxy));
-
     }
 
     @Override

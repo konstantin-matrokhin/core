@@ -47,9 +47,8 @@ public class PlayerList<T extends ServerPlayer> extends HashSet<T> {
     @Override
     public boolean contains(Object o) {
         T target = (T) o;
-        T pc = stream().filter(p -> p.getName().equalsIgnoreCase(target.getName())).findFirst().orElse(null);
-
-        return pc != null;
+        return stream()
+                .anyMatch(p -> p.getName().equalsIgnoreCase(target.getName()));
     }
 
     /**

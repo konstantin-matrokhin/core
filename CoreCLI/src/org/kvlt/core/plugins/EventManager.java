@@ -1,16 +1,61 @@
 package org.kvlt.core.plugins;
 
-import org.kvlt.core.events.PlayerCoreJoinEvent;
+import org.kvlt.core.events.CoreEvent;
+import org.kvlt.core.events.CoreHandler;
+import org.kvlt.core.events.CoreListener;
+import org.kvlt.core.utils.Log;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EventManager {
 
-    private PlayerCoreJoinEvent playerCoreJoinEvent;
+    private List<CoreListener> listeners;
 
-    public EventManager() {
-        playerCoreJoinEvent = new PlayerCoreJoinEvent();
+    {
+        listeners = new ArrayList<>();
     }
 
-    public PlayerCoreJoinEvent getPlayerCoreJoinEvent() {
-        return playerCoreJoinEvent;
+    public void registerListener(CoreListener cl) {
+        listeners.add(cl);
     }
+
+    public void invokeEvent(CoreListener listener, CoreEvent event) {
+        List<Method> allMethods = getHandlersMethods();
+
+        allMethods.forEach(method -> {
+            Parameter[] params = method.getParameters();
+
+            for (Parameter param : params) {
+                if (param.getType().equals(event.getClass())) {
+                    try{
+                        Log.$(method.getName());
+                        Log.$(param.toString());
+                        Log.$(method.getDeclaringClass().getName());
+                        method.invoke(listener, new TestEvent());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    public List<Method> getHandlersMethods() {
+        List<Method> handlersMethods = new ArrayList<>();
+        Class annotation = CoreHandler.class;
+
+        listeners.forEach(listener -> {
+            Method[] methods = listener.getClass().getMethods();
+            List<Method> list = Arrays.asList(methods);
+            list.stream()
+                    .filter(m -> m.isAnnotationPresent(annotation))
+                    .forEach(m -> handlersMethods.add((Method) m));
+        });
+        return handlersMethods;
+    }
+
 }

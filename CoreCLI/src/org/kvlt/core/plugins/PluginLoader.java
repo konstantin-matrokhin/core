@@ -67,7 +67,7 @@ public class PluginLoader {
             boolean added = pm.addPlugin(p);
 
             if (added) {
-                pm.loadPlugin(p);
+                //pm.loadPlugin(p);
             } else {
                 Log.$(LogType.ERROR, "Плагин " + name + " не загружен!");
             }

@@ -1,23 +1,20 @@
 package org.kvlt.core.events;
 
+import org.kvlt.core.entities.OnlinePlayer;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerCoreJoinEvent implements CoreEvent {
 
-    private List<CoreListener> listeners;
+    private OnlinePlayer player;
 
-    public PlayerCoreJoinEvent() {
-        listeners = new ArrayList<>();
+    public PlayerCoreJoinEvent(OnlinePlayer player) {
+        this.player = player;
     }
 
-    @Override
-    public void addListener(CoreListener cl) {
-        listeners.add(cl);
+    public OnlinePlayer getPlayer() {
+        return player;
     }
 
-    @Override
-    public void notifyListeners() {
-        listeners.forEach(l -> l.execute());
-    }
 }
