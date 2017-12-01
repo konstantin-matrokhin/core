@@ -3,7 +3,6 @@ package org.kvlt.core.plugins;
 import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.events.CoreHandler;
 import org.kvlt.core.events.CoreListener;
-import org.kvlt.core.utils.Log;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

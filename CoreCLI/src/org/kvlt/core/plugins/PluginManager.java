@@ -8,23 +8,17 @@ import java.util.Set;
 public class PluginManager {
 
     private Set<CorePlugin> plugins;
-    private EventManager eventManager;
 
     public PluginManager() {
         plugins = new HashSet<>();
-
-        eventManager = new EventManager();
-        eventManager.registerListener(new TestEventListener());
-
-        eventManager.invokeEvent(new TestEvent());
     }
 
     public boolean addPlugin(CorePlugin p) {
         return !hasPlugin(p.getPluginData().getName()) && plugins.add(p);
     }
 
-    public void unloadPlugin() {
-
+    public void unloadPlugin(CorePlugin plugin) {
+        plugin.onDisable();
     }
 
     public void loadPlugin(CorePlugin plugin) {
@@ -45,7 +39,4 @@ public class PluginManager {
         return plugins;
     }
 
-    public EventManager getEventManager() {
-        return eventManager;
-    }
 }

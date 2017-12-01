@@ -3,7 +3,6 @@ package org.kvlt.core.packets.player;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.events.PlayerCoreJoinEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.Packet;
 
