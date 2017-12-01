@@ -7,7 +7,6 @@ public class TestEventListener implements CoreListener {
 
     @CoreHandler
     public void kek(TestEvent e) {
-        System.out.println("Success!");
         System.out.println(e.getKek());
     }
 

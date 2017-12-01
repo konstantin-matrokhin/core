@@ -23,7 +23,7 @@ public class EventManager {
         listeners.add(cl);
     }
 
-    public void invokeEvent(CoreListener listener, CoreEvent event) {
+    public void invokeEvent(CoreEvent event) {
         List<Method> allMethods = getHandlersMethods();
 
         allMethods.forEach(method -> {
@@ -32,10 +32,7 @@ public class EventManager {
             for (Parameter param : params) {
                 if (param.getType().equals(event.getClass())) {
                     try{
-                        Log.$(method.getName());
-                        Log.$(param.toString());
-                        Log.$(method.getDeclaringClass().getName());
-                        method.invoke(listener, new TestEvent());
+                        method.invoke(method.getDeclaringClass().newInstance(), event.getClass().newInstance());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
