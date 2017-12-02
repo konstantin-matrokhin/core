@@ -39,7 +39,11 @@ public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
 
     @Override
     public Proxy getNode(String nodeName) {
-        return proxies.stream().filter(node -> node.getName().equalsIgnoreCase(nodeName)).findFirst().get();
+        return proxies
+                .stream()
+                .filter(node -> node.getName().equalsIgnoreCase(nodeName))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override

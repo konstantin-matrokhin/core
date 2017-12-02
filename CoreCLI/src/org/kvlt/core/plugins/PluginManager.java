@@ -9,7 +9,7 @@ public class PluginManager {
 
     private Set<CorePlugin> plugins;
 
-    {
+    public PluginManager() {
         plugins = new HashSet<>();
     }
 
@@ -17,8 +17,8 @@ public class PluginManager {
         return !hasPlugin(p.getPluginData().getName()) && plugins.add(p);
     }
 
-    public void unloadPlugin() {
-
+    public void unloadPlugin(CorePlugin plugin) {
+        plugin.onDisable();
     }
 
     public void loadPlugin(CorePlugin plugin) {

@@ -15,9 +15,12 @@ import org.kvlt.core.config.Config;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.entities.ServerPlayer;
+import org.kvlt.core.net.ClientManager;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.nodes.Proxies;
+import org.kvlt.core.plugins.CorePlugin;
+import org.kvlt.core.plugins.EventManager;
 import org.kvlt.core.plugins.PluginLoader;
 import org.kvlt.core.plugins.PluginManager;
 import org.kvlt.core.utils.Log;
@@ -25,6 +28,7 @@ import org.kvlt.core.utils.Log;
 public class CoreServer {
 
     private static CoreServer instance;
+
     private PlayerList<ServerPlayer> serverPlayers;
     private PlayerList<OnlinePlayer> onlinePlayers;
     private Proxies proxies;
@@ -33,8 +37,11 @@ public class CoreServer {
     private int port;
     private PluginLoader pluginLoader;
     private PluginManager pluginManager;
+    private EventManager eventManager;
 
-    private CoreServer() {
+    private CoreServer() {}
+
+    void start() {
 
         serverPlayers = new PlayerList<>();
         onlinePlayers = new PlayerList<>();
@@ -42,14 +49,17 @@ public class CoreServer {
         gameServers = new GameServers();
         port = Integer.valueOf(Config.getCore("port"));
 
+        eventManager = new EventManager();
+
         pluginManager = new PluginManager();
 
         pluginLoader = new PluginLoader(pluginManager);
         pluginLoader.loadPlugins();
+
+        runServer();
     }
 
-    void start() {
-
+    private void runServer() {
         boolean hasEpoll = Epoll.isAvailable();
 
         EventLoopGroup bossGroup;
@@ -95,6 +105,9 @@ public class CoreServer {
 
     public void stop() {
         Log.$("Остановка сервера...");
+        ClientManager.getClients().disconnect();
+        pluginManager.getPlugins().forEach(CorePlugin::onDisable);
+
         try {
             future.channel().close().sync();
             Log.$("Сервер выключен.");
@@ -129,5 +142,13 @@ public class CoreServer {
 
     public PluginManager getPluginManager() {
         return pluginManager;
+    }
+
+    public EventManager getEventManager() {
+        return eventManager;
+    }
+
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
     }
 }
