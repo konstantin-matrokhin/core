@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.jar.JarFile;
@@ -56,13 +57,16 @@ public class PluginLoader {
                     pluginFile.toURI().toURL()
             });
 
-            Class c = loader.loadClass(mainClass);
-            CorePlugin p = (CorePlugin) c.newInstance();
-
             PluginData pd = new PluginData();
             pd.setName(name);
             pd.setMainClass(mainClass);
+
+            Class c = loader.loadClass(mainClass);
+            Method init = c.getSuperclass().getDeclaredMethod("init");
+            CorePlugin p = (CorePlugin) c.newInstance();
             p.setPluginData(pd);
+            init.setAccessible(true);
+            init.invoke(p);
 
             boolean added = pm.addPlugin(p);
 
