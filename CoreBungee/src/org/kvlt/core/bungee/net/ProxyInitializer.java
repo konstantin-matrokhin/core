@@ -6,6 +6,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
+import org.kvlt.core.datahandlers.PacketDecoder;
+import org.kvlt.core.datahandlers.PacketEncoder;
 
 public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
 
@@ -14,8 +16,8 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
         ChannelPipeline pipeline = socketChannel.pipeline();
 
         pipeline.addLast(
-                new ObjectEncoder(),
-                new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(getClass().getClassLoader())),
+                new PacketEncoder(),
+                new PacketDecoder(),
                 new BungeeHandler()
         );
     }
