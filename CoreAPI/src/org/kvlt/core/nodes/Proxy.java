@@ -3,7 +3,7 @@ package org.kvlt.core.nodes;
 import io.netty.channel.Channel;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.PlayerList;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
 import java.io.Serializable;
 
@@ -39,13 +39,13 @@ public class Proxy implements Node, Serializable {
     }
 
     @Override
-    public void send(Packet packet) {
+    public void send(PacketOld packet) {
         channel.writeAndFlush(packet, channel.voidPromise());
     }
 
     @Override
-    public void send(Packet... packets) {
-        for (Packet packet: packets) {
+    public void send(PacketOld... packets) {
+        for (PacketOld packet: packets) {
             channel.write(packet, channel.voidPromise());
         }
         channel.flush();

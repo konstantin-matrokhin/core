@@ -4,7 +4,7 @@ import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.PlayerList;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
 public class GameServer implements Node {
 
@@ -23,12 +23,12 @@ public class GameServer implements Node {
     }
 
     @Override
-    public void send(Packet packet) {
+    public void send(PacketOld packet) {
         channel.writeAndFlush(packet, channel.voidPromise());
     }
 
-    public void send(Packet... packets) {
-        for (Packet packet: packets) {
+    public void send(PacketOld... packets) {
+        for (PacketOld packet: packets) {
             channel.write(packet, channel.voidPromise());
         }
         channel.flush();

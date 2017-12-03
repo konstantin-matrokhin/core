@@ -89,11 +89,14 @@ public class CoreServer {
 
             future = bootstrap.bind(port);
             future.addListener((channelFuture) -> {
-                Log.$(
-                        channelFuture.isSuccess()
-                                ? "Сервер запущен с портом " + port
-                                : "Не удалось запустить сервер"
-                );
+                String result;
+                if (channelFuture.isSuccess()) {
+                    result = "Сервер запущен с портом " + port;
+                } else {
+                    result = "Не удалось запустить сервер";
+                    future.cause().printStackTrace();
+                }
+                Log.$(result);
             });
 
             new CommandListener();

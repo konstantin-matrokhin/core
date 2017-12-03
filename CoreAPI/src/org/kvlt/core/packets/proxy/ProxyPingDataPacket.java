@@ -1,9 +1,9 @@
 package org.kvlt.core.packets.proxy;
 
 import org.kvlt.core.bungee.CoreBungee;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class ProxyPingDataPacket extends Packet {
+public class ProxyPingDataPacket extends PacketOld {
 
     private String motd;
 

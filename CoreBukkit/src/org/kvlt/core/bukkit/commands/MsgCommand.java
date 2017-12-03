@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.net.ConnectionManager;
-import org.kvlt.core.packets.player.PlayerMessagePacket;
+import org.kvlt.core.packets.player.PlayerMessagePacketOld;
 
 import java.util.Arrays;
 
@@ -19,7 +19,7 @@ public class MsgCommand implements CommandExecutor {
         String[] words = Arrays.copyOfRange(args, 1, args.length);
         String message = String.join(" ", words);
 
-        PlayerMessagePacket pmp = new PlayerMessagePacket(
+        PlayerMessagePacketOld pmp = new PlayerMessagePacketOld(
                 ConfigManager.getClientName(),
                 sender.getName(),
                 recipient,

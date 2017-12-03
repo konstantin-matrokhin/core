@@ -1,5 +1,16 @@
 package org.kvlt.core.datahandlers;
 
-public class PacketEncoder {
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.MessageToByteEncoder;
+import org.kvlt.core.packets.Packet;
 
+public class PacketEncoder extends MessageToByteEncoder<Packet> {
+
+    @Override
+    protected void encode(ChannelHandlerContext ctx, Packet packet, ByteBuf byteBuf) throws Exception {
+        byte packetId = packet.getId();
+        byteBuf.writeByte(packetId);
+        packet.writeBytes(byteBuf);
+    }
 }

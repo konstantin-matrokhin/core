@@ -5,10 +5,10 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.bukkit.Bukkit;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.bukkit.ServerConnectionPacket;
 
-public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
+public class ClientHandler extends SimpleChannelInboundHandler<PacketOld> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -23,7 +23,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, Packet packet) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, PacketOld packet) throws Exception {
         packet.execute();
         System.out.println("new packet: " + packet.getClass().getSimpleName());
     }

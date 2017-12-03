@@ -3,10 +3,10 @@ package org.kvlt.core.bungee.net;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.kvlt.core.bungee.CoreBungee;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.proxy.ProxyConnectionPacket;
 
-public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
+public class BungeeHandler extends SimpleChannelInboundHandler<PacketOld> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -21,7 +21,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Packet packet) {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, PacketOld packet) {
         packet.execute();
     }
 

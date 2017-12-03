@@ -4,9 +4,9 @@ import net.md_5.bungee.BungeeCord;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.nodes.GameServer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class ProxySwitchServerPacket extends Packet {
+public class ProxySwitchServerPacket extends PacketOld {
 
     private OnlinePlayer op;
     private String server;

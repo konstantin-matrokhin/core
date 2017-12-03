@@ -3,13 +3,13 @@ package org.kvlt.core.packets.player;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class PlayerProxyQuitPacket extends Packet {
+public class PlayerProxyQuitPacketOld extends PacketOld {
 
     private String playerName;
 
-    public PlayerProxyQuitPacket(String playerName) {
+    public PlayerProxyQuitPacketOld(String playerName) {
         this.playerName = playerName;
     }
 

@@ -1,9 +1,9 @@
 package org.kvlt.core.packets.proxy;
 
 import net.md_5.bungee.BungeeCord;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class AutomessagePacket extends Packet {
+public class AutomessagePacket extends PacketOld {
 
     private String message;
 

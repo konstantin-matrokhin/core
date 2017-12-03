@@ -5,7 +5,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import org.kvlt.core.bungee.CoreBungee;
-import org.kvlt.core.packets.player.PlayerRegisterPacket;
+import org.kvlt.core.packets.player.PlayerRegisterPacketOld;
 
 public class RegisterCommand extends Command {
 
@@ -28,7 +28,7 @@ public class RegisterCommand extends Command {
             return;
         }
 
-        PlayerRegisterPacket prp = new PlayerRegisterPacket(p.getName(), password);
+        PlayerRegisterPacketOld prp = new PlayerRegisterPacketOld(p.getName(), password);
         CoreBungee.get().sendPacket(prp);
     }
 }

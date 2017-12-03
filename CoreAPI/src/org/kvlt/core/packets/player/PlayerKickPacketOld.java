@@ -5,18 +5,18 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class PlayerKickPacket extends Packet {
+public class PlayerKickPacketOld extends PacketOld {
 
     private String initiator;
     private String victim;
 
-    public PlayerKickPacket(String victim) {
+    public PlayerKickPacketOld(String victim) {
         this.victim = victim;
     }
 
-    public PlayerKickPacket(String initiator, String victim) {
+    public PlayerKickPacketOld(String initiator, String victim) {
         this.initiator = initiator;
         this.victim = victim;
     }

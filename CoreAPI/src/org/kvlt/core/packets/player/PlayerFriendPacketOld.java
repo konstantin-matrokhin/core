@@ -1,8 +1,8 @@
 package org.kvlt.core.packets.player;
 
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class PlayerFriendPacket extends Packet {
+public class PlayerFriendPacketOld extends PacketOld {
 
     @Override
     protected void onCore() {

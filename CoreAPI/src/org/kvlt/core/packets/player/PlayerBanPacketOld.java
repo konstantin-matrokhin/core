@@ -1,10 +1,10 @@
 package org.kvlt.core.packets.player;
 
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.type.Spigot;
 
 @Spigot
-public class PlayerBanPacket extends Packet {
+public class PlayerBanPacketOld extends PacketOld {
 
     @Override
     protected void onCore() {

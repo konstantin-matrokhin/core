@@ -3,7 +3,7 @@ package org.kvlt.core.bungee;
 import io.netty.channel.Channel;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.net.ConnectionManager;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,12 +48,12 @@ public class CoreBungee extends Plugin {
         return serverName;
     }
 
-    public void sendPacket(Packet packet) {
+    public void sendPacket(PacketOld packet) {
         server.writeAndFlush(packet, server.voidPromise());
     }
 
-    public void sendPackets(Packet... packets) {
-        for (Packet p: packets) {
+    public void sendPackets(PacketOld... packets) {
+        for (PacketOld p: packets) {
             server.write(p, server.voidPromise());
         }
         server.flush();

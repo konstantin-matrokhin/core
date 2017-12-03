@@ -1,9 +1,9 @@
 package org.kvlt.core.packets.player;
 
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class PlayerDisconnectPacket extends Packet {
+public class PlayerDisconnectPacket extends PacketOld {
 
     private String playerName;
 

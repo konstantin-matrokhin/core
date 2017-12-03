@@ -3,10 +3,10 @@ package org.kvlt.core.net;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.utils.Log;
 
-public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
+public class ServerHandler extends SimpleChannelInboundHandler<PacketOld> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -30,7 +30,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
      * Выполняет, принимая контекст пакета
      */
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, Packet packet) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, PacketOld packet) throws Exception {
         packet.execute(ctx.channel());
     }
 

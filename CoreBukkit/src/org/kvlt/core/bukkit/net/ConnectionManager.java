@@ -9,7 +9,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.utils.Log;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
 import java.util.concurrent.TimeUnit;
 
@@ -67,12 +67,12 @@ public class ConnectionManager {
         }
     }
 
-    public void sendPacket(Packet packet) {
+    public void sendPacket(PacketOld packet) {
         channel.writeAndFlush(packet, channel.voidPromise());
     }
 
-    public void sendPackets(Packet... packets) {
-        for (Packet p: packets) {
+    public void sendPackets(PacketOld... packets) {
+        for (PacketOld p: packets) {
             channel.write(p, channel.voidPromise());
         }
         channel.flush();

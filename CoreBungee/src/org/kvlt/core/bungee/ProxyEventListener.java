@@ -9,8 +9,8 @@ import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.entities.PlayerAdapter;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.packets.player.PlayerProxyLoginPacket;
-import org.kvlt.core.packets.player.PlayerProxyQuitPacket;
-import org.kvlt.core.packets.player.PlayerSwitchServerPacket;
+import org.kvlt.core.packets.player.PlayerProxyQuitPacketOld;
+import org.kvlt.core.packets.player.PlayerSwitchServerPacketOld;
 
 public class ProxyEventListener implements Listener {
 
@@ -31,14 +31,14 @@ public class ProxyEventListener implements Listener {
         ProxiedPlayer player = event.getPlayer();
         String to = player.getServer().getInfo().getName();
 
-        PlayerSwitchServerPacket packet = new PlayerSwitchServerPacket(player.getName(), to);
+        PlayerSwitchServerPacketOld packet = new PlayerSwitchServerPacketOld(player.getName(), to);
         CoreBungee.get().sendPacket(packet);
     }
 
     @EventHandler
     public void onDisconnect(PlayerDisconnectEvent event) {
         ProxiedPlayer p = event.getPlayer();
-        PlayerProxyQuitPacket ppqp = new PlayerProxyQuitPacket(p.getName());
+        PlayerProxyQuitPacketOld ppqp = new PlayerProxyQuitPacketOld(p.getName());
         CoreBungee.get().sendPacket(ppqp);
     }
 

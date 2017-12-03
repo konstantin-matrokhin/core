@@ -4,10 +4,10 @@ import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.nodes.Proxy;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.utils.Log;
 
-public class ProxyConnectionPacket extends Packet<Channel> {
+public class ProxyConnectionPacket extends PacketOld<Channel> {
 
     private String serverName;
 

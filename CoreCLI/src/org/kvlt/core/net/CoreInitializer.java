@@ -6,7 +6,9 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.datahandlers.PacketDecoder;
+import org.kvlt.core.datahandlers.PacketEncoder;
+import org.kvlt.core.packets.PacketOld;
 
 public class CoreInitializer extends ChannelInitializer<SocketChannel> {
 
@@ -15,8 +17,8 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         ChannelPipeline pipeline = socketChannel.pipeline();
 
         pipeline.addLast(
-                new ObjectEncoder(),
-                new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.weakCachingConcurrentResolver(Packet.class.getClassLoader())),
+                new PacketEncoder(),
+                new PacketDecoder(),
                 new ServerHandler()
         );
     }

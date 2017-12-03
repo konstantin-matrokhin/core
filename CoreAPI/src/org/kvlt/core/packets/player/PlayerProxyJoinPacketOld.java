@@ -3,17 +3,17 @@ package org.kvlt.core.packets.player;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
 import java.io.Serializable;
 
 @Deprecated
-public class PlayerProxyJoinPacket extends Packet implements Serializable {
+public class PlayerProxyJoinPacketOld extends PacketOld implements Serializable {
 
     private OnlinePlayer player;
     private String serverName;
 
-    public PlayerProxyJoinPacket(OnlinePlayer p, String serverName) {
+    public PlayerProxyJoinPacketOld(OnlinePlayer p, String serverName) {
         this.player = p;
     }
 

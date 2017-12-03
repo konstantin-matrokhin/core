@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.packets.bukkit.ServerCommandPacket;
+import org.kvlt.core.packets.bukkit.ServerCommandPacketOld;
 
 import java.util.Arrays;
 
@@ -18,7 +18,7 @@ public class SendCommandCommand implements CommandExecutor {
         String[] cmdArr = Arrays.copyOfRange(args, 1, args.length);
         String cmd = String.join(" ", cmdArr);
 
-        ServerCommandPacket scp = new ServerCommandPacket(commandSender.getName(), to, cmd);
+        ServerCommandPacketOld scp = new ServerCommandPacketOld(commandSender.getName(), to, cmd);
         CorePlugin.get().getCoreServer().writeAndFlush(scp);
         return true;
     }

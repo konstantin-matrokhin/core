@@ -4,9 +4,9 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.nodes.Proxy;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class PlayerProxyLoginPacket extends Packet {
+public class PlayerProxyLoginPacket extends PacketOld {
 
     private OnlinePlayer player;
     private String proxy;
@@ -25,7 +25,7 @@ public class PlayerProxyLoginPacket extends Packet {
                 .anyMatch(p -> p.getIp().equalsIgnoreCase(player.getIp()));
 
         if (containsSameIp) {
-            PlayerKickPacket pkp = new PlayerKickPacket(player.getName());
+            PlayerKickPacketOld pkp = new PlayerKickPacketOld(player.getName());
             cproxy.send(pkp);
             return;
         }

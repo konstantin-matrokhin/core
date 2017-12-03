@@ -7,10 +7,10 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.bungee.storages.ReplyStorage;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
 
-public class PlayerMessagePacket extends Packet {
+public class PlayerMessagePacketOld extends PacketOld {
 
     private static final String msgFormat = "&7[&e%from%&7] %sender% -> вам: &e%msg%";
 
@@ -19,7 +19,7 @@ public class PlayerMessagePacket extends Packet {
     private String message;
     private String server;
 
-    public PlayerMessagePacket(String from, String sender, String recipient, String message) {
+    public PlayerMessagePacketOld(String from, String sender, String recipient, String message) {
         this.sender = sender;
         this.recipient = recipient;
         this.message = message;

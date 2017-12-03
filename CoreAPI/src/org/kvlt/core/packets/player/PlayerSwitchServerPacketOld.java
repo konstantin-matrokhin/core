@@ -3,14 +3,14 @@ package org.kvlt.core.packets.player;
 import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class PlayerSwitchServerPacket extends Packet<Channel> {
+public class PlayerSwitchServerPacketOld extends PacketOld<Channel> {
 
     private String playerName;
     private String to;
 
-    public PlayerSwitchServerPacket(String playerName, String to) {
+    public PlayerSwitchServerPacketOld(String playerName, String to) {
         this.playerName = playerName;
         this.to = to;
     }
@@ -26,13 +26,13 @@ public class PlayerSwitchServerPacket extends Packet<Channel> {
         if (p == null) return;
 
         if (p.isLogged()) {
-            PlayerAuthPacket pap = new PlayerAuthPacket(p.getName(), true);
+            PlayerAuthPacketOld pap = new PlayerAuthPacketOld(p.getName(), true);
             CoreServer.get().getGameServers().getNode(to).send(pap);
         }
 
         if (p.getCurrentServer() != null) {
             if (p.isLogged()) {
-                PlayerAuthPacket pap = new PlayerAuthPacket(playerName, true);
+                PlayerAuthPacketOld pap = new PlayerAuthPacketOld(playerName, true);
                 CoreServer.get().getGameServers().send(pap);
             } else {
                 return;

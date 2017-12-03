@@ -74,7 +74,6 @@ public class PluginConfig {
 
             if (configContent.isJsonObject()) {
                 json = configContent.getAsJsonObject();
-                System.out.println(json);
                 return true;
             } else {
                 return false;

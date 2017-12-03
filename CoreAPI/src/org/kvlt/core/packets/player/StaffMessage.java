@@ -2,9 +2,9 @@ package org.kvlt.core.packets.player;
 
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class StaffMessage extends Packet {
+public class StaffMessage extends PacketOld {
 
     static final String TEMPLATE = "(STAFF) [%name%]: %msg%";
 

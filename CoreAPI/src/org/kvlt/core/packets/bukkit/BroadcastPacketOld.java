@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.nodes.GameServer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.type.Spigot;
 import org.kvlt.core.utils.Log;
 import org.kvlt.core.utils.LogType;
@@ -16,7 +16,7 @@ import java.util.Optional;
  * Может быть отправлено как на конкретный сервер, так и на все
  */
 @Spigot
-public class BroadcastPacket extends Packet {
+public class BroadcastPacketOld extends PacketOld {
 
     private final String PREFIX = "&7[&cОБЪЯВЛЕНИЕ&7]&r ";
 
@@ -24,16 +24,16 @@ public class BroadcastPacket extends Packet {
     private Optional<String> server;
     private Optional<String> sender;
 
-    public BroadcastPacket(String str) {
+    public BroadcastPacketOld(String str) {
         this.str = str;
     }
 
-    public BroadcastPacket(String str, String sender) {
+    public BroadcastPacketOld(String str, String sender) {
         this.str = str;
         this.sender = Optional.ofNullable(sender);
     }
 
-    public BroadcastPacket(String str, String server, String sender) {
+    public BroadcastPacketOld(String str, String server, String sender) {
         this.str = str;
         this.server = Optional.ofNullable(server);
         this.sender = Optional.ofNullable(sender);

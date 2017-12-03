@@ -8,21 +8,21 @@ import org.kvlt.core.bukkit.datastorage.LoggedPlayers;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
 
-public class PlayerAuthPacket extends Packet<Channel> {
+public class PlayerAuthPacketOld extends PacketOld<Channel> {
 
     private String playerName;
     private String password;
     private boolean successful;
 
-    public PlayerAuthPacket(String playerName, String password) {
+    public PlayerAuthPacketOld(String playerName, String password) {
         this.playerName = playerName;
         this.password = password;
     }
 
-    public PlayerAuthPacket(String playerName, boolean successful) {
+    public PlayerAuthPacketOld(String playerName, boolean successful) {
         this.playerName = playerName;
         this.successful = successful;
     }

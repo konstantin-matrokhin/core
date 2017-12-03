@@ -3,18 +3,18 @@ package org.kvlt.core.packets.player;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.bukkit.ServerMessagePacket;
 import org.kvlt.core.utils.Log;
 
-public class PlayerRegisterPacket extends Packet {
+public class PlayerRegisterPacketOld extends PacketOld {
 
     private static final String SUCCESSFUL_REGISRATION = "Вы успешно зарегистрировались";
 
     private String playerName;
     private String password;
 
-    public PlayerRegisterPacket(String playerName, String password) {
+    public PlayerRegisterPacketOld(String playerName, String password) {
         this.playerName = playerName;
         this.password = password;
     }
@@ -33,7 +33,7 @@ public class PlayerRegisterPacket extends Packet {
                 op.setPassword(password);
                 op.setRegistered(true);
 
-                PlayerAuthPacket pap  = new PlayerAuthPacket(playerName, true);
+                PlayerAuthPacketOld pap  = new PlayerAuthPacketOld(playerName, true);
                 ServerMessagePacket smp = new ServerMessagePacket(playerName, SUCCESSFUL_REGISRATION);
                 op.getCurrentServer().send(pap, smp);
                 Log.$(playerName + " registered / " + password);

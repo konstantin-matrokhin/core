@@ -4,17 +4,17 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.bukkit.corehandlers.CoreHandler;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.nodes.GameServer;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 import org.kvlt.core.packets.type.Spigot;
 
 @Spigot
-public class ServerCommandPacket extends Packet {
+public class ServerCommandPacketOld extends PacketOld {
 
     private String sender;
     private String to;
     private String cmd;
 
-    public ServerCommandPacket(String sender, String to, String cmd) {
+    public ServerCommandPacketOld(String sender, String to, String cmd) {
         this.sender = sender;
         this.to = to;
         this.cmd = cmd;

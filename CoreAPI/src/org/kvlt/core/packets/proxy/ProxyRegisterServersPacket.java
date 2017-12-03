@@ -1,9 +1,9 @@
 package org.kvlt.core.packets.proxy;
 
 import org.kvlt.core.bungee.storages.ServersLoader;
-import org.kvlt.core.packets.Packet;
+import org.kvlt.core.packets.PacketOld;
 
-public class ProxyRegisterServersPacket extends Packet {
+public class ProxyRegisterServersPacket extends PacketOld {
 
     private String name;
     private String ip;

@@ -6,7 +6,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.storages.ReplyStorage;
-import org.kvlt.core.packets.player.PlayerMessagePacket;
+import org.kvlt.core.packets.player.PlayerMessagePacketOld;
 
 public class ReplyCommand extends Command {
 
@@ -27,7 +27,7 @@ public class ReplyCommand extends Command {
         if (ReplyStorage.hasLastInterlocutor(myName)) {
             ProxiedPlayer interlocutor = ReplyStorage.getLastInterlocutor(myName);
             String interlocutorName = interlocutor.getName();
-            PlayerMessagePacket pmp = new PlayerMessagePacket(serverName, myName, interlocutorName, message);
+            PlayerMessagePacketOld pmp = new PlayerMessagePacketOld(serverName, myName, interlocutorName, message);
 
             CoreBungee.get().sendPacket(pmp);
         } else {
