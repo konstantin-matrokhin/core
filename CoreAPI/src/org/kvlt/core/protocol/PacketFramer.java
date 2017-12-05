@@ -1,15 +1,12 @@
-package org.kvlt.core.datahandlers;
+package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;
-import org.kvlt.core.packets.Packet;
-import org.kvlt.core.packets.Packets;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 public class PacketFramer extends ByteToMessageCodec<Packet> {

@@ -19,11 +19,11 @@ import org.kvlt.core.net.ClientManager;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.nodes.Proxies;
-import org.kvlt.core.packets.Packets;
 import org.kvlt.core.plugins.CorePlugin;
 import org.kvlt.core.plugins.EventManager;
 import org.kvlt.core.plugins.PluginLoader;
 import org.kvlt.core.plugins.PluginManager;
+import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.Log;
 
 public class CoreServer {

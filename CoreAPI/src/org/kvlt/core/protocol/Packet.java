@@ -1,7 +1,6 @@
-package org.kvlt.core.packets;
+package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 
 public abstract class Packet {
 

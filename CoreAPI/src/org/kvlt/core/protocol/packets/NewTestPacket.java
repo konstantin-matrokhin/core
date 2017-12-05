@@ -1,6 +1,8 @@
-package org.kvlt.core.packets;
+package org.kvlt.core.protocol.packets;
 
 import io.netty.buffer.ByteBuf;
+import org.kvlt.core.protocol.Packet;
+import org.kvlt.core.protocol.PacketUtil;
 
 public class NewTestPacket extends Packet {
 

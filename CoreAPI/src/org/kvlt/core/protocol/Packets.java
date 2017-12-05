@@ -1,4 +1,6 @@
-package org.kvlt.core.packets;
+package org.kvlt.core.protocol;
+
+import org.kvlt.core.protocol.packets.NewTestPacket;
 
 import java.util.ArrayList;
 import java.util.List;
