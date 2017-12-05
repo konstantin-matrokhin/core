@@ -9,6 +9,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.utils.Log;
+import org.kvlt.core.packets.Packets;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +32,8 @@ public class ConnectionManager {
         host = CoreBungee.get().getConfigManager().getConfig().getString("host");
         port = CoreBungee.get().getConfigManager().getConfig().getInt("port");
         eventLoopGroup = new NioEventLoopGroup();
+
+        Packets.initAllPackets();
 
         try {
             bootstrap = new Bootstrap()

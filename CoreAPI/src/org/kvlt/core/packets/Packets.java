@@ -1,21 +1,27 @@
 package org.kvlt.core.packets;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Packets {
 
-    private static HashMap<Byte, Class<? extends Packet>> packets;
+    private static List<Class<? extends Packet>> packets;
 
     static {
-        packets = new HashMap<>();
+        packets = new ArrayList<>();
     }
 
-    public static void register(byte id, Class<? extends Packet> packetClass) {
-        packets.put(id, packetClass);
+    public static void register(Class<? extends Packet> packetClass) {
+        packets.add(packetClass);
+    }
+
+    public static int getIdByClass(Class<? extends Packet> packetClass) {
+        return packets.indexOf(packetClass);
     }
 
     public static void initAllPackets() {
-        register((byte) 0x01, NewTestPacket.class);
+        register(Packet.class);
+        register(NewTestPacket.class);
     }
 
     public static Packet getById(byte id) {
