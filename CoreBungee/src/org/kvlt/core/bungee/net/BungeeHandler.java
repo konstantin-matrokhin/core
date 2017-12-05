@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.protocol.Packet;
 import org.kvlt.core.protocol.packets.NewTestPacket;
+import org.kvlt.core.protocol.packets.ProxyConnectPacket;
 
 public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
 
@@ -12,7 +13,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
     public void channelActive(ChannelHandlerContext ctx) {
         CoreBungee.get().setCoreServer(ctx.channel());
 //        ctx.channel().writeAndFlush(new ProxyConnectionPacket(CoreBungee.get().getServerName()), ctx.voidPromise());
-        ctx.channel().writeAndFlush(new NewTestPacket());
+        ctx.channel().writeAndFlush(new ProxyConnectPacket(CoreBungee.get().getServerName()));
     }
 
     @Override
@@ -22,8 +23,8 @@ public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Packet packet) {
-        packet.execute();
+    protected void channelRead0(ChannelHandlerContext ctx, Packet packet) {
+        packet.execute(ctx.channel());
     }
 
     @Override

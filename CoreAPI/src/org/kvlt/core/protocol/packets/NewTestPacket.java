@@ -1,10 +1,11 @@
 package org.kvlt.core.protocol.packets;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
 import org.kvlt.core.protocol.Packet;
 import org.kvlt.core.protocol.PacketUtil;
 
-public class NewTestPacket extends Packet {
+public class NewTestPacket extends Packet<Channel> {
 
     private int myNum;
     private String str;
@@ -14,7 +15,7 @@ public class NewTestPacket extends Packet {
     }
 
     @Override
-    public void execute() {
+    public void execute(Channel channel) {
         System.out.println(myNum);
         System.out.println(str);
     }

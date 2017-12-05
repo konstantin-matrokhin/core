@@ -2,14 +2,18 @@ package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
 
-public abstract class Packet {
+public abstract class Packet<T> {
 
     private byte id;
     private byte length;
 
-    public abstract void execute();
+    public abstract void execute(T t);
     public abstract void readBytes(ByteBuf byteBuf);
     public abstract void writeBytes(ByteBuf byteBuf);
+
+    public void execute() {
+        execute(null);
+    }
 
     public byte getId() {
         return id;

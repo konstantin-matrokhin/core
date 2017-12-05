@@ -1,6 +1,7 @@
 package org.kvlt.core.nodes;
 
 import io.netty.channel.Channel;
+import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.packets.PacketOld;
@@ -22,6 +23,7 @@ public class Proxy implements Node, Serializable {
 
         this.name = name;
         this.channel = channel;
+        CoreServer.get().getProxies().addNode(this);
     }
 
     public String getName() {
