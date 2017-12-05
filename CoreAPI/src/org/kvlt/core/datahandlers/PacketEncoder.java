@@ -9,8 +9,5 @@ public class PacketEncoder extends MessageToByteEncoder<Packet> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Packet packet, ByteBuf byteBuf) throws Exception {
-        byte packetId = packet.getId();
-        byteBuf.writeByte(packetId);
-        packet.writeBytes(byteBuf);
     }
 }

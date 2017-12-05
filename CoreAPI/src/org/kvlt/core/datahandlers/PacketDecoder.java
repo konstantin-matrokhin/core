@@ -17,7 +17,7 @@ public class PacketDecoder extends ByteToMessageDecoder {
 
         byte packetId = byteBuf.readByte();
         Packet packet = Packets.getById(packetId);
-        packet.execute(byteBuf);
+//        packet.execute(byteBuf);
 
     }
 }

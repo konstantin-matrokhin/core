@@ -8,6 +8,7 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import org.kvlt.core.datahandlers.PacketDecoder;
 import org.kvlt.core.datahandlers.PacketEncoder;
+import org.kvlt.core.datahandlers.PacketFramer;
 
 public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
 
@@ -16,8 +17,9 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
         ChannelPipeline pipeline = socketChannel.pipeline();
 
         pipeline.addLast(
-                new PacketEncoder(),
-                new PacketDecoder(),
+                new PacketFramer(),
+//                new PacketEncoder(),
+//                new PacketDecoder(),
                 new BungeeHandler()
         );
     }
