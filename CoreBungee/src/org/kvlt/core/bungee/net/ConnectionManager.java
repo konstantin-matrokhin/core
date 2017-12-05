@@ -33,7 +33,7 @@ public class ConnectionManager {
         port = CoreBungee.get().getConfigManager().getConfig().getInt("port");
         eventLoopGroup = new NioEventLoopGroup();
 
-        Packets.initAllPackets();
+        Packets.registerCorePackets();
 
         try {
             bootstrap = new Bootstrap()

@@ -1,6 +1,7 @@
 package org.kvlt.core.protocol;
 
 import org.kvlt.core.protocol.packets.NewTestPacket;
+import org.kvlt.core.protocol.packets.ProxyConnectPacket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +14,18 @@ public class Packets {
         packets = new ArrayList<>();
     }
 
+    public static void registerCorePackets() {
+        register(Packet.class); // dummy packet 'cause 1st packet isn't valid
+        register(NewTestPacket.class);
+        register(ProxyConnectPacket.class);
+    }
+
     public static void register(Class<? extends Packet> packetClass) {
         packets.add(packetClass);
     }
 
     public static int getIdByClass(Class<? extends Packet> packetClass) {
         return packets.indexOf(packetClass);
-    }
-
-    public static void initAllPackets() {
-        register(Packet.class);
-        register(NewTestPacket.class);
     }
 
     public static Packet getById(byte id) {

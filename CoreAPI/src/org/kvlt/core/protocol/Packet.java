@@ -7,9 +7,9 @@ public abstract class Packet {
     private byte id;
     private byte length;
 
-    public abstract void writeBytes(ByteBuf byteBuf);
-    public abstract void readBytes(ByteBuf byteBuf);
     public abstract void execute();
+    public abstract void readBytes(ByteBuf byteBuf);
+    public abstract void writeBytes(ByteBuf byteBuf);
 
     public byte getId() {
         return id;

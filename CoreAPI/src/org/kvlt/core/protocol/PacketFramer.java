@@ -11,11 +11,12 @@ import java.util.List;
 
 public class PacketFramer extends ByteToMessageCodec<Packet> {
 
-    private final int MIN_BYTES = 8;
-    private final int MAX_BYTES = 128;
-    private final int DATA_PART_INDEX = 8;
+    private final int MIN_BYTES        = 8;
+    private final int MAX_BYTES        = 128;
+
+    private final int DATA_PART_INDEX  = 8;
     private final int SIZE_SHORT_INDEX = 6;
-    private final int MIN_PACKET_ID = 1;
+    private final int MIN_PACKET_ID    = 1;
 
 
     // prefix for each packet
