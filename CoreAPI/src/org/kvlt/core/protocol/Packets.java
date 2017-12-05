@@ -1,5 +1,6 @@
 package org.kvlt.core.protocol;
 
+import org.kvlt.core.packets.bukkit.ServerConnectPacket;
 import org.kvlt.core.protocol.packets.NewTestPacket;
 import org.kvlt.core.protocol.packets.ProxyConnectPacket;
 
@@ -18,6 +19,7 @@ public class Packets {
         register(Packet.class); // dummy packet 'cause 1st packet isn't valid
         register(NewTestPacket.class);
         register(ProxyConnectPacket.class);
+        register(ServerConnectPacket.class);
     }
 
     public static void register(Class<? extends Packet> packetClass) {

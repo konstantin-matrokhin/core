@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.utils.Log;
 import org.kvlt.core.packets.PacketOld;
+import org.kvlt.core.protocol.Packets;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +33,8 @@ public class ConnectionManager {
         host = ConfigManager.config().getString("host");
         port = ConfigManager.config().getInt("port");
         eventLoopGroup = new NioEventLoopGroup();
+
+        Packets.registerCorePackets();
 
         try {
             bootstrap = new Bootstrap()
