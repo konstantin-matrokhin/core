@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.packets.PacketOld;
-import org.kvlt.core.packets.bukkit.ServerConnectionPacket;
+import org.kvlt.core.packets.bukkit.ServerConnectPacket;
 
 public class ClientHandler extends SimpleChannelInboundHandler<PacketOld> {
 
@@ -19,7 +19,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketOld> {
         int port = Bukkit.getPort();
         String ip = Bukkit.getIp();
 
-        ctx.writeAndFlush(new ServerConnectionPacket(name, ip, port));
+        ctx.writeAndFlush(new ServerConnectPacket(name, port), ctx.voidPromise());
     }
 
     @Override
