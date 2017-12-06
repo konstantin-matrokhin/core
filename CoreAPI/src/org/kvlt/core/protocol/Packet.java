@@ -1,6 +1,7 @@
 package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
 
 public abstract class Packet<T> {
 
@@ -14,6 +15,10 @@ public abstract class Packet<T> {
 
     public void send(Destination dest) {
         send(dest, "@all");
+    }
+
+    public void send(Channel channel) {
+        channel.writeAndFlush(this, channel.voidPromise());
     }
 
     public void execute() {
