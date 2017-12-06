@@ -5,8 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.bukkit.Bukkit;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.packets.PacketOld;
-import org.kvlt.core.packets.bukkit.ServerConnectPacket;
+import org.kvlt.core.protocol.packets.ServerConnectPacket;
 import org.kvlt.core.protocol.Packet;
 
 public class ClientHandler extends SimpleChannelInboundHandler<Packet> {

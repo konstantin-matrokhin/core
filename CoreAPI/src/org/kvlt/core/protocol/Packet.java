@@ -10,6 +10,11 @@ public abstract class Packet<T> {
     public abstract void execute(T t);
     public abstract void readBytes(ByteBuf byteBuf);
     public abstract void writeBytes(ByteBuf byteBuf);
+    public abstract void send(Destination dest, String name);
+
+    public void send(Destination dest) {
+        send(dest, "@all");
+    }
 
     public void execute() {
         execute(null);

@@ -1,6 +1,6 @@
 package org.kvlt.core.protocol;
 
-import org.kvlt.core.packets.bukkit.ServerConnectPacket;
+import org.kvlt.core.protocol.packets.ServerConnectPacket;
 import org.kvlt.core.protocol.packets.NewTestPacket;
 import org.kvlt.core.protocol.packets.ProxyConnectPacket;
 

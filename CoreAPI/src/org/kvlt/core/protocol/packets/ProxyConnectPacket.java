@@ -3,6 +3,7 @@ package org.kvlt.core.protocol.packets;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.nodes.Proxy;
+import org.kvlt.core.protocol.Destination;
 import org.kvlt.core.protocol.Packet;
 import org.kvlt.core.protocol.PacketUtil;
 
@@ -25,6 +26,11 @@ public class ProxyConnectPacket extends Packet<Channel> {
         String response = String.format("Прокси-сервер подключен (%s)", proxy);
         System.out.println(response);
         new Proxy(proxy, channel);
+    }
+
+    @Override
+    public void send(Destination dest, String name) {
+
     }
 
     //Когда пакет пришел, разбираем байты
