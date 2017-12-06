@@ -8,7 +8,7 @@ public class CoreCLI {
 
     public static void main(String[] args) {
         Config.init();
-        //DAO.connect();
+        //CoreDAO.connect();
         CoreServer.get().start();
     }
 

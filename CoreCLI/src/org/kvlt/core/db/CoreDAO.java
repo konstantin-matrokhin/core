@@ -7,7 +7,7 @@ import org.sql2o.Sql2o;
 
 import java.util.concurrent.TimeUnit;
 
-public class DAO {
+public class CoreDAO {
 
     private static Sql2o sql;
     private static Connection c;

@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.config.Config;
-import org.kvlt.core.db.DAO;
+import org.kvlt.core.db.CoreDAO;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.nodes.Proxy;
@@ -18,7 +18,7 @@ public class TestOne extends TestCase {
 
     {
         Config.init();
-        DAO.connect();
+        CoreDAO.connect();
         cs = CoreServer.get();
     }
 

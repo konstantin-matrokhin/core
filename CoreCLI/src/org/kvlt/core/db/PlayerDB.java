@@ -38,7 +38,7 @@ public class PlayerDB {
                 "WHERE id = :id";
 
         Runnable r = () -> {
-            DAO.getConnection()
+            CoreDAO.getConnection()
                     .createQuery(sql)
                     .addParameter("id", id)
                     .addParameter("now", playedNow)
@@ -61,7 +61,7 @@ public class PlayerDB {
                     "last_authenticated = :now\n" +
                     "WHERE id = :id";
 
-            DAO.getConnection()
+            CoreDAO.getConnection()
                     .createQuery(registerSql)
                     .addParameter("pass", password)
                     .addParameter("ip", ip)
@@ -81,7 +81,7 @@ public class PlayerDB {
         int id;
         String existSql = "SELECT IF(COUNT(id) = 0, 0, id) AS id FROM identifier WHERE player_name = :name";
 
-        id = DAO.getConnection()
+        id = CoreDAO.getConnection()
                 .createQuery(existSql)
                 .addParameter("name", name)
                 .executeScalar(Integer.class);
@@ -121,7 +121,7 @@ public class PlayerDB {
         String playerName = player.getName();
         String insertIdSql = "INSERT INTO identifier (player_name) VALUES (:name) ON DUPLICATE KEY UPDATE id=id";
 
-        BigInteger bigId = (BigInteger) DAO.getConnection()
+        BigInteger bigId = (BigInteger) CoreDAO.getConnection()
                 .createQuery(insertIdSql, true)
                 .addParameter("name", playerName)
                 .executeUpdate()
@@ -143,7 +143,7 @@ public class PlayerDB {
 
         for (String q : queries) {
             executor.execute(() -> {
-                DAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+                CoreDAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
             });
         }
 
@@ -155,7 +155,7 @@ public class PlayerDB {
         if (player == null) return;
 
         int id = player.getId();
-        Connection conn = DAO.getConnection();
+        Connection conn = CoreDAO.getConnection();
 
         AuthModel authModel = loadModel(AuthModel.class, new AuthParams(), conn, id);
         JoinInfoModel joinInfoModel = loadModel(JoinInfoModel.class, new JoinInfoParams(), conn, id);
