@@ -1,0 +1,53 @@
+package org.kvlt.core.utils;
+
+import org.kvlt.core.CoreServer;
+import org.kvlt.core.nodes.GameServers;
+import org.kvlt.core.nodes.Proxies;
+
+public class Finder {
+
+    public static Proxies getProxies(String pattern) {
+        boolean patterned = pattern.startsWith("@");
+        Proxies proxies = new Proxies();
+        String searchStr = patterned
+                ? pattern.substring(1, pattern.length())
+                : pattern;
+
+        CoreServer.get().getProxies().forEach(proxy -> {
+            if (patterned) {
+                if (proxy.getName().startsWith(searchStr)) {
+                    proxies.addNode(proxy);
+                }
+            } else {
+                if (proxy.getName().equalsIgnoreCase(searchStr)) {
+                    proxies.addNode(proxy);
+                }
+            }
+        });
+
+        return proxies;
+    }
+
+    public static GameServers getGameServers(String pattern) {
+        boolean patterned = pattern.startsWith("@");
+        GameServers gameServers = new GameServers();
+        String searchStr = patterned
+                ? pattern.substring(1, pattern.length())
+                : pattern;
+
+        CoreServer.get().getGameServers().forEach(gs -> {
+            if (patterned) {
+                if (gs.getName().startsWith(searchStr)) {
+                    gameServers.addNode(gs);
+                }
+            } else {
+                if (gs.getName().equalsIgnoreCase(searchStr)) {
+                    gameServers.addNode(gs);
+                }
+            }
+        });
+
+        return gameServers;
+    }
+
+}

@@ -1,6 +1,6 @@
 package org.kvlt.core.nodes;
 
-import org.kvlt.core.packets.PacketOld;
+import org.kvlt.core.protocol.Packet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,12 +14,12 @@ public class GameServers implements NodeContainer<GameServer>, Iterable<GameServ
     }
 
     @Override
-    public void send(PacketOld packet) {
+    public void send(Packet packet) {
         gameServers.forEach(node -> node.send(packet));
     }
 
     @Override
-    public void send(PacketOld... packets) {
+    public void send(Packet... packets) {
         gameServers.forEach(node -> node.send(packets));
     }
 

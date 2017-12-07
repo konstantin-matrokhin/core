@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.type.Core;
-import org.kvlt.core.protocol.Destination;
 import org.kvlt.core.protocol.Packet;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.utils.Log;
@@ -32,7 +31,7 @@ public class ServerConnectPacket extends Packet<Channel> {
     }
 
     @Override
-    public void send(Destination dest, String name) {
+    public void send() {
 
     }
 

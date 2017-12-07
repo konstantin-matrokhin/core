@@ -2,7 +2,6 @@ package org.kvlt.core.protocol.packets;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.protocol.Destination;
 import org.kvlt.core.protocol.Packet;
 import org.kvlt.core.protocol.PacketUtil;
 
@@ -22,7 +21,7 @@ public class NewTestPacket extends Packet<Channel> {
     }
 
     @Override
-    public void send(Destination dest, String name) {
+    public void send() {
 
     }
 

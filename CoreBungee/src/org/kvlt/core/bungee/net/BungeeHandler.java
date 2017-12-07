@@ -4,7 +4,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.protocol.Packet;
-import org.kvlt.core.protocol.packets.NewTestPacket;
 import org.kvlt.core.protocol.packets.ProxyConnectPacket;
 
 public class BungeeHandler extends SimpleChannelInboundHandler<Packet> {

@@ -2,6 +2,7 @@ package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import org.kvlt.core.utils.Finder;
 
 public abstract class Packet<T> {
 
@@ -11,14 +12,20 @@ public abstract class Packet<T> {
     public abstract void execute(T t);
     public abstract void readBytes(ByteBuf byteBuf);
     public abstract void writeBytes(ByteBuf byteBuf);
-    public abstract void send(Destination dest, String name);
-
-    public void send(Destination dest) {
-        send(dest, "@all");
-    }
+    public abstract void send();
 
     public void send(Channel channel) {
         channel.writeAndFlush(this, channel.voidPromise());
+    }
+
+    public void send(Destination dest, String nodeName) {
+        if (dest.equals(Destination.BUKKIT)) {
+            Finder.getGameServers(nodeName);
+        }
+    }
+
+    public void send(Destination dest) {
+
     }
 
     public void execute() {

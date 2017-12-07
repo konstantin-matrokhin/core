@@ -8,8 +8,8 @@ public abstract class CorePlugin {
     private PluginConfig config;
     private PluginData pluginData;
 
+    @SuppressWarnings("unused")
     private void init() {
-        this.pluginData = pluginData;
         config = new PluginConfig();
 
         boolean created = config.createFile(pluginData.getName(), "config.json");

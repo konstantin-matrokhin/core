@@ -26,7 +26,7 @@ import org.kvlt.core.plugins.PluginManager;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.Log;
 
-public class CoreServer {
+public final class CoreServer {
 
     private static CoreServer instance;
 
@@ -109,7 +109,7 @@ public class CoreServer {
         }
     }
 
-    public void stop() {
+    public final void stop() {
         Log.$("Остановка сервера...");
         ClientManager.getClients().disconnect();
         pluginManager.getPlugins().forEach(CorePlugin::onDisable);
@@ -118,7 +118,7 @@ public class CoreServer {
             future.channel().close().sync();
             Log.$("Сервер выключен.");
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -154,7 +154,4 @@ public class CoreServer {
         return eventManager;
     }
 
-    public void setEventManager(EventManager eventManager) {
-        this.eventManager = eventManager;
-    }
 }

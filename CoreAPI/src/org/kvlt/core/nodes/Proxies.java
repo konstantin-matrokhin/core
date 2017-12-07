@@ -1,6 +1,6 @@
 package org.kvlt.core.nodes;
 
-import org.kvlt.core.packets.PacketOld;
+import org.kvlt.core.protocol.Packet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,12 +18,12 @@ public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
     }
 
     @Override
-    public void send(PacketOld packet) {
+    public void send(Packet packet) {
         proxies.forEach(proxy -> proxy.send(packet));
     }
 
     @Override
-    public void send(PacketOld... packets) {
+    public void send(Packet... packets) {
         proxies.forEach(proxy -> proxy.send(packets));
     }
 

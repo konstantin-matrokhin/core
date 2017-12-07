@@ -1,6 +1,6 @@
 package org.kvlt.core.nodes;
 
-import org.kvlt.core.packets.PacketOld;
+import org.kvlt.core.protocol.Packet;
 
 /**
  * Служит для хранения группы узлов
@@ -8,8 +8,8 @@ import org.kvlt.core.packets.PacketOld;
  */
 public interface NodeContainer<T extends Node> {
 
-    void send(PacketOld packet);
-    void send(PacketOld... packets);
+    void send(Packet packet);
+    void send(Packet... packets);
     void addNode(T t);
     void removeNode(T t);
     T getNode(String node);
