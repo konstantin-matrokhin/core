@@ -6,11 +6,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.*;
 import org.kvlt.core.bukkit.events.AuthEventsListener;
 import org.kvlt.core.bukkit.net.ConnectionManager;
+import org.kvlt.core.protocol.PacketResolver;
 
 public class CorePlugin extends JavaPlugin {
 
     private static CorePlugin instance;
     private Channel server;
+    private PacketResolver packetResolver;
 
     @Override
     public void onEnable() {
@@ -18,6 +20,8 @@ public class CorePlugin extends JavaPlugin {
         synchronized (this) {
             instance = this;
         }
+
+        packetResolver = new PacketResolver();
 
         Bukkit.getPluginManager().registerEvents(new AuthEventsListener(), this);
 
@@ -49,5 +53,8 @@ public class CorePlugin extends JavaPlugin {
         return instance;
     }
 
+    public PacketResolver getPacketResolver() {
+        return packetResolver;
+    }
 }
 

@@ -19,6 +19,6 @@ public class CorePingPacket implements PacketOut {
 
     @Override
     public int getId() {
-        return 1;
+        return 2;
     }
 }

@@ -4,6 +4,7 @@ import io.netty.channel.Channel;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.net.ConnectionManager;
 import org.kvlt.core.protocol.PacketOut;
+import org.kvlt.core.protocol.PacketResolver;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class CoreBungee extends Plugin {
     private Channel server;
     private ConfigManager configManager;
     private ControlManager controlManager;
+    private PacketResolver packetResolver;
 
     @Override
     public void onEnable() {
@@ -30,6 +32,8 @@ public class CoreBungee extends Plugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        packetResolver = new PacketResolver();
 
         controlManager = new ControlManager(this);
         controlManager.registerCoreCommands();
@@ -67,4 +71,7 @@ public class CoreBungee extends Plugin {
         return configManager;
     }
 
+    public PacketResolver getPacketResolver() {
+        return packetResolver;
+    }
 }

@@ -22,6 +22,7 @@ import org.kvlt.core.plugins.CorePlugin;
 import org.kvlt.core.plugins.EventManager;
 import org.kvlt.core.plugins.PluginLoader;
 import org.kvlt.core.plugins.PluginManager;
+import org.kvlt.core.protocol.PacketResolver;
 import org.kvlt.core.utils.Log;
 
 public final class CoreServer {
@@ -36,6 +37,7 @@ public final class CoreServer {
     private PluginLoader pluginLoader;
     private PluginManager pluginManager;
     private EventManager eventManager;
+    private PacketResolver packetResolver;
 
     private CoreServer() {}
 
@@ -48,6 +50,7 @@ public final class CoreServer {
         eventManager = new EventManager();
         pluginManager = new PluginManager();
         pluginLoader = new PluginLoader(pluginManager);
+        packetResolver = new PacketResolver();
 
         pluginLoader.loadPlugins();
         runServer();
@@ -139,6 +142,10 @@ public final class CoreServer {
 
     public EventManager getEventManager() {
         return eventManager;
+    }
+
+    public PacketResolver getPacketResolver() {
+        return packetResolver;
     }
 
 }
