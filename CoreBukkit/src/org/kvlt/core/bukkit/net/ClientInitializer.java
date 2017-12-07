@@ -4,6 +4,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.bukkit.CorePlugin;
+import org.kvlt.core.bukkit.packets.ConnectPacket;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;
 import org.kvlt.core.protocol.PacketResolver;
@@ -15,7 +16,7 @@ public class ClientInitializer extends ChannelInitializer<SocketChannel> {
     static {
         resolver = CorePlugin.get().getPacketResolver();
 
-        //resolver.registerPacket(meme((();
+
     }
 
     @Override

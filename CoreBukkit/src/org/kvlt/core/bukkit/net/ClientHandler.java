@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.bukkit.Bukkit;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
+import org.kvlt.core.bukkit.packets.ConnectPacket;
 import org.kvlt.core.protocol.PacketIn;
 
 public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
@@ -18,7 +19,8 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
         int port = Bukkit.getPort();
         String ip = Bukkit.getIp();
 
-        //ctx.writeAndFlush(new ServerConnectPacket(name, port), ctx.voidPromise());
+        ConnectPacket packet = new ConnectPacket(ConfigManager.getClientName());
+        packet.send();
     }
 
     @Override

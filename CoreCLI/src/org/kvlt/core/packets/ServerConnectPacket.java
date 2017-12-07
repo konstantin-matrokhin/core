@@ -2,11 +2,11 @@ package org.kvlt.core.packets;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.nodes.Proxy;
+import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 
-public class ProxyConnectPacket implements PacketIn {
+public class ServerConnectPacket implements PacketIn {
 
     private String name;
 
@@ -17,17 +17,13 @@ public class ProxyConnectPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        System.out.println(String.format("Прокси-севрер присоединен (%s)", name));
-        new Proxy(name, channel);
+        System.out.println(String.format("Сервер присоединен (%s)", name));
+        new GameServer(name, channel);
     }
 
     @Override
     public int getId() {
-        return 1;
-    }
-
-    public String getName() {
-        return name;
+        return 3;
     }
 
 }
