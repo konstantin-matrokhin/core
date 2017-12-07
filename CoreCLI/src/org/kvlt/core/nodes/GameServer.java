@@ -10,14 +10,16 @@ public class GameServer implements Node {
 
     private Channel channel;
     private String name;
+    private short port;
     private PlayerList<OnlinePlayer> onlinePlayers;
 
     {
         onlinePlayers = new PlayerList<>();
     }
 
-    public GameServer(String name, Channel channel) {
+    public GameServer(String name, short port, Channel channel) {
         this.name = name;
+        this.port = port;
         this.channel = channel;
         CoreServer.get().getGameServers().addNode(this);
     }
@@ -58,4 +60,11 @@ public class GameServer implements Node {
         return onlinePlayers;
     }
 
+    public short getPort() {
+        return port;
+    }
+
+    public void setPort(short port) {
+        this.port = port;
+    }
 }

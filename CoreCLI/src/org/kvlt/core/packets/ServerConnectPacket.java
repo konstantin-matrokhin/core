@@ -9,16 +9,18 @@ import org.kvlt.core.protocol.PacketUtil;
 public class ServerConnectPacket implements PacketIn {
 
     private String name;
+    private short port;
 
     @Override
     public void read(ByteBuf in) {
         name = PacketUtil.readString(in);
+        port = in.readShort();
     }
 
     @Override
     public void execute(Channel channel) {
         System.out.println(String.format("Сервер присоединен (%s)", name));
-        new GameServer(name, channel);
+        new GameServer(name, port, channel);
     }
 
     @Override

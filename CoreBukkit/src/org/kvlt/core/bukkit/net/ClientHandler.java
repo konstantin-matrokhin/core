@@ -16,10 +16,9 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
         CorePlugin.get().setServer(ctx.channel());
 
         String name = ConfigManager.getClientName();
-        int port = Bukkit.getPort();
-        String ip = Bukkit.getIp();
+        short port = (short) Bukkit.getPort();
 
-        ConnectPacket packet = new ConnectPacket(ConfigManager.getClientName());
+        ConnectPacket packet = new ConnectPacket(ConfigManager.getClientName(), port);
         packet.send();
     }
 
