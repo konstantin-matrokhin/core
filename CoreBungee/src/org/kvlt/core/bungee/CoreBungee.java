@@ -3,6 +3,7 @@ package org.kvlt.core.bungee;
 import io.netty.channel.Channel;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.net.ConnectionManager;
+import org.kvlt.core.bungee.packets.DisconnectPacket;
 import org.kvlt.core.protocol.PacketOut;
 import org.kvlt.core.protocol.PacketResolver;
 
@@ -42,6 +43,12 @@ public class CoreBungee extends Plugin {
         serverName = new File(getDataFolder().getParentFile().getAbsolutePath()).getParentFile().getName();
 
         ConnectionManager.get().startClient();
+    }
+
+    @Override
+    public void onDisable() {
+        DisconnectPacket dp = new DisconnectPacket();
+        dp.send();
     }
 
     public static synchronized CoreBungee get() {

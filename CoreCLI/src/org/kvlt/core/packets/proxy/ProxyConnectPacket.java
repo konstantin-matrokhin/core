@@ -1,31 +1,33 @@
-package org.kvlt.core.packets;
+package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.nodes.GameServer;
+import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 
-public class ServerConnectPacket implements PacketIn {
+public class ProxyConnectPacket implements PacketIn {
 
     private String name;
-    private short port;
 
     @Override
     public void read(ByteBuf in) {
         name = PacketUtil.readString(in);
-        port = in.readShort();
     }
 
     @Override
     public void execute(Channel channel) {
-        System.out.println(String.format("Сервер присоединен (%s)", name));
-        new GameServer(name, port, channel);
+        System.out.println(String.format("Прокси-севрер присоединен (%s)", name));
+        new Proxy(name, channel);
     }
 
     @Override
     public int getId() {
-        return 3;
+        return 1;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
