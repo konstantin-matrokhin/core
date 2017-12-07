@@ -3,6 +3,7 @@ package org.kvlt.core.bungee.net;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import org.kvlt.core.bungee.packets.BungeePacketResolver;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;
 import org.kvlt.core.protocol.PacketResolver;

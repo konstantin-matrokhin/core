@@ -1,4 +1,4 @@
-package org.kvlt.core.bungee.net;
+package org.kvlt.core.bungee.packets;
 
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketResolver;

@@ -27,8 +27,4 @@ public class BungeeHandler extends SimpleChannelInboundHandler<PacketIn> {
         packetIn.execute(ctx.channel());
     }
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-    }
-
 }

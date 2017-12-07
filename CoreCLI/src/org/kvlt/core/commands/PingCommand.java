@@ -1,8 +1,5 @@
 package org.kvlt.core.commands;
 
-import org.kvlt.core.packets.CorePingPacket;
-import org.kvlt.core.packets.Destination;
-
 public class PingCommand extends Command {
 
     public PingCommand() {

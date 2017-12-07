@@ -67,8 +67,4 @@ public class CoreBungee extends Plugin {
         return configManager;
     }
 
-    public ControlManager getControlManager() {
-        return controlManager;
-    }
-
 }

@@ -3,7 +3,7 @@ package org.kvlt.core.bungee.utils;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 
-public class Log {
+public class BungeeLog {
 
     private static String PREFIX = ChatColor.AQUA + "[CORE]";
 

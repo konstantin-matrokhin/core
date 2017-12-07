@@ -10,8 +10,10 @@ public class ServersLoader {
 
     public static void loadServer(String name, String ip, int port) {
         InetSocketAddress address = new InetSocketAddress(ip, port);
+
         ServerInfo newServer = BungeeCord.getInstance()
                 .constructServerInfo(name, address, "", false);
+
         ProxyServer.getInstance().getServers().put(name, newServer);
     }
 

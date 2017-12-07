@@ -5,7 +5,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.events.PacketEvent;
-import org.kvlt.core.protocol.Packet;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.utils.Log;
 

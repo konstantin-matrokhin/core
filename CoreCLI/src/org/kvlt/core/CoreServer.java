@@ -14,7 +14,6 @@ import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.PlayerList;
-import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.net.ClientManager;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.GameServers;
@@ -29,7 +28,6 @@ public final class CoreServer {
 
     private static CoreServer instance;
 
-    private PlayerList<ServerPlayer> serverPlayers;
     private PlayerList<OnlinePlayer> onlinePlayers;
     private Proxies proxies;
     private GameServers gameServers;
@@ -42,20 +40,16 @@ public final class CoreServer {
     private CoreServer() {}
 
     void start() {
-
-        serverPlayers = new PlayerList<>();
         onlinePlayers = new PlayerList<>();
         proxies = new Proxies();
         gameServers = new GameServers();
         port = Integer.valueOf(Config.getCore("port"));
 
         eventManager = new EventManager();
-
         pluginManager = new PluginManager();
-
         pluginLoader = new PluginLoader(pluginManager);
-        pluginLoader.loadPlugins();
 
+        pluginLoader.loadPlugins();
         runServer();
     }
 
@@ -117,10 +111,6 @@ public final class CoreServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public PlayerList<ServerPlayer> getServerPlayers() {
-        return serverPlayers;
     }
 
     public PlayerList<OnlinePlayer> getOnlinePlayers() {
