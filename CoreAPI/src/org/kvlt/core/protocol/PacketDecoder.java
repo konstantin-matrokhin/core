@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class PacketDecoder extends ByteToMessageDecoder {
+public final class PacketDecoder extends ByteToMessageDecoder {
 
     private final int MIN_BYTES        = 8;
     private final int MAX_BYTES        = 128;

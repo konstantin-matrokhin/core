@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
-public class PacketEncoder extends MessageToByteEncoder<PacketOut> {
+public final class PacketEncoder extends MessageToByteEncoder<PacketOut> {
 
     private final int DATA_PART_INDEX  = 8;
     private final int SIZE_SHORT_INDEX = 6;
