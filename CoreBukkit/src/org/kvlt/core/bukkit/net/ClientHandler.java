@@ -23,7 +23,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, PacketIn packetIn) {
-        packetIn.execute();
+        packetIn.execute(ctx.channel());
     }
 
     @Override

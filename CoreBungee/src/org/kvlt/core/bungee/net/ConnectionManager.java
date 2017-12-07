@@ -9,7 +9,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.utils.Log;
-import org.kvlt.core.protocol.Packets;
 
 import java.util.concurrent.TimeUnit;
 

@@ -5,7 +5,6 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;
-import org.kvlt.core.protocol.PacketFramer;
 import org.kvlt.core.protocol.PacketResolver;
 
 public class ProxyInitializer extends ChannelInitializer<SocketChannel> {

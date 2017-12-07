@@ -13,8 +13,8 @@ public class PacketEncoder extends MessageToByteEncoder<PacketOut> {
     protected void encode(ChannelHandlerContext channelHandlerContext, PacketOut packetOut, ByteBuf byteBuf) {
         int id = packetOut.getId();
 
-        if (id <= 0) {
-            throw new IllegalArgumentException("id must be positive");
+        if (id <= 0 || id > Byte.MAX_VALUE) {
+            throw new IllegalArgumentException("id must be in range [1; 127]");
         }
 
         byteBuf.writeBytes(ProtocolCommons.PREFIX);

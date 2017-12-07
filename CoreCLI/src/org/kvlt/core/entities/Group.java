@@ -35,13 +35,6 @@ public enum Group {
                 .filter(g -> g.getLevel() == level)
                 .findFirst()
                 .orElse(Group.getGroup(0));
-
-//        for (Group group : groups.values()){
-//            if (group.getLevel() == level){
-//                return group;
-//            }
-//        }
-//        return Group.getGroup(0);
     }
 
 

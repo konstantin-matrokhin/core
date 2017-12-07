@@ -24,7 +24,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, PacketIn packetIn) {
-        packetIn.execute();
+        packetIn.execute(ctx.channel());
     }
 
     @Override

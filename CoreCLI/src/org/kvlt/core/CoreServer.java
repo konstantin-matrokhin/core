@@ -23,7 +23,6 @@ import org.kvlt.core.plugins.CorePlugin;
 import org.kvlt.core.plugins.EventManager;
 import org.kvlt.core.plugins.PluginLoader;
 import org.kvlt.core.plugins.PluginManager;
-import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.Log;
 
 public final class CoreServer {

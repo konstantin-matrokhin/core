@@ -1,7 +1,7 @@
 package org.kvlt.core.commands;
 
 import org.kvlt.core.packets.CorePingPacket;
-import org.kvlt.core.protocol.Destination;
+import org.kvlt.core.packets.Destination;
 
 public class PingCommand extends Command {
 
@@ -11,8 +11,8 @@ public class PingCommand extends Command {
 
     @Override
     protected boolean execute() {
-        CorePingPacket cpp = new CorePingPacket();
-        cpp.send(Destination.BUNGEE);
+//        CorePingPacket cpp = new CorePingPacket();
+//        cpp.send(Destination.BUNGEE);
         return true;
     }
 }
