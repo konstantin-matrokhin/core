@@ -8,6 +8,10 @@ public class Finder {
 
     public static Proxies getProxies(String pattern) {
         boolean patterned = pattern.startsWith("@");
+        boolean toAll = pattern.equalsIgnoreCase("@all");
+
+        if (toAll) return CoreServer.get().getProxies();
+
         Proxies proxies = new Proxies();
         String searchStr = patterned
                 ? pattern.substring(1, pattern.length())
@@ -30,6 +34,10 @@ public class Finder {
 
     public static GameServers getGameServers(String pattern) {
         boolean patterned = pattern.startsWith("@");
+        boolean toAll = pattern.equalsIgnoreCase("@all");
+
+        if (toAll) return CoreServer.get().getGameServers();
+
         GameServers gameServers = new GameServers();
         String searchStr = patterned
                 ? pattern.substring(1, pattern.length())

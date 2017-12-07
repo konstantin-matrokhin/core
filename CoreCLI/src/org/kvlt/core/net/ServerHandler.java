@@ -3,10 +3,13 @@ package org.kvlt.core.net;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.kvlt.core.CoreServer;
+import org.kvlt.core.events.PacketEvent;
 import org.kvlt.core.protocol.Packet;
+import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.utils.Log;
 
-public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
+public class ServerHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -26,12 +29,13 @@ public class ServerHandler extends SimpleChannelInboundHandler<Packet> {
         ClientManager.remove(ctx.channel());
     }
 
-    /**
-     * Выполняет, принимая контекст пакета
-     */
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, Packet packet) throws Exception {
-        packet.execute(ctx.channel());
+    public void channelRead0(ChannelHandlerContext ctx, PacketIn packetIn) {
+        Channel channel = ctx.channel();
+        PacketEvent event = new PacketEvent(packetIn, channel);
+
+        packetIn.execute();
+        CoreServer.get().getEventManager().invokeEvent(event);
     }
 
     @Override

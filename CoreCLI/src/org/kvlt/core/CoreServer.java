@@ -57,8 +57,6 @@ public final class CoreServer {
         pluginLoader = new PluginLoader(pluginManager);
         pluginLoader.loadPlugins();
 
-        Packets.registerCorePackets();
-
         runServer();
     }
 

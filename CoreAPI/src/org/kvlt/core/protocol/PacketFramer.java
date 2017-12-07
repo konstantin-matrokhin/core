@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+@Deprecated
 public class PacketFramer extends ByteToMessageCodec<Packet> {
 
     private final int MIN_BYTES        = 8;
@@ -40,7 +41,7 @@ public class PacketFramer extends ByteToMessageCodec<Packet> {
 
         byteBuf.writerIndex(DATA_PART_INDEX);
 
-        packet.writeBytes(byteBuf);
+        //packet.write(byteBuf);
 
         byteBuf.setShort(SIZE_SHORT_INDEX, (short) byteBuf.readableBytes());
     }
@@ -64,7 +65,7 @@ public class PacketFramer extends ByteToMessageCodec<Packet> {
 
                     Packet p = Packets.getById(id);
                     if (p != null && readable == length) {
-                        p.readBytes(byteBuf);
+                        //p.readBytes(byteBuf);
                         list.add(p);
                     } else {
                         throw new IOException("Invalid packet with [id = " + id + "]");

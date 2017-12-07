@@ -5,10 +5,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.bukkit.Bukkit;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.protocol.Packet;
-import org.kvlt.core.protocol.packets.ServerConnectPacket;
+import org.kvlt.core.protocol.PacketIn;
 
-public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
+public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -19,12 +18,12 @@ public class ClientHandler extends SimpleChannelInboundHandler<Packet> {
         int port = Bukkit.getPort();
         String ip = Bukkit.getIp();
 
-        ctx.writeAndFlush(new ServerConnectPacket(name, port), ctx.voidPromise());
+        //ctx.writeAndFlush(new ServerConnectPacket(name, port), ctx.voidPromise());
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, Packet packet) {
-        packet.execute(ctx.channel());
+    public void channelRead0(ChannelHandlerContext ctx, PacketIn packetIn) {
+        packetIn.execute();
     }
 
     @Override
