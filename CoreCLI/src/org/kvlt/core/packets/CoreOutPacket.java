@@ -6,7 +6,7 @@ import org.kvlt.core.nodes.NodeContainer;
 import org.kvlt.core.protocol.PacketOut;
 import org.kvlt.core.utils.Finder;
 
-public abstract class CoreOutPacket extends PacketOut {
+public abstract class CoreOutPacket implements PacketOut {
 
     public void send(Destination dest, String nodeName) {
         NodeContainer<? extends Node> node = null;

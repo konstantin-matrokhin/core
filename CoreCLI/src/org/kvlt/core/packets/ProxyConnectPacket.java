@@ -6,7 +6,7 @@ import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 
-public class ProxyConnectPacket extends PacketIn {
+public class ProxyConnectPacket implements PacketIn {
 
     private String name;
 

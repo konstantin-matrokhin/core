@@ -5,7 +5,7 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.protocol.PacketOut;
 import org.kvlt.core.protocol.PacketUtil;
 
-public class CorePingPacket extends PacketOut {
+public class CorePingPacket implements PacketOut {
 
     @Override
     public void write(ByteBuf out) {
