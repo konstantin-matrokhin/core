@@ -70,11 +70,6 @@ TestEvents.java
 public class TestEvents implements CoreListener {
 
     @CoreHandler
-    public void onLoad(TestEvent e) {
-        System.out.println("event loaded!");
-    }
-
-    @CoreHandler
     public void onProxy(ProxyConnectEvent event) {
         Proxy p = event.getProxy();
         System.out.println("Из плагина мы тут поняли, что " + p.getName() + " вошел))");
