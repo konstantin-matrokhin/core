@@ -8,6 +8,7 @@ import org.kvlt.core.packets.bukkit.ServerDisconnectPacket;
 import org.kvlt.core.packets.proxy.ProxyConnectPacket;
 import org.kvlt.core.packets.bukkit.ServerConnectPacket;
 import org.kvlt.core.packets.proxy.ProxyDisconnectPacket;
+import org.kvlt.core.packets.proxy.player.PlayerJoinPacket;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;
 import org.kvlt.core.protocol.PacketResolver;
@@ -23,6 +24,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new ServerConnectPacket());
         resolver.registerPacket(new ProxyDisconnectPacket());
         resolver.registerPacket(new ServerDisconnectPacket());
+        resolver.registerPacket(new PlayerJoinPacket());
     }
 
     @Override

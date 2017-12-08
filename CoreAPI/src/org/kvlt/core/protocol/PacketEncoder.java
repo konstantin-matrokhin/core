@@ -6,8 +6,8 @@ import io.netty.handler.codec.MessageToByteEncoder;
 
 public final class PacketEncoder extends MessageToByteEncoder<PacketOut> {
 
-    private final int DATA_PART_INDEX  = 8;
-    private final int SIZE_SHORT_INDEX = 6;
+    private final int DATA_PART_INDEX  = 0x8;
+    private final int SIZE_SHORT_INDEX = 0x6;
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, PacketOut packetOut, ByteBuf byteBuf) {

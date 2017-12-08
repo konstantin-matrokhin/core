@@ -13,38 +13,13 @@ import java.util.List;
 public class EventManager {
 
     private List<CoreListener> listeners;
+    private List<Method> allMethods;
 
     {
         listeners = new ArrayList<>();
     }
 
-    public void registerListener(CoreListener cl) {
-        listeners.add(cl);
-    }
-
-    public void invokeEvent(CoreEvent event) {
-        List<Method> allMethods = getHandlersMethods();
-
-        allMethods.forEach(method -> {
-            Parameter[] params = method.getParameters();
-
-            for (Parameter param : params) {
-                if (param.getType().equals(event.getClass())) {
-                    try{
-                        Object toInvoke = method.getDeclaringClass()
-                                .getDeclaredConstructor()
-                                .newInstance();
-
-                        method.invoke(toInvoke, event);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
-
-    public List<Method> getHandlersMethods() {
+    public void initializeExternalEvents() {
         List<Method> handlersMethods = new ArrayList<>();
         Class annotation = CoreHandler.class;
 
@@ -55,7 +30,30 @@ public class EventManager {
                     .filter(m -> m.isAnnotationPresent(annotation))
                     .forEach(m -> handlersMethods.add((Method) m));
         });
-        return handlersMethods;
+        allMethods = handlersMethods;
+    }
+
+    public void registerListener(CoreListener cl) {
+        listeners.add(cl);
+    }
+
+    public void invokeEvent(CoreEvent event) {
+        allMethods.forEach(method -> {
+            Parameter[] params = method.getParameters();
+
+            for (Parameter param : params) {
+                if (param.getType().equals(event.getClass())) {
+                    try{
+                        Object toInvoke = method.getDeclaringClass()
+                                .getDeclaredConstructor()
+                                .newInstance();
+                        method.invoke(toInvoke, event);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
 }

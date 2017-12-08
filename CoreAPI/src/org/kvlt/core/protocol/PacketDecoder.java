@@ -11,9 +11,9 @@ import java.util.List;
 
 public final class PacketDecoder extends ByteToMessageDecoder {
 
-    private final int MIN_BYTES        = 8;
-    private final int MAX_BYTES        = 128;
-    private final int MIN_PACKET_ID    = 1;
+    private final int MIN_BYTES        = 0x8;
+    private final int MAX_BYTES        = 0xffff; // 65535
+    private final int MIN_PACKET_ID    = 0x1;
 
     private PacketResolver packetResolver;
 

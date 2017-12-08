@@ -14,7 +14,7 @@ public abstract class ServerPlayer implements Serializable {
     private String name;
     private String password;
     private int group;
-    private UUID uuid;
+    private String uuid;
     private String lastIp;
     private String lastJoin;
     private GameServer lastServer;
@@ -68,11 +68,11 @@ public abstract class ServerPlayer implements Serializable {
         this.group = group;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

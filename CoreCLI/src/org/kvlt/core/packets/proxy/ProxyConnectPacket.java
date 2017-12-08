@@ -21,8 +21,7 @@ public class ProxyConnectPacket implements PacketIn {
     public void execute(Channel channel) {
         System.out.println(String.format("Прокси-севрер присоединен (%s)", name));
         Proxy p = new Proxy(name, channel);
-        ProxyConnectEvent event = new ProxyConnectEvent();
-        event.setProxy(p);
+        ProxyConnectEvent event = new ProxyConnectEvent(p);
 
         CoreServer.get().getEventManager().invokeEvent(event);
     }

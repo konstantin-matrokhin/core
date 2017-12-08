@@ -53,6 +53,8 @@ public final class CoreServer {
         packetResolver = new PacketResolver();
 
         pluginLoader.loadPlugins();
+        eventManager.initializeExternalEvents();
+
         runServer();
     }
 
