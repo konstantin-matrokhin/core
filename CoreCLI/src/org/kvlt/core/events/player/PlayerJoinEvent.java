@@ -1,6 +1,7 @@
-package org.kvlt.core.events;
+package org.kvlt.core.events.player;
 
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.nodes.Proxy;
 
 public class PlayerJoinEvent implements CoreEvent {

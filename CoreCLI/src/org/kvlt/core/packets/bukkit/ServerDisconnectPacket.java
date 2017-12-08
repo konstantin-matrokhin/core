@@ -3,7 +3,7 @@ package org.kvlt.core.packets.bukkit;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.events.ServerDisconnectEvent;
+import org.kvlt.core.events.bukkit.ServerDisconnectEvent;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;

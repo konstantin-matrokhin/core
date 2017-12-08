@@ -1,6 +1,7 @@
-package org.kvlt.core.events;
+package org.kvlt.core.events.network;
 
 import io.netty.channel.Channel;
+import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.protocol.PacketIn;
 
 public class PacketEvent implements CoreEvent {

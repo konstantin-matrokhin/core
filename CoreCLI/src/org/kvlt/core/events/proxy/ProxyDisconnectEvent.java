@@ -1,4 +1,4 @@
-package org.kvlt.core.events;
+package org.kvlt.core.events.proxy;
 
 import org.kvlt.core.nodes.Proxy;
 

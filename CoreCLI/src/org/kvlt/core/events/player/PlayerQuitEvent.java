@@ -1,4 +1,4 @@
-package org.kvlt.core.events;
+package org.kvlt.core.events.player;
 
 import org.kvlt.core.entities.OnlinePlayer;
 
