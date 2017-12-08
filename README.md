@@ -106,7 +106,7 @@ event.invoke();
 ```
 Обработка события
 ```java
-public class TestEvents implements CoreListener {=
+public class TestEvents implements CoreListener {
 
     @CoreHandler
     public void onJoin(PlayerJoinEvent event) {
