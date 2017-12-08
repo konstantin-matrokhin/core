@@ -116,6 +116,26 @@ public methodName(CoreEvent event) {
 CoreListener coreListener = new CoreListener();
 CoreServer.get().getEventManager().registerListener(coreListener);
 ```
+Регистрация команд
+```java
+CoreServer.get().getCommmandListener().register(new TestPluginCommand());
+```
+TestPluginCommandjava
+```java
+public class TestPluginCommand extends Command {
+
+    public TestPluginCommand() {
+        super("hi");
+    }
+
+    @Override
+    protected boolean execute() {
+        System.out.println("hello!");
+        return true;
+    }
+}
+
+```
 ### События
 * PacketEvent
 * ProxyConnectEvent
