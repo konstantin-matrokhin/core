@@ -9,6 +9,8 @@ public class PlayerJoinEvent implements CoreEvent {
     private OnlinePlayer player;
     private Proxy proxy;
 
+    public PlayerJoinEvent() {}
+
     public PlayerJoinEvent(OnlinePlayer player) {
         this.player = player;
         this.proxy = player.getCurrentProxy();

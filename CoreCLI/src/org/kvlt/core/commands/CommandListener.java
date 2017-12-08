@@ -8,11 +8,11 @@ import java.util.Scanner;
 public class CommandListener {
 
     private List<Command> commands;
+    private Scanner scanner;
 
     public CommandListener() {
         commands = new ArrayList<>();
-
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
 
         registerCommand(new WhoCommand());
         registerCommand(new BroadcastCommand());
@@ -21,6 +21,9 @@ public class CommandListener {
         registerCommand(new ReloadCommand());
         registerCommand(new PluginsCommand());
 
+    }
+
+    public void listen() {
         try {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -29,7 +32,6 @@ public class CommandListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void registerCommand(Command command) {

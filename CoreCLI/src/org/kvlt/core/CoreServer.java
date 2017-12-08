@@ -38,6 +38,7 @@ public final class CoreServer {
     private PluginManager pluginManager;
     private EventManager eventManager;
     private PacketResolver packetResolver;
+    private CommandListener commandListener;
 
     private CoreServer() {}
 
@@ -51,6 +52,7 @@ public final class CoreServer {
         pluginManager = new PluginManager();
         pluginLoader = new PluginLoader(pluginManager);
         packetResolver = new PacketResolver();
+        commandListener = new CommandListener();
 
         pluginLoader.loadPlugins();
         eventManager.initializeExternalEvents();
@@ -98,7 +100,7 @@ public final class CoreServer {
                 Log.$(result);
             });
 
-            new CommandListener();
+            commandListener.listen();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,4 +152,7 @@ public final class CoreServer {
         return packetResolver;
     }
 
+    public CommandListener getCommandListener() {
+        return commandListener;
+    }
 }

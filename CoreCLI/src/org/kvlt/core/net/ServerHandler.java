@@ -33,8 +33,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<PacketIn> {
         Channel channel = ctx.channel();
         PacketEvent event = new PacketEvent(packetIn, channel);
 
+        event.invoke();
         packetIn.execute(channel);
-        CoreServer.get().getEventManager().invokeEvent(event);
     }
 
     @Override

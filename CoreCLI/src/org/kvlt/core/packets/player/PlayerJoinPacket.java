@@ -35,7 +35,13 @@ public class PlayerJoinPacket implements PacketIn {
         op.setCurrentProxy(proxy);
 
         CoreServer.get().getOnlinePlayers().add(op);
-        CoreServer.get().getEventManager().invokeEvent(new PlayerJoinEvent(op));
+
+        System.out.println(String.format("Игрок %s подключился к прокси-серверу %s",
+                playerName,
+                proxyName));
+
+        PlayerJoinEvent pje = new PlayerJoinEvent(op);
+        pje.invoke();
     }
 
     @Override
