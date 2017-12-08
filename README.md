@@ -95,6 +95,13 @@ config.json
     "test": "random string"
 }
 ```
+Отправка пакета
+```java
+Packet p = new Packet();
+p.send(Channel channel);
+p.send(Destination destination);
+p.send(Destination destination, String nodeName);
+```
 ### События
 * PacketEvent
 * ProxyConnectEvent
