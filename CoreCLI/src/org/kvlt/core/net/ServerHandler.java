@@ -39,8 +39,10 @@ public class ServerHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        Log.$("Произошла ошибка с подключением: " + ctx.channel().remoteAddress());
-        cause.printStackTrace();
+        Log.err(String.format("Отсоединен %s  %s",
+                ctx.channel().remoteAddress(),
+                cause.getLocalizedMessage()));
+
         channelInactive(ctx);
     }
 
