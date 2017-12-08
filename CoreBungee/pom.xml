@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>CoreBungee</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <parent>
         <groupId>org.kvlt</groupId>
@@ -28,6 +28,15 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>CoreBungee</id>
+            <build>
+                <directory>C:\Users\remillary\Desktop\lc-proxy\plugins</directory>
+            </build>
+        </profile>
+    </profiles>
+
     <repositories>
         <repository>
             <id>bungeecord-repo</id>
@@ -35,30 +44,31 @@
         </repository>
     </repositories>
 
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>net.md-5</groupId>
+                <artifactId>bungeecord-api</artifactId>
+                <version>1.12-SNAPSHOT</version>
+                <type>jar</type>
+                <scope>provided</scope>
+            </dependency>
 
-        <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
-            <version>1.12-SNAPSHOT</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
+            <dependency>
+                <groupId>net.md-5</groupId>
+                <artifactId>bungeecord-api</artifactId>
+                <version>1.12-SNAPSHOT</version>
+                <type>javadoc</type>
+                <scope>provided</scope>
+            </dependency>
 
-        <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
-            <version>1.12-SNAPSHOT</version>
-            <type>javadoc</type>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.kvlt</groupId>
-            <artifactId>CoreAPI</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-    </dependencies>
+            <dependency>
+                <groupId>org.kvlt</groupId>
+                <artifactId>CoreAPI</artifactId>
+                <version>1.0</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
