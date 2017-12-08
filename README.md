@@ -46,7 +46,7 @@ PacketUtil.readString(ByteBuf byteBuf); // Чтение из ByteBuf
 ### API
 Пример простого плагина
 
-**TestPlugin.java**
+TestPlugin.java
 ```java
 public class TestPlugin extends CorePlugin {
 
