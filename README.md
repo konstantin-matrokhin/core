@@ -52,17 +52,16 @@ public class TestPlugin extends CorePlugin {
 
     @Override
     public void onEnable() {
-		System.out.println("Hello Plugin!");
-
+        System.out.println("Hello Plugin!");
         System.out.println(getConfig().get("test").getAsString());
 
         CoreServer.get().getEventManager().registerListener(new TestEvents());
-	}
+    }
 
     @Override
-	public void onDisable() {
-		System.out.println("bye bye!");
-	}
+    public void onDisable() {
+        System.out.println("bye bye!");
+    }
 
 }
 ```
