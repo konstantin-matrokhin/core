@@ -106,9 +106,18 @@ event.invoke();
 ```
 Обработка события
 ```java
-@CoreHandler
-public methodName(CoreEvent event) {
-    //Обработка
+public class TestEvents implements CoreListener {=
+
+    @CoreHandler
+    public void onJoin(PlayerJoinEvent event) {
+        OnlinePlayer p = event.getPlayer();
+        Proxy proxy = event.getProxy();
+
+        System.out.println(String.format("%s вошел на прокси %s",
+                p.getName(),
+                proxy.getName()));
+    }
+
 }
 ```
 Регистрация обработчика событий
