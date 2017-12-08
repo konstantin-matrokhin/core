@@ -109,6 +109,18 @@ CoreEvent event = CoreEvent(params...);
 ...
 event.invoke();
 ```
+Обработка события
+```java
+@CoreHandler
+public methodName(CoreEvent event) {
+    //Обработка
+}
+```
+Регистрация обработчика событий
+```java
+CoreListener coreListener = new CoreListener();
+CoreServer.get().getEventManager().registerListener(coreListener);
+```
 ### События
 * PacketEvent
 * ProxyConnectEvent
