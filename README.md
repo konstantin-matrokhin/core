@@ -1,69 +1,102 @@
 # LastCraft Core
 Проект состоит из 4 частей:
-* **CoreAPI** - API для взаимодействия
-* **CoreCLI** - приложение для управления серверами для командной строки
+* **CoreAPI** - API для взаимодействия (интерфейсы, декодер/энкодер)
+* **CoreCLI** - Сервер, который всем управляет
 * **CoreBukkit** - плагин для Spigot/Bukkit
 * **CoreBungee** - плагин для BungeeCord
 ## CoreAPI
-Содержит все необходимые общие для всех проектов элементы.
-Отсюда и задается поведение пакетов, пришедших на один из серверов (__CLI, Bukkit, Proxy__).
+Содержит все необходимые общие для всех проектов элементы. Например,
+интерфейсы Packet, PacketIn, PacketOut, а также кодеки для работы
+с пакетами.
 ## CoreCLI
+### Запуск
 Для запуска используйте
 ```bash
 java -cp CoreCLI.jar;libs/* org.kvlt.core.CoreCLI
 ```
-А проще всего запустить скрипт из директории Compiled
-### Хочу подергать API (CoreCLI)
+А проще всего запустить скрипт из директории Compiled.
+Скоро я подключу Maven и всё будет ок.
+### Протокол
+Пакеты кодируются в поток байтов такого вида:
+
+|5 байт|1 байт|2 байта|N байт (< 65535)|
+|:---:|:---:|:---:|:---:|
+|**>core**|**ID** (0 < id < 128)|Размер пакета|Данные|
+|byte[]|byte|short|ByteBuf|
+
+_>core_ - префикс для всех пакетов для идентификации
+
+_id_ - номер пакета. Интерфейс **Packet** содержит метод _getId()_, который и должен возвращать ID пакета.
+
+_Размер пакета_ - автоматически вычисляется по окончанию записи данных в пакет
+___
+Все данные записываются записываются и читаются в одинаковом порядке. Строки
+кодируются/декодируются с помощью методов
 ```java
-// Онлайн-игрок
-OnlinePlayer onlinePlayer = CoreServer.get().getOnlinePlayers().get("Steve");
-
-// Любой игрок
-ServerPlayer serverPlayer = PlayerDB.loadServerPlayer(name);
-
-// Получить все игровые серверы
-GameServer gameServer = CoreServer.get().getGameServers();
-
-//Получить прокси по имени
-Proxy proxy = CoreServer.get().getProxies().get("swlobby-1");
-
-//Отправка пакета
-BroadcastPacket bp = new BroadbastPacket("Hello World");
-
-CorePlugin.get().sendPacket(bp); //из баккита
-CoreBungee.get().sendPacket(bp); //из прокси
-
-GameServer#send(Packet p); //в баккит
-Proxy#send(Packet p); //в прокси
-
-// Получить данных из секции конфига
-String bukkitSectionValue = Config.getServer("key");
-
-/**
-* Создать пакет можно унаследовав класс Packet и имплементировав методы из него
-*/
-public class TestPacket extends Packet {
-    @Override
-    protected void onCore() {
-        //Если пакет пришел на кор
-    }
-
-    @Override
-    protected void onServer() {
-        //... и если на баккит
-        
-        /* !!Используйте только методы из CoreAPI/CoreBungee/CoreBukkit!! */
-        /* Использование методов из Spigot или BungeeCord напрямую может вызвать ошибку */
-    }
-
-    @Override
-    protected void onProxy() {
-        //... и если на прокси
-    }
-}
-
+PacketUtil.writeString(String str, ByteBuf byteBuf); // Запись в ByteBuf
+PacketUtil.readString(ByteBuf byteBuf); // Чтение из ByteBuf
 ```
-#### Что сделано:
+Для записи строки в ByteBuf сначала пишется длина строки в *short* (2 байта),
+потом байты строки в **UTF-8**.
+
+Соответственно для чтения сначала считываются 2 байта для определения
+длины строки, а потом уже читается строка с определенной длиной.
+
+Всё остальное читается в ByteBuf через встроенные методы.
+### API
+Пример простого плагина
+
+**TestPlugin.java**
+```java
+public class TestPlugin extends CorePlugin {
+
+    @Override
+    public void onEnable() {
+		System.out.println("Hello Plugin!");
+
+        System.out.println(getConfig().get("test").getAsString());
+
+        CoreServer.get().getEventManager().registerListener(new TestEvents());
+	}
+
+    @Override
+	public void onDisable() {
+		System.out.println("bye bye!");
+	}
+
+}
+```
+TestEvents.java
+```java
+public class TestEvents implements CoreListener {
+
+    @CoreHandler
+    public void onLoad(TestEvent e) {
+        System.out.println("event loaded!");
+    }
+
+    @CoreHandler
+    public void onProxy(ProxyConnectEvent event) {
+        Proxy p = event.getProxy();
+        System.out.println("Из плагина мы тут поняли, что " + p.getName() + " вошел))");
+    }
+
+}
+```
+plugin.json
+```json
+{
+	"name": "TestPlugin",
+	"main": "org.kvlt.testplugin.TestPlugin"
+}
+```
+config.json
+```json
+{
+    "test": "random string"
+}
+```
+##### Что сделано:
 * Ничего
 * Отправка пакетов между серверами
 * Соответственно их получение и обработка
@@ -125,17 +158,8 @@ public class TestPacket extends Packet {
     <artifactId>gson</artifactId>
     <version>2.8.2</version>
 </dependency>
-
-<!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
-<dependency>
-    <groupId>org.codehaus.groovy</groupId>
-    <artifactId>groovy-all</artifactId>
-    <version>2.4.11</version>
-</dependency>
 ```
-Используйте Maven только для загрузки зависимостей, для компиляции он не подходит из-за циклических зависимостей.
 ## CoreBukkit
-Работает, гоняет пакеты, хорошо всё там. Трогать лишний раз не надо, только пакеты отсылать, да события обрабатывать.
-Отрефакторить надо бы.
+Работает, гоняет пакеты, хорошо всё там.
 ## CoreBungee
 Что-то делает. Работает и ладно.
