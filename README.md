@@ -97,10 +97,17 @@ config.json
 ```
 Отправка пакета
 ```java
-Packet p = new Packet();
+Packet p = new Packet(params...);
+...
 p.send(Channel channel);
 p.send(Destination destination);
 p.send(Destination destination, String nodeName);
+```
+Вызов события
+```java
+CoreEvent event = CoreEvent(params...);
+...
+event.invoke();
 ```
 ### События
 * PacketEvent
