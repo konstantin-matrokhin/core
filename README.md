@@ -85,8 +85,8 @@ public class TestEvents implements CoreListener {
 plugin.json
 ```json
 {
-	"name": "TestPlugin",
-	"main": "org.kvlt.testplugin.TestPlugin"
+    "name": "TestPlugin",
+    "main": "org.kvlt.testplugin.TestPlugin"
 }
 ```
 config.json
@@ -95,6 +95,15 @@ config.json
     "test": "random string"
 }
 ```
+### События
+* PacketEvent
+* ProxyConnectEvent
+* ProxyDisconnectEvent
+* ServerConnectEvent
+* ServerDisconnectEvent
+* PlayerJoinEvent
+* PlayerQuitEvent
+* PlayerSwitchServerEvent
 ##### Что сделано:
 * Ничего
 * Отправка пакетов между серверами
