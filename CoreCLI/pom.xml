@@ -26,7 +26,7 @@
             <groupId>org.kvlt</groupId>
             <artifactId>CoreAPI</artifactId>
             <version>1.0</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->

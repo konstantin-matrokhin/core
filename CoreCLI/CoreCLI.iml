@@ -12,7 +12,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="netty-all-4.1.16.Final" level="project" />
     <orderEntry type="library" name="mysql-connector-java-6.0.6" level="project" />
-    <orderEntry type="module" module-name="CoreAPI" scope="PROVIDED" />
+    <orderEntry type="module" module-name="CoreAPI" />
     <orderEntry type="library" name="Maven: io.netty:netty-all:4.1.16.Final" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:6.0.6" level="project" />
     <orderEntry type="library" name="Maven: org.sql2o:sql2o:1.6.0-RC3" level="project" />
