@@ -31,7 +31,11 @@ public class EventManager {
             for (Parameter param : params) {
                 if (param.getType().equals(event.getClass())) {
                     try{
-                        method.invoke(method.getDeclaringClass().newInstance(), event.getClass().newInstance());
+                        Object toInvoke = method.getDeclaringClass()
+                                .getDeclaredConstructor()
+                                .newInstance();
+
+                        method.invoke(toInvoke, event);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

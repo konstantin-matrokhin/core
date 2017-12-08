@@ -105,8 +105,6 @@ public class PlayerDB {
         executor.execute(r);
     }
 
-
-    //TODO MAKE IN THREAD!
     public static ServerPlayer loadServerPlayer(String name) {
         ServerPlayer player = new SimplePlayer(name);
         int id = loadId(name);
