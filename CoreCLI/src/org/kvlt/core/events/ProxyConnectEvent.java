@@ -16,8 +16,4 @@ public class ProxyConnectEvent implements CoreEvent {
         return proxy;
     }
 
-    public void setProxy(Proxy proxy) {
-        this.proxy = proxy;
-    }
-
 }

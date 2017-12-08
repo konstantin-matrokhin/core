@@ -2,7 +2,6 @@ package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
 import org.kvlt.core.events.ProxyConnectEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
@@ -21,9 +20,8 @@ public class ProxyConnectPacket implements PacketIn {
     public void execute(Channel channel) {
         System.out.println(String.format("Прокси-севрер присоединен (%s)", name));
         Proxy p = new Proxy(name, channel);
-        ProxyConnectEvent event = new ProxyConnectEvent(p);
-
-        CoreServer.get().getEventManager().invokeEvent(event);
+        ProxyConnectEvent pce = new ProxyConnectEvent(p);
+        pce.invoke();
     }
 
     @Override

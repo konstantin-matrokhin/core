@@ -47,6 +47,7 @@ public class CoreBungee extends Plugin {
 
     @Override
     public void onDisable() {
+        ConnectionManager.get().setDisconnecting(true);
         DisconnectPacket dp = new DisconnectPacket();
         dp.send();
     }

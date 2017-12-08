@@ -24,6 +24,7 @@ public class ConnectionManager {
     private String host;
     private int port;
     private volatile boolean isConnected;
+    private volatile boolean disconnecting;
 
     private ConnectionManager() {}
 
@@ -49,12 +50,14 @@ public class ConnectionManager {
 
     public void connect() {
         if (isConnected) return;
+        if (disconnecting) return;
 
         try {
             ChannelFuture channelFuture = bootstrap.connect(host, port);
             channel = channelFuture.channel();
             channelFuture.addListener((ChannelFuture future) -> {
                 isConnected = future.isSuccess();
+
                 if (!isConnected) {
                     BungeeLog.$("Нет связи с главным сервером. Переподключение через 3 сек..");
                     future.channel().eventLoop().schedule(this::connect, RECONNECT_DELAY, TimeUnit.SECONDS);
@@ -91,6 +94,14 @@ public class ConnectionManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isDisconnecting() {
+        return disconnecting;
+    }
+
+    public void setDisconnecting(boolean disconnecting) {
+        this.disconnecting = disconnecting;
     }
 }
 
