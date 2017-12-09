@@ -1,0 +1,4 @@
+name: CoreBungee
+main: org.kvlt.core.bungee.CoreBungee
+version: 0.1
+author: kvlt
