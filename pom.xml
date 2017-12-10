@@ -21,6 +21,7 @@
         <module>CoreBukkit</module>
         <module>CoreBungee</module>
         <module>CoreCLI</module>
+        <module>staffchat</module>
     </modules>
 
     <!--<build>-->
