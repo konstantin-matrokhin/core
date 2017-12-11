@@ -3,7 +3,6 @@ package org.kvlt.core.db;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.entities.SimplePlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.models.*;
 import org.sql2o.Connection;
@@ -106,7 +105,7 @@ public class PlayerDB {
     }
 
     public static ServerPlayer loadServerPlayer(String name) {
-        ServerPlayer player = new SimplePlayer(name);
+        ServerPlayer player = new ServerPlayer(name);
         int id = loadId(name);
 
         player.setId(id);

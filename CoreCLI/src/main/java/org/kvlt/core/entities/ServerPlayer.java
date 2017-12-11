@@ -3,11 +3,16 @@ package org.kvlt.core.entities;
 import org.kvlt.core.nodes.GameServer;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-/**
- * Абстрактный класс, от которого наследуются все классы, хранящие данные об игроке
- */
-public abstract class ServerPlayer implements Serializable {
+public class ServerPlayer implements Serializable {
+
+    public ServerPlayer(String name) {
+        this.name = name;
+    }
+
+    public ServerPlayer() {
+    }
 
     private int id;
     private String name;
@@ -29,6 +34,19 @@ public abstract class ServerPlayer implements Serializable {
     private long playedLastTime;
     private long playedTotal;
     private boolean isRegistered;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ServerPlayer)) return false;
+        ServerPlayer that = (ServerPlayer) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 
     @Override
     public String toString() {

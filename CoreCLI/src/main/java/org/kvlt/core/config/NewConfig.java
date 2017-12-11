@@ -14,7 +14,7 @@ public class NewConfig {
     private final Yaml yaml;
     private final File file;
 
-    private Map<String, Object> config;
+    private Map<String, String> config;
 
     public NewConfig(String path) {
         yaml = new Yaml();
@@ -28,7 +28,6 @@ public class NewConfig {
 
             try (InputStream is = new FileInputStream(file)) {
                 config = yaml.load(is);
-                config.forEach((k, v) -> System.out.println(k + "|" + v));
             } catch (YAMLException e) {
                 e.printStackTrace();
             }
