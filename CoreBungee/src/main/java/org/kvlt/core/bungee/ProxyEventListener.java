@@ -1,13 +1,11 @@
 package org.kvlt.core.bungee;
 
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import org.kvlt.core.bungee.packets.PlayerChatPacket;
-import org.kvlt.core.bungee.packets.PlayerJoinPacket;
-import org.kvlt.core.bungee.packets.PlayerQuitPacket;
-import org.kvlt.core.bungee.packets.SwitchServerPacket;
+import org.kvlt.core.bungee.packets.*;
 
 public class ProxyEventListener implements Listener {
 
@@ -31,8 +29,16 @@ public class ProxyEventListener implements Listener {
         String message = event.getMessage();
         boolean isCommand = event.isCommand();
 
-        PlayerChatPacket pcp = new PlayerChatPacket(sender.getName(), message, isCommand);
-        pcp.send();
+//        PlayerChatPacket pcp = new PlayerChatPacket(sender.getName(), message, isCommand);
+//        pcp.send();
+    }
+
+    @EventHandler
+    public void onLogin(LoginEvent event) {
+        ProxiedPlayer p = ProxyServer.getInstance().getPlayer(event.getConnection().getUniqueId());
+
+        LoginPacket lp = new LoginPacket(p.getName());
+        lp.send();
     }
 
     @EventHandler

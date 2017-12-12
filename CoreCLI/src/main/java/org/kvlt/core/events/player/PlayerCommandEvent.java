@@ -7,6 +7,7 @@ public class PlayerCommandEvent implements CoreEvent {
 
     private OnlinePlayer player;
     private String command;
+    private String[] args;
 
     public PlayerCommandEvent() { }
 
