@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.packets.protocol.BungeeOutPacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class DisconnectPacket extends BungeeOutPacket {
 
@@ -14,7 +15,7 @@ public class DisconnectPacket extends BungeeOutPacket {
 
     @Override
     public int getId() {
-        return 4;
+        return Packets.PROXY_DISCONNECT_PACKET;
     }
 
 }

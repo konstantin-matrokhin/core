@@ -7,6 +7,7 @@ import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.events.player.PlayerQuitEvent;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class PlayerQuitPacket implements PacketIn {
 
@@ -28,6 +29,6 @@ public class PlayerQuitPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return 7;
+        return Packets.PLAYER_QUIT_PACKET;
     }
 }

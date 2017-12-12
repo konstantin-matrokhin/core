@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.packets.protocol.BungeeOutPacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class PlayerJoinPacket extends BungeeOutPacket {
 
@@ -27,7 +28,7 @@ public class PlayerJoinPacket extends BungeeOutPacket {
 
     @Override
     public int getId() {
-        return 6;
+        return Packets.PLAYER_JOIN_PACKET;
     }
 
 }

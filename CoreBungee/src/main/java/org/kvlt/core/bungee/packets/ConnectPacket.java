@@ -3,6 +3,7 @@ package org.kvlt.core.bungee.packets;
 import io.netty.buffer.ByteBuf;
 import org.kvlt.core.bungee.packets.protocol.BungeeOutPacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class ConnectPacket extends BungeeOutPacket {
 
@@ -19,6 +20,6 @@ public class ConnectPacket extends BungeeOutPacket {
 
     @Override
     public int getId() {
-        return 1;
+        return Packets.PROXY_CONNECT_PACKET;
     }
 }

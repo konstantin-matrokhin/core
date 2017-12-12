@@ -2,6 +2,7 @@ package org.kvlt.core.bukkit.packets;
 
 import io.netty.buffer.ByteBuf;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class ConnectPacket extends BukkitPacketOut {
 
@@ -21,7 +22,7 @@ public class ConnectPacket extends BukkitPacketOut {
 
     @Override
     public int getId() {
-        return 3;
+        return Packets.SERVER_CONNECT_PACKET;
     }
 
 }

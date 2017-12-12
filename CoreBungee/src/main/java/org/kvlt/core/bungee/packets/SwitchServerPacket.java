@@ -3,6 +3,7 @@ package org.kvlt.core.bungee.packets;
 import io.netty.buffer.ByteBuf;
 import org.kvlt.core.bungee.packets.protocol.BungeeOutPacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class SwitchServerPacket extends BungeeOutPacket {
 
@@ -22,6 +23,6 @@ public class SwitchServerPacket extends BungeeOutPacket {
 
     @Override
     public int getId() {
-        return 2;
+        return Packets.PLAYER_SWITCH_SERVER_PACKET;
     }
 }

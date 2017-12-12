@@ -3,6 +3,7 @@ package org.kvlt.core.bungee.packets;
 import io.netty.buffer.ByteBuf;
 import org.kvlt.core.bungee.packets.protocol.BungeeOutPacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class PlayerQuitPacket extends BungeeOutPacket {
 
@@ -19,6 +20,6 @@ public class PlayerQuitPacket extends BungeeOutPacket {
 
     @Override
     public int getId() {
-        return 7;
+        return Packets.PLAYER_QUIT_PACKET;
     }
 }

@@ -7,6 +7,7 @@ import org.kvlt.core.events.proxy.ProxyDisconnectEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class ProxyDisconnectPacket implements PacketIn {
 
@@ -29,6 +30,6 @@ public class ProxyDisconnectPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return 4;
+        return Packets.PROXY_DISCONNECT_PACKET;
     }
 }

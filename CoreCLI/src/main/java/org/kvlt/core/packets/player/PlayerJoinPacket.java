@@ -8,6 +8,7 @@ import org.kvlt.core.events.player.PlayerJoinEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class PlayerJoinPacket implements PacketIn {
 
@@ -46,6 +47,6 @@ public class PlayerJoinPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return 6;
+        return Packets.PLAYER_JOIN_PACKET;
     }
 }

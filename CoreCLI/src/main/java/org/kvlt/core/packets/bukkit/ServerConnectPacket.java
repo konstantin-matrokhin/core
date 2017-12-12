@@ -6,6 +6,7 @@ import org.kvlt.core.events.bukkit.ServerConnectEvent;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class ServerConnectPacket implements PacketIn {
 
@@ -28,7 +29,7 @@ public class ServerConnectPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return 3;
+        return Packets.SERVER_CONNECT_PACKET;
     }
 
 }

@@ -7,6 +7,7 @@ import org.kvlt.core.events.bukkit.ServerDisconnectEvent;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class ServerDisconnectPacket implements PacketIn {
 
@@ -29,6 +30,6 @@ public class ServerDisconnectPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return 5;
+        return Packets.SERVER_DISCONNECT_PACKET;
     }
 }

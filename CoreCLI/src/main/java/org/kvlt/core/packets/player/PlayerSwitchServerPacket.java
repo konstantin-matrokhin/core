@@ -8,6 +8,7 @@ import org.kvlt.core.events.player.PlayerSwitchServerEvent;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 public class PlayerSwitchServerPacket implements PacketIn {
 
@@ -34,6 +35,6 @@ public class PlayerSwitchServerPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return 2;
+        return Packets.PLAYER_SWITCH_SERVER_PACKET;
     }
 }

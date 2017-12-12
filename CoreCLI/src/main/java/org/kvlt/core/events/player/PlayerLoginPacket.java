@@ -1,27 +1,28 @@
-package org.kvlt.core.bungee.packets;
+package org.kvlt.core.events.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 
-@Deprecated
-public class PingPacket implements PacketIn {
+public class PlayerLoginPacket implements PacketIn {
 
-    private String result;
+    private String playerName;
+    private String proxyName;
 
     @Override
     public void read(ByteBuf in) {
-        result = PacketUtil.readString(in);
+        playerName = PacketUtil.readString(in);
+        proxyName = PacketUtil.readString(in);
     }
 
     @Override
     public void execute(Channel channel) {
-        System.out.println(result);
+        
     }
 
     @Override
     public int getId() {
-        return 2;
+        return 9;
     }
 }
