@@ -7,8 +7,6 @@ public class ServerConnectEvent implements CoreEvent {
 
     private GameServer server;
 
-    public ServerConnectEvent() {}
-
     public ServerConnectEvent(GameServer server) {
         this.server = server;
     }

@@ -7,8 +7,6 @@ public class PlayerChatEvent extends PlayerEvent {
 
     private String message;
 
-    public PlayerChatEvent() {}
-
     public PlayerChatEvent(OnlinePlayer player, String message) {
         setPlayer(player);
         this.message = message;

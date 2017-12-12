@@ -8,8 +8,6 @@ public class PlayerJoinEvent extends PlayerEvent {
 
     private Proxy proxy;
 
-    public PlayerJoinEvent() {}
-
     public PlayerJoinEvent(OnlinePlayer player) {
         setPlayer(player);
         this.proxy = player.getCurrentProxy();

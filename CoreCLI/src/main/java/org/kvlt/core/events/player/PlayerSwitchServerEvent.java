@@ -8,8 +8,6 @@ public class PlayerSwitchServerEvent extends PlayerEvent {
 
     private GameServer to;
 
-    public PlayerSwitchServerEvent() {}
-
     public PlayerSwitchServerEvent(OnlinePlayer player, GameServer to) {
         setPlayer(player);
         this.to = to;

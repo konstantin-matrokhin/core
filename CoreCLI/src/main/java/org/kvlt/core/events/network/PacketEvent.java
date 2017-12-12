@@ -10,8 +10,6 @@ public class PacketEvent implements CoreEvent {
     private PacketIn packet;
     private Channel channel;
 
-    public PacketEvent() {}
-
     public PacketEvent(PacketIn packetIn, Channel channel) {
         this.id = packetIn.getId();
         this.packet = packetIn;

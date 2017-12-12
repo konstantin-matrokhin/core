@@ -7,8 +7,6 @@ public class PlayerCommandEvent extends PlayerEvent {
 
     private String command;
 
-    public PlayerCommandEvent() { }
-
     public PlayerCommandEvent(OnlinePlayer player, String command) {
         setPlayer(player);
         this.command = command;
