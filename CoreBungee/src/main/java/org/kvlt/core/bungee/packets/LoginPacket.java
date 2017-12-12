@@ -4,8 +4,8 @@ import io.netty.buffer.ByteBuf;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.packets.protocol.PlayerPacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
-@Deprecated
 public class LoginPacket extends PlayerPacket {
 
     public LoginPacket(String playerName) {
@@ -20,6 +20,6 @@ public class LoginPacket extends PlayerPacket {
 
     @Override
     public int getId() {
-        return 9;
+        return Packets.PLAYER_LOGIN_PACKET;
     }
 }

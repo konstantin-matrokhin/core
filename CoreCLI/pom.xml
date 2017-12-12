@@ -81,6 +81,14 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>DartaPlayer</groupId>
+            <artifactId>net.lastcraft</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../build/lib/DartaPlayer.jar</systemPath>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>
             <groupId>org.yaml</groupId>
