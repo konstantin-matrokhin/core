@@ -4,20 +4,15 @@ import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.nodes.Proxy;
 
-public class PlayerJoinEvent implements CoreEvent {
+public class PlayerJoinEvent extends PlayerEvent {
 
-    private OnlinePlayer player;
     private Proxy proxy;
 
     public PlayerJoinEvent() {}
 
     public PlayerJoinEvent(OnlinePlayer player) {
-        this.player = player;
+        setPlayer(player);
         this.proxy = player.getCurrentProxy();
-    }
-
-    public OnlinePlayer getPlayer() {
-        return player;
     }
 
     public Proxy getProxy() {

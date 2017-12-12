@@ -3,20 +3,15 @@ package org.kvlt.core.events.player;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.events.CoreEvent;
 
-public class PlayerChatEvent implements CoreEvent {
+public class PlayerChatEvent extends PlayerEvent {
 
-    private OnlinePlayer player;
     private String message;
 
     public PlayerChatEvent() {}
 
     public PlayerChatEvent(OnlinePlayer player, String message) {
-        this.player = player;
+        setPlayer(player);
         this.message = message;
-    }
-
-    public OnlinePlayer getPlayer() {
-        return player;
     }
 
     public String getMessage() {

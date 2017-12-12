@@ -4,20 +4,15 @@ import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.nodes.GameServer;
 
-public class PlayerSwitchServerEvent implements CoreEvent {
+public class PlayerSwitchServerEvent extends PlayerEvent {
 
-    private OnlinePlayer player;
     private GameServer to;
 
     public PlayerSwitchServerEvent() {}
 
     public PlayerSwitchServerEvent(OnlinePlayer player, GameServer to) {
-        this.player = player;
+        setPlayer(player);
         this.to = to;
-    }
-
-    public OnlinePlayer getPlayer() {
-        return player;
     }
 
     public GameServer getTo() {
