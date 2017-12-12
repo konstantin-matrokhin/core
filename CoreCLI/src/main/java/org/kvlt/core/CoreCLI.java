@@ -10,8 +10,8 @@ public class CoreCLI {
 
     public static void main(String[] args) {
         Config.init();
-        CoreDAO.start();
-        new NewConfig("test.yml").load();
+        //CoreDAO.start();
+        //new NewConfig("test.yml").load();
         CoreServer.get().start();
     }
 

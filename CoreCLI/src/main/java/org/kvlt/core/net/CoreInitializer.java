@@ -6,6 +6,7 @@ import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.packets.bukkit.ServerConnectPacket;
 import org.kvlt.core.packets.bukkit.ServerDisconnectPacket;
+import org.kvlt.core.packets.player.PlayerChatPacket;
 import org.kvlt.core.packets.player.PlayerJoinPacket;
 import org.kvlt.core.packets.player.PlayerQuitPacket;
 import org.kvlt.core.packets.player.PlayerSwitchServerPacket;
@@ -29,6 +30,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new PlayerJoinPacket());
         resolver.registerPacket(new PlayerQuitPacket());
         resolver.registerPacket(new PlayerSwitchServerPacket());
+        resolver.registerPacket(new PlayerChatPacket());
     }
 
     @Override

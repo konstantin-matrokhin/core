@@ -1,6 +1,7 @@
 package org.kvlt.core.bungee.packets;
 
 import io.netty.buffer.ByteBuf;
+import org.kvlt.core.bungee.packets.protocol.BungeeOutPacket;
 import org.kvlt.core.protocol.PacketUtil;
 
 public class PlayerQuitPacket extends BungeeOutPacket {

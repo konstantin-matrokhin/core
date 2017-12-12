@@ -1,11 +1,10 @@
 package org.kvlt.core.bungee;
 
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.PlayerDisconnectEvent;
-import net.md_5.bungee.api.event.PostLoginEvent;
-import net.md_5.bungee.api.event.ServerSwitchEvent;
+import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import org.kvlt.core.bungee.packets.PlayerChatPacket;
 import org.kvlt.core.bungee.packets.PlayerJoinPacket;
 import org.kvlt.core.bungee.packets.PlayerQuitPacket;
 import org.kvlt.core.bungee.packets.SwitchServerPacket;
@@ -22,6 +21,18 @@ public class ProxyEventListener implements Listener {
 
         PlayerJoinPacket playerJoinPacket = new PlayerJoinPacket(name, ip, uuid);
         playerJoinPacket.send();
+    }
+
+    @EventHandler
+    public void onChat(ChatEvent event) {
+        if (!(event.getSender() instanceof ProxiedPlayer)) return;
+
+        ProxiedPlayer sender = (ProxiedPlayer) event.getSender();
+        String message = event.getMessage();
+        boolean isCommand = event.isCommand();
+
+        PlayerChatPacket pcp = new PlayerChatPacket(sender.getName(), message, isCommand);
+        pcp.send();
     }
 
     @EventHandler

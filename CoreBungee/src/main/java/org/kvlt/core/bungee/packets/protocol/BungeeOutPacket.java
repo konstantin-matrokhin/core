@@ -1,4 +1,4 @@
-package org.kvlt.core.bungee.packets;
+package org.kvlt.core.bungee.packets.protocol;
 
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.protocol.PacketOut;
