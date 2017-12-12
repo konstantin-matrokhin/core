@@ -1,4 +1,4 @@
-package org.kvlt.core.packets.bukkit;
+package org.kvlt.core.protocol.packets.bukkit;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;

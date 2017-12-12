@@ -1,16 +1,19 @@
-package org.kvlt.core.packets.player;
+package org.kvlt.core.protocol.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerJoinEvent;
+import org.kvlt.core.events.player.PlayerLoginEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.protocol.PlayerPacket;
 
-public class PlayerJoinPacket implements PacketIn {
+public class PlayerLoginPacket implements PacketIn {
 
     private String playerName;
     private String proxyName;
@@ -27,26 +30,19 @@ public class PlayerJoinPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        OnlinePlayer op = new OnlinePlayer(playerName);
+        ServerPlayer op = new ServerPlayer(playerName);
         Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);
-        if (proxy == null) return;
-
-        op.setIp(ip);
-        op.setUuid(uuid);
-        op.setCurrentProxy(proxy);
-
-        CoreServer.get().getOnlinePlayers().add(op);
 
         System.out.println(String.format("Игрок %s подключился к прокси-серверу %s",
                 playerName,
                 proxyName));
 
-        PlayerJoinEvent pje = new PlayerJoinEvent(op);
-        pje.invoke();
+        PlayerLoginEvent ple = new PlayerLoginEvent(op, proxy);
+        ple.invoke();
     }
 
     @Override
     public int getId() {
-        return Packets.PLAYER_JOIN_PACKET;
+        return Packets.PLAYER_LOGIN_PACKET;
     }
 }

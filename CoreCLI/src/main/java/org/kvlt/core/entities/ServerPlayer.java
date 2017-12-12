@@ -1,11 +1,12 @@
 package org.kvlt.core.entities;
 
 import org.kvlt.core.nodes.GameServer;
+import org.kvlt.core.protocol.packets.player.KickPacket;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class ServerPlayer implements Serializable {
+public class ServerPlayer implements Kickable {
 
     public ServerPlayer(String name) {
         this.name = name;
@@ -34,6 +35,10 @@ public class ServerPlayer implements Serializable {
     private long playedLastTime;
     private long playedTotal;
     private boolean isRegistered;
+
+    public void kick(String reason) {
+        new KickPacket(this.name, reason).send();
+    }
 
     @Override
     public boolean equals(Object o) {

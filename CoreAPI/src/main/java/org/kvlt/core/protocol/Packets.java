@@ -14,5 +14,6 @@ public class Packets {
     public static final int PLAYER_CHAT_PACKET = 9;
     public static final int PLAYER_AUTH_PACKET = 10;
     public static final int PLAYER_REG_PACKET = 11;
+    public static final int PLAYER_KICK_PACKET = 12;
 
 }

@@ -1,17 +1,17 @@
 package org.kvlt.core.events.player;
 
-import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.CoreEvent;
 
 public abstract class PlayerEvent implements CoreEvent {
 
-    private OnlinePlayer player;
+    private ServerPlayer player;
 
-    public OnlinePlayer getPlayer() {
+    public ServerPlayer getPlayer() {
         return player;
     }
 
-    protected void setPlayer(OnlinePlayer player) {
+    protected void setPlayer(ServerPlayer player) {
         this.player = player;
     }
 }

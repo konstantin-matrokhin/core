@@ -7,4 +7,5 @@ public class ProxyDisconnectEvent extends ProxyConnectEvent {
     public ProxyDisconnectEvent(Proxy proxy) {
         super(proxy);
     }
+
 }
