@@ -26,4 +26,5 @@ public class MotdPacket implements PacketIn {
     public int getId() {
         return PROXY_MOTD_PACKET;
     }
-
+
+}
