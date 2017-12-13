@@ -1,4 +1,4 @@
-package org.kvlt.core.protocol.packets.proxy;
+package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;

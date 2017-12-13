@@ -1,4 +1,4 @@
-package org.kvlt.core.protocol.packets;
+package org.kvlt.core.packets;
 
 public enum Destination {
 

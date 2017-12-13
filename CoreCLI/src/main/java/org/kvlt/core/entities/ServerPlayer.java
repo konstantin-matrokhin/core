@@ -1,9 +1,8 @@
 package org.kvlt.core.entities;
 
 import org.kvlt.core.nodes.GameServer;
-import org.kvlt.core.protocol.packets.player.KickPacket;
+import org.kvlt.core.packets.player.KickPacket;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 public class ServerPlayer implements Kickable {

@@ -1,4 +1,4 @@
-package org.kvlt.core.protocol.packets.player;
+package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;

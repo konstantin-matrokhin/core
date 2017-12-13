@@ -1,10 +1,10 @@
-package org.kvlt.core.protocol.packets.player;
+package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
+import org.kvlt.core.packets.CorePacketOut;
+import org.kvlt.core.packets.Destination;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
-import org.kvlt.core.protocol.packets.CorePacketOut;
-import org.kvlt.core.protocol.packets.Destination;
 
 public class KickPacket extends CorePacketOut {
 

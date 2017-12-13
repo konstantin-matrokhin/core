@@ -1,4 +1,4 @@
-package org.kvlt.core.protocol.packets;
+package org.kvlt.core.packets;
 
 import io.netty.channel.Channel;
 import org.kvlt.core.nodes.Node;

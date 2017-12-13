@@ -1,4 +1,4 @@
-package org.kvlt.core.protocol.packets.player;
+package org.kvlt.core.packets.player;
 
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
