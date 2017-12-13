@@ -16,4 +16,5 @@ public class PlayerSwitchServerEvent extends PlayerEvent {
     public GameServer getTo() {
         return to;
     }
+
 }

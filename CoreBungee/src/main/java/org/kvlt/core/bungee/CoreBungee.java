@@ -16,8 +16,8 @@ public class CoreBungee extends Plugin {
     private String serverName;
     private Channel server;
     private ConfigManager configManager;
-    private ControlManager controlManager;
     private PacketResolver packetResolver;
+    private ControlManager controlManager;
 
     @Override
     public void onEnable() {
@@ -54,6 +54,10 @@ public class CoreBungee extends Plugin {
 
     public static synchronized CoreBungee get() {
         return instance;
+    }
+
+    public ControlManager getControlManager() {
+        return controlManager;
     }
 
     public String getServerName() {
