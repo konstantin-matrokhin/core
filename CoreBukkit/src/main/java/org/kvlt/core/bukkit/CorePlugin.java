@@ -23,7 +23,7 @@ public class CorePlugin extends JavaPlugin {
 
         packetResolver = new PacketResolver();
 
-        Bukkit.getPluginManager().registerEvents(new AuthEventsListener(), this);
+        //Bukkit.getPluginManager().registerEvents(new AuthEventsListener(), this);
 
         getCommand("alert").setExecutor(new AlertCommand());
         getCommand("salert").setExecutor(new ServerAlertCommand());

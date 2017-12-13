@@ -1,7 +1,8 @@
-package org.kvlt.core.protocol;
+package org.kvlt.core.protocol.packets.player;
 
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.protocol.PacketIn;
 
 public abstract class PlayerPacket implements PacketIn {
 

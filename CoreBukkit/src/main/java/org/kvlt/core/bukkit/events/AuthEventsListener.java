@@ -9,6 +9,7 @@ import org.kvlt.core.bukkit.datastorage.LoggedPlayers;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class AuthEventsListener implements Listener {
 
     static final String LOGIN_PLEASE = "Пожалуйста, введите пароль или зарегистрируйтесь";
