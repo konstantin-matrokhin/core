@@ -14,6 +14,7 @@ import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.PlayerList;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.net.ClientManager;
 import org.kvlt.core.net.CoreInitializer;
 import org.kvlt.core.nodes.GameServers;
@@ -30,6 +31,7 @@ public final class CoreServer {
     private static CoreServer instance;
 
     private PlayerList<OnlinePlayer> onlinePlayers;
+    private PlayerList<ServerPlayer> unloggedPlayers;
     private Proxies proxies;
     private GameServers gameServers;
     private ChannelFuture future;
@@ -44,6 +46,7 @@ public final class CoreServer {
 
     void start() {
         onlinePlayers = new PlayerList<>();
+        unloggedPlayers = new PlayerList<>();
         proxies = new Proxies();
         gameServers = new GameServers();
         port = Integer.valueOf(Config.getCore("port"));
@@ -154,5 +157,9 @@ public final class CoreServer {
 
     public CommandListener getCommandListener() {
         return commandListener;
+    }
+
+    public PlayerList<ServerPlayer> getUnloggedPlayers() {
+        return unloggedPlayers;
     }
 }

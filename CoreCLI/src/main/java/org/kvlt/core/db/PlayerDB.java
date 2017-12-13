@@ -48,10 +48,10 @@ public class PlayerDB {
         executor.execute(r);
     }
 
-    public static void register(OnlinePlayer player, String password) {
+    public static void register(ServerPlayer player, String password) {
         Runnable r = () -> {
             int id = player.getId();
-            String ip = player.getIp();
+            String ip = "127.0.0.1"; // TODO : FIX !!!
             long now = System.currentTimeMillis();
 
             String registerSql = "UPDATE authentication SET\n" +
@@ -72,7 +72,7 @@ public class PlayerDB {
         executor.execute(r);
     }
 
-    public static boolean correctPassword(OnlinePlayer op, String password) {
+    public static boolean correctPassword(ServerPlayer op, String password) {
         return op.getPassword() != null && op.getPassword().equals(password);
     }
 
@@ -114,7 +114,7 @@ public class PlayerDB {
         return player;
     }
 
-    private static void createPlayerModel(OnlinePlayer player) {
+    private static void createPlayerModel(ServerPlayer player) {
         String playerName = player.getName();
         String insertIdSql = "INSERT INTO identifier (player_name) VALUES (:name) ON DUPLICATE KEY UPDATE id=id";
 

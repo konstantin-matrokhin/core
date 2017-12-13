@@ -28,6 +28,8 @@ public class PlayerLoginPacket implements PacketIn {
     @Override
     public void execute(Channel channel) {
         ServerPlayer op = new ServerPlayer(playerName);
+        CoreServer.get().getUnloggedPlayers().add(op);
+
         Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);
 
         System.out.println(String.format("Игрок %s подключился к прокси-серверу %s",
