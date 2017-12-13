@@ -3,6 +3,7 @@ package org.kvlt.core.packets.player;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerLoginEvent;
 import org.kvlt.core.nodes.Proxy;
@@ -28,6 +29,7 @@ public class PlayerLoginPacket implements PacketIn {
     @Override
     public void execute(Channel channel) {
         ServerPlayer op = new ServerPlayer(playerName);
+        PlayerDB.loadPlayer(op);
         CoreServer.get().getUnloggedPlayers().add(op);
 
         Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);

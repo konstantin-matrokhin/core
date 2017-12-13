@@ -87,7 +87,7 @@ public class PlayerDB {
         return id;
     }
 
-    public static void loadOnlinePlayer(OnlinePlayer player) {
+    public static void loadPlayer(ServerPlayer player) {
         Runnable r = () -> {
             int id = loadId(player.getName());
 
@@ -97,8 +97,6 @@ public class PlayerDB {
                 player.setId(id);
                 loadPlayerModel(player);
             }
-
-            PlayedTimeCounter.start(player);
         };
 
         executor.execute(r);
