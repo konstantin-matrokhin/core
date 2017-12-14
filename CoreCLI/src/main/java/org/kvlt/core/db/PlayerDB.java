@@ -157,6 +157,7 @@ public class PlayerDB {
 
         AuthModel authModel = loadModel(AuthModel.class, new AuthParams(), conn, id);
         JoinInfoModel joinInfoModel = loadModel(JoinInfoModel.class, new JoinInfoParams(), conn, id);
+        InfractionsModel infractionsModel = loadModel(InfractionsModel.class, new InfractionsParams(), conn, id);
 
         if (authModel != null && authModel.getPassword() != null) {
             player.setRegistered(true);
@@ -165,6 +166,8 @@ public class PlayerDB {
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());
+
+        //todo
     }
 
     private static <T extends Model> T loadModel(Class<T> fetchClass, ModelParams modelParams, Connection conn, int id) {
