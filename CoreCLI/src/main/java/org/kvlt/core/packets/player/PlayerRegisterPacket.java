@@ -30,8 +30,6 @@ public class PlayerRegisterPacket extends PlayerPacket {
         unloggedPlayer = CoreServer.get().getUnloggedPlayers().get(name);
         if (unloggedPlayer == null) return;
 
-        Log.$(getClass().getSimpleName());
-
         String response;
         String dbPassword = unloggedPlayer.getPassword();
 

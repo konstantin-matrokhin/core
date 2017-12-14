@@ -21,18 +21,6 @@ public class ProxyEventListener implements Listener {
     }
 
     @EventHandler
-    public void onChat(ChatEvent event) {
-        if (!(event.getSender() instanceof ProxiedPlayer)) return;
-
-        ProxiedPlayer sender = (ProxiedPlayer) event.getSender();
-        String message = event.getMessage();
-        boolean isCommand = event.isCommand();
-
-//        PlayerChatPacket pcp = new PlayerChatPacket(sender.getName(), message, isCommand);
-//        pcp.send();
-    }
-
-    @EventHandler
     public void onLogin(LoginEvent event) {
         PendingConnection c = event.getConnection();
 

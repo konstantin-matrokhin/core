@@ -24,8 +24,6 @@ public class PlayerJoinPacket extends PlayerPacket {
         unloggedPlayer = CoreServer.get().getUnloggedPlayers().get(name);
         if (unloggedPlayer == null) return;
 
-        Log.$(getClass().getSimpleName());
-
         PlayerJoinEvent pje = new PlayerJoinEvent(unloggedPlayer);
         pje.invoke();
     }

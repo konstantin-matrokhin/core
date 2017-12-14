@@ -33,8 +33,6 @@ public class PlayerLoginPacket implements PacketIn {
         PlayerDB.loadPlayer(op);
         CoreServer.get().getUnloggedPlayers().add(op);
 
-        Log.$(getClass().getSimpleName());
-
         Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);
 
         System.out.println(String.format("Игрок %s подключился к прокси-серверу %s",
