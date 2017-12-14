@@ -29,8 +29,8 @@ public class ConnectionManager {
     private ConnectionManager() {}
 
     public void startClient() {
-        host = CoreBungee.get().getConfigManager().getConfig().getString("host");
-        port = CoreBungee.get().getConfigManager().getConfig().getInt("port");
+        host = CoreBungee.get().getConfig().getString("core.host");
+        port = CoreBungee.get().getConfig().getInt("core.port");
         eventLoopGroup = new NioEventLoopGroup();
 
         try {

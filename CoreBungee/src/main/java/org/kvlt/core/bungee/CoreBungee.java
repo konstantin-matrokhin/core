@@ -2,6 +2,7 @@ package org.kvlt.core.bungee;
 
 import io.netty.channel.Channel;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.config.Configuration;
 import org.kvlt.core.bungee.net.ConnectionManager;
 import org.kvlt.core.bungee.packets.DisconnectPacket;
 import org.kvlt.core.protocol.PacketOut;
@@ -15,7 +16,7 @@ public class CoreBungee extends Plugin {
     private static CoreBungee instance;
     private String serverName;
     private Channel server;
-    private ConfigManager configManager;
+    private Configuration config;
     private PacketResolver packetResolver;
     private ControlManager controlManager;
 
@@ -25,7 +26,8 @@ public class CoreBungee extends Plugin {
             instance = this;
         }
 
-        configManager = new ConfigManager(this);
+        ConfigManager configManager = new ConfigManager(this);
+        config = configManager.getConfig();
 
         try {
             configManager.initConfig();
@@ -41,6 +43,14 @@ public class CoreBungee extends Plugin {
         controlManager.registerCoreEvents();
 
         serverName = new File(getDataFolder().getParentFile().getAbsolutePath()).getParentFile().getName();
+
+        String host = config.getString("db.host");
+        String port = (String) config.get("db.port");
+        String username = config.getString("db.username");
+        String password= config.getString("db.password");
+        String db = config.getString("db.db");
+
+        CoreDB.get().connect(host, port, username, password, db);
 
         ConnectionManager.get().startClient();
     }
@@ -79,11 +89,12 @@ public class CoreBungee extends Plugin {
         this.server = server;
     }
 
-    public ConfigManager getConfigManager() {
-        return configManager;
-    }
-
     public PacketResolver getPacketResolver() {
         return packetResolver;
     }
+
+    public Configuration getConfig() {
+        return config;
+    }
+
 }
