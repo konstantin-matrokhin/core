@@ -54,6 +54,9 @@ public class PlayerDB {
             String ip = "127.0.0.1"; // TODO : FIX !!!
             long now = System.currentTimeMillis();
 
+            player.setPassword(password);
+            player.setRegistered(true);
+
             String registerSql = "UPDATE authentication SET\n" +
                     "password = :pass,\n" +
                     "registration_ip = :ip,\n" +

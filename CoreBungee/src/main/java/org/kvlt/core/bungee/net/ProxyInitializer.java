@@ -5,6 +5,7 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.packets.KickPacket;
+import org.kvlt.core.bungee.packets.MessagePacket;
 import org.kvlt.core.bungee.packets.MotdPacket;
 import org.kvlt.core.bungee.packets.PingPacket;
 import org.kvlt.core.protocol.PacketDecoder;
@@ -20,6 +21,7 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
 
         resolver.registerPacket(new KickPacket());
         resolver.registerPacket(new MotdPacket());
+        resolver.registerPacket(new MessagePacket());
     }
 
     @Override

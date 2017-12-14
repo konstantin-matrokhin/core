@@ -42,7 +42,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<PacketIn> {
                 ctx.channel().remoteAddress(),
                 cause.getLocalizedMessage()));
 
-        channelInactive(ctx);
+        cause.printStackTrace();
     }
 
 }

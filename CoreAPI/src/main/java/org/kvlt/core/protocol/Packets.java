@@ -18,4 +18,6 @@ public class Packets {
     public static final int PLAYER_REG_PACKET = 11;
     public static final int PLAYER_KICK_PACKET = 12;
 
+    public static final int MESSAGE_PACKET = 14;
+
 }

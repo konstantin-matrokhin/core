@@ -10,6 +10,7 @@ import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.Log;
 
 public class PlayerLoginPacket implements PacketIn {
 
@@ -31,6 +32,8 @@ public class PlayerLoginPacket implements PacketIn {
         ServerPlayer op = new ServerPlayer(playerName);
         PlayerDB.loadPlayer(op);
         CoreServer.get().getUnloggedPlayers().add(op);
+
+        Log.$(getClass().getSimpleName());
 
         Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);
 

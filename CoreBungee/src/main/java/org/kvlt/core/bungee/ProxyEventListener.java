@@ -1,6 +1,7 @@
 package org.kvlt.core.bungee;
 
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.Listener;
@@ -14,10 +15,8 @@ public class ProxyEventListener implements Listener {
         ProxiedPlayer p = event.getPlayer();
 
         String name = p.getName();
-        String ip = p.getAddress().getHostString();
-        String uuid = p.getUniqueId().toString();
 
-        PlayerJoinPacket playerJoinPacket = new PlayerJoinPacket(name, ip, uuid);
+        PlayerJoinPacket playerJoinPacket = new PlayerJoinPacket(name);
         playerJoinPacket.send();
     }
 
@@ -35,9 +34,9 @@ public class ProxyEventListener implements Listener {
 
     @EventHandler
     public void onLogin(LoginEvent event) {
-        ProxiedPlayer p = ProxyServer.getInstance().getPlayer(event.getConnection().getUniqueId());
+        PendingConnection c = event.getConnection();
 
-        LoginPacket lp = new LoginPacket(p.getName());
+        LoginPacket lp = new LoginPacket(c.getName(), c.getAddress().getHostString(), c.getUniqueId().toString());
         lp.send();
     }
 

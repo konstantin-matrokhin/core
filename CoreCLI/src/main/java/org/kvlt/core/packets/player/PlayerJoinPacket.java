@@ -7,6 +7,7 @@ import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerJoinEvent;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.Log;
 
 public class PlayerJoinPacket extends PlayerPacket {
 
@@ -22,6 +23,8 @@ public class PlayerJoinPacket extends PlayerPacket {
     public void execute(Channel channel) {
         unloggedPlayer = CoreServer.get().getUnloggedPlayers().get(name);
         if (unloggedPlayer == null) return;
+
+        Log.$(getClass().getSimpleName());
 
         PlayerJoinEvent pje = new PlayerJoinEvent(unloggedPlayer);
         pje.invoke();
