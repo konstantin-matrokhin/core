@@ -15,31 +15,16 @@ import org.kvlt.core.utils.Log;
 public class PlayerLoginPacket implements PacketIn {
 
     private String playerName;
-    private String proxyName;
-    private String ip;
-    private String uuid;
-
     @Override
     public void read(ByteBuf in) {
         playerName = PacketUtil.readString(in);
-        proxyName = PacketUtil.readString(in);
-        ip = PacketUtil.readString(in);
-        uuid = PacketUtil.readString(in);
     }
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer op = new ServerPlayer(playerName);
-        PlayerDB.loadPlayer(op);
-        CoreServer.get().getUnloggedPlayers().add(op);
+        ServerPlayer op = CoreServer.get().getUnloggedPlayers().get(playerName);
 
-        Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);
-
-        System.out.println(String.format("Игрок %s подключился к прокси-серверу %s",
-                playerName,
-                proxyName));
-
-        PlayerLoginEvent ple = new PlayerLoginEvent(op, proxy);
+        PlayerLoginEvent ple = new PlayerLoginEvent(op);
         ple.invoke();
     }
 
