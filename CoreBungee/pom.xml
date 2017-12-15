@@ -33,6 +33,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <outputDirectory>C:\Users\remillary\Desktop\lc-proxy\plugins\</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -43,6 +44,7 @@
                         </goals>
                     </execution>
                 </executions>
+
             </plugin>
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>

@@ -45,7 +45,7 @@ public class PlayerDB {
                     .addParameter("server", player.getCurrentServer().getName())
                     .executeUpdate();
         };
-        executor.execute(r);
+        executor.submit(r);
     }
 
     public static void register(ServerPlayer player, String password) {
@@ -72,7 +72,7 @@ public class PlayerDB {
                     .executeUpdate();
         };
 
-        executor.execute(r);
+        executor.submit(r);
     }
 
     public static boolean correctPassword(ServerPlayer op, String password) {
@@ -102,7 +102,7 @@ public class PlayerDB {
             }
         };
 
-        executor.execute(r);
+        executor.submit(r);
     }
 
     public static ServerPlayer loadServerPlayer(String name) {
@@ -140,7 +140,7 @@ public class PlayerDB {
         };
 
         for (String q : queries) {
-            executor.execute(() -> {
+            executor.submit(() -> {
                 CoreDAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
             });
         }

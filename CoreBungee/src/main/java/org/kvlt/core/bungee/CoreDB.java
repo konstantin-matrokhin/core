@@ -16,11 +16,12 @@ public class CoreDB {
     private String password;
     private String db;
 
-    public void connect(String host, String port, String usename, String password, String db) {
+    public void connect(String host, int port, String username, String password, String db) {
         BungeeLog.$("Соединяюсь с базой данных..");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("mysql://%s:%s/%s", username, password);
+            String url = String.format("jdbc:mysql://%s:%d/%s", host, port, db);
+            connection = DriverManager.getConnection(url, username, password);
             BungeeLog.$("Подключено!");
         } catch (Exception e) {
             e.printStackTrace();

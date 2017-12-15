@@ -18,6 +18,7 @@ public class Packets {
     public static final int PLAYER_REG_PACKET = 11;
     public static final int PLAYER_KICK_PACKET = 12;
     public static final int PLAYER_PRELOGIN_PACKET = 15;
+    public static final int ID_PACKET = 16;
 
     public static final int MESSAGE_PACKET = 14;
 

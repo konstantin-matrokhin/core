@@ -27,7 +27,6 @@ public class CoreBungee extends Plugin {
         }
 
         ConfigManager configManager = new ConfigManager(this);
-        config = configManager.getConfig();
 
         try {
             configManager.initConfig();
@@ -35,6 +34,8 @@ public class CoreBungee extends Plugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        config = configManager.getConfig();
 
         packetResolver = new PacketResolver();
 
@@ -45,7 +46,7 @@ public class CoreBungee extends Plugin {
         serverName = new File(getDataFolder().getParentFile().getAbsolutePath()).getParentFile().getName();
 
         String host = config.getString("db.host");
-        String port = (String) config.get("db.port");
+        int port = config.getInt("db.port");
         String username = config.getString("db.username");
         String password= config.getString("db.password");
         String db = config.getString("db.db");

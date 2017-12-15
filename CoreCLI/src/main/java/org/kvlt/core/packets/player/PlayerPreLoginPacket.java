@@ -5,12 +5,13 @@ import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerDB;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.events.player.PlayerLoginEvent;
 import org.kvlt.core.events.player.PlayerPreLoginEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+
+import java.util.concurrent.TimeUnit;
 
 public class PlayerPreLoginPacket implements PacketIn {
 
@@ -30,9 +31,25 @@ public class PlayerPreLoginPacket implements PacketIn {
     @Override
     public void execute(Channel channel) {
         ServerPlayer op = new ServerPlayer(playerName);
-        PlayerDB.loadPlayer(op);
-        CoreServer.get().getUnloggedPlayers().add(op);
 
+        op.setIp(ip);
+        op.setUuid(uuid);
+
+        PlayerDB.loadPlayer(op);
+        Runnable r = () -> {
+            try {
+                PlayerDB.executor.awaitTermination(5, TimeUnit.SECONDS);
+                int id = op.getId();
+                IdPacket idPacket = new IdPacket(playerName, id);
+                idPacket.send(channel);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        PlayerDB.executor.execute(r);
+
+        CoreServer.get().getUnloggedPlayers().add(op);
         Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);
 
         System.out.println(String.format("Игрок %s подключился к прокси-серверу %s",

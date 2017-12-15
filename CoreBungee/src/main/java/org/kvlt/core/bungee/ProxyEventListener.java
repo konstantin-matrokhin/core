@@ -5,7 +5,6 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import org.kvlt.core.bungee.auth.Auth;
 import org.kvlt.core.bungee.packets.*;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
@@ -17,17 +16,28 @@ public class ProxyEventListener implements Listener {
 
         String name = p.getName();
 
-        Auth.trySessionAuth(p);
+//        try {
+//            PreparedStatement statId= CoreDB.get().getConnection()
+//                    .prepareStatement("SELECT id FROM identifier WHERE player_name = ?");
+//
+//            statId.setString(1, name);
+//            ResultSet result = statId.executeQuery();
+//            int id = result.getInt("id");
+//            IdMap.setId(p, id);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         PlayerJoinPacket playerJoinPacket = new PlayerJoinPacket(name);
         playerJoinPacket.send();
+
     }
 
     @EventHandler
     public void onPreLogin(PreLoginEvent event) {
         PendingConnection c = event.getConnection();
 
-        PreLoginPacket plp = new PreLoginPacket(c.getName(), c.getAddress().getHostName(), c.getUniqueId().toString());
+        PreLoginPacket plp = new PreLoginPacket(c.getName(), c.getAddress().getHostName(), "000");
         plp.send();
     }
 
