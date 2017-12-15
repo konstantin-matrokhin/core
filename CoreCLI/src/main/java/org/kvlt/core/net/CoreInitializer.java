@@ -4,11 +4,9 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.packets.bukkit.ServerConnectPacket;
-import org.kvlt.core.packets.bukkit.ServerDisconnectPacket;
 import org.kvlt.core.packets.player.*;
-import org.kvlt.core.packets.proxy.ProxyConnectPacket;
-import org.kvlt.core.packets.proxy.ProxyDisconnectPacket;
+import org.kvlt.core.packets.proxy.*;
+import org.kvlt.core.packets.bukkit.*;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;
 import org.kvlt.core.protocol.PacketResolver;
@@ -30,6 +28,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new PlayerChatPacket());
         resolver.registerPacket(new PlayerRegisterPacket());
         resolver.registerPacket(new PlayerLoginPacket());
+        resolver.registerPacket(new PlayerPreLoginPacket());
     }
 
     @Override
