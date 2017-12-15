@@ -10,10 +10,6 @@ public class OnlinePlayer extends ServerPlayer {
 
     private GameServer currentServer;
     private Proxy currentProxy;
-    private String ip;
-    private long joinTime;
-    private long leaveTime;
-    private boolean isLogged;
 
     public OnlinePlayer() {}
 
@@ -29,30 +25,6 @@ public class OnlinePlayer extends ServerPlayer {
         this.currentServer = currentServer;
     }
 
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public long getJoinTime() {
-        return joinTime;
-    }
-
-    public void setJoinTime(long joinTime) {
-        this.joinTime = joinTime;
-    }
-
-    public long getLeaveTime() {
-        return leaveTime;
-    }
-
-    public void setLeaveTime(long leaveTime) {
-        this.leaveTime = leaveTime;
-    }
-
     public Proxy getCurrentProxy() {
         return currentProxy;
     }
@@ -61,11 +33,4 @@ public class OnlinePlayer extends ServerPlayer {
         this.currentProxy = currentProxy;
     }
 
-    public boolean isLogged() {
-        return isLogged;
-    }
-
-    public void setLogged(boolean logged) {
-        isLogged = logged;
-    }
 }

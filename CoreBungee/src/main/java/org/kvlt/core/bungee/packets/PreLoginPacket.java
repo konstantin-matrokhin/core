@@ -6,19 +6,27 @@ import org.kvlt.core.bungee.packets.protocol.PlayerPacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
-public class LoginPacket extends PlayerPacket {
+public class PreLoginPacket extends PlayerPacket {
 
-    public LoginPacket(String playerName) {
+    private String ip;
+    private String uuid;
+
+    public PreLoginPacket(String playerName, String ip, String uuid) {
         setPlayerName(playerName);
+        this.ip = ip;
+        this.uuid = uuid;
     }
 
     @Override
     public void write(ByteBuf out) {
         PacketUtil.writeString(getPlayerName(), out);
+        PacketUtil.writeString(CoreBungee.get().getServerName(), out);
+        PacketUtil.writeString(ip, out);
+        PacketUtil.writeString(uuid, out);
     }
 
     @Override
     public int getId() {
-        return Packets.PLAYER_LOGIN_PACKET;
+        return Packets.PLAYER_PRELOGIN_PACKET;
     }
 }

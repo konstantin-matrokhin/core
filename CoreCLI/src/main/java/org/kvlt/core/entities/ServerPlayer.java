@@ -34,6 +34,9 @@ public class ServerPlayer implements Kickable {
     private long playedLastTime;
     private long playedTotal;
     private boolean isRegistered;
+    private long leaveTime;
+    private long joinTime;
+    private String ip;
 
     public void kick(String reason) {
         new KickPacket(this.name, reason).send();
@@ -215,5 +218,29 @@ public class ServerPlayer implements Kickable {
 
     public void setRegistered(boolean registered) {
         isRegistered = registered;
+    }
+
+    public long getLeaveTime() {
+        return leaveTime;
+    }
+
+    public void setLeaveTime(long leaveTime) {
+        this.leaveTime = leaveTime;
+    }
+
+    public long getJoinTime() {
+        return joinTime;
+    }
+
+    public void setJoinTime(long joinTime) {
+        this.joinTime = joinTime;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }
