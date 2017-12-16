@@ -1,12 +1,14 @@
 package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 
 /**
  * Кодируем исходящий пакет в потом байтов
  */
+@ChannelHandler.Sharable
 public final class PacketEncoder extends MessageToByteEncoder<PacketOut> {
 
     /**
