@@ -53,7 +53,7 @@ public class ProxyEventListener implements Listener {
     public void onServerSwitch(ServerSwitchEvent event) {
         ProxiedPlayer player = event.getPlayer();
         String to = player.getServer().getInfo().getName();
-
+        player.getPendingConnection().isOnlineMode();
         SwitchServerPacket ssp = new SwitchServerPacket(player.getName(), to);
         ssp.send();
     }

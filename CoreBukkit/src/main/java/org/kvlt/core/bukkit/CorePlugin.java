@@ -1,10 +1,8 @@
 package org.kvlt.core.bukkit;
 
 import io.netty.channel.Channel;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.*;
-import org.kvlt.core.bukkit.events.AuthEventsListener;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 import org.kvlt.core.protocol.PacketResolver;
 
@@ -22,8 +20,6 @@ public class CorePlugin extends JavaPlugin {
         }
 
         packetResolver = new PacketResolver();
-
-        //Bukkit.getPluginManager().registerEvents(new AuthEventsListener(), this);
 
         getCommand("alert").setExecutor(new AlertCommand());
         getCommand("salert").setExecutor(new ServerAlertCommand());

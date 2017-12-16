@@ -14,7 +14,6 @@ import java.util.List;
  * Декодируем поток байтов во входящий пакет
  * Почитать о протоколе подробнее можно на гитхабе
  */
-@ChannelHandler.Sharable
 public final class PacketDecoder extends ByteToMessageDecoder {
 
     private final int MIN_BYTES        = 0x8; // Минимальное кол-во байтов для валидного пакета

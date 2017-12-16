@@ -8,7 +8,6 @@ import io.netty.handler.codec.MessageToByteEncoder;
 /**
  * Кодируем исходящий пакет в потом байтов
  */
-@ChannelHandler.Sharable
 public final class PacketEncoder extends MessageToByteEncoder<PacketOut> {
 
     /**
