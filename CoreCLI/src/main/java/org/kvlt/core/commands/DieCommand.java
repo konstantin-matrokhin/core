@@ -2,10 +2,11 @@ package org.kvlt.core.commands;
 
 import org.kvlt.core.CoreServer;
 
-public class StopCommand extends Command {
+public class DieCommand extends Command {
 
-    public StopCommand() {
-        super("stop");
+    public DieCommand() {
+        super("dir");
+        addAliases("diepls");
     }
 
     @Override

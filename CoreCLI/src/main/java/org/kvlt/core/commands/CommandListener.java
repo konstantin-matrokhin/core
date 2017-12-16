@@ -8,7 +8,6 @@ import org.jline.terminal.TerminalBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class CommandListener {
 
@@ -33,7 +32,7 @@ public class CommandListener {
 
         registerCommand(new WhoCommand());
         registerCommand(new BroadcastCommand());
-        registerCommand(new StopCommand());
+        registerCommand(new DieCommand());
         registerCommand(new WhoisCommand());
         registerCommand(new ReloadCommand());
         registerCommand(new PluginsCommand());
