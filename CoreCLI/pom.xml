@@ -63,19 +63,42 @@
             </plugin>
 
             <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.kvlt.core.CoreCLI</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>copy-dependencies</goal>
+                            <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <outputDirectory>../build/lib</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+            <!--<plugin>-->
+                <!--<artifactId>maven-dependency-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>compile</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>copy-dependencies</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<outputDirectory>../build/lib</outputDirectory>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 
