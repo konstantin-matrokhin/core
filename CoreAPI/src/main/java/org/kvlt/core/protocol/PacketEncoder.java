@@ -33,8 +33,9 @@ public final class PacketEncoder extends MessageToByteEncoder<PacketOut> {
         byteBuf.writeByte(id); // и айди
 
         byteBuf.writerIndex(DATA_PART_INDEX); // перемещаем курсор для записи данных
-        byteBuf.setShort(SIZE_SHORT_INDEX, (short) byteBuf.readableBytes()); // пишем в нужное место размер пакета
 
         packetOut.write(byteBuf); // пишем в пакет данные
+
+        byteBuf.setShort(SIZE_SHORT_INDEX, (short) byteBuf.readableBytes()); // пишем в нужное место размер пакета
     }
 }

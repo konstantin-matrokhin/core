@@ -1,2 +1,1 @@
-java -cp CoreCLI-1.0.jar;lib/* org.kvlt.core.CoreCLI
-PAUSE
+java -jar CoreCLI-1.0-jar-with-dependencies.jar

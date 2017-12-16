@@ -50,7 +50,6 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                     // Находим пакет по ID
                     PacketIn p = packetResolver.getPacketIn(id);
                     System.out.println(p.getClass().getSimpleName());
-
                     // Проверяем есть ли такой ID и проверяем длину пакета
                     if (p != null) {
                         p.read(byteBuf);

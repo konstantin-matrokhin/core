@@ -72,7 +72,7 @@ public class CoreBungee extends Plugin {
     }
 
     public String getServerName() {
-        return serverName;
+        return "test";
     }
 
     public void sendPacket(PacketOut packet) {
