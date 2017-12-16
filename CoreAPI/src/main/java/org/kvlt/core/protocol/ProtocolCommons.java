@@ -2,8 +2,10 @@ package org.kvlt.core.protocol;
 
 public class ProtocolCommons {
 
-    // prefix for each packet
-    // >core
+    /**
+     * префикс для всех пакетов
+     * >core
+     */
     public static byte[] PREFIX = {
             0x3E,       // >
             0x63, 0x6F, // c o

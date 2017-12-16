@@ -1,5 +1,8 @@
 package org.kvlt.core.protocol;
 
+/**
+ * ID всех пакетов
+ */
 public class Packets {
 
     public static final int PROXY_CONNECT_PACKET = 1;

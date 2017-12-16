@@ -28,16 +28,6 @@
         </plugins>
     </build>
 
-
-    <!--<profiles>-->
-        <!--<profile>-->
-            <!--<id>CoreAPI</id>-->
-            <!--<build>-->
-                <!--<directory>C:\Users\remillary\Desktop\lc-proxy\plugins</directory>-->
-            <!--</build>-->
-        <!--</profile>-->
-    <!--</profiles>-->
-
     <dependencies>
         <dependency>
             <groupId>io.netty</groupId>

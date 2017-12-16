@@ -9,13 +9,17 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Декодируем поток байтов во входящий пакет
+ * Почитать о протоколе подробнее можно на гитхабе
+ */
 public final class PacketDecoder extends ByteToMessageDecoder {
 
-    private final int MIN_BYTES        = 0x8;
-    private final int MAX_BYTES        = 0xffff; // 65535
-    private final int MIN_PACKET_ID    = 0x1;
+    private final int MIN_BYTES        = 0x8; // Минимальное кол-во байтов для валидного пакета
+    private final int MAX_BYTES        = 0xffff; // Максимальное кол-во байт - 65535
+    private final int MIN_PACKET_ID    = 0x1; // Минимальный ID пакета
 
-    private PacketResolver packetResolver;
+    private PacketResolver packetResolver; // Обрабатывает ID пакетов
 
     public PacketDecoder(PacketResolver packetResolver) {
         this.packetResolver = packetResolver;
@@ -25,25 +29,31 @@ public final class PacketDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
         int readable = byteBuf.readableBytes();
 
+        // Смотрим кол-во байт
         if (readable < MIN_BYTES || readable > MAX_BYTES) {
             return;
         }
 
+        // Проверяем префикс
         byte[] receivedPrefix = ByteBufUtil.getBytes(byteBuf.readBytes(5));
         if (Arrays.equals(receivedPrefix, ProtocolCommons.PREFIX)) {
 
+            // Валидный ли айди пакета
             byte id = byteBuf.readByte();
             if (id >= MIN_PACKET_ID) {
 
+                // Читаем длину пакета
                 short length = byteBuf.readShort();
                 if (length >= MIN_BYTES) {
 
+                    // Находим пакет по ID
                     PacketIn p = packetResolver.getPacketIn(id);
                     System.out.println(p.getClass().getSimpleName());
+
+                    // Проверяем есть ли такой ID и проверяем длину пакета
                     if (p != null && readable == length) {
                         p.read(byteBuf);
                         list.add(p);
-                        System.out.println(p.getClass().getSimpleName());
                     } else {
                         System.out.println("Invalid packet with [id = " + id + "]");
                     }

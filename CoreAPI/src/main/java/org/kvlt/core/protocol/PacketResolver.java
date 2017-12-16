@@ -2,6 +2,9 @@ package org.kvlt.core.protocol;
 
 import java.util.HashMap;
 
+/**
+ * Служит для определения класса пакета по ID
+ */
 public class PacketResolver {
 
     private HashMap<Integer, Class<? extends PacketIn>> packetsMap;
