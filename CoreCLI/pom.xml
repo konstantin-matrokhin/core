@@ -81,13 +81,23 @@
 
     <dependencies>
 
-        <!--<dependency>-->
-            <!--<groupId>DartaPlayer</groupId>-->
-            <!--<artifactId>net.lastcraft</artifactId>-->
-            <!--<version>1.0</version>-->
-            <!--<scope>system</scope>-->
-            <!--<systemPath>${project.basedir}/../build/lib/DartaPlayer.jar</systemPath>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline-terminal</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline-reader</artifactId>
+            <version>3.5.1</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
         <dependency>
