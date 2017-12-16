@@ -18,7 +18,6 @@ org\kvlt\core\events\player\PlayerQuitEvent.class
 org\kvlt\core\CoreCLI.class
 org\kvlt\core\CoreAPI.class
 org\kvlt\core\utils\Finder.class
-org\kvlt\core\commands\StopCommand.class
 org\kvlt\core\nodes\Proxies.class
 org\kvlt\core\models\AuthModel.class
 org\kvlt\core\events\player\PlayerEvent.class

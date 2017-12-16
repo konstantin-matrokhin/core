@@ -45,14 +45,14 @@ public final class PacketDecoder extends ByteToMessageDecoder {
 
                 // Читаем длину пакета
                 short length = byteBuf.readShort();
-                if (length >= MIN_BYTES) {
+                if (length >= MIN_BYTES && readable == length) {
 
                     // Находим пакет по ID
                     PacketIn p = packetResolver.getPacketIn(id);
                     System.out.println(p.getClass().getSimpleName());
 
                     // Проверяем есть ли такой ID и проверяем длину пакета
-                    if (p != null && readable == length) {
+                    if (p != null) {
                         p.read(byteBuf);
                         list.add(p);
                     } else {

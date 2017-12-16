@@ -24,6 +24,7 @@ public class CommandListener {
                     .terminal(terminal)
                     .appName("Core CLI")
                     .build();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

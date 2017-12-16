@@ -10,7 +10,6 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\netwo
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\BroadcastCommand.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\nodes\GameServers.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\player\PlayerLoginEvent.java
-C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\StopCommand.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\db\CoreDAO.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\player\PlayerCommandEvent.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\plugins\PluginData.java
@@ -66,6 +65,7 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\bukk
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\utils\LogType.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\bukkit\ServerDisconnectEvent.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\nodes\GameServer.java
+C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\DieCommand.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\Command.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\player\PlayerEvent.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\models\AuthModel.java
