@@ -37,7 +37,7 @@ public class ProxyEventListener implements Listener {
     public void onPreLogin(PreLoginEvent event) {
         PendingConnection c = event.getConnection();
 
-        PreLoginPacket plp = new PreLoginPacket(c.getName(), c.getAddress().getHostName(), "000");
+        PreLoginPacket plp = new PreLoginPacket(c.getName(), c.getAddress().getHostName());
         plp.send();
     }
 
@@ -45,7 +45,7 @@ public class ProxyEventListener implements Listener {
     public void onLogin(LoginEvent event) {
         PendingConnection c = event.getConnection();
 
-        LoginPacket lp = new LoginPacket(c.getName());
+        LoginPacket lp = new LoginPacket(c.getName(), c.getUniqueId().toString());
         lp.send();
     }
 

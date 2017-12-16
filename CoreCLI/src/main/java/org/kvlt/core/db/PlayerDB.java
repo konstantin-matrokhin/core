@@ -5,20 +5,27 @@ import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.models.*;
+import org.kvlt.core.utils.Log;
 import org.sql2o.Connection;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Для управления записями игрокамов в БД
  */
 public class PlayerDB {
 
-    public static ExecutorService executor;
+    public static final ExecutorService executor;
+    public static final List<Future<?>> queries;
 
     static {
+        queries = new ArrayList<>();
         executor = Executors.newSingleThreadExecutor();
     }
 
@@ -45,7 +52,7 @@ public class PlayerDB {
                     .addParameter("server", player.getCurrentServer().getName())
                     .executeUpdate();
         };
-        executor.submit(r);
+        queries.add(executor.submit(r));
     }
 
     public static void register(ServerPlayer player, String password) {
@@ -72,7 +79,7 @@ public class PlayerDB {
                     .executeUpdate();
         };
 
-        executor.submit(r);
+        queries.add(executor.submit(r));
     }
 
     public static boolean correctPassword(ServerPlayer op, String password) {
@@ -92,6 +99,7 @@ public class PlayerDB {
 
     public static void loadPlayer(ServerPlayer player) {
         Runnable r = () -> {
+            Log.$("getting id");
             int id = loadId(player.getName());
 
             if (id == 0) {
@@ -99,10 +107,11 @@ public class PlayerDB {
             } else {
                 player.setId(id);
                 loadPlayerModel(player);
+                Log.$("id is " + id);
             }
         };
 
-        executor.submit(r);
+        queries.add(executor.submit(r));
     }
 
     public static ServerPlayer loadServerPlayer(String name) {
@@ -140,9 +149,9 @@ public class PlayerDB {
         };
 
         for (String q : queries) {
-            executor.submit(() -> {
+            PlayerDB.queries.add(executor.submit(() -> {
                 CoreDAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
-            });
+            }));
         }
 
         player.setId(id);
@@ -166,6 +175,8 @@ public class PlayerDB {
 
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());
+
+        Log.$("loaded data))");
 
         //todo
     }

@@ -42,6 +42,7 @@ public class Auth {
             ResultSet authResult = authQuery.executeQuery();
             authResult.next();
 
+            return authResult;
         } catch (Exception e) {
             e.printStackTrace();
         }

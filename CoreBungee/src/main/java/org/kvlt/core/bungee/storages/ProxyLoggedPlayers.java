@@ -16,7 +16,6 @@ public class ProxyLoggedPlayers {
 
     public static void logIn(String player) {
         players.add(player);
-        ProxyServer.getInstance().getPlayer(player).sendMessage(new TextComponent("Вы успешно вошли!"));
     }
 
     public static void logOut(String player) {

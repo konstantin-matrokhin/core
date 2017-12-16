@@ -9,20 +9,16 @@ import org.kvlt.core.protocol.Packets;
 public class PreLoginPacket extends PlayerPacket {
 
     private String ip;
-    private String uuid;
 
-    public PreLoginPacket(String playerName, String ip, String uuid) {
+    public PreLoginPacket(String playerName, String ip) {
         setPlayerName(playerName);
         this.ip = ip;
-        this.uuid = uuid;
     }
 
     @Override
     public void write(ByteBuf out) {
         PacketUtil.writeString(getPlayerName(), out);
-        PacketUtil.writeString(CoreBungee.get().getServerName(), out);
         PacketUtil.writeString(ip, out);
-        PacketUtil.writeString(uuid, out);
     }
 
     @Override

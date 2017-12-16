@@ -39,11 +39,13 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                 if (length >= MIN_BYTES) {
 
                     PacketIn p = packetResolver.getPacketIn(id);
+                    System.out.println(p.getClass().getSimpleName());
                     if (p != null && readable == length) {
                         p.read(byteBuf);
                         list.add(p);
+                        System.out.println(p.getClass().getSimpleName());
                     } else {
-                        throw new IOException("Invalid packet with [id = " + id + "]");
+                        System.out.println("Invalid packet with [id = " + id + "]");
                     }
 
                 }

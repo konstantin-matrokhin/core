@@ -6,15 +6,8 @@ import org.kvlt.core.nodes.Proxy;
 
 public class PlayerPreLoginEvent extends PlayerEvent implements Cancalleble {
 
-    private Proxy proxy;
-
-    public PlayerPreLoginEvent(ServerPlayer player, Proxy proxy) {
+    public PlayerPreLoginEvent(ServerPlayer player) {
         setPlayer(player);
-        this.proxy = proxy;
-    }
-
-    public Proxy getProxy() {
-        return proxy;
     }
 
     @Override
