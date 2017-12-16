@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class CommandListener {
 
     private List<Command> commands;
-    private Scanner scanner;
     private LineReader reader;
 
     public CommandListener() {
@@ -31,7 +30,6 @@ public class CommandListener {
         }
 
         commands = new ArrayList<>();
-        scanner = new Scanner(System.in);
 
         registerCommand(new WhoCommand());
         registerCommand(new BroadcastCommand());
@@ -52,17 +50,6 @@ public class CommandListener {
             }
         }
     }
-
-//    public void listen() {
-//        try {
-//            while (scanner.hasNextLine()) {
-//                String line = scanner.nextLine();
-//                listenCommands(line);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void registerCommand(Command command) {
         commands.add(command);
