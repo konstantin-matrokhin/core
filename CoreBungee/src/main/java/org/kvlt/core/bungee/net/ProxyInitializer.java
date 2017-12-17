@@ -7,6 +7,7 @@ import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.packets.*;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;
+import org.kvlt.core.protocol.PacketFramer;
 import org.kvlt.core.protocol.PacketResolver;
 
 public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
@@ -28,6 +29,7 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
         ChannelPipeline pipeline = socketChannel.pipeline();
 
         pipeline.addLast(
+                new PacketFramer(),
                 new PacketEncoder(),
                 new PacketDecoder(resolver),
                 new BungeeHandler()
