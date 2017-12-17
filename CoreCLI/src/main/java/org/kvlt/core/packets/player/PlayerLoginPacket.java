@@ -15,18 +15,15 @@ import org.kvlt.core.utils.Log;
 public class PlayerLoginPacket implements PacketIn {
 
     private String playerName;
-    private String uuid;
 
     @Override
     public void read(ByteBuf in) {
         playerName = PacketUtil.readString(in);
-        uuid = PacketUtil.readString(in);
     }
 
     @Override
     public void execute(Channel channel) {
         ServerPlayer op = CoreServer.get().getUnloggedPlayers().get(playerName);
-        op.setUuid(uuid);
 
         PlayerLoginEvent ple = new PlayerLoginEvent(op);
         ple.invoke();

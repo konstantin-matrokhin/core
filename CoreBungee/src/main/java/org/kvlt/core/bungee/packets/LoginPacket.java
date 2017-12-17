@@ -12,13 +12,11 @@ public class LoginPacket extends PlayerPacket {
 
     public LoginPacket(String playerName, String uuid) {
         setPlayerName(playerName);
-        this.uuid = uuid;
     }
 
     @Override
     public void write(ByteBuf out) {
         PacketUtil.writeString(getPlayerName(), out);
-        PacketUtil.writeString("kek", out);
     }
 
     @Override

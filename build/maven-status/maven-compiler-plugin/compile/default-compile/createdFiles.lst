@@ -48,6 +48,7 @@ org\kvlt\core\net\ClientManager.class
 org\kvlt\core\metrics\PlayedTimeCounter.class
 org\kvlt\core\entities\Group.class
 org\kvlt\core\events\player\PlayerSwitchServerEvent.class
+org\kvlt\core\commands\DieCommand.class
 org\kvlt\core\commands\Command.class
 org\kvlt\core\events\proxy\ProxyDisconnectEvent.class
 org\kvlt\core\utils\LogType.class

@@ -38,7 +38,6 @@ public class PlayerPreLoginPacket implements PacketIn {
                 PlayerDB.queries.forEach(q -> {
                     try {
                         q.get();
-                        Log.$("waiting...");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -46,7 +45,6 @@ public class PlayerPreLoginPacket implements PacketIn {
                 int id = op.getId();
                 IdPacket idPacket = new IdPacket(playerName, id);
                 idPacket.send(channel);
-                Log.$("sent!");
             } catch (Exception e) {
                 e.printStackTrace();
             }

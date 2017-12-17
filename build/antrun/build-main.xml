@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <scp trust="true" password="hubqdoFDG34SDG1" localFile="C:\Users\remillary\Desktop\Core\CoreCLI/../build/CoreCLI-1.0-jar-with-dependencies.jar" remoteToFile="root@build.huesos228.com:/home/core/core/" port="1" verbose="true"></scp>
+</target>
+</project>

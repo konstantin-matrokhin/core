@@ -1,5 +1,6 @@
 package org.kvlt.core.db;
 
+import io.netty.util.internal.ConcurrentSet;
 import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.OnlinePlayer;
 import org.kvlt.core.entities.ServerPlayer;
@@ -10,11 +11,10 @@ import org.sql2o.Connection;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 /**
  * Для управления записями игрокамов в БД
@@ -22,10 +22,10 @@ import java.util.concurrent.Future;
 public class PlayerDB {
 
     public static final ExecutorService executor;
-    public static final List<Future<?>> queries;
+    public static final Collection<Future<?>> queries;
 
     static {
-        queries = new ArrayList<>();
+        queries = new ConcurrentSet<>();
         executor = Executors.newSingleThreadExecutor();
     }
 

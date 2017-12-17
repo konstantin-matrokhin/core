@@ -19,6 +19,7 @@ public class PreLoginPacket extends PlayerPacket {
     public void write(ByteBuf out) {
         PacketUtil.writeString(getPlayerName(), out);
         PacketUtil.writeString(ip, out);
+        System.out.println("SENDING PRELOGIN");
     }
 
     @Override

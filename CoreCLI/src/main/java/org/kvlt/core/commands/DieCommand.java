@@ -5,7 +5,7 @@ import org.kvlt.core.CoreServer;
 public class DieCommand extends Command {
 
     public DieCommand() {
-        super("dir");
+        super("die");
         addAliases("diepls");
     }
 

@@ -19,6 +19,7 @@ public class ControlManager {
     public void registerCoreEvents() {
         pingEventListener = new PingEventListener();
 
+        plugin.getProxy().getPluginManager().registerListener(plugin, new AuthEventListener());
         plugin.getProxy().getPluginManager().registerListener(plugin, new ProxyEventListener());
         plugin.getProxy().getPluginManager().registerListener(plugin, pingEventListener);
     }

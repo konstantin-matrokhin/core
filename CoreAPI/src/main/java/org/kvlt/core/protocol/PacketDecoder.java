@@ -39,17 +39,22 @@ public final class PacketDecoder extends ByteToMessageDecoder {
         byte[] receivedPrefix = ByteBufUtil.getBytes(byteBuf.readBytes(5));
         if (Arrays.equals(receivedPrefix, ProtocolCommons.PREFIX)) {
 
+            System.out.println("Пришел префикс");
+
             // Валидный ли айди пакета
             byte id = byteBuf.readByte();
             if (id >= MIN_PACKET_ID) {
+
+                System.out.println("id = " + id);
 
                 // Читаем длину пакета
                 short length = byteBuf.readShort();
                 if (length >= MIN_BYTES && readable == length) {
 
+                    System.out.println("Принято " + readable);
+
                     // Находим пакет по ID
                     PacketIn p = packetResolver.getPacketIn(id);
-                    System.out.println(p.getClass().getSimpleName());
                     // Проверяем есть ли такой ID и проверяем длину пакета
                     if (p != null) {
                         p.read(byteBuf);

@@ -1,5 +1,6 @@
 package org.kvlt.core.bungee;
 
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.*;
@@ -36,6 +37,8 @@ public class ProxyEventListener implements Listener {
     @EventHandler
     public void onPreLogin(PreLoginEvent event) {
         PendingConnection c = event.getConnection();
+
+        ProxyServer.getInstance().getLogger().info("PRELOGIN EVENT!" + c.getAddress().getHostName());
 
         PreLoginPacket plp = new PreLoginPacket(c.getName(), c.getAddress().getHostName());
         plp.send();

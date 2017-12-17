@@ -31,11 +31,8 @@ public final class PacketEncoder extends MessageToByteEncoder<PacketOut> {
 
         byteBuf.writeBytes(ProtocolCommons.PREFIX); // записываем префикс
         byteBuf.writeByte(id); // и айди
-
         byteBuf.writerIndex(DATA_PART_INDEX); // перемещаем курсор для записи данных
-
         packetOut.write(byteBuf); // пишем в пакет данные
-
         byteBuf.setShort(SIZE_SHORT_INDEX, (short) byteBuf.readableBytes()); // пишем в нужное место размер пакета
     }
 }
