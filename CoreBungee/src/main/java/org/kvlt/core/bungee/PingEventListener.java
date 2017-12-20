@@ -15,7 +15,7 @@ public class PingEventListener implements Listener {
     public void onPing(ProxyPingEvent event) {
         ServerPing response = event.getResponse();
         String newMotd = ChatColor.translateAlternateColorCodes('&',
-                motd.isEmpty() ? DEFAULT_MOTD : motd);
+                motd == null ? DEFAULT_MOTD : motd);
 
         response.setDescription(newMotd);
         ServerPing.Players players = response.getPlayers();
