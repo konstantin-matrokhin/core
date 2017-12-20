@@ -13,13 +13,13 @@ public final class PacketEncoder extends MessageToByteEncoder<PacketOut> {
     /**
      * Байт, с которого начинаются произвольные данные
      */
-    private final int DATA_PART_INDEX  = 0x8;
+    private final int DATA_PART_INDEX  = 8;
 
     /**
      * Байт, с которого записывается длина
      * т.к. записывается в short, то кол-во байт = 2
      */
-    private final int SIZE_SHORT_INDEX = 0x6;
+    private final int SIZE_SHORT_INDEX = 6;
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, PacketOut packetOut, ByteBuf byteBuf) {
