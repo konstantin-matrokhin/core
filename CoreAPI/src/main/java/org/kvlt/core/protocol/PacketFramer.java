@@ -40,7 +40,7 @@ public class PacketFramer extends ByteToMessageCodec<ByteBuf> {
         if (readable < length) {
             byteBuf.resetReaderIndex();
         } else {
-            ByteBuf message = byteBuf.readBytes(length);
+            ByteBuf message = byteBuf.readSlice(length);
             list.add(message);
         }
 

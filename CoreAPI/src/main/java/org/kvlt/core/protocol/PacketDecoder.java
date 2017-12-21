@@ -16,7 +16,7 @@ import java.util.List;
  */
 public final class PacketDecoder extends ByteToMessageDecoder {
 
-    private final int MIN_PACKET_ID    = 0x1; // Минимальный ID пакета
+    private final int MIN_PACKET_ID = 1; // Минимальный ID пакета
 
     private PacketResolver packetResolver; // Обрабатывает ID пакетов
 

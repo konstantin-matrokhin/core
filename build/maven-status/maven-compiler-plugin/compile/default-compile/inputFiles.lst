@@ -39,6 +39,7 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\models\JoinI
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\utils\Log.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\plugins\auth\LoginPacket.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\CommandListener.java
+C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\db\HibernateInitiaizer.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\CorePacketOut.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\config\ConfigManager.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\PlayerSwitchServerPacket.java

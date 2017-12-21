@@ -3,9 +3,13 @@ package org.kvlt.core.entities;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.player.KickPacket;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ServerPlayer implements Kickable {
+@Entity
+@Table(name = "identifier")
+public class ServerPlayer implements Serializable, Kickable {
 
     public ServerPlayer(String name) {
         this.name = name;
@@ -14,28 +18,56 @@ public class ServerPlayer implements Kickable {
     public ServerPlayer() {
     }
 
+    @Id
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "player_name")
     private String name;
+
+    @Transient
     private String password;
+    @Transient
     private int group;
+    @Transient
     private String uuid;
+    @Transient
     private String lastIp;
+    @Transient
     private String lastJoin;
+    @Transient
     private GameServer lastServer;
+    @Transient
     private String mutedBy;
+    @Transient
     private String bannedBy;
-    private boolean banned;
+    @Transient
     private boolean muted;
+    @Transient
+    private boolean banned;
+    @Transient
     private int muteAmount;
+    @Transient
     private int banAmount;
+    @Transient
     private long bannedUntil;
+    @Transient
     private long mutedUntil;
+    @Transient
     private String banReason;
+    @Transient
+    private String muteReason;
+    @Transient
     private long playedLastTime;
+    @Transient
     private long playedTotal;
+    @Transient
     private boolean isRegistered;
+    @Transient
     private long leaveTime;
+    @Transient
     private long joinTime;
+    @Transient
     private String ip;
 
     public void kick(String reason) {
@@ -242,5 +274,13 @@ public class ServerPlayer implements Kickable {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getMuteReason() {
+        return muteReason;
+    }
+
+    public void setMuteReason(String muteReason) {
+        this.muteReason = muteReason;
     }
 }

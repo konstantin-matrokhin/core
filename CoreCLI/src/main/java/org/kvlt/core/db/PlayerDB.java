@@ -10,11 +10,10 @@ import org.kvlt.core.utils.Log;
 import org.sql2o.Connection;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Для управления записями игрокамов в БД
@@ -58,7 +57,7 @@ public class PlayerDB {
     public static void register(ServerPlayer player, String password) {
         Runnable r = () -> {
             int id = player.getId();
-            String ip = "127.0.0.1"; // TODO : FIX !!!
+            String ip = player.getIp();
             long now = System.currentTimeMillis();
 
             player.setPassword(password);
@@ -136,23 +135,23 @@ public class PlayerDB {
 
         int id = bigId.intValue();
 
-        String[] queries = {
-                "INSERT INTO join_info (id) VALUES (:id)",
-                "INSERT INTO authentication (id) VALUES (:id)",
-                "INSERT INTO friends (id) VALUES (:id)",
-                "INSERT INTO ignores (id) VALUES (:id)",
-                "INSERT INTO infractions (id) VALUES (:id)",
-                "INSERT INTO players_groups (id) VALUES (:id)",
-                "INSERT INTO reporters (id) VALUES (:id)",
-                "INSERT INTO selected_skins (id) VALUES (:id)",
-                "INSERT INTO settings (id) VALUES (:id)"
-        };
-
-        for (String q : queries) {
-            PlayerDB.queries.add(executor.submit(() -> {
-                CoreDAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
-            }));
-        }
+//        String[] queries = {
+//                "INSERT INTO join_info (id) VALUES (:id)",
+//                "INSERT INTO authentication (id) VALUES (:id)",
+//                "INSERT INTO friends (id) VALUES (:id)",
+//                "INSERT INTO ignores (id) VALUES (:id)",
+//                "INSERT INTO infractions (id) VALUES (:id)",
+//                "INSERT INTO players_groups (id) VALUES (:id)",
+//                "INSERT INTO reporters (id) VALUES (:id)",
+//                "INSERT INTO selected_skins (id) VALUES (:id)",
+//                "INSERT INTO settings (id) VALUES (:id)"
+//        };
+//
+//        for (String q : queries) {
+//            PlayerDB.queries.add(executor.submit(() -> {
+//                CoreDAO.getConnection().createQuery(q).addParameter("id", id).executeUpdate();
+//            }));
+//        }
 
         player.setId(id);
 
@@ -176,9 +175,20 @@ public class PlayerDB {
         player.setPlayedLastTime(joinInfoModel.getLastOnline());
         player.setPlayedTotal(joinInfoModel.getOnlineTime());
 
-        Log.$("loaded data))");
+        int bans = infractionsModel.getBans();
+        int mutes = infractionsModel.getMutes();
 
-        //todo
+        player.setBanned(bans > 0);
+        player.setBanAmount(infractionsModel.getBans());
+        player.setBannedBy(infractionsModel.getBanEnforcer());
+        player.setBanReason(infractionsModel.getBanReason());
+        player.setBannedUntil(infractionsModel.getBanEnd());
+
+        player.setMuted(mutes > 0);
+        player.setMuteAmount(infractionsModel.getMutes());
+        player.setMutedBy(infractionsModel.getMuteEnforcer());
+        player.setMuteReason(infractionsModel.getMuteReason());
+        player.setMutedUntil(infractionsModel.getMuteEnd());
     }
 
     private static <T extends Model> T loadModel(Class<T> fetchClass, ModelParams modelParams, Connection conn, int id) {
@@ -188,7 +198,6 @@ public class PlayerDB {
                 .setColumnMappings(modelParams.getCols())
                 .throwOnMappingFailure(false)
                 .executeAndFetchFirst(fetchClass);
-
     }
 
 }
