@@ -14,6 +14,18 @@ public class CoreCLI {
     public static void main(String[] args) {
         Config.init();
         CoreDAO.start();
+
+        Session s = HibernateInitiaizer.getSessionFactory().openSession();
+        s.beginTransaction();
+        ServerPlayer p = new ServerPlayer();
+        p.setName("meme");
+        p.setId(1000);
+        p.setPassword("test");
+        s.saveOrUpdate(p);
+        s.getTransaction().commit();
+        s.close();
+
+        //new NewConfig("test.yml").load();
         CoreServer.get().start();
     }
 

@@ -9,6 +9,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "identifier")
+@SecondaryTables({
+        @SecondaryTable(name = "authentication", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
+})
 public class ServerPlayer implements Serializable, Kickable {
 
     public ServerPlayer(String name) {
@@ -25,8 +28,9 @@ public class ServerPlayer implements Serializable, Kickable {
     @Column(name = "player_name")
     private String name;
 
-    @Transient
+    @Column(table = "authentication", name = "password", updatable = true, insertable = true)
     private String password;
+
     @Transient
     private int group;
     @Transient
