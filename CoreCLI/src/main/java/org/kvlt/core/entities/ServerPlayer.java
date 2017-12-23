@@ -140,6 +140,9 @@ public class ServerPlayer implements Serializable, Kickable {
     @Transient
     private String ip;
 
+    @Transient
+    private boolean isOnline;
+
     public void kick(String reason) {
         new KickPacket(this.name, reason).send();
     }

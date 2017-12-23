@@ -6,6 +6,7 @@ import org.kvlt.core.nodes.Proxy;
 /**
  * Класс, который является сущностью игрока на сервере
  */
+@Deprecated
 public class OnlinePlayer extends ServerPlayer {
 
     private GameServer currentServer;
