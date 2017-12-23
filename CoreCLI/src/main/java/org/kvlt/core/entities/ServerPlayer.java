@@ -1,16 +1,26 @@
 package org.kvlt.core.entities;
 
-import org.kvlt.core.nodes.GameServer;
+import org.hibernate.annotations.GenericGenerator;
 import org.kvlt.core.packets.player.KickPacket;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "identifier")
+@Table(name = "identifier", uniqueConstraints = @UniqueConstraint(columnNames = "player_name"))
 @SecondaryTables({
-        @SecondaryTable(name = "authentication", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
+        @SecondaryTable(name = "authentication", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "join_info", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "infractions", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "players_groups", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "premium_auth", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "reports", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "friends", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "ignores", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "custom_prefixes", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "selected_skins", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
 })
 public class ServerPlayer implements Serializable, Kickable {
 
@@ -18,59 +28,115 @@ public class ServerPlayer implements Serializable, Kickable {
         this.name = name;
     }
 
-    public ServerPlayer() {
-    }
+    public ServerPlayer() {}
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, unique = true)
+    @GenericGenerator(name = "id_gen", strategy = "increment")
+    @GeneratedValue(generator = "id_gen")
     private int id;
 
-    @Column(name = "player_name")
+    @Column(table = "identifier", name = "player_name", unique = true, length = 32, nullable = false)
     private String name;
 
-    @Column(table = "authentication", name = "password", updatable = true, insertable = true)
+    @Column(table = "authentication", name = "password", length = 32)
     private String password;
 
-    @Transient
+    @Column(table = "players_groups", name = "group_id")
     private int group;
-    @Transient
+
+    @Column(table = "identifier", name = "uuid", nullable = false, length = 32)
     private String uuid;
-    @Transient
+
+    @Column(table = "join_info", name = "ip", nullable = false, length = 16)
     private String lastIp;
-    @Transient
-    private String lastJoin;
-    @Transient
-    private GameServer lastServer;
-    @Transient
+
+    @Column(table = "authentication", name = "last_auth")
+    private long lastJoin;
+
+    @Column(table = "join_info", name = "last_server", nullable = false, length = 32)
+    private String lastServer;
+
+    @Column(table = "infractions", name = "mute_enforcer", length = 16)
     private String mutedBy;
-    @Transient
+
+    @Column(table = "infractions", name = "ban_enforcer", length = 16)
     private String bannedBy;
-    @Transient
+
+    @Column(table = "infractions", name = "is_muted")
     private boolean muted;
-    @Transient
+
+    @Column(table = "infractions", name = "is_banned")
     private boolean banned;
-    @Transient
+
+    @Column(table = "infractions", name = "mutes")
     private int muteAmount;
-    @Transient
+
+    @Column(table = "infractions", name = "bans")
     private int banAmount;
-    @Transient
+
+    @Column(table = "infractions", name = "ban_end")
     private long bannedUntil;
-    @Transient
+
+    @Column(table = "infractions", name = "mute_end")
     private long mutedUntil;
-    @Transient
+
+    @Column(table = "infractions", name = "ban_reason", length = 64)
     private String banReason;
-    @Transient
+
+    @Column(table = "infractions", name = "mute_reason", length = 64)
     private String muteReason;
-    @Transient
+
+    @Column(table = "join_info", name = "last_online")
     private long playedLastTime;
-    @Transient
+
+    @Column(table = "join_info", name = "online_time")
     private long playedTotal;
+
+    @Column(table = "authentication", name = "registration_ip", length = 16)
+    private String registerIp;
+
+    @Column(table = "authentication", name = "email", length = 64)
+    private String email;
+
+    @Column(table = "authentication", name = "email_confirmed")
+    private boolean isEmailConfimed;
+
+    @Column(table = "authentication", name = "email_confirmation_code", length = 32)
+    private String emailConfirmationCode;
+
+    @Column(table = "authentication", name = "email_code_timestamp")
+    private long emailTimestamp;
+
+    @Column(table = "custom_prefixes", name = "prefix", length = 32)
+    private String prefix;
+
+    @ElementCollection
+    @Column(table = "friends", name = "friend_id")
+    private Set<Integer> friends;
+
+    @ElementCollection
+    @Column(table = "ignores", name = "ignored_id")
+    private Set<Integer> ignores;
+
+    @Column(table = "reports", name = "total_reports")
+    private int totalReports;
+
+    @Column(table = "reports", name = "reports_approved")
+    private int reportsApproved;
+
+    @Column(table = "selected_skins", name = "skin", length = 16)
+    private String skin;
+
     @Transient
     private boolean isRegistered;
+
     @Transient
     private long leaveTime;
+
     @Transient
     private long joinTime;
+
     @Transient
     private String ip;
 
@@ -144,19 +210,19 @@ public class ServerPlayer implements Serializable, Kickable {
         this.lastIp = lastIp;
     }
 
-    public String getLastJoin() {
+    public long getLastJoin() {
         return lastJoin;
     }
 
-    public void setLastJoin(String lastJoin) {
+    public void setLastJoin(long lastJoin) {
         this.lastJoin = lastJoin;
     }
 
-    public GameServer getLastServer() {
+    public String getLastServer() {
         return lastServer;
     }
 
-    public void setLastServer(GameServer lastServer) {
+    public void setLastServer(String lastServer) {
         this.lastServer = lastServer;
     }
 
@@ -286,5 +352,93 @@ public class ServerPlayer implements Serializable, Kickable {
 
     public void setMuteReason(String muteReason) {
         this.muteReason = muteReason;
+    }
+
+    public String getRegisterIp() {
+        return registerIp;
+    }
+
+    public void setRegisterIp(String registerIp) {
+        this.registerIp = registerIp;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isEmailConfimed() {
+        return isEmailConfimed;
+    }
+
+    public void setEmailConfimed(boolean emailConfimed) {
+        isEmailConfimed = emailConfimed;
+    }
+
+    public String getEmailConfirmationCode() {
+        return emailConfirmationCode;
+    }
+
+    public void setEmailConfirmationCode(String emailConfirmationCode) {
+        this.emailConfirmationCode = emailConfirmationCode;
+    }
+
+    public long getEmailTimestamp() {
+        return emailTimestamp;
+    }
+
+    public void setEmailTimestamp(long emailTimestamp) {
+        this.emailTimestamp = emailTimestamp;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public Set<Integer> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<Integer> friends) {
+        this.friends = friends;
+    }
+
+    public Set<Integer> getIgnores() {
+        return ignores;
+    }
+
+    public void setIgnores(Set<Integer> ignores) {
+        this.ignores = ignores;
+    }
+
+    public int getTotalReports() {
+        return totalReports;
+    }
+
+    public void setTotalReports(int totalReports) {
+        this.totalReports = totalReports;
+    }
+
+    public int getReportsApproved() {
+        return reportsApproved;
+    }
+
+    public void setReportsApproved(int reportsApproved) {
+        this.reportsApproved = reportsApproved;
+    }
+
+    public String getSkin() {
+        return skin;
+    }
+
+    public void setSkin(String skin) {
+        this.skin = skin;
     }
 }

@@ -13,19 +13,21 @@ public class CoreCLI {
 
     public static void main(String[] args) {
         Config.init();
-        CoreDAO.start();
+        //CoreDAO.start();
 
         Session s = HibernateInitiaizer.getSessionFactory().openSession();
         s.beginTransaction();
         ServerPlayer p = new ServerPlayer();
-        p.setName("meme");
-        p.setId(1000);
-        p.setPassword("test");
-        s.saveOrUpdate(p);
-        s.getTransaction().commit();
-        s.close();
+        p.setName("MEMES");
+        p.setPassword("test23231");
+        p.setUuid("uuidempty");
+        p.setLastIp("testip");
+        p.setLastServer("test-server");
+        p.setBanAmount(10);
+        s.save(p);
 
-        //new NewConfig("test.yml").load();
+        s.getTransaction().commit();
+
         CoreServer.get().start();
     }
 
