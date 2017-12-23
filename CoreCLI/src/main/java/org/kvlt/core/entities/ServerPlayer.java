@@ -1,6 +1,8 @@
 package org.kvlt.core.entities;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.kvlt.core.nodes.GameServer;
+import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.player.KickPacket;
 
 import javax.persistence.*;
@@ -143,6 +145,12 @@ public class ServerPlayer implements Serializable, Kickable {
     @Transient
     private boolean isOnline;
 
+    @Transient
+    private GameServer currentServer;
+
+    @Transient
+    private Proxy currentProxy;
+
     public void kick(String reason) {
         new KickPacket(this.name, reason).send();
     }
@@ -171,6 +179,30 @@ public class ServerPlayer implements Serializable, Kickable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
+    }
+
+    public GameServer getCurrentServer() {
+        return currentServer;
+    }
+
+    public void setCurrentServer(GameServer currentServer) {
+        this.currentServer = currentServer;
+    }
+
+    public Proxy getCurrentProxy() {
+        return currentProxy;
+    }
+
+    public void setCurrentProxy(Proxy currentProxy) {
+        this.currentProxy = currentProxy;
     }
 
     public String getName() {

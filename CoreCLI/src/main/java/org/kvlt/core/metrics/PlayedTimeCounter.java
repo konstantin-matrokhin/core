@@ -1,6 +1,6 @@
 package org.kvlt.core.metrics;
 
-import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.ServerPlayer;
 
 import java.text.SimpleDateFormat;

@@ -1,10 +1,10 @@
 package org.kvlt.core.events.player;
 
-import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 
 public class PlayerQuitEvent extends PlayerJoinEvent {
 
-    public PlayerQuitEvent(OnlinePlayer player) {
+    public PlayerQuitEvent(ServerPlayer player) {
         super(player);
     }
 

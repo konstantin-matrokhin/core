@@ -12,7 +12,7 @@ import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.config.Config;
-import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.net.ClientManager;
@@ -30,7 +30,7 @@ public final class CoreServer {
 
     private static CoreServer instance;
 
-    private PlayerList<OnlinePlayer> onlinePlayers;
+    private PlayerList<ServerPlayer> onlinePlayers;
     private PlayerList<ServerPlayer> unloggedPlayers;
     private Proxies proxies;
     private GameServers gameServers;
@@ -123,7 +123,7 @@ public final class CoreServer {
         }
     }
 
-    public PlayerList<OnlinePlayer> getOnlinePlayers() {
+    public PlayerList<ServerPlayer> getOnlinePlayers() {
         return onlinePlayers;
     }
 

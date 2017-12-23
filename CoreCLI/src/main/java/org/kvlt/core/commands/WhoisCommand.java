@@ -1,8 +1,7 @@
 package org.kvlt.core.commands;
 
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.db.PlayerDB;
-import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.utils.Printer;
 
@@ -27,10 +26,10 @@ public class WhoisCommand extends Command {
 
         Runnable r = () -> {
             if (CoreServer.get().getOnlinePlayers().contains(name)) {
-                OnlinePlayer player = CoreServer.get().getOnlinePlayers().get(name);
+                ServerPlayer player = CoreServer.get().getOnlinePlayers().get(name);
                 printInfo(player);
             } else {
-                ServerPlayer player = PlayerDB.loadServerPlayer(name);
+                ServerPlayer player = PlayerFactory.loadServerPlayer(name);
                 if (player != null) {
                     printInfo(player);
                 } else {
@@ -38,7 +37,7 @@ public class WhoisCommand extends Command {
                 }
             }
         };
-        PlayerDB.executor.execute(r);
+        PlayerFactory.executor.execute(r);
         return true;
     }
 
@@ -48,9 +47,9 @@ public class WhoisCommand extends Command {
         String totalPlayed = format.format(new Date(player.getPlayedTotal()));
         String lastTimePlayed = format.format(new Date(player.getPlayedLastTime()));
 
-        OnlinePlayer op = null;
-        if (player instanceof OnlinePlayer) {
-            op = (OnlinePlayer) player;
+        ServerPlayer op = null;
+        if (player instanceof ServerPlayer) {
+            op = (ServerPlayer) player;
             isOnline = true;
         }
 

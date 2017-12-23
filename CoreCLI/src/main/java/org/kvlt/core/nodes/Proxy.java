@@ -2,7 +2,7 @@ package org.kvlt.core.nodes;
 
 import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.protocol.Packet;
 
@@ -14,7 +14,7 @@ public class Proxy implements Node {
 
     private String name;
     private Channel channel;
-    private PlayerList<OnlinePlayer> players;
+    private PlayerList<ServerPlayer> players;
 
     public Proxy(String name, Channel channel) {
         players = new PlayerList<>();
@@ -56,7 +56,7 @@ public class Proxy implements Node {
         this.name = name;
     }
 
-    public PlayerList<OnlinePlayer> getPlayers() {
+    public PlayerList<ServerPlayer> getPlayers() {
         return players;
     }
 

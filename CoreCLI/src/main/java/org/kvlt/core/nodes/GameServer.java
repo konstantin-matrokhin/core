@@ -2,7 +2,7 @@ package org.kvlt.core.nodes;
 
 import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
-import org.kvlt.core.entities.OnlinePlayer;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.protocol.Packet;
 
@@ -11,7 +11,7 @@ public class GameServer implements Node {
     private Channel channel;
     private String name;
     private short port;
-    private PlayerList<OnlinePlayer> onlinePlayers;
+    private PlayerList<ServerPlayer> onlinePlayers;
 
     {
         onlinePlayers = new PlayerList<>();
@@ -56,7 +56,7 @@ public class GameServer implements Node {
         return channel;
     }
 
-    public PlayerList<OnlinePlayer> getOnlinePlayers() {
+    public PlayerList<ServerPlayer> getOnlinePlayers() {
         return onlinePlayers;
     }
 

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+@Deprecated
 public class CoreDAO {
 
     private static final String CHECK_IF_VALID_QUERY = "SELECT 1 FROM identifier LIMIT 1";
