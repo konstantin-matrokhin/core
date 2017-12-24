@@ -34,7 +34,7 @@ public class PlayerRegisterPacket extends PlayerPacket {
 
         if (!ensurePlayer()) { // checking if player is logged in
             if (dbPassword == null || dbPassword.isEmpty()) {
-                PlayerFactory.register(unloggedPlayer, password);
+                //PlayerFactory.register(unloggedPlayer, password);
                 response = "Вы успешно зарегистировались!";
             } else {
                 response = "Вы уже зарегистрированы!";

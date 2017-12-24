@@ -13,8 +13,8 @@ import java.util.concurrent.Future;
 
 public class PlayerFactory {
 
-    public static final ExecutorService executor;
-    public static final Collection<Future<?>> queries;
+    private static final ExecutorService executor;
+    private static final Collection<Future<?>> queries;
 
     private static final SessionFactory sessionFactory;
 
@@ -24,12 +24,21 @@ public class PlayerFactory {
         sessionFactory = HibernateInitiaizer.getSessionFactory();
     }
 
+    public static void addTask(Runnable r) {
+        Future f = executor.submit(r);
+        queries.add(f);
+    }
+
+    public static Collection<Future<?>> queue() {
+        return queries;
+    }
+
     public static ServerPlayer loadPlayer(String name) {
         ServerPlayer player;
         Session s = sessionFactory.openSession();
 
         s.beginTransaction();
-        Query query = s.createQuery("FROM identifier WHERE player_name = :name");
+        Query query = s.createQuery("FROM ServerPlayer WHERE name = :name");
         query.setParameter("name", name);
         player = (ServerPlayer) query.uniqueResult();
         s.getTransaction().commit();

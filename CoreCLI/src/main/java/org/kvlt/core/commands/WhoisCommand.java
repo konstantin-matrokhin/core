@@ -29,7 +29,7 @@ public class WhoisCommand extends Command {
                 ServerPlayer player = CoreServer.get().getOnlinePlayers().get(name);
                 printInfo(player);
             } else {
-                ServerPlayer player = PlayerFactory.loadServerPlayer(name);
+                ServerPlayer player = PlayerFactory.loadPlayer(name);
                 if (player != null) {
                     printInfo(player);
                 } else {
@@ -37,35 +37,23 @@ public class WhoisCommand extends Command {
                 }
             }
         };
-        PlayerFactory.executor.execute(r);
+        PlayerFactory.addTask(r);
         return true;
     }
 
     private void printInfo(ServerPlayer player) {
-        boolean isOnline = false;
         SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
         String totalPlayed = format.format(new Date(player.getPlayedTotal()));
         String lastTimePlayed = format.format(new Date(player.getPlayedLastTime()));
-
-        ServerPlayer op = null;
-        if (player instanceof ServerPlayer) {
-            op = (ServerPlayer) player;
-            isOnline = true;
-        }
 
         Printer.$("_____________________________________");
         Printer.$("ИГРОК: " + player.getName());
         Printer.$("ID: " + player.getId());
         Printer.$("ВСЕГО СЫГРАНО: " + totalPlayed);
         Printer.$("ПОСЛЕДНЕЕ ВРЕМЯ ОНЛАЙНА: " + lastTimePlayed);
-        if (isOnline) {
-            Printer.$("ОНЛАЙН: ДА");
-            Printer.$("СЕРВЕР: " + op.getCurrentServer().getName());
-            Printer.$("ПРОКСИ: " + op.getCurrentProxy().getName());
-            Printer.$("IP: " + op.getIp());
-        } else {
-            Printer.$("ОНЛАЙН: НЕТ");
-        }
+//        Printer.$("СЕРВЕР: " + player.getCurrentServer().getName());
+//        Printer.$("ПРОКСИ: " + player.getCurrentProxy().getName());
+        Printer.$("IP: " + player.getIp());
         Printer.$("_____________________________________");
     }
 

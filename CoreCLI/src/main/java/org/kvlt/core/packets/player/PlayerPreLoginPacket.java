@@ -23,37 +23,23 @@ public class PlayerPreLoginPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer op = new ServerPlayer(playerName);
-        op.setIp(ip);
-
-        PlayerFactory.loadPlayer(op);
-
         Runnable r = () -> {
-            try {
-                Log.$("freeze..");
+            ServerPlayer player;
+            player = PlayerFactory.loadPlayer(playerName);
+            player.setIp(ip);
 
-                PlayerFactory.queries.forEach(q -> {
-                    try {
-                        q.get();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-                int id = op.getId();
-                IdPacket idPacket = new IdPacket(playerName, id);
-                idPacket.send(channel);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            CoreServer.get().getUnloggedPlayers().add(player);
+            System.out.println(String.format("Игрок %s подключился", playerName));
+
+            int id = player.getId();
+            IdPacket idPacket = new IdPacket(playerName, id);
+            idPacket.send(channel);
+
+            PlayerPreLoginEvent prle = new PlayerPreLoginEvent(player);
+            prle.invoke();
         };
 
-        new Thread(r).start();
-
-        CoreServer.get().getUnloggedPlayers().add(op);
-        System.out.println(String.format("Игрок %s подключился", playerName));
-
-        PlayerPreLoginEvent prle = new PlayerPreLoginEvent(op);
-        prle.invoke();
+        PlayerFactory.addTask(r);
     }
 
     @Override

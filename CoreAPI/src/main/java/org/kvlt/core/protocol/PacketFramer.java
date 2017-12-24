@@ -22,7 +22,7 @@ public class PacketFramer extends ByteToMessageCodec<ByteBuf> {
             throw new IOException("Слишком длинный пакет!");
         }
 
-        out.ensureWritable(length);
+        out.ensureWritable(length + 2);
         byteBuf.readBytes(out, length);
     }
 
@@ -40,7 +40,7 @@ public class PacketFramer extends ByteToMessageCodec<ByteBuf> {
         if (readable < length) {
             byteBuf.resetReaderIndex();
         } else {
-            ByteBuf message = byteBuf.readSlice(length);
+            ByteBuf message = byteBuf.readBytes(length);
             list.add(message);
         }
 

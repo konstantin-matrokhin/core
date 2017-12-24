@@ -27,6 +27,8 @@ public final class PacketDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
 
+        byteBuf.markReaderIndex();
+
         // Проверяем префикс
         byte[] receivedPrefix = ByteBufUtil.getBytes(byteBuf.readBytes(5));
         if (Arrays.equals(receivedPrefix, ProtocolCommons.PREFIX)) {
@@ -39,6 +41,7 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                 PacketIn p = packetResolver.getPacketIn(id);
                 // Проверяем есть ли такой ID и проверяем длину пакета
                 if (p != null) {
+                    byteBuf.readerIndex(8);
                     p.read(byteBuf);
                     list.add(p);
                 } else {

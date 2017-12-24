@@ -33,7 +33,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <!--<outputDirectory>C:\Users\remillary\Desktop\lc-proxy\plugins\</outputDirectory>-->
+                    <outputDirectory>C:\Users\remillary\Desktop\lc-proxy\plugins\</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>

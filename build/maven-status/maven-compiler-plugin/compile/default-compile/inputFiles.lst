@@ -4,7 +4,6 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\play
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\PlayerPacket.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\models\ModelParams.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\PlayerChatPacket.java
-C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\entities\OnlinePlayer.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\Cancalleble.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\network\PacketEvent.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\BroadcastCommand.java
@@ -28,6 +27,7 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\models\JoinI
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\ReloadCommand.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\CoreAPI.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\models\InfractionsModel.java
+C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\db\PlayerFactory.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\player\PlayerChatEvent.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\nodes\Node.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\net\CoreInitializer.java
@@ -48,7 +48,6 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\entities\Ser
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\CoreListener.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\Destination.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\config\Config.java
-C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\db\PlayerDB.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\proxy\ProxyConnectEvent.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\metrics\PlayedTimeCounter.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\plugins\EventManager.java

@@ -39,8 +39,6 @@ org\kvlt\core\nodes\Proxy.class
 org\kvlt\core\models\JoinInfoParams.class
 org\kvlt\core\nodes\GameServers.class
 org\kvlt\core\plugins\PluginLoader.class
-org\kvlt\core\entities\OnlinePlayer.class
-org\kvlt\core\db\PlayerDB.class
 org\kvlt\core\events\network\PacketEvent.class
 org\kvlt\core\utils\Printer.class
 org\kvlt\core\events\player\PlayerJoinEvent.class
