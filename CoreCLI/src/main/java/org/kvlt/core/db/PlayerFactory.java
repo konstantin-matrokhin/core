@@ -40,11 +40,56 @@ public class PlayerFactory {
         s.beginTransaction();
         Query query = s.createQuery("FROM ServerPlayer WHERE name = :name");
         query.setParameter("name", name);
+
         player = (ServerPlayer) query.uniqueResult();
+
         s.getTransaction().commit();
+
+        if (player == null) {
+            s.beginTransaction();
+            player = new ServerPlayer(name);
+            player.setUuid("random uuid");
+            s.save(player);
+            s.getTransaction().commit();
+        }
         s.close();
 
         return player;
     }
 
+    public static void updatePlayer(ServerPlayer player) {
+        updatePlayer(player, true);
+    }
+
+    public static void updatePlayer(ServerPlayer player, boolean async) {
+        Runnable r = () -> {
+            Session regSession = sessionFactory.openSession();
+            regSession.beginTransaction();
+            regSession.update(player);
+            regSession.getTransaction().commit();
+            regSession.close();
+        };
+
+        if (async) {
+            addTask(r);
+        } else {
+            r.run();
+        }
+    }
+
+    public static void register(ServerPlayer player, String password) {
+        player.setPassword(password);
+        player.setRegisterIp(player.getIp());
+        player.setLastAuth(System.currentTimeMillis());
+
+        Runnable r = () -> {
+            Session regSession = sessionFactory.openSession();
+            regSession.beginTransaction();
+            regSession.update(player);
+            regSession.getTransaction().commit();
+            regSession.close();
+        };
+
+        addTask(r);
+    }
 }

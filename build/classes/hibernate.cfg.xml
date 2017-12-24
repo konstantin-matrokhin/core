@@ -6,9 +6,11 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://s7.huesos228.com:3306/test?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoReconnect=true
+            <!--jdbc:mysql://s7.huesos228.com:3306/test?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoReconnect=true-->
+            jdbc:mysql://build.huesos228.com:3306/core?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoReconnect=true
         </property>
-        <property name="hibernate.connection.password">JH87ipal56yhkd9kGFtyFDG123</property>
+        <property name="hibernate.connection.password">12345</property>
+        <!--<property name="hibernate.connection.password">JH87ipal56yhkd9kGFtyFDG123</property>-->
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <property name="show_sql">true</property>

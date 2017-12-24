@@ -50,13 +50,13 @@ public class ServerPlayer implements Serializable, Kickable {
     @Column(table = "identifier", name = "uuid", nullable = false, length = 32)
     private String uuid;
 
-    @Column(table = "join_info", name = "ip", nullable = false, length = 16)
+    @Column(table = "join_info", name = "ip", nullable = true, length = 16)
     private String lastIp;
 
     @Column(table = "authentication", name = "last_auth")
-    private long lastJoin;
+    private long lastAuth;
 
-    @Column(table = "join_info", name = "last_server", nullable = false, length = 32)
+    @Column(table = "join_info", name = "last_server", length = 32)
     private String lastServer;
 
     @Column(table = "infractions", name = "mute_enforcer", length = 16)
@@ -245,12 +245,12 @@ public class ServerPlayer implements Serializable, Kickable {
         this.lastIp = lastIp;
     }
 
-    public long getLastJoin() {
-        return lastJoin;
+    public long getLastAuth() {
+        return lastAuth;
     }
 
-    public void setLastJoin(long lastJoin) {
-        this.lastJoin = lastJoin;
+    public void setLastAuth(long lastAuth) {
+        this.lastAuth = lastAuth;
     }
 
     public String getLastServer() {
