@@ -76,7 +76,8 @@ public class Auth {
             e.printStackTrace();
         }
 
-        if (dbPassword != null && !dbIp.equals("unknown")) {
+        System.out.println("LOGGING IN..");
+        if (dbPassword != null && dbIp != null) {
             if (password.equals(dbPassword)) {
                 ProxyLoggedPlayers.logIn(name);
                 return true;
@@ -111,11 +112,13 @@ public class Auth {
             e.printStackTrace();
         }
 
-        if (lastAuth != -1 && !dbIp.equals("unknown")) {
+        System.out.println("AUTH..");
+        if (lastAuth != -1 && dbIp != null) {
             if (dbIp.equals(ip)) {
                 long timeInterval = now - lastAuth;
 
                 if (inSessionRange(timeInterval)) {
+                    ProxyLoggedPlayers.logIn(name);
                     return true;
                 } else {
                     player.sendMessage("Вас не было слишком давно, введите пароль.");

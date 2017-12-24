@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
+import org.kvlt.core.entities.ServerPlayer;
 
 public class HibernateInitiaizer {
 
@@ -21,5 +22,11 @@ public class HibernateInitiaizer {
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public static void start() {
+        String name = "core_startup";
+        ServerPlayer startUp = new ServerPlayer(name);
+        PlayerFactory.loadPlayer(name);
     }
 }

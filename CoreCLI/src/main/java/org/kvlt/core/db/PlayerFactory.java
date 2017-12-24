@@ -48,7 +48,6 @@ public class PlayerFactory {
         if (player == null) {
             s.beginTransaction();
             player = new ServerPlayer(name);
-            player.setUuid("random uuid");
             s.save(player);
             s.getTransaction().commit();
         }
@@ -81,15 +80,6 @@ public class PlayerFactory {
         player.setPassword(password);
         player.setRegisterIp(player.getIp());
         player.setLastAuth(System.currentTimeMillis());
-
-        Runnable r = () -> {
-            Session regSession = sessionFactory.openSession();
-            regSession.beginTransaction();
-            regSession.update(player);
-            regSession.getTransaction().commit();
-            regSession.close();
-        };
-
-        addTask(r);
+        updatePlayer(player);
     }
 }

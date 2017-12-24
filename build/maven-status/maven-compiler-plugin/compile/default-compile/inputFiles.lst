@@ -49,6 +49,7 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\CoreL
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\Destination.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\config\Config.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\proxy\ProxyConnectEvent.java
+C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\AuthPacket.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\metrics\PlayedTimeCounter.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\plugins\EventManager.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\CoreCLI.java

@@ -47,14 +47,14 @@ public class ServerPlayer implements Serializable, Kickable {
     @Column(table = "players_groups", name = "group_id")
     private int group;
 
-    @Column(table = "identifier", name = "uuid", nullable = false, length = 32)
+    @Column(table = "identifier", name = "uuid", length = 32)
     private String uuid;
 
-    @Column(table = "join_info", name = "ip", nullable = true, length = 16)
+    @Column(table = "join_info", name = "ip", length = 16)
     private String lastIp;
 
-    @Column(table = "authentication", name = "last_auth")
-    private long lastAuth;
+    @Column(table = "authentication", name = "last_authenticated")
+    private long lastAuth = -1;
 
     @Column(table = "join_info", name = "last_server", length = 32)
     private String lastServer;
