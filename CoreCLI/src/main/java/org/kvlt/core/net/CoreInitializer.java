@@ -30,6 +30,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new PlayerRegisterPacket());
         resolver.registerPacket(new PlayerLoginPacket());
         resolver.registerPacket(new PlayerPreLoginPacket());
+        resolver.registerPacket(new PrivateMessagePacket());
     }
 
     @Override

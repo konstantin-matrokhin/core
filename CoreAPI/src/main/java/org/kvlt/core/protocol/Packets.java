@@ -24,5 +24,7 @@ public class Packets {
     public static final int ID_PACKET = 16;
 
     public static final int MESSAGE_PACKET = 14;
+    public static final int PM_PACKET = 17;
+    public static final int REPLY_PACKET = 18;
 
 }

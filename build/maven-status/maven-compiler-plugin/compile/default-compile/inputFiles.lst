@@ -82,6 +82,7 @@ C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\proxy
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\IdPacket.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\net\ServerHandler.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\KickPacket.java
+C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\PrivateMessagePacket.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\commands\PluginsCommand.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\events\player\PlayerJoinEvent.java
 C:\Users\remillary\Desktop\Core\CoreCLI\src\main\java\org\kvlt\core\packets\player\PlayerPreLoginPacket.java

@@ -38,8 +38,6 @@ public class ProxyEventListener implements Listener {
     public void onPreLogin(PreLoginEvent event) {
         PendingConnection c = event.getConnection();
 
-        ProxyServer.getInstance().getLogger().info("PRELOGIN EVENT!" + c.getAddress().getHostName());
-
         PreLoginPacket plp = new PreLoginPacket(c.getName(), c.getAddress().getHostName());
         plp.send();
     }

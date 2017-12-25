@@ -17,3 +17,6 @@ commands:
   sendcommand:
     aliases: [sc]
     usage: /sc <server> <command>
+  reply:
+    aliases: [r, rep]
+    usabe: /r <message>

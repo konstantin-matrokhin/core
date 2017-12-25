@@ -6,6 +6,7 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerPreLoginEvent;
+import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
@@ -15,20 +16,28 @@ public class PlayerPreLoginPacket implements PacketIn {
 
     private String playerName;
     private String ip;
+    private String proxyName;
+
     @Override
     public void read(ByteBuf in) {
         playerName = PacketUtil.readString(in);
         ip = PacketUtil.readString(in);
+        proxyName = PacketUtil.readString(in);
     }
 
     @Override
     public void execute(Channel channel) {
+        Proxy proxy = CoreServer.get().getProxies().getNode(proxyName);
+        if (proxy == null) return;
+
         Runnable r = () -> {
             ServerPlayer player;
             player = PlayerFactory.loadPlayer(playerName);
             player.setIp(ip);
+            player.setCurrentProxy(proxy);
 
             CoreServer.get().getUnloggedPlayers().add(player);
+            CoreServer.get().getOnlinePlayers().add(player);
             System.out.println(String.format("Игрок %s подключился", playerName));
 
             int id = player.getId();

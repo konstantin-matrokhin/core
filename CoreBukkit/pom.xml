@@ -76,7 +76,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <scp localFile="${project.basedir}/target/CoreBukkit-1.0-jar-with-dependencies.jar"
+                                <scp localFile="C:\Users\remillary\Desktop\swlobby-1\plugins\CoreBukkit-1.0-jar-with-dependencies.jar"
                                      remoteToFile="root@build.huesos228.com:/home/core/swlobby-1/plugins/" verbose="true"
                                      password="hubqdoFDG34SDG1" trust="true" port="1">
                                 </scp>
@@ -122,7 +122,7 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.16.Final</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

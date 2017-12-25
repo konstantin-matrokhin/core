@@ -49,5 +49,7 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                 }
             }
         }
+
+        byteBuf.clear();
     }
 }

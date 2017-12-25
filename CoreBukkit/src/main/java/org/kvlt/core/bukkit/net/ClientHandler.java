@@ -12,14 +12,18 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        Bukkit.getLogger().info("Соединено с главным сервером!");
+        Bukkit.getLogger().info("Соединено с главным сервером!!!!!!!!!!");
         CorePlugin.get().setServer(ctx.channel());
 
         String name = ConfigManager.getClientName();
         short port = (short) Bukkit.getPort();
 
-        ConnectPacket packet = new ConnectPacket(ConfigManager.getClientName(), port);
-        packet.send();
+        ConnectPacket packet = new ConnectPacket("test server", port);
+        try {
+            System.out.println(ctx.channel().writeAndFlush(packet).sync().isSuccess());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

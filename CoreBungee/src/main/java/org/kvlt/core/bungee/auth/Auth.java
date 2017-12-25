@@ -112,7 +112,6 @@ public class Auth {
             e.printStackTrace();
         }
 
-        System.out.println("AUTH..");
         if (lastAuth != -1 && dbIp != null) {
             if (dbIp.equals(ip)) {
                 long timeInterval = now - lastAuth;
