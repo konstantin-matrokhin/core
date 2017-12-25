@@ -14,8 +14,12 @@ public class PacketUtil {
      * @param buf буфер
      */
     public static void writeString(String str, ByteBuf buf) {
-        buf.writeShort(str.getBytes(UTF8).length);
-        buf.writeCharSequence(str, UTF8);
+        byte[] bytes = str.getBytes(UTF8);
+        buf.writeShort(str.length());
+        buf.writeBytes(bytes);
+
+//        buf.writeShort(str.getBytes(UTF8).length);
+//        buf.writeCharSequence(str, UTF8);
     }
 
     /**
@@ -24,8 +28,12 @@ public class PacketUtil {
      * @return строка
      */
     public static String readString(ByteBuf buf) {
-        short length = buf.readShort();
-        return buf.readCharSequence((int) length, UTF8).toString();
+        byte[] bytes = new byte[buf.readShort()];
+        buf.readBytes(bytes);
+        return new String(bytes, UTF8);
+
+//        short length = buf.readShort();
+//        return buf.readCharSequence((int) length, UTF8).toString();
     }
 
 }

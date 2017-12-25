@@ -17,7 +17,6 @@ public class ReplyPacket implements PacketIn {
     public static final String RECEIVED = "%s -> вам: %s";
 
     private String from;
-    private String to;
     private String message;
 
     @Override
@@ -37,6 +36,7 @@ public class ReplyPacket implements PacketIn {
 
         if (Replies.hasCompanion(fromPlayer)) {
             toPlayer = Replies.getCompanion(fromPlayer);
+            String to = toPlayer.getName();
             if (CoreServer.get().getOnlinePlayers().contains(toPlayer)) {
                 MessagePacket msg = new MessagePacket(to, String.format(RECEIVED, from, message));
                 toPlayer.getCurrentProxy().send(msg);
@@ -48,7 +48,7 @@ public class ReplyPacket implements PacketIn {
             response = "Некому отвечать :(";
         }
 
-        MessagePacket responsePacket = new MessagePacket(to, response);
+        MessagePacket responsePacket = new MessagePacket(from, response);
         responsePacket.send(channel);
 
     }
