@@ -1,6 +1,7 @@
 package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -26,16 +27,28 @@ public final class PacketDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-
         byteBuf.markReaderIndex();
 
+        ByteBuf prefix = byteBuf.readBytes(5);
+        byte[] prefixBytes;
+
+        if (prefix.hasArray()) {
+            prefixBytes = prefix.array();
+        } else {
+            prefixBytes = new byte[prefix.readableBytes()];
+            prefix.getBytes(prefix.readerIndex(), prefixBytes);
+        }
+
         // Проверяем префикс
-        byte[] receivedPrefix = ByteBufUtil.getBytes(byteBuf.readBytes(5));
-        if (Arrays.equals(receivedPrefix, ProtocolCommons.PREFIX)) {
+        if (Arrays.equals(prefixBytes, ProtocolCommons.PREFIX)) {
+
+            System.out.println("Пришел префикс");
 
             // Валидный ли айди пакета
             byte id = byteBuf.readByte();
             if (id >= MIN_PACKET_ID) {
+
+                System.out.println(id);
 
                 // Находим пакет по ID
                 PacketIn p = packetResolver.getPacketIn(id);
