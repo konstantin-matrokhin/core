@@ -2,3 +2,4 @@
 /plugins/
 /*/target/
 /src/
+/build/**/*
