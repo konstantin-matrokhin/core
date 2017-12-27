@@ -11,12 +11,12 @@ public class Config {
     private static final String MYSQL_SECTION = "mysql";
     private static final String PROXY_SECTION = "proxy";
     private static final String SERVER_SECTION = "bukkit";
-    private static final String CORE_SECTION = "core";
+    private static final String SMTP_SECTION = "smtp";
 
     private static ConfigManager configManager;
     private static HashMap<String, String> mysqlData;
     private static HashMap<String, String> proxyData;
-    private static HashMap<String, String> bukkitData;
+    private static HashMap<String, String> smtpData;
     private static HashMap<String, String> coreData;
 
     public static void init() {
@@ -26,8 +26,8 @@ public class Config {
         try {
             mysqlData = configManager.loadSection(MYSQL_SECTION);
             proxyData = configManager.loadSection(PROXY_SECTION);
-            bukkitData = configManager.loadSection(SERVER_SECTION);
-            coreData = configManager.loadSection(CORE_SECTION);
+            smtpData = configManager.loadSection(SERVER_SECTION);
+            coreData = configManager.loadSection(SMTP_SECTION);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,8 +41,8 @@ public class Config {
         return configManager.getValue(proxyData, key);
     }
 
-    public static String getServer(String key) {
-        return configManager.getValue(bukkitData, key);
+    public static String getSMTP(String key) {
+        return configManager.getValue(smtpData, key);
     }
 
     public static String getCore(String key) {

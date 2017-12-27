@@ -24,7 +24,7 @@
 
     <profiles>
         <profile>
-            <id>Run Core</id>
+            <id>run_core</id>
             <build>
                 <plugins>
                     <plugin>
@@ -48,7 +48,7 @@
             </build>
         </profile>
         <profile>
-            <id>Deploy Core</id>
+            <id>deploy_core</id>
             <build>
                 <plugins>
                     <plugin>
@@ -129,6 +129,13 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>

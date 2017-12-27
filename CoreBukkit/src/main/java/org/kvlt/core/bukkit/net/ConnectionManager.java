@@ -15,16 +15,17 @@ import java.util.concurrent.TimeUnit;
 
 public class ConnectionManager {
 
-    public static final long RECONNECT_DELAY = 8L;
+    public static final long RECONNECT_DELAY = 3L;
 
     private static ConnectionManager instance;
 
     private EventLoopGroup eventLoopGroup;
     private Bootstrap bootstrap;
     private Channel channel;
+
     private String host;
     private int port;
-    private boolean isConnected = false;
+    private boolean isConnected;
 
     private ConnectionManager() {}
 
@@ -49,7 +50,7 @@ public class ConnectionManager {
 
     }
 
-    void connect() {
+    public void connect() {
 
         System.out.println("Подключение к кору..");
 

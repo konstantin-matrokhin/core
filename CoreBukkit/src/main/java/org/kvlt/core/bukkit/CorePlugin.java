@@ -28,6 +28,7 @@ public class CorePlugin extends JavaPlugin {
         getCommand("hub").setExecutor(new HubCommand());
         getCommand("sendcommand").setExecutor(new SendCommandCommand());
         getCommand("reply").setExecutor(new ReplyCommand());
+        getCommand("connect").setExecutor(new ConnectCommand());
 
         ConfigManager.initConfig();
         ConnectionManager.get().startClient();

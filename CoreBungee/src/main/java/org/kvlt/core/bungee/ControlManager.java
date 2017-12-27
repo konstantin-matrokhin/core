@@ -30,13 +30,12 @@ public class ControlManager {
             add(new ConnectCommand());
             add(new LoginCommand());
             add(new RegisterCommand());
-            add(new EmailCommand());
+            add(new EmailAddCommand());
             add(new ReplyCommand());
+            add(new EmailAddCommand());
         }};
 
-        cmds.forEach(c -> {
-            plugin.getProxy().getPluginManager().registerCommand(plugin, c);
-        });
+        cmds.forEach(c -> plugin.getProxy().getPluginManager().registerCommand(plugin, c));
     }
 
     public PingEventListener getPingEventListener() {

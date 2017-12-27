@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConnectionManager {
 
-    public static final long RECONNECT_DELAY = 8L;
+    public static final long RECONNECT_DELAY = 3L;
 
     private static ConnectionManager instance;
 
@@ -23,6 +23,7 @@ public class ConnectionManager {
     private Channel channel;
     private String host;
     private int port;
+
     private volatile boolean isConnected;
     private volatile boolean disconnecting;
 

@@ -14,4 +14,13 @@
   "proxy": {
     "motd": "&c[&7 bungeecord proxy server &c] &r"
   },
+
+  "smtp": {
+    "host": "smtp.yandex.ru",
+    "port": 465,
+    "email": "register@lastcraft.net",
+    "sender": "LastCraft",
+    "password": "JHg87yujkh4"
+  }
+
 }

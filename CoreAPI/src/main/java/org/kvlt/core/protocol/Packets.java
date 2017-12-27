@@ -27,4 +27,5 @@ public class Packets {
     public static final int PM_PACKET = 17;
     public static final int REPLY_PACKET = 18;
 
+    public static final int EMAIL_ADD_PACKET = 19;
 }

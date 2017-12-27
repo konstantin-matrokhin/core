@@ -19,4 +19,7 @@ commands:
     usage: /sc <server> <command>
   reply:
     aliases: [r, rep]
-    usabe: /r <message>
+    usage: /r <message>
+  con:
+    aliases: [connect, core, coreconnect, cc]
+    usage: /connect
