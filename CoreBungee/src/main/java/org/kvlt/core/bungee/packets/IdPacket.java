@@ -24,13 +24,11 @@ public class IdPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ProxiedPlayer p = ProxyServer.getInstance().getPlayer(playerName);
-        if (p == null) return;
 
-        IdMap.setId(p, id);
+        IdMap.setId(playerName, id);
         System.out.println("Пришел айдишник " + id);
 
-        Auth.trySessionAuth(p);
+        Auth.trySessionAuth(playerName);
     }
 
     @Override

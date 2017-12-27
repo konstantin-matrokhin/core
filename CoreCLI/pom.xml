@@ -24,7 +24,7 @@
 
     <profiles>
         <profile>
-            <id>Run</id>
+            <id>Run Core</id>
             <build>
                 <plugins>
                     <plugin>
@@ -48,7 +48,7 @@
             </build>
         </profile>
         <profile>
-            <id>Deploy</id>
+            <id>Deploy Core</id>
             <build>
                 <plugins>
                     <plugin>
@@ -125,27 +125,10 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!--<plugin>-->
-                <!--<artifactId>maven-dependency-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>compile</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>copy-dependencies</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<outputDirectory>../build/lib</outputDirectory>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -198,20 +181,12 @@
             <version>6.0.6</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.sql2o/sql2o -->
-        <dependency>
-            <groupId>org.sql2o</groupId>
-            <artifactId>sql2o</artifactId>
-            <version>1.6.0-RC3</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
         </dependency>
-
     </dependencies>
     
 </project>

@@ -17,7 +17,7 @@ public class WhoCommand extends Command {
             players.append(p.getName()).append(" ");
         });
 
-        Printer.$("Подключенные игроки (" + CoreServer.get().getOnlinePlayers().size() + ") :");
+        Printer.$("Подключенные игроки(" + CoreServer.get().getOnlinePlayers().size() + "):");
         Printer.$(players.toString().isEmpty() ? "Никого нет" : players.toString());
         return true;
     }

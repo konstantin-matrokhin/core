@@ -1,5 +1,4 @@
 {
-
   "core": {
     "port": 3030
   },
@@ -15,9 +14,4 @@
   "proxy": {
     "motd": "&c[&7 bungeecord proxy server &c] &r"
   },
-
-  "bukkit": {
-    "test": "test"
-  }
-
 }

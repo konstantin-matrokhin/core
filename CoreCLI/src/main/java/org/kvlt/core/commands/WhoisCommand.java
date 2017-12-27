@@ -29,7 +29,7 @@ public class WhoisCommand extends Command {
                 ServerPlayer player = CoreServer.get().getOnlinePlayers().get(name);
                 printInfo(player);
             } else {
-                ServerPlayer player = PlayerFactory.loadPlayer(name);
+                ServerPlayer player = PlayerFactory.loadPlayer(name, false);
                 if (player != null) {
                     printInfo(player);
                 } else {

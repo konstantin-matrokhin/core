@@ -20,9 +20,13 @@ public class PlayerLoginPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer op = CoreServer.get().getUnloggedPlayers().get(playerName);
+        ServerPlayer player = CoreServer.get().getUnloggedPlayers().get(playerName);
 
-        PlayerLoginEvent ple = new PlayerLoginEvent(op);
+        int id = player.getId();
+        IdPacket idPacket = new IdPacket(playerName, id);
+        idPacket.send(channel);
+
+        PlayerLoginEvent ple = new PlayerLoginEvent(player);
         ple.invoke();
     }
 

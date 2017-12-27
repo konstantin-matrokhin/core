@@ -32,10 +32,14 @@ public final class CoreServer {
 
     private PlayerList<ServerPlayer> onlinePlayers;
     private PlayerList<ServerPlayer> unloggedPlayers;
+
     private Proxies proxies;
     private GameServers gameServers;
+
     private ChannelFuture future;
+
     private int port;
+
     private PluginLoader pluginLoader;
     private PluginManager pluginManager;
     private EventManager eventManager;
@@ -47,8 +51,10 @@ public final class CoreServer {
     void start() {
         onlinePlayers = new PlayerList<>();
         unloggedPlayers = new PlayerList<>();
+
         proxies = new Proxies();
         gameServers = new GameServers();
+
         port = Integer.valueOf(Config.getCore("port"));
 
         eventManager = new EventManager();
@@ -95,9 +101,9 @@ public final class CoreServer {
             future.addListener((channelFuture) -> {
                 String result;
                 if (channelFuture.isSuccess()) {
-                    result = "Сервер запущен с портом " + port;
+                    result = "Сервер запущен!";
                 } else {
-                    result = "Не удалось запустить сервер";
+                    result = "Не удалось запустить сервер :(";
                     future.cause().printStackTrace();
                 }
                 Log.$(result);

@@ -1,5 +1,6 @@
 package org.kvlt.core.bungee.auth;
 
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.kvlt.core.bungee.CoreDB;
 import org.kvlt.core.bungee.storages.IdMap;
@@ -49,18 +50,16 @@ public class Auth {
         return null;
     }
 
-    public static boolean passwordAuth(ProxiedPlayer player, String password) {
+    public static boolean passwordAuth(String player, String password) {
         final int id = IdMap.getId(player);
-        final String name = player.getName();
-
-        //TODO check ip!
-        @SuppressWarnings("unused")
-        final String ip = player.getAddress().getHostString();
 
         String dbIp = null;
         String dbPassword = null;
 
-        if (ProxyLoggedPlayers.isLogged(name)) return true;
+        if (ProxyLoggedPlayers.isLogged(player)) return true;
+
+        ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
+        final String ip = pp.getAddress().getHostString();
 
         ResultSet authData = getAuthData(id);
         ResultSet infoData = getInfoData(id);
@@ -70,7 +69,7 @@ public class Auth {
                 dbPassword = authData.getString("password");
                 dbIp = infoData.getString("ip");
             } else {
-                player.sendMessage("Вы не зарегистрированы!");
+                pp.sendMessage("Вы не зарегистрированы!");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,28 +78,30 @@ public class Auth {
         System.out.println("LOGGING IN..");
         if (dbPassword != null && dbIp != null) {
             if (password.equals(dbPassword)) {
-                ProxyLoggedPlayers.logIn(name);
+                ProxyLoggedPlayers.logIn(player);
                 return true;
             } else {
-                player.sendMessage("Неверный пароль!");
+                pp.sendMessage("Неверный пароль!");
             }
         } else {
-            player.sendMessage("Вы не зарегистрированы! (2)");
+            pp.sendMessage("Вы не зарегистрированы! (2)");
         }
 
         return false;
     }
 
-    public static boolean trySessionAuth(ProxiedPlayer player) {
+    public static boolean trySessionAuth(String player) {
         final int id = IdMap.getId(player);
         final long now = System.currentTimeMillis();
-        final String ip = player.getAddress().getHostString();
-        final String name = player.getName();
+
+        ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
+
+        final String ip = pp.getAddress().getHostString();
 
         String dbIp = null;
         long lastAuth = 0;
 
-        if (ProxyLoggedPlayers.isLogged(name)) return true;
+        if (ProxyLoggedPlayers.isLogged(player)) return true;
 
         ResultSet authData = getAuthData(id);
         ResultSet infoData = getInfoData(id);
@@ -117,16 +118,17 @@ public class Auth {
                 long timeInterval = now - lastAuth;
 
                 if (inSessionRange(timeInterval)) {
-                    ProxyLoggedPlayers.logIn(name);
+                    ProxyLoggedPlayers.logIn(player);
                     return true;
                 } else {
-                    player.sendMessage("Вас не было слишком давно, введите пароль.");
+                    pp.sendMessage("Вас не было слишком давно, введите пароль.");
+                    pp.sendMessage("last auth = " + TimeUnit.MILLISECONDS.toHours(lastAuth) + ", delta = " + TimeUnit.MILLISECONDS.toHours(timeInterval));
                 }
             } else {
-                player.sendMessage("IP не совпадают!");
+                pp.sendMessage("IP не совпадают!");
             }
         } else {
-            player.sendMessage("Вы не зарегистрированы, поэтому сессия не прошла!");
+            pp.sendMessage("Вы не зарегистрированы, поэтому сессия не прошла!");
         }
         return false;
     }

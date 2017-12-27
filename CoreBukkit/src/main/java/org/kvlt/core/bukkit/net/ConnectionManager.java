@@ -24,7 +24,7 @@ public class ConnectionManager {
     private Channel channel;
     private String host;
     private int port;
-    private boolean isConnected;
+    private boolean isConnected = false;
 
     private ConnectionManager() {}
 
@@ -50,6 +50,9 @@ public class ConnectionManager {
     }
 
     void connect() {
+
+        System.out.println("Подключение к кору..");
+
         if (isConnected) return;
         try {
             ChannelFuture channelFuture = bootstrap.connect(host, port);
@@ -57,13 +60,14 @@ public class ConnectionManager {
             channelFuture.addListener((ChannelFuture future) -> {
                 isConnected = future.isSuccess();
                 if (!isConnected) {
-                    Log.$("Нет связи с главным сервером. Переподключение через 3 сек..");
+                    System.out.println("Нет связи с главным сервером. Переподключение через 3 сек..");
                     future.channel().eventLoop().schedule(this::connect, RECONNECT_DELAY, TimeUnit.SECONDS);
                 } else {
-                    Log.$("Подключено!");
+                    System.out.println("Подключено!");
                 }
             });
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

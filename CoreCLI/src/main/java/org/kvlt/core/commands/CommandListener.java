@@ -43,7 +43,7 @@ public class CommandListener {
     public void listen() {
         while (true) {
             try {
-                String line = reader.readLine("> ");
+                String line = reader.readLine(">");
                 listenCommands(line);
             } catch (Exception e) {
                 e.printStackTrace();

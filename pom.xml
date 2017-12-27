@@ -22,7 +22,6 @@
         <module>CoreCLI</module>
         <module>CoreBungee</module>
         <module>CoreBukkit</module>
-        <!--<module>staffchat</module>-->
     </modules>
 
 </project>

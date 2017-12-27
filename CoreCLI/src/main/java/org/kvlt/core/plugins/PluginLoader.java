@@ -61,7 +61,12 @@ public class PluginLoader {
             pd.setName(name);
             pd.setMainClass(mainClass);
 
-            Class c = loader.loadClass(mainClass);
+            Class<?> c = loader.loadClass(mainClass);
+            if (!(c.equals(CorePlugin.class))) {
+                Log.err(String.format("Главный класс плагина %s не наследует CorePlugin!", name));
+                return;
+            }
+
             Method init = c.getSuperclass().getDeclaredMethod("init");
             CorePlugin p = (CorePlugin) c.newInstance();
             p.setPluginData(pd);

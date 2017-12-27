@@ -26,7 +26,6 @@ public class HibernateInitiaizer {
 
     public static void start() {
         String name = "core_startup";
-        ServerPlayer startUp = new ServerPlayer(name);
         PlayerFactory.loadPlayer(name);
     }
 }

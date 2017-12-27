@@ -2,6 +2,7 @@ package org.kvlt.core.bungee.auth;
 
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+@SuppressWarnings("unused")
 public class Premium {
 
     public static final String JOIN_URL =

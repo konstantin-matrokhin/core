@@ -1,5 +1,4 @@
-comp/
-out/
 .idea/
-lib/
-target/
+/plugins/
+/*/target/
+/src/

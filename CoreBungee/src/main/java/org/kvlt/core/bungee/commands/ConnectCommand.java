@@ -7,7 +7,7 @@ import org.kvlt.core.bungee.net.ConnectionManager;
 public class ConnectCommand extends Command {
 
     public ConnectCommand() {
-        super("con");
+        super("con", null, "connect", "cc", "core");
     }
 
     @Override

@@ -6,21 +6,21 @@ import java.util.HashMap;
 
 public class IdMap {
 
-    private static HashMap<ProxiedPlayer, Integer> idMap;
+    private static HashMap<String, Integer> idMap;
 
     static {
         idMap = new HashMap<>();
     }
 
-    public static void setId(ProxiedPlayer player, int id) {
+    public static void setId(String player, int id) {
         idMap.put(player, id);
     }
 
-    public static int getId(ProxiedPlayer player) {
+    public static int getId(String player) {
         return idMap.get(player);
     }
 
-    public static ProxiedPlayer getPlayer(int id) {
+    public static String getPlayer(int id) {
         return idMap.entrySet().stream()
                 .filter(entry -> entry.getValue() == id)
                 .findFirst()

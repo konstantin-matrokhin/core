@@ -6,6 +6,8 @@ import org.kvlt.core.plugins.EventManager;
 import org.kvlt.core.plugins.PluginLoader;
 import org.kvlt.core.plugins.PluginManager;
 
+@Deprecated
+@SuppressWarnings("unused")
 public class CoreAPI {
 
     public static GameServers getGameServer() {

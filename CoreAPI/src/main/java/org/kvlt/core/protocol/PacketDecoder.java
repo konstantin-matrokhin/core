@@ -29,6 +29,8 @@ public final class PacketDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
         byteBuf.markReaderIndex();
 
+        System.out.println(ByteBufUtil.prettyHexDump(byteBuf));
+
         ByteBuf prefix = byteBuf.readBytes(5);
         byte[] prefixBytes;
 
@@ -47,8 +49,6 @@ public final class PacketDecoder extends ByteToMessageDecoder {
             // Валидный ли айди пакета
             byte id = byteBuf.readByte();
             if (id >= MIN_PACKET_ID) {
-
-                System.out.println(id);
 
                 // Находим пакет по ID
                 PacketIn p = packetResolver.getPacketIn(id);

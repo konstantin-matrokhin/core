@@ -40,10 +40,6 @@ public class PlayerPreLoginPacket implements PacketIn {
             CoreServer.get().getOnlinePlayers().add(player);
             System.out.println(String.format("Игрок %s подключился", playerName));
 
-            int id = player.getId();
-            IdPacket idPacket = new IdPacket(playerName, id);
-            idPacket.send(channel);
-
             PlayerPreLoginEvent prle = new PlayerPreLoginEvent(player);
             prle.invoke();
         };

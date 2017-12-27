@@ -64,7 +64,4 @@ public class GameServer implements Node {
         return port;
     }
 
-    public void setPort(short port) {
-        this.port = port;
-    }
 }

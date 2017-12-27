@@ -34,6 +34,10 @@ public class PlayerFactory {
     }
 
     public static ServerPlayer loadPlayer(String name) {
+        return loadPlayer(name, true);
+    }
+
+    public static ServerPlayer loadPlayer(String name, boolean create) {
         ServerPlayer player;
         Session s = sessionFactory.openSession();
 
@@ -45,14 +49,16 @@ public class PlayerFactory {
 
         s.getTransaction().commit();
 
-        if (player == null) {
-            s.beginTransaction();
-            player = new ServerPlayer(name);
-            s.save(player);
-            s.getTransaction().commit();
+        if (create) {
+            if (player == null) {
+                s.beginTransaction();
+                player = new ServerPlayer(name);
+                s.save(player);
+                s.getTransaction().commit();
+            }
         }
-        s.close();
 
+        s.close();
         return player;
     }
 
