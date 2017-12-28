@@ -37,6 +37,7 @@ public class CommandListener {
         registerCommand(new WhoisCommand());
         registerCommand(new ReloadCommand());
         registerCommand(new PluginsCommand());
+        registerCommand(new ReloadEmailsCommand());
 
     }
 

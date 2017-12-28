@@ -10,8 +10,8 @@ public class Config {
     private static final String FILE_NAME = "config.json";
     private static final String MYSQL_SECTION = "mysql";
     private static final String PROXY_SECTION = "proxy";
-    private static final String SERVER_SECTION = "bukkit";
     private static final String SMTP_SECTION = "smtp";
+    private static final String CORE_SECTION = "core";
 
     private static ConfigManager configManager;
     private static HashMap<String, String> mysqlData;
@@ -26,8 +26,8 @@ public class Config {
         try {
             mysqlData = configManager.loadSection(MYSQL_SECTION);
             proxyData = configManager.loadSection(PROXY_SECTION);
-            smtpData = configManager.loadSection(SERVER_SECTION);
-            coreData = configManager.loadSection(SMTP_SECTION);
+            coreData = configManager.loadSection(CORE_SECTION);
+            smtpData = configManager.loadSection(SMTP_SECTION);
         } catch (Exception e) {
             e.printStackTrace();
         }

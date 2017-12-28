@@ -23,7 +23,7 @@ public class EmailAddCommand extends Command {
     public void execute(CommandSender sender, String[] args) {
         ProxiedPlayer player;
 
-        if (args.length < 3) return;
+        if (args.length < 2) return;
 
         if (sender instanceof ProxiedPlayer) {
             player = (ProxiedPlayer) sender;
@@ -39,7 +39,7 @@ public class EmailAddCommand extends Command {
                 String email = args[1];
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
                 if (matcher.find()) {
-                    new EmailAddPacket(name, email);
+                    new EmailAddPacket(name, email).send();
                 } else {
                     player.sendMessage(new TextComponent("Введите корректный email!"));
                     return;
