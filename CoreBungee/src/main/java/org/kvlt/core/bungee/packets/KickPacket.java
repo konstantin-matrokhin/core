@@ -8,7 +8,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 
-import static org.kvlt.core.protocol.Packets.PLAYER_KICK_PACKET;
+import static org.kvlt.core.protocol.Packets.KICK_PACKET;
 
 public class KickPacket implements PacketIn {
 
@@ -32,7 +32,7 @@ public class KickPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return PLAYER_KICK_PACKET;
+        return KICK_PACKET;
     }
 
 }

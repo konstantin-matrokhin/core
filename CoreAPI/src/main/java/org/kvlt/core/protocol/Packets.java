@@ -19,7 +19,6 @@ public class Packets {
     public static final int PLAYER_CHAT_PACKET = 9;
     public static final int PLAYER_AUTH_PACKET = 10;
     public static final int PLAYER_REG_PACKET = 11;
-    public static final int PLAYER_KICK_PACKET = 12;
     public static final int PLAYER_PRELOGIN_PACKET = 15;
     public static final int ID_PACKET = 16;
 
@@ -33,5 +32,9 @@ public class Packets {
 
     public static final int PWD_PACKET = 22;
 
+    public static final int KICK_PACKET = 12;
     public static final int BAN_PACKET = 23;
+
+    public static final int BROADCAST_PACKET = 24;
+
 }

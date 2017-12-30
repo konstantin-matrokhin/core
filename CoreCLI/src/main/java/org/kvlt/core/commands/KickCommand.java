@@ -4,6 +4,7 @@ import org.kvlt.core.CoreServer;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.Destination;
 import org.kvlt.core.packets.player.KickPacket;
+import org.kvlt.core.utils.Printer;
 
 import java.util.Optional;
 
@@ -15,7 +16,10 @@ public class KickCommand extends Command {
 
     @Override
     protected boolean execute() {
-        if (getArgs().length < 1) return false;
+        if (getArgs().length < 1) {
+            Printer.$("Укажите игрока!");
+            return false;
+        }
 
         String name = getArg(0);
         Optional<String> reason = Optional.ofNullable(getArg(1));
@@ -24,6 +28,13 @@ public class KickCommand extends Command {
         if (victim != null) {
             new KickPacket(name, reason.orElse("Kicked from CORE!"))
                     .send(Destination.BUNGEE);
+
+            Printer.$(String.format("%s кикнут с сервера %s: %s",
+                    name,
+                    victim.getCurrentProxy(),
+                    reason));
+        } else {
+            Printer.$("Игрок не найден!");
         }
 
         return true;

@@ -35,6 +35,6 @@ public class KickPacket extends CorePacketOut {
 
     @Override
     public int getId() {
-        return Packets.PLAYER_KICK_PACKET;
+        return Packets.KICK_PACKET;
     }
 }
