@@ -29,4 +29,6 @@ public class Packets {
 
     public static final int EMAIL_ADD_PACKET = 19;
     public static final int EMAIL_VERIFY_PACKET = 20;
+    public static final int PASSWORD_RECOVERY_PACKET = 21;
+
 }

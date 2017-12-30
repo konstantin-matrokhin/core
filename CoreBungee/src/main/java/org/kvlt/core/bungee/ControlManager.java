@@ -30,9 +30,9 @@ public class ControlManager {
             add(new ConnectCommand());
             add(new LoginCommand());
             add(new RegisterCommand());
-            add(new EmailAddCommand());
+            add(new EmailCommand());
             add(new ReplyCommand());
-            add(new EmailAddCommand());
+            add(new EmailCommand());
         }};
 
         cmds.forEach(c -> plugin.getProxy().getPluginManager().registerCommand(plugin, c));
