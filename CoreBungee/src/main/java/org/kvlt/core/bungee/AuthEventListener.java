@@ -20,7 +20,6 @@ public class AuthEventListener implements Listener {
             add("/reg");
             add("/l");
             add("/login");
-            add("/email");
         }};
     }
 

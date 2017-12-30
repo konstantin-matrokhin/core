@@ -23,11 +23,10 @@ public class EmailAddPacket extends PlayerPacket {
         if (ensurePlayer()) {
             String code = CodeGenerator.genNiceCode().toUpperCase();
             getPlayer().setEmailConfirmationCode(code);
-            PlayerFactory.updatePlayer(getPlayer());
+            getPlayer().setEmail(playerEmail);
+            PlayerFactory.updatePlayer(getPlayer()); // ПРОВЕРЯТЬ ЕСТЬ ЛИ КОД В БАЗЕ - ЕСЛИ ДА, ТО ХУЙ ТЕБЕ А НЕ МЫЛО
             Email email = new Email(playerEmail);
             email.sendEmailConfirmation(getPlayer().getName(), code);
-        } else {
-
         }
     }
 

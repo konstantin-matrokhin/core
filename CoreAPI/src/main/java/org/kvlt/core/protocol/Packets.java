@@ -28,4 +28,5 @@ public class Packets {
     public static final int REPLY_PACKET = 18;
 
     public static final int EMAIL_ADD_PACKET = 19;
+    public static final int EMAIL_VERIFY_PACKET = 20;
 }

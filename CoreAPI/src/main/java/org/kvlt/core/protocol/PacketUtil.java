@@ -14,8 +14,8 @@ public class PacketUtil {
         return new String(bytes, CharsetUtil.UTF_8);
     }
 
-    public static void writeString(String text, ByteBuf byteBuf){
-        byte[] bytes = text.getBytes(CharsetUtil.UTF_8);
+    public static void writeString(String string, ByteBuf byteBuf){
+        byte[] bytes = string.getBytes(CharsetUtil.UTF_8);
         byteBuf.writeInt(bytes.length);
         byteBuf.writeBytes(bytes);
     }

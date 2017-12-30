@@ -33,6 +33,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new PrivateMessagePacket());
         resolver.registerPacket(new ReplyPacket());
         resolver.registerPacket(new EmailAddPacket());
+        resolver.registerPacket(new EmailVerifyPacket());
     }
 
     @Override
