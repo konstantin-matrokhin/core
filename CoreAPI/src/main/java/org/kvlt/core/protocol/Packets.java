@@ -32,4 +32,6 @@ public class Packets {
     public static final int PASSWORD_RECOVERY_PACKET = 21;
 
     public static final int PWD_PACKET = 22;
+
+    public static final int BAN_PACKET = 23;
 }

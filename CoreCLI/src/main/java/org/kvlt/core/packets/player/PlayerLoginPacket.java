@@ -26,6 +26,10 @@ public class PlayerLoginPacket implements PacketIn {
         IdPacket idPacket = new IdPacket(playerName, id);
         idPacket.send(channel);
 
+        if (player.isBanned()) {
+            new KickPacket(playerName, "Ban Hammer has spoken.").send(channel);
+        }
+
         PlayerLoginEvent ple = new PlayerLoginEvent(player);
         ple.invoke();
     }

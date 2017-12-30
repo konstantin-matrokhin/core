@@ -13,15 +13,19 @@ public class KickPacket extends CorePacketOut {
     private String targetName;
     private String reason;
 
+    public KickPacket(String targetName) {
+        this.targetName = targetName;
+    }
+
     public KickPacket(String targetName, String reason) {
         this.targetName = targetName;
-        this.reason = reason != null ? reason : DEFAULT_REASON;
+        this.reason = reason;
     }
 
     @Override
     public void write(ByteBuf out) {
         PacketUtil.writeString(targetName, out);
-        PacketUtil.writeString(reason, out);
+        PacketUtil.writeString(reason == null ? DEFAULT_REASON : reason, out);
     }
 
     @Override
