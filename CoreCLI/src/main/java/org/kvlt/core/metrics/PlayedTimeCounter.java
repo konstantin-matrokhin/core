@@ -5,6 +5,8 @@ import org.kvlt.core.entities.ServerPlayer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,8 +16,16 @@ public class PlayedTimeCounter {
 
     public static final SimpleDateFormat sdf;
 
+    private static final Map<Character, TimeUnit> timeMap;
+
     static {
         sdf = new SimpleDateFormat("mm:ss");
+
+        timeMap = new HashMap<Character, TimeUnit>() {{
+            put('h', TimeUnit.HOURS);
+            put('m', TimeUnit.MINUTES);
+            put('d', TimeUnit.DAYS);
+        }};
     }
 
     public static boolean inSessionRange(long time) {
@@ -49,5 +59,11 @@ public class PlayedTimeCounter {
     public static String getFormatedTime(long time) {
         Date date = new Date(time);
         return sdf.format(date);
+    }
+
+    public static long parseTime(String time) {
+        char lastChar = time.charAt(time.length());
+        long timePart = Long.valueOf(time.substring(0, time.length() - 1));
+        //TODO convert
     }
 }
