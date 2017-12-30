@@ -64,6 +64,12 @@ public class PlayedTimeCounter {
     public static long parseTime(String time) {
         char lastChar = time.charAt(time.length());
         long timePart = Long.valueOf(time.substring(0, time.length() - 1));
-        //TODO convert
+        for (Map.Entry timeEntry: timeMap.entrySet()) {
+            if (lastChar == (char) timeEntry.getKey()) {
+                TimeUnit timeUnit = (TimeUnit) timeEntry.getValue();
+                return timeUnit.toMillis(timePart);
+            }
+        }
+        return -1;
     }
 }

@@ -43,25 +43,31 @@ public class BanPacket implements PacketIn {
             level = 1000;
         }
 
-        if (level > Group.HELPER.getId()) {
+        if (level >= Group.JUNIOR.getLevel()) {
             ServerPlayer victimPlayer;
+
             if (CoreServer.get().getOnlinePlayers().contains(victim)) {
                 victimPlayer = CoreServer.get().getOnlinePlayers().get(victim);
             } else {
                 victimPlayer = PlayerFactory.loadPlayer(victim, false);
-                if (victimPlayer != null) {
-                    long parsedTime = PlayedTimeCounter.parseTime(time);
-                    victimPlayer.setBanned(true);
-                    victimPlayer.setBannedBy(enforcer);
-                    victimPlayer.setBannedUntil(parsedTime);
-                    victimPlayer.setBanAmount(victimPlayer.getBanAmount() + 1);
-                    victimPlayer.setBanReason(reason);
-                    PlayerFactory.updatePlayer(victimPlayer);
-                } else {
-                    response = "Нет такого игрока в базе!";
-                }
             }
-            response = "Успешно!";
+
+            if (victimPlayer != null) {
+                long parsedTime = PlayedTimeCounter.parseTime(time);
+
+                victimPlayer.setBanned(true);
+                victimPlayer.setBannedBy(enforcer);
+                victimPlayer.setBannedUntil(parsedTime);
+                victimPlayer.setBanAmount(victimPlayer.getBanAmount() + 1);
+                victimPlayer.setBanReason(reason);
+
+                PlayerFactory.updatePlayer(victimPlayer);
+                new KickPacket(victim, String.format("БАН: %s", reason)).send();
+
+                response = String.format("Вы забанили %s.", victim);
+            } else {
+                response = "Нет такого игрока в базе!";
+            }
         } else {
             response = "Недостаточно прав!";
         }
