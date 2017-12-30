@@ -49,6 +49,12 @@ public class Email {
         loadTemplates();
     }
 
+    public void sendPasswordChange(String name) {
+        String formattedEmail = passwordChangeEmail
+                .replace("%name%", name);
+        send("Пароль успешно изменен // LastCraft", formattedEmail);
+    }
+
     public void sendPasswordRecovery(String name, String password) {
         String formattedEmail = passwordRecoveryEmail
                 .replace("%name%", name)

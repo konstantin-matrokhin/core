@@ -33,6 +33,7 @@ public class ControlManager {
             add(new EmailCommand());
             add(new ReplyCommand());
             add(new EmailCommand());
+            add(new PwdCommand());
         }};
 
         cmds.forEach(c -> plugin.getProxy().getPluginManager().registerCommand(plugin, c));
