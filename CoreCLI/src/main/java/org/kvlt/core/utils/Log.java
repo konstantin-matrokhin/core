@@ -28,4 +28,9 @@ public class Log {
         System.out.println("[" + time + "][" + level + "] " + str);
     }
 
+    public enum LogType {
+        ERROR, WARN, INFO
+    }
+
+
 }

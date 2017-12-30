@@ -8,9 +8,10 @@ public class CoreCLI {
 
     private CoreCLI() {}
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         Config.init();
         HibernateInitiaizer.start();
+        Class.forName("org.kvlt.core.email.Email");
         CoreServer.get().start();
     }
 

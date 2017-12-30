@@ -4,6 +4,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 
+@Deprecated
 public class YamlConfig {
 
     public static final String PLUGINS_DIR_NAME = "plugins";

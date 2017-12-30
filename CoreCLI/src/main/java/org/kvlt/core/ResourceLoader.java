@@ -11,12 +11,7 @@ public class ResourceLoader {
      */
     public static InputStream newResourceStream(String fileName) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        try {
-            System.out.println(classLoader.getResources("./").nextElement().toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return classLoader.getResourceAsStream("./" + fileName);
+        return classLoader.getResourceAsStream(fileName);
     }
 
 }

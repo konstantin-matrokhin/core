@@ -6,7 +6,7 @@ public class DieCommand extends Command {
 
     public DieCommand() {
         super("die");
-        addAliases("diepls");
+        addAliases("diepls", "end", "stop");
     }
 
     @Override
