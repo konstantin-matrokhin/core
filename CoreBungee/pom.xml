@@ -33,7 +33,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <outputDirectory>C:\Users\remillary\Desktop\lc-proxy\plugins\</outputDirectory>
+                    <outputDirectory>D:\lc-proxy\plugins\</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -68,7 +68,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <scp localFile="C:\Users\remillary\Desktop\lc-proxy\plugins\CoreBungee-1.0-jar-with-dependencies.jar"
+                                <scp localFile="D:\lc-proxy\plugins\CoreBungee-1.0-jar-with-dependencies.jar"
                                      remoteToFile="root@build.huesos228.com:/home/core/bungee/plugins/" verbose="true"
                                      password="hubqdoFDG34SDG1" trust="true" port="1">
                                 </scp>

@@ -7,6 +7,7 @@ import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.utils.Log;
 
 import static org.kvlt.core.protocol.Packets.PLAYER_REG_PACKET;
 
@@ -32,9 +33,10 @@ public class PlayerRegisterPacket extends PlayerPacket {
         String response;
         String dbPassword = unloggedPlayer.getPassword();
 
-        if (!ensurePlayer()) { // checking if player is logged in
+        if (!ensurePlayer()) { // checking if player is logged in TODO: ITS NOT VALID!
             if (dbPassword == null || dbPassword.isEmpty()) {
                 PlayerFactory.register(unloggedPlayer, password);
+                Log.$(String.format("%s зарегистрировался.", name));
                 response = "Вы успешно зарегистировались!";
             } else {
                 response = "Вы уже зарегистрированы!";

@@ -15,12 +15,20 @@ public class PwdCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (!(sender instanceof ProxiedPlayer)) return;
+        if (!(sender instanceof ProxiedPlayer)) {
+            sender.sendMessage(new TextComponent("Возможно, вы имели в виду /auth changepassword?"));
+            return;
+        }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
         String name = player.getName();
 
-        if (!ProxyLoggedPlayers.isLogged(name)) return;
+        if (!ProxyLoggedPlayers.isLogged(name)) {
+            player.sendMessage(new TextComponent("Сначала войдите (/login <пароль>). Если вы забыли\n" +
+                    "пароль, то восстановите его (/email recovery <привязанный email>).\n" +
+                    "Если email не привязан, то обратитесь к администратору."));
+            return;
+        };
 
         String oldPassword = args[0];
         String newPassword = args[1];
@@ -28,7 +36,7 @@ public class PwdCommand extends Command {
         if (!oldPassword.equals(newPassword)) {
             new PwdPacket(name, oldPassword, newPassword).send();
         } else {
-            player.sendMessage(new TextComponent("Пароли совпадают!"));
+            player.sendMessage(new TextComponent("Пароли совпадают! Новый пароль должен отличаться от старого."));
         }
     }
 }

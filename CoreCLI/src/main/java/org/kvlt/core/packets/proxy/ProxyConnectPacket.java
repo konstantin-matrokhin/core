@@ -21,7 +21,7 @@ public class ProxyConnectPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        Log.$(String.format("Прокси-севрер присоединен (%s)", name));
+        Log.$(String.format("[+] Прокси-севрер присоединен (%s)", name));
         Proxy p = new Proxy(name, channel);
 
         MotdPacket motdPacket = new MotdPacket(Config.getProxy("motd"));

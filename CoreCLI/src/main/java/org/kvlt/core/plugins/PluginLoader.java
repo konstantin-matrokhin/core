@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import org.kvlt.core.utils.Log;
-import org.kvlt.core.utils.LogType;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,7 +77,7 @@ public class PluginLoader {
             if (added) {
                 pm.loadPlugin(p);
             } else {
-                Log.$(LogType.ERROR, "Плагин " + name + " не загружен!");
+                Log.err("Плагин " + name + " не загружен!");
             }
         } catch (Exception e) {
             e.printStackTrace();

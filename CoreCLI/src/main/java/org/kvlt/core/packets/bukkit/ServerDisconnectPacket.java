@@ -20,7 +20,7 @@ public class ServerDisconnectPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        System.out.println(String.format("Сервер отключен (%s)", name));
+        System.out.println(String.format("[-] Сервер отключен (%s)", name));
         GameServer gs = CoreServer.get().getGameServers().getNode(name);
         CoreServer.get().getGameServers().removeNode(gs);
 

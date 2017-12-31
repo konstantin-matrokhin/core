@@ -38,7 +38,7 @@ public class PlayerPreLoginPacket implements PacketIn {
 
             CoreServer.get().getUnloggedPlayers().add(player);
             CoreServer.get().getOnlinePlayers().add(player);
-            System.out.println(String.format("Игрок %s подключился", playerName));
+            System.out.println(String.format("[+] Игрок %s подключился", playerName));
 
             PlayerPreLoginEvent prle = new PlayerPreLoginEvent(player);
             prle.invoke();

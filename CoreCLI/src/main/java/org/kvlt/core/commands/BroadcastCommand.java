@@ -3,9 +3,7 @@ package org.kvlt.core.commands;
 import org.kvlt.core.packets.Destination;
 import org.kvlt.core.packets.proxy.BroadcastPacket;
 import org.kvlt.core.utils.Log;
-import org.kvlt.core.utils.LogType;
 import org.kvlt.core.utils.Printer;
-import sun.jvm.hotspot.DebugServer;
 
 import java.util.Arrays;
 
@@ -31,7 +29,7 @@ public class BroadcastCommand extends Command {
         hasDestination = destination.startsWith("@");
 
         startFrom = hasDestination ? 1 : 0;
-        minArgs = hasDestination ? 2 : 1;
+        minArgs = startFrom + 1;
 
         String[] wordsArray = Arrays.copyOfRange(getArgs(), startFrom, getArgs().length);
         String words = String.join(" ", wordsArray);
@@ -44,7 +42,7 @@ public class BroadcastCommand extends Command {
         String finalDestination = hasDestination ? destination : "@all";
 
         new BroadcastPacket(words).send(Destination.BUNGEE, finalDestination);
-        Log.$(LogType.BROADCAST, words);
+        Log.$(words);
 
         return true;
     }

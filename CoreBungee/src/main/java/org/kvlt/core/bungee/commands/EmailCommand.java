@@ -27,7 +27,10 @@ public class EmailCommand extends Command {
     public void execute(CommandSender sender, String[] args) {
         ProxiedPlayer player;
 
-        if (args.length < 2) return;
+        if (args.length < 2) {
+            sender.sendMessage(new TextComponent("/email <add/verify/confirm/recovery> [email]"));
+            return;
+        }
 
         if (sender instanceof ProxiedPlayer) {
             player = (ProxiedPlayer) sender;
@@ -40,7 +43,10 @@ public class EmailCommand extends Command {
 
         switch (action) {
             case "add":
-                if (!ProxyLoggedPlayers.isLogged(name)) return;
+                if (!ProxyLoggedPlayers.isLogged(name)) {
+                    player.sendMessage(new TextComponent("Сначала залогиньтесь!"));
+                    return;
+                }
 
                 String email = args[1];
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
@@ -50,15 +56,19 @@ public class EmailCommand extends Command {
                     player.sendMessage(new TextComponent("Введите команду /email verify [код] для подтверждения почты."));
                 } else {
                     player.sendMessage(new TextComponent("Введите корректный email!"));
-                    return;
                 }
                 break;
             case "verify":
-                if (!ProxyLoggedPlayers.isLogged(name)) return;
+                if (!ProxyLoggedPlayers.isLogged(name)) {
+                    player.sendMessage(new TextComponent("Сначала залогиньтесь!"));
+                    return;
+                }
 
                 String code = args[1];
                 if (code.length() == CODE_LENGTH) {
                     new EmailVerifyPacket(name, code).send();
+                } else {
+                    player.sendMessage(new TextComponent("Код состоит из 5 латинских букв!"));
                 }
                 break;
             case "recovery":

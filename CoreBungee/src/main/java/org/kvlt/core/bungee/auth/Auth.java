@@ -75,7 +75,6 @@ public class Auth {
             e.printStackTrace();
         }
 
-        System.out.println("LOGGING IN..");
         if (dbPassword != null && dbIp != null) {
             if (password.equals(dbPassword)) {
                 ProxyLoggedPlayers.logIn(player);
@@ -84,7 +83,7 @@ public class Auth {
                 pp.sendMessage("Неверный пароль!");
             }
         } else {
-            pp.sendMessage("Вы не зарегистрированы! (2)");
+            pp.sendMessage("Вы не зарегистрированы!");
         }
 
         return false;
@@ -124,11 +123,7 @@ public class Auth {
                     pp.sendMessage("Вас не было слишком давно, введите пароль.");
                     pp.sendMessage("last auth = " + TimeUnit.MILLISECONDS.toHours(lastAuth) + ", delta = " + TimeUnit.MILLISECONDS.toHours(timeInterval));
                 }
-            } else {
-                pp.sendMessage("IP не совпадают!");
             }
-        } else {
-            pp.sendMessage("Вы не зарегистрированы, поэтому сессия не прошла!");
         }
         return false;
     }

@@ -26,8 +26,7 @@ public class ControlManager {
 
     public void registerCoreCommands() {
         List<Command> cmds = new ArrayList<Command>() {{
-            add(new PingCommand());
-            add(new ConnectCommand());
+            add(new ReconnectCommand());
             add(new LoginCommand());
             add(new RegisterCommand());
             add(new EmailCommand());

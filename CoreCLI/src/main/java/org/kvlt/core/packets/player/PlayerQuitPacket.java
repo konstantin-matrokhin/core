@@ -23,7 +23,7 @@ public class PlayerQuitPacket implements PacketIn {
         ServerPlayer op = CoreServer.get().getOnlinePlayers().get(playerName);
         CoreServer.get().getOnlinePlayers().remove(playerName);
 
-        System.out.println(playerName + " вышел.");
+        System.out.println(String.format("[-] %s вышел.", playerName));
 
         PlayerQuitEvent pqe = new PlayerQuitEvent(op);
         pqe.invoke();

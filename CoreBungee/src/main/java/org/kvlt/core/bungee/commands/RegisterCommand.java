@@ -13,17 +13,23 @@ public class RegisterCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String[] args) {
-        if (args.length != 2) return;
-        if (!(commandSender instanceof ProxiedPlayer)) return;
+    public void execute(CommandSender sender, String[] args) {
+        if (args.length != 2) {
+            sender.sendMessage(new TextComponent("/register <пароль> <пароль>"));
+            return;
+        };
+        if (!(sender instanceof ProxiedPlayer)) {
+            sender.sendMessage(new TextComponent("Команда только для игроков!"));
+            return;
+        }
 
-        ProxiedPlayer p = (ProxiedPlayer) commandSender;
+        ProxiedPlayer p = (ProxiedPlayer) sender;
 
         String password = args[0];
         String passwordRepeat = args[1];
 
         if (!password.equals(passwordRepeat)) {
-            p.sendMessage(new TextComponent("Пароли не совпадают"));
+            p.sendMessage(new TextComponent("Пароли не совпадают!"));
         } else {
             RegisterPacket rp = new RegisterPacket(p.getName(), password);
             rp.send();

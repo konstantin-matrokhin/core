@@ -21,7 +21,7 @@ public class ServerConnectPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        System.out.println(String.format("Сервер присоединен (%s)", name));
+        System.out.println(String.format("[+] Сервер присоединен (%s)", name));
         GameServer gs = new GameServer(name, port, channel);
         ServerConnectEvent sce = new ServerConnectEvent(gs);
         sce.invoke();

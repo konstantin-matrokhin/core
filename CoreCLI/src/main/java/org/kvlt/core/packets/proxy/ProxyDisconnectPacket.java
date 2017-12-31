@@ -21,7 +21,7 @@ public class ProxyDisconnectPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        Log.$(String.format("Прокси-сервер %s отсоединился", name));
+        Log.$(String.format("[-] Прокси-сервер %s отсоединился", name));
 
         Proxy proxy = CoreServer.get().getProxies().getNode(name);
         CoreServer.get().getProxies().removeNode(proxy);

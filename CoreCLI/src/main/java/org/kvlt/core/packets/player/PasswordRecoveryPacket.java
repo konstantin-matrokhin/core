@@ -7,6 +7,7 @@ import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.Log;
 
 public class PasswordRecoveryPacket extends PlayerPacket {
 
@@ -30,6 +31,10 @@ public class PasswordRecoveryPacket extends PlayerPacket {
                         email.substring(email.lastIndexOf("."));
 
                 recoveryMail.sendPasswordRecovery(name, getPlayer().getPassword());
+                Log.$(String.format("%s запросил пароль на %s",
+                        name,
+                        email));
+
                 response = String.format("На ваш email %s отправлен пароль", hiddenEmail);
             } else {
                 response = "Вы не подтвердили ваш email!";

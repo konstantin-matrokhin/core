@@ -8,6 +8,7 @@ import org.kvlt.core.events.player.PlayerLoginEvent;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.Log;
 
 public class PlayerLoginPacket implements PacketIn {
 
@@ -27,7 +28,10 @@ public class PlayerLoginPacket implements PacketIn {
         idPacket.send(channel);
 
         if (player.isBanned()) {
-            new KickPacket(playerName, "Ban Hammer has spoken.").send(channel);
+            String reason = player.getBanReason();
+            new KickPacket(playerName, reason).send(channel);
+            Log.$(String.format("%s хотел войти, но забанен (%s)", playerName, reason));
+            return;
         }
 
         PlayerLoginEvent ple = new PlayerLoginEvent(player);

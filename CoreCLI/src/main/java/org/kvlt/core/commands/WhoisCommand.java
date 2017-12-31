@@ -21,7 +21,10 @@ public class WhoisCommand extends Command {
 
     @Override
     protected boolean execute() {
-        if (getArgs().length != 1) return false;
+        if (getArgs().length != 1) {
+            Printer.$("Введите имя игрока.");
+            return false;
+        }
         String name = getArg(0);
 
         Runnable r = () -> {

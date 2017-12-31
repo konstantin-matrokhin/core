@@ -13,15 +13,20 @@ public class LoginCommand extends Command {
     }
 
     @Override
-    public void execute(CommandSender commandSender, String[] args) {
-        if (args.length != 1) return;
-        if (!(commandSender instanceof ProxiedPlayer)) return;
+    public void execute(CommandSender sender, String[] args) {
+        if (args.length != 1) {
+            sender.sendMessage(new TextComponent("/login <пароль>"));
+            return;
+        }
+        if (!(sender instanceof ProxiedPlayer)) return;
 
-        ProxiedPlayer p = (ProxiedPlayer) commandSender;
+        ProxiedPlayer p = (ProxiedPlayer) sender;
         String password = args[0];
 
         if (Auth.passwordAuth(p.getName(), password)) {
             p.sendMessage(new TextComponent("Вы успешно вошли!"));
+        } else {
+            p.sendMessage(new TextComponent("Неверный пароль!"));
         }
 
     }
