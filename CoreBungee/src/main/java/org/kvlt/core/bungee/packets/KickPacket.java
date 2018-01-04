@@ -5,6 +5,7 @@ import io.netty.channel.Channel;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.protocol.DefinedPacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 
@@ -26,7 +27,7 @@ public class KickPacket implements PacketIn {
         ProxiedPlayer player = ProxyServer.getInstance().getPlayer(name);
 
         if (player != null) {
-            player.disconnect(TextComponent.fromLegacyText(reason));
+            player.disconnect(new TextComponent(reason));
         }
     }
 

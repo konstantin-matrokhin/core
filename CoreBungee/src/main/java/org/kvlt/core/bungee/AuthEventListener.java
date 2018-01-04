@@ -5,6 +5,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import org.kvlt.core.bungee.storages.Infractions;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
 import java.util.ArrayList;
@@ -31,7 +32,13 @@ public class AuthEventListener implements Listener {
         ProxiedPlayer sender = (ProxiedPlayer) event.getSender();
         String playerName = sender.getName();
         String message = event.getMessage();
-        boolean isCommand = event.isCommand();
+
+        if (Infractions.isMuted(playerName)) {
+            if (!event.isCommand()) {
+                sender.sendMessage(new TextComponent("У вас мут!"));
+                event.setCancelled(true);
+            }
+        }
 
         if (!ProxyLoggedPlayers.isLogged(playerName)) {
             if (event.isCommand()) {

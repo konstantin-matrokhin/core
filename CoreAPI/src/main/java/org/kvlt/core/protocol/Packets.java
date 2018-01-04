@@ -37,4 +37,5 @@ public class Packets {
 
     public static final int BROADCAST_PACKET = 24;
 
+    public static final int MUTE_PACKET = 25;
 }
