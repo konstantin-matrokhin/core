@@ -39,6 +39,7 @@ public class CommandListener {
         registerCommand(new PluginsCommand());
         registerCommand(new ReloadEmailsCommand());
         registerCommand(new KickCommand());
+        registerCommand(new BanCommand());
 
     }
 

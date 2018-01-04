@@ -100,6 +100,13 @@
     </build>
 
     <dependencies>
+
+        <dependency>
+            <groupId>net.lastcraft</groupId>
+            <artifactId>darta-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>

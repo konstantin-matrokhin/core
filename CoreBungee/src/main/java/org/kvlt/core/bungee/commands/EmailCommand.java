@@ -9,6 +9,7 @@ import org.kvlt.core.bungee.packets.EmailVerifyPacket;
 import org.kvlt.core.bungee.packets.PasswordRecoveryPacket;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,7 +28,7 @@ public class EmailCommand extends Command {
     public void execute(CommandSender sender, String[] args) {
         ProxiedPlayer player;
 
-        if (args.length < 2) {
+        if (args.length < 1) {
             sender.sendMessage(new TextComponent("/email <add/verify/confirm/recovery> [email]"));
             return;
         }
@@ -40,20 +41,19 @@ public class EmailCommand extends Command {
 
         String name = player.getName();
         String action = args[0].toLowerCase();
+        Optional<String> email = Optional.ofNullable(args[1]);
 
         switch (action) {
             case "add":
+                if (!email.isPresent()) return;
+
                 if (!ProxyLoggedPlayers.isLogged(name)) {
                     player.sendMessage(new TextComponent("Сначала залогиньтесь!"));
                     return;
                 }
-
-                String email = args[1];
-                Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+                Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email.get());
                 if (matcher.find()) {
-                    new EmailAddPacket(name, email).send();
-                    player.sendMessage(new TextComponent(String.format("На ваш email %s отправлено письмо с кодом.", email)));
-                    player.sendMessage(new TextComponent("Введите команду /email verify [код] для подтверждения почты."));
+                    new EmailAddPacket(name, email.get()).send();
                 } else {
                     player.sendMessage(new TextComponent("Введите корректный email!"));
                 }

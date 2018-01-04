@@ -15,6 +15,7 @@ public class PacketUtil {
     }
 
     public static void writeString(String string, ByteBuf byteBuf){
+        if (string == null) throw new NullPointerException("string cannot be null!");
         byte[] bytes = string.getBytes(CharsetUtil.UTF_8);
         byteBuf.writeInt(bytes.length);
         byteBuf.writeBytes(bytes);

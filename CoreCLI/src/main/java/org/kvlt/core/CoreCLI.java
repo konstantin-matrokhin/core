@@ -1,8 +1,7 @@
 package org.kvlt.core;
 
 import org.kvlt.core.config.Config;
-import org.kvlt.core.db.HibernateInitiaizer;
-import org.kvlt.core.email.Email;
+import org.kvlt.core.db.HibernateInitializer;
 
 public class CoreCLI {
 
@@ -10,7 +9,7 @@ public class CoreCLI {
 
     public static void main(String[] args) throws ClassNotFoundException {
         Config.init();
-        HibernateInitiaizer.start();
+        HibernateInitializer.start();
         Class.forName("org.kvlt.core.email.Email");
         CoreServer.get().start();
     }

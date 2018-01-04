@@ -36,7 +36,7 @@ public class BanPacket implements PacketIn {
         if (!enforcer.equalsIgnoreCase("console")) {
             ServerPlayer enforcerPlayer = CoreServer.get().getOnlinePlayers().get(enforcer);
             if (enforcerPlayer != null) {
-                level = enforcerPlayer.getGroup();
+                level = Group.getGroup(enforcerPlayer.getGroup()).getLevel();
             } else {
                 return;
             }

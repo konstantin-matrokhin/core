@@ -37,6 +37,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new PasswordRecoveryPacket());
         resolver.registerPacket(new PwdPacket());
         resolver.registerPacket(new BanPacket());
+        resolver.registerPacket(new KickRequestPacket());
     }
 
     @Override

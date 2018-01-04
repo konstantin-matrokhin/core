@@ -36,6 +36,17 @@ public class PlayerPreLoginPacket implements PacketIn {
             player.setIp(ip);
             player.setCurrentProxy(proxy);
 
+            int id = player.getId();
+            IdPacket idPacket = new IdPacket(playerName, id);
+            idPacket.send(channel);
+
+            if (player.isBanned()) {
+                String reason = player.getBanReason();
+                new KickPacket(playerName, reason).send(channel);
+                Log.$(String.format("%s хотел войти, но забанен (%s)", playerName, reason));
+                return;
+            }
+
             CoreServer.get().getUnloggedPlayers().add(player);
             CoreServer.get().getOnlinePlayers().add(player);
             System.out.println(String.format("[+] Игрок %s подключился", playerName));

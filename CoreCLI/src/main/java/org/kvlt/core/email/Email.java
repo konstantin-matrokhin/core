@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -35,6 +33,7 @@ public class Email {
 
     static {
         props = new Properties();
+
         props.put("mail.smtp.host", Config.getSMTP("host"));
         props.put("mail.smtp.port", Config.getSMTP("port"));
         props.put("mail.smtp.socketFactory.port", Config.getSMTP("port"));
@@ -47,6 +46,14 @@ public class Email {
         session = createSession();
 
         loadTemplates();
+    }
+
+    public void sendChangeConfirmEmail() {
+
+    }
+
+    public void sendChangeEmail() {
+
     }
 
     public void sendPasswordChange(String name) {

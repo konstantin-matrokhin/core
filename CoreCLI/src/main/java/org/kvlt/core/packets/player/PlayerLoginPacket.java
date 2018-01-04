@@ -3,6 +3,7 @@ package org.kvlt.core.packets.player;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.CoreServer;
+import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerLoginEvent;
 import org.kvlt.core.protocol.PacketIn;
@@ -21,18 +22,7 @@ public class PlayerLoginPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer player = CoreServer.get().getUnloggedPlayers().get(playerName);
-
-        int id = player.getId();
-        IdPacket idPacket = new IdPacket(playerName, id);
-        idPacket.send(channel);
-
-        if (player.isBanned()) {
-            String reason = player.getBanReason();
-            new KickPacket(playerName, reason).send(channel);
-            Log.$(String.format("%s хотел войти, но забанен (%s)", playerName, reason));
-            return;
-        }
+        ServerPlayer player = CoreServer.get().getOnlinePlayers().get(playerName);
 
         PlayerLoginEvent ple = new PlayerLoginEvent(player);
         ple.invoke();

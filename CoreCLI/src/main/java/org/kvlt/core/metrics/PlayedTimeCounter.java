@@ -62,14 +62,18 @@ public class PlayedTimeCounter {
     }
 
     public static long parseTime(String time) {
-        char lastChar = time.charAt(time.length());
-        long timePart = Long.valueOf(time.substring(0, time.length() - 1));
+        long currentTime = System.currentTimeMillis();
+        char lastChar = time.charAt(time.length() - 1);
+
+        if (lastChar == 'e') return -1;
+
+        long timePart = Long.valueOf(time.substring(0, time.length() - 2));
         for (Map.Entry timeEntry: timeMap.entrySet()) {
             if (lastChar == (char) timeEntry.getKey()) {
                 TimeUnit timeUnit = (TimeUnit) timeEntry.getValue();
-                return timeUnit.toMillis(timePart);
+                return currentTime + timeUnit.toMillis(timePart);
             }
         }
-        return -1;
+        return 0;
     }
 }

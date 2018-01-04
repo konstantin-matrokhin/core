@@ -4,7 +4,10 @@ import io.netty.util.internal.ConcurrentSet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.kvlt.core.entities.Group;
 import org.kvlt.core.entities.ServerPlayer;
+import org.kvlt.core.metrics.PlayedTimeCounter;
+import org.kvlt.core.utils.Log;
 
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
@@ -21,7 +24,7 @@ public class PlayerFactory {
     static {
         queries = new ConcurrentSet<>();
         executor = Executors.newSingleThreadExecutor();
-        sessionFactory = HibernateInitiaizer.getSessionFactory();
+        sessionFactory = HibernateInitializer.getSessionFactory();
     }
 
     public static void addTask(Runnable r) {
@@ -87,5 +90,21 @@ public class PlayerFactory {
         player.setRegisterIp(player.getIp());
         player.setLastAuth(System.currentTimeMillis());
         updatePlayer(player);
+    }
+
+    public static void ban(ServerPlayer player, String enforcer, String until, String reason) {
+        player.setBanned(true);
+        player.setBannedUntil(PlayedTimeCounter.parseTime(until));
+        player.setBannedBy(enforcer);
+        player.setBanReason(reason);
+        player.setBanAmount(player.getBanAmount() + 1);
+        player.kick(reason);
+        updatePlayer(player);
+
+        Log.$(String.format("%s забанен: %s", player.getName(), reason));
+    }
+
+    public static boolean isStaff(ServerPlayer player) {
+        return Group.getGroup(player.getGroup()).getLevel() >= Group.JUNIOR.getLevel();
     }
 }
