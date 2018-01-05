@@ -13,7 +13,7 @@ public abstract class CorePacketOut implements PacketOut {
 
         if (dest == null || dest.equals(Destination.BUKKIT)) {
             node = Finder.getGameServers(nodeName);
-        } else if (dest.equals(Destination.BUNGEE)) {
+        } else {
             node = Finder.getProxies(nodeName);
         }
 

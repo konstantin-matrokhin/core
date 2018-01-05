@@ -7,7 +7,8 @@ import java.util.Map;
 
 public class EmailChangeData {
 
-    // List = NAME, CODE_1, CODE_2
+    // String = NAME
+    // List = EMAIL, CODE_1, CODE_2
     private static Map<String, List<String>> emailData;
 
     static {

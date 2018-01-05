@@ -23,3 +23,5 @@ commands:
   con:
     aliases: [connect, core, coreconnect, cc]
     usage: /connect
+  server:
+    usage: /server <server_name>

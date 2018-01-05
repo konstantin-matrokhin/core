@@ -42,6 +42,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new KickRequestPacket());
         resolver.registerPacket(new EmailChangePacket());
         resolver.registerPacket(new EmailChangeVerifyPacket());
+        resolver.registerPacket(new TransferRequestPacket());
     }
 
     @Override

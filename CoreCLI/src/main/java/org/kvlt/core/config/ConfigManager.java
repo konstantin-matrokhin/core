@@ -64,7 +64,7 @@ public class ConfigManager {
 
     public boolean createConfig() throws Exception {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classLoader.getResourceAsStream("./" + fileName);
+        InputStream is = classLoader.getResourceAsStream(fileName);
         Files.copy(is, config.toPath());
         return true;
     }

@@ -4,11 +4,14 @@
   },
 
   "mysql": {
-    "host": "build.huesos228.com",
-    "port": 3306,
-    "db": "core",
+    "driver": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://build.huesos228.com:3306/core?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoReconnect=true",
     "user": "root",
-    "password": "12345"
+    "password": "12345",
+    "dialect": "org.hibernate.dialect.MySQL5InnoDBDialect",
+    "show_sql": true,
+    "format_sql": true,
+    "mode": "update"
   },
 
   "proxy": {

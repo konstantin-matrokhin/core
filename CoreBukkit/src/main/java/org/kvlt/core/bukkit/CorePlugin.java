@@ -30,6 +30,7 @@ public class CorePlugin extends JavaPlugin {
         getCommand("reply").setExecutor(new ReplyCommand());
         getCommand("connect").setExecutor(new ConnectCommand());
         getCommand("ban").setExecutor(new BanCommand());
+        getCommand("server").setExecutor(new ServerCommand());
 
         ConfigManager.initConfig();
         ConnectionManager.get().startClient();

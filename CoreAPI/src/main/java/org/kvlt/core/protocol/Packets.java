@@ -40,4 +40,7 @@ public class Packets {
 
     public static final int BROADCAST_PACKET = 24;
 
+    public static final int HUB_PACKET = 28;
+    public static final int PLAYER_TRANSFER_PACKET = 29;
+
 }

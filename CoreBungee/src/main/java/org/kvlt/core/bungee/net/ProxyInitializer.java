@@ -23,6 +23,7 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
         resolver.registerPacket(new AuthPacket());
         resolver.registerPacket(new IdPacket());
         resolver.registerPacket(new BroadcastPacket());
+        resolver.registerPacket(new TransferPacket());
     }
 
     @Override
