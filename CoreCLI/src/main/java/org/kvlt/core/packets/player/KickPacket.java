@@ -2,7 +2,6 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import org.kvlt.core.packets.CorePacketOut;
-import org.kvlt.core.packets.Destination;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
@@ -26,11 +25,6 @@ public class KickPacket extends CorePacketOut {
     public void write(ByteBuf out) {
         PacketUtil.writeString(targetName, out);
         PacketUtil.writeString(reason == null ? DEFAULT_REASON : reason, out);
-    }
-
-    @Override
-    public void send() {
-        send(Destination.BUNGEE);
     }
 
     @Override

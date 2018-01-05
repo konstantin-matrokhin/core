@@ -2,7 +2,9 @@ package org.kvlt.core.plugins;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 @Deprecated
 public class YamlConfig {

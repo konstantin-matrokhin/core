@@ -29,13 +29,15 @@ public class Packets {
     public static final int EMAIL_ADD_PACKET = 19;
     public static final int EMAIL_VERIFY_PACKET = 20;
     public static final int PASSWORD_RECOVERY_PACKET = 21;
+    public static final int EMAIL_CHANGE_PACKET = 26;
+    public static final int EMAIL_CHANGE_VERIFY_PACKET = 27;
 
     public static final int PWD_PACKET = 22;
 
     public static final int KICK_PACKET = 12;
     public static final int BAN_PACKET = 23;
+    public static final int MUTE_PACKET = 25;
 
     public static final int BROADCAST_PACKET = 24;
 
-    public static final int MUTE_PACKET = 25;
 }

@@ -66,7 +66,7 @@ public class ConnectionManager {
                     BungeeLog.$("Подключено!");
                 }
             });
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }

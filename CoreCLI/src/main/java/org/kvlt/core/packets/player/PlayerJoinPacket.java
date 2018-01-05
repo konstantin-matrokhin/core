@@ -7,7 +7,6 @@ import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerJoinEvent;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
-import org.kvlt.core.utils.Log;
 
 public class PlayerJoinPacket extends PlayerPacket {
 

@@ -13,9 +13,7 @@ public class WhoCommand extends Command {
     public boolean execute() {
         final StringBuilder players = new StringBuilder();
 
-        CoreServer.get().getOnlinePlayers().forEach(p -> {
-            players.append(p.getName()).append(" ");
-        });
+        CoreServer.get().getOnlinePlayers().forEach(p -> players.append(p.getName()).append(" "));
 
         Printer.$("Подключенные игроки(" + CoreServer.get().getOnlinePlayers().size() + "):");
         Printer.$(players.toString().isEmpty() ? "Никого нет" : players.toString());

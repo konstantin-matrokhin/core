@@ -127,7 +127,7 @@ CoreServer.get().getEventManager().registerListener(coreListener);
 ```
 Регистрация команд
 ```java
-CoreServer.get().getCommmandListener().register(new TestPluginCommand());
+CoreServer.get().getCommandListener().register(new TestPluginCommand());
 ```
 TestPluginCommandjava
 ```java

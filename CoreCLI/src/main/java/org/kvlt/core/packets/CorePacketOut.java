@@ -20,6 +20,9 @@ public abstract class CorePacketOut implements PacketOut {
         node.send(this);
     }
 
+    @Override
+    public void send() {}
+
     public void send(Destination dest) {
         send(dest, "@all");
     }

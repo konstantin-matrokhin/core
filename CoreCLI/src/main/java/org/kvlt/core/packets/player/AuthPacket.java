@@ -19,11 +19,6 @@ public class AuthPacket extends CorePacketOut {
     }
 
     @Override
-    public void send() {
-
-    }
-
-    @Override
     public int getId() {
         return Packets.PLAYER_AUTH_PACKET;
     }

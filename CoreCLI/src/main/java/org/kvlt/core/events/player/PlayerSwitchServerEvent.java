@@ -1,7 +1,6 @@
 package org.kvlt.core.events.player;
 
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.nodes.GameServer;
 
 public class PlayerSwitchServerEvent extends PlayerEvent {

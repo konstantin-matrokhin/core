@@ -102,7 +102,7 @@ public class ServerPlayer implements Serializable, Kickable {
     private String email;
 
     @Column(table = "authentication", name = "email_confirmed")
-    private boolean isEmailConfimed;
+    private boolean isEmailConfirmed;
 
     @Column(table = "authentication", name = "email_confirmation_code", length = 32)
     private String emailConfirmationCode;
@@ -405,12 +405,12 @@ public class ServerPlayer implements Serializable, Kickable {
         this.email = email;
     }
 
-    public boolean isEmailConfimed() {
-        return isEmailConfimed;
+    public boolean isEmailConfirmed() {
+        return isEmailConfirmed;
     }
 
-    public void setEmailConfimed(boolean emailConfimed) {
-        isEmailConfimed = emailConfimed;
+    public void setEmailConfirmed(boolean emailConfirmed) {
+        isEmailConfirmed = emailConfirmed;
     }
 
     public String getEmailConfirmationCode() {

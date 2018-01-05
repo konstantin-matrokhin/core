@@ -4,9 +4,7 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
-import org.kvlt.core.bungee.packets.EmailAddPacket;
-import org.kvlt.core.bungee.packets.EmailVerifyPacket;
-import org.kvlt.core.bungee.packets.PasswordRecoveryPacket;
+import org.kvlt.core.bungee.packets.*;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
 import java.util.Optional;
@@ -22,6 +20,11 @@ public class EmailCommand extends Command {
 
     public EmailCommand() {
         super("email");
+    }
+
+    private boolean isEmail(String email) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+        return matcher.find();
     }
 
     @Override
@@ -51,8 +54,7 @@ public class EmailCommand extends Command {
                     player.sendMessage(new TextComponent("Сначала залогиньтесь!"));
                     return;
                 }
-                Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email.get());
-                if (matcher.find()) {
+                if (isEmail(email.get())) {
                     new EmailAddPacket(name, email.get()).send();
                 } else {
                     player.sendMessage(new TextComponent("Введите корректный email!"));
@@ -65,10 +67,39 @@ public class EmailCommand extends Command {
                 }
 
                 String code = args[1];
-                if (code.length() == CODE_LENGTH) {
-                    new EmailVerifyPacket(name, code).send();
+                if (code == null) return;
+
+                Optional<String> oCode2 = Optional.ofNullable(args[2]);
+
+                if (oCode2.isPresent()) {
+                    String code2 = oCode2.get();
+                    if (code.length() == CODE_LENGTH && code2.length() == CODE_LENGTH) {
+                        new EmailChangeVerifyPacket(name, code, code2).send();
+                    } else {
+                        player.sendMessage(new TextComponent("Коды состоят из 5 латинских букв!"));
+                    }
                 } else {
-                    player.sendMessage(new TextComponent("Код состоит из 5 латинских букв!"));
+                    if (code.length() == CODE_LENGTH) {
+                        new EmailVerifyPacket(name, code).send();
+                    } else {
+                        player.sendMessage(new TextComponent("Код состоит из 5 латинских букв!"));
+                    }
+                }
+                break;
+            case "change":
+                if (!ProxyLoggedPlayers.isLogged(name)) {
+                    player.sendMessage(new TextComponent("Сначала залогиньтесь!"));
+                    return;
+                }
+                if (!email.isPresent()) return;
+
+                String newMail = args[2];
+                if (!email.get().equalsIgnoreCase(newMail)) {
+                    if (newMail != null && isEmail(newMail)) {
+                        new EmailChangePacket(name, email.get(), newMail).send();
+                    }
+                } else {
+                    player.sendMessage(new TextComponent("Ящики совпадают!"));
                 }
                 break;
             case "recovery":

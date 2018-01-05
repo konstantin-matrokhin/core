@@ -23,11 +23,6 @@ public class IdPacket extends CorePacketOut {
     }
 
     @Override
-    public void send() {
-
-    }
-
-    @Override
     public int getId() {
         return ID_PACKET;
     }

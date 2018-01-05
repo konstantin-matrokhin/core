@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
-import org.kvlt.core.entities.ServerPlayer;
 
 public class HibernateInitializer {
 

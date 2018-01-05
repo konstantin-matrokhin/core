@@ -1,10 +1,9 @@
 package org.kvlt.core.events.player;
 
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.events.Cancalleble;
-import org.kvlt.core.nodes.Proxy;
+import org.kvlt.core.events.Cancelleble;
 
-public class PlayerLoginEvent extends PlayerEvent implements Cancalleble {
+public class PlayerLoginEvent extends PlayerEvent implements Cancelleble {
 
     public PlayerLoginEvent(ServerPlayer player) {
         setPlayer(player);

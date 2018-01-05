@@ -16,8 +16,7 @@ public class ConfigManager {
     }
 
     public static String getClientName() {
-        String path = new File(Bukkit.getWorldContainer().getAbsolutePath()).getParentFile().getName();
-        return path;
+        return new File(Bukkit.getWorldContainer().getAbsolutePath()).getParentFile().getName();
     }
 
 }

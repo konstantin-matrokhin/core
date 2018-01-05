@@ -5,7 +5,6 @@ import org.kvlt.core.protocol.PacketOut;
 
 public abstract class BungeeOutPacket implements PacketOut {
 
-    @Override
     public void send() {
         CoreBungee.get().sendPacket(this);
     }

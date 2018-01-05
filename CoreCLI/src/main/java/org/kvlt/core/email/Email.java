@@ -1,6 +1,7 @@
 package org.kvlt.core.email;
 
 import org.kvlt.core.config.Config;
+import org.kvlt.core.utils.CodeGenerator;
 import org.kvlt.core.utils.Log;
 
 import javax.mail.*;
@@ -48,12 +49,21 @@ public class Email {
         loadTemplates();
     }
 
-    public void sendChangeConfirmEmail() {
+    public void sendChangeConfirmEmail(String name, String code) {
+        String formattedEmail = emailChangeConfirmEmail
+                .replace("%name%", name)
+                .replace("%code%", code);
 
+        send("Новый ящик // LastCraft", formattedEmail);
     }
 
-    public void sendChangeEmail() {
+    public void sendChangeEmail(String name, String newEmail, String code) {
+        String formattedEmail = emailChangeEmail
+                .replace("%name%", name)
+                .replace("%email%", newEmail)
+                .replace("%code%", code);
 
+        send("Смена Email // LastCraft", formattedEmail);
     }
 
     public void sendPasswordChange(String name) {
@@ -80,8 +90,7 @@ public class Email {
         String dir = "email/";
         InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(dir + template + ".html");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
-            String s = reader.lines().collect(Collectors.joining(System.lineSeparator()));
-            return s;
+            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
         }
     }
 

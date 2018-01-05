@@ -1,7 +1,6 @@
 package org.kvlt.core.metrics;
 
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.entities.ServerPlayer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -53,10 +52,10 @@ public class PlayedTimeCounter {
 
     /**
      * Форматирует время в понятный для человека вид
-     * @param time
-     * @return
+     * @param time исходное время
+     * @return строку с человекопонятным временем
      */
-    public static String getFormatedTime(long time) {
+    public static String getFormattedTime(long time) {
         Date date = new Date(time);
         return sdf.format(date);
     }

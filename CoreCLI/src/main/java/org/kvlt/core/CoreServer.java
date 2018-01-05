@@ -12,7 +12,6 @@ import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.config.Config;
-import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.net.ClientManager;

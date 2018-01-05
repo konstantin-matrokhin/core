@@ -1,8 +1,7 @@
 package org.kvlt.core.bungee.storages;
 
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-
 import java.util.HashMap;
+import java.util.Objects;
 
 public class IdMap {
 
@@ -21,10 +20,10 @@ public class IdMap {
     }
 
     public static String getPlayer(int id) {
-        return idMap.entrySet().stream()
+        return Objects.requireNonNull(idMap.entrySet().stream()
                 .filter(entry -> entry.getValue() == id)
                 .findFirst()
-                .orElse(null)
+                .orElse(null))
                 .getKey();
     }
 
