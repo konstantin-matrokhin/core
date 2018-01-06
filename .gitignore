@@ -1,5 +1,9 @@
 .idea/
-/plugins/
 /*/target/
+*.iml
+
 /src/
+/plugins/
+
 /build/**/*
+!/build/start.bat

@@ -20,7 +20,7 @@ public class PacketResolver {
 
     public void registerPackets(PacketIn[] packets) {
         for (PacketIn packet: packets) {
-            packetsMap.put(packet.getId(), packet.getClass());
+            registerPacket(packet);
         }
     }
 

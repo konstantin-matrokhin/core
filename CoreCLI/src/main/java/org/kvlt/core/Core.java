@@ -64,10 +64,6 @@ public final class Core implements CoreAPI {
         return gameServers;
     }
 
-    public static synchronized CoreAPI get() {
-        return instance == null ? instance = new Core() : instance;
-    }
-
     @Override
     public PluginLoader getPluginLoader() {
         return pluginLoader;
@@ -91,6 +87,10 @@ public final class Core implements CoreAPI {
     @Override
     public Server getServer() {
         return server;
+    }
+
+    public static synchronized CoreAPI get() {
+        return instance == null ? instance = new Core() : instance;
     }
 
 }

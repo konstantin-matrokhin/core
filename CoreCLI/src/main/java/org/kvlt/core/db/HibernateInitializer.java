@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.entities.ServerPlayer;
 
-public class HibernateInitializer {
+public final class HibernateInitializer {
 
     private static final SessionFactory sessionFactory;
 

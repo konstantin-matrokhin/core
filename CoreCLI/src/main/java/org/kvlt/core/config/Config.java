@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Класс главного конфига, дающий доступ к <b>чтению</b> его полей
  */
-public class Config {
+public final class Config {
 
     private static final String FILE_NAME = "config.json";
     private static final String MYSQL_SECTION = "mysql";

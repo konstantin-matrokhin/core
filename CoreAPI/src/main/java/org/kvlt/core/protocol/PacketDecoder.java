@@ -26,8 +26,6 @@ public final class PacketDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
         byteBuf.markReaderIndex();
 
-        System.out.println(ByteBufUtil.prettyHexDump(byteBuf));
-
         ByteBuf prefix = byteBuf.readBytes(5);
         byte[] prefixBytes;
 
@@ -49,6 +47,8 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                 PacketIn p = packetResolver.getPacketIn(id);
                 // Проверяем есть ли такой ID и проверяем длину пакета
                 if (p != null) {
+                    System.out.println(String.format("::%s | %s", p.getId(), p.getClass().getSimpleName()));
+
                     byteBuf.readerIndex(8);
                     p.read(byteBuf);
                     list.add(p);
@@ -57,7 +57,7 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                 }
             }
         }
-
+        //Это очень важно!
         byteBuf.clear();
     }
 }

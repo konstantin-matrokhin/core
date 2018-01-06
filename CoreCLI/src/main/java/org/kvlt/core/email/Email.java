@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-public class Email {
+public final class Email {
 
     private static Properties props;
     private static Session session;
@@ -31,7 +31,7 @@ public class Email {
         this.email = email;
     }
 
-    static {
+    public static void init() {
         props = new Properties();
 
         props.put("mail.smtp.host", Config.getSMTP("host"));
