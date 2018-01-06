@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.Group;
 import org.kvlt.core.entities.ServerPlayer;
@@ -34,7 +34,7 @@ public class BanPacket implements PacketIn {
         int level;
 
         if (!enforcer.equalsIgnoreCase("console")) {
-            ServerPlayer enforcerPlayer = CoreServer.get().getOnlinePlayers().get(enforcer);
+            ServerPlayer enforcerPlayer = Core.get().getOnlinePlayers().get(enforcer);
             if (enforcerPlayer != null) {
                 level = Group.getGroup(enforcerPlayer.getGroup()).getLevel();
             } else {
@@ -47,8 +47,8 @@ public class BanPacket implements PacketIn {
         if (level >= Group.JUNIOR.getLevel()) {
             ServerPlayer victimPlayer;
 
-            if (CoreServer.get().getOnlinePlayers().contains(victim)) {
-                victimPlayer = CoreServer.get().getOnlinePlayers().get(victim);
+            if (Core.get().getOnlinePlayers().contains(victim)) {
+                victimPlayer = Core.get().getOnlinePlayers().get(victim);
             } else {
                 victimPlayer = PlayerFactory.loadPlayer(victim, false);
             }

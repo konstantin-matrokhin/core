@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.MessagePacket;
@@ -13,7 +13,6 @@ import static org.kvlt.core.protocol.Packets.PLAYER_REG_PACKET;
 
 public class PlayerRegisterPacket extends PlayerPacket {
 
-    private ServerPlayer unloggedPlayer;
     private String name;
     private String password;
 
@@ -27,7 +26,7 @@ public class PlayerRegisterPacket extends PlayerPacket {
 
     @Override
     public void execute(Channel channel) {
-        unloggedPlayer = CoreServer.get().getUnloggedPlayers().get(name);
+        ServerPlayer unloggedPlayer = Core.get().getOnlinePlayers().get(name);
         if (unloggedPlayer == null) return;
 
         String response;

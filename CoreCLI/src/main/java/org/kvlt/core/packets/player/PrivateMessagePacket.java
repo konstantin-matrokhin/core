@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.Replies;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.MessagePacket;
@@ -28,8 +28,8 @@ public class PrivateMessagePacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer from = CoreServer.get().getOnlinePlayers().get(sender);
-        ServerPlayer to = CoreServer.get().getOnlinePlayers().get(recipient);
+        ServerPlayer from = Core.get().getOnlinePlayers().get(sender);
+        ServerPlayer to = Core.get().getOnlinePlayers().get(recipient);
         String response;
         String recipientsMessage;
 

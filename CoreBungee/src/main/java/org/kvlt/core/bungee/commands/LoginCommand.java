@@ -22,12 +22,7 @@ public class LoginCommand extends Command {
 
         ProxiedPlayer p = (ProxiedPlayer) sender;
         String password = args[0];
-
-        if (Auth.passwordAuth(p.getName(), password)) {
-            p.sendMessage(new TextComponent("Вы успешно вошли!"));
-        } else {
-            p.sendMessage(new TextComponent("Неверный пароль!"));
-        }
+        Auth.passwordAuth(p.getName(), password);
 
     }
 

@@ -5,7 +5,7 @@
 
   "mysql": {
     "driver": "com.mysql.jdbc.Driver",
-    "url": "jdbc:mysql://build.huesos228.com:3306/core?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoReconnect=true",
+    "url": "jdbc:mysql://build.huesos228.com:3306/core?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&max_allowed_packet=5073741824",
     "user": "root",
     "password": "12345",
     "dialect": "org.hibernate.dialect.MySQL5InnoDBDialect",

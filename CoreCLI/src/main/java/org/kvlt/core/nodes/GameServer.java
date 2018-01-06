@@ -1,7 +1,7 @@
 package org.kvlt.core.nodes;
 
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.protocol.Packet;
@@ -21,7 +21,7 @@ public class GameServer implements Node {
         this.name = name;
         this.port = port;
         this.channel = channel;
-        CoreServer.get().getGameServers().addNode(this);
+        Core.get().getGameServers().addNode(this);
     }
 
     @Override

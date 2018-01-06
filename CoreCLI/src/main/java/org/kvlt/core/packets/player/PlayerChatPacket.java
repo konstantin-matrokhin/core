@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.CoreEvent;
 import org.kvlt.core.events.player.PlayerChatEvent;
@@ -26,7 +26,7 @@ public class PlayerChatPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer op = CoreServer.get().getOnlinePlayers().get(playerName);
+        ServerPlayer op = Core.get().getOnlinePlayers().get(playerName);
 
         CoreEvent event;
 

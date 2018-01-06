@@ -2,7 +2,7 @@ package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.events.proxy.ProxyDisconnectEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
@@ -23,8 +23,8 @@ public class ProxyDisconnectPacket implements PacketIn {
     public void execute(Channel channel) {
         Log.$(String.format("[-] Прокси-сервер %s отсоединился", name));
 
-        Proxy proxy = CoreServer.get().getProxies().getNode(name);
-        CoreServer.get().getProxies().removeNode(proxy);
+        Proxy proxy = Core.get().getProxies().getNode(name);
+        Core.get().getProxies().removeNode(proxy);
         channel.disconnect();
 
         ProxyDisconnectEvent pde = new ProxyDisconnectEvent(proxy);

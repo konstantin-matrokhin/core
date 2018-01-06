@@ -1,7 +1,6 @@
 package org.kvlt.core.email;
 
 import org.kvlt.core.config.Config;
-import org.kvlt.core.utils.CodeGenerator;
 import org.kvlt.core.utils.Log;
 
 import javax.mail.*;

@@ -1,6 +1,6 @@
 package org.kvlt.core.commands;
 
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.utils.Printer;
@@ -25,7 +25,7 @@ public class BanCommand extends Command {
         String until = Optional.ofNullable(getArg(1)).orElse("e");
         String reason = Optional.ofNullable(getArg(2)).orElse("BANNED!");
         ServerPlayer player = Optional.ofNullable(Optional
-                .ofNullable(CoreServer.get().getOnlinePlayers().get(name))
+                .ofNullable(Core.get().getOnlinePlayers().get(name))
                 .orElse(PlayerFactory.loadPlayer(name, false)))
                 .orElseThrow(IllegalArgumentException::new);
 

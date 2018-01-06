@@ -1,6 +1,6 @@
 package org.kvlt.core.packets.player;
 
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.protocol.PacketIn;
 
@@ -10,7 +10,7 @@ public abstract class PlayerPacket implements PacketIn {
     private ServerPlayer player;
 
     protected boolean ensurePlayer() {
-        player = CoreServer.get().getOnlinePlayers().get(playerName);
+        player = Core.get().getOnlinePlayers().get(playerName);
         return player != null;
     }
 

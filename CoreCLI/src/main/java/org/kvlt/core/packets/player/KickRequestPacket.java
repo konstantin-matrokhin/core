@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.MessagePacket;
@@ -30,7 +30,7 @@ public class KickRequestPacket extends PlayerPacket {
         String response;
 
         if (PlayerFactory.isStaff(player)) {
-            ServerPlayer victimPlayer = CoreServer.get().getOnlinePlayers().get(victim);
+            ServerPlayer victimPlayer = Core.get().getOnlinePlayers().get(victim);
             if (victimPlayer != null) {
                 victimPlayer.kick(reason);
                 response = String.format("%s кикнут.", victim);

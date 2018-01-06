@@ -18,7 +18,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
         String name = ConfigManager.getClientName();
         short port = (short) Bukkit.getPort();
 
-        ConnectPacket packet = new ConnectPacket("test server", port);
+        ConnectPacket packet = new ConnectPacket(ConfigManager.getClientName(), port);
         try {
             System.out.println(ctx.channel().writeAndFlush(packet).sync().isSuccess());
         } catch (InterruptedException e) {

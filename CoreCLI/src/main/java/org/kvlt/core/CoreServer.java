@@ -10,65 +10,26 @@ import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.config.Config;
-import org.kvlt.core.entities.PlayerList;
-import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.net.ClientManager;
 import org.kvlt.core.net.CoreInitializer;
-import org.kvlt.core.nodes.GameServers;
-import org.kvlt.core.nodes.Proxies;
 import org.kvlt.core.plugins.CorePlugin;
-import org.kvlt.core.plugins.EventManager;
-import org.kvlt.core.plugins.PluginLoader;
-import org.kvlt.core.plugins.PluginManager;
 import org.kvlt.core.protocol.PacketResolver;
 import org.kvlt.core.utils.Log;
 
-public final class CoreServer {
-
-    private static CoreServer instance;
-
-    private PlayerList<ServerPlayer> onlinePlayers;
-    private PlayerList<ServerPlayer> unloggedPlayers;
-
-    private Proxies proxies;
-    private GameServers gameServers;
+public final class CoreServer implements Server {
 
     private ChannelFuture future;
-
+    private PacketResolver packetResolver;
     private int port;
 
-    private PluginLoader pluginLoader;
-    private PluginManager pluginManager;
-    private EventManager eventManager;
-    private PacketResolver packetResolver;
-    private CommandListener commandListener;
-
-    private CoreServer() {}
-
-    void start() {
-        onlinePlayers = new PlayerList<>();
-        unloggedPlayers = new PlayerList<>();
-
-        proxies = new Proxies();
-        gameServers = new GameServers();
-
-        port = Integer.valueOf(Config.getCore("port"));
-
-        eventManager = new EventManager();
-        pluginManager = new PluginManager();
-        pluginLoader = new PluginLoader(pluginManager);
+    CoreServer() {
         packetResolver = new PacketResolver();
-        commandListener = new CommandListener();
-
-        pluginLoader.loadPlugins();
-        eventManager.initializeExternalEvents();
-
-        runServer();
+        port = Integer.valueOf(Config.getCore("port"));
     }
 
-    private void runServer() {
+    @Override
+    public void start() {
         boolean hasEpoll = Epoll.isAvailable();
 
         EventLoopGroup bossGroup;
@@ -108,17 +69,16 @@ public final class CoreServer {
                 Log.$(result);
             });
 
-            commandListener.listen();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public final void stop() {
+    @Override
+    public void stop() {
         Log.$("Остановка сервера...");
         ClientManager.getClients().disconnect();
-        pluginManager.getPlugins().forEach(CorePlugin::onDisable);
+        Core.get().getPluginManager().getPlugins().forEach(CorePlugin::onDisable);
 
         try {
             future.channel().close().sync();
@@ -126,45 +86,23 @@ public final class CoreServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
-    public PlayerList<ServerPlayer> getOnlinePlayers() {
-        return onlinePlayers;
-    }
-
-    public Proxies getProxies() {
-        return proxies;
-    }
-
-    public GameServers getGameServers() {
-        return gameServers;
-    }
-
-    public static synchronized CoreServer get() {
-        return instance == null ? instance = new CoreServer() : instance;
-    }
-
-    public PluginLoader getPluginLoader() {
-        return pluginLoader;
-    }
-
-    public PluginManager getPluginManager() {
-        return pluginManager;
-    }
-
-    public EventManager getEventManager() {
-        return eventManager;
-    }
-
+    @Override
     public PacketResolver getPacketResolver() {
         return packetResolver;
     }
 
-    public CommandListener getCommandListener() {
-        return commandListener;
+    @Override
+    public void restart() {
+        stop();
+        start();
     }
 
-    public PlayerList<ServerPlayer> getUnloggedPlayers() {
-        return unloggedPlayers;
+    @Override
+    public int getPort() {
+        return port;
     }
+
 }

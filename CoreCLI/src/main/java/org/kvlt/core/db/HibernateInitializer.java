@@ -2,10 +2,7 @@ package org.kvlt.core.db;
 
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.entities.ServerPlayer;
 
@@ -36,7 +33,7 @@ public class HibernateInitializer {
         return sessionFactory;
     }
 
-    public static void start() {
+    public static void init() {
         String name = "core_startup";
         PlayerFactory.loadPlayer(name);
     }

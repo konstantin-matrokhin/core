@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerLoginEvent;
 import org.kvlt.core.protocol.PacketIn;
@@ -20,7 +20,7 @@ public class PlayerLoginPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer player = CoreServer.get().getOnlinePlayers().get(playerName);
+        ServerPlayer player = Core.get().getOnlinePlayers().get(playerName);
 
         PlayerLoginEvent ple = new PlayerLoginEvent(player);
         ple.invoke();

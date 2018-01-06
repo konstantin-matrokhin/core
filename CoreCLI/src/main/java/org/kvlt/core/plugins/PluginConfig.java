@@ -12,17 +12,13 @@ import java.nio.file.Files;
 
 public class PluginConfig {
 
-    public static final String PLUGINS_DIR_NAME = "plugins";
+    private static final String PLUGINS_DIR_NAME = "plugins";
     private static final String DEFAULT_NAME = "config.json";
 
     private File file;
     private JsonObject json;
     private JsonParser jsonParser;
     private Gson gson;
-    private FileWriter fileWriter;
-    private JsonWriter jsonWriter;
-    private FileReader fileReader;
-    private JsonReader jsonReader;
 
     {
         json = new JsonObject();
@@ -44,14 +40,14 @@ public class PluginConfig {
                 }
             }
 
-            fileReader = new FileReader(file);
+            FileReader fileReader = new FileReader(file);
 
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = bufferedReader.readLine();
 
             if (line == null || line.isEmpty()) {
-                fileWriter = new FileWriter(file);
-                jsonWriter = new JsonWriter(fileWriter);
+                FileWriter fileWriter = new FileWriter(file);
+                JsonWriter jsonWriter = new JsonWriter(fileWriter);
 
                 jsonWriter.beginObject();
                 jsonWriter.endObject();
@@ -97,7 +93,7 @@ public class PluginConfig {
     public boolean copyDefault() {
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream is = classLoader.getResourceAsStream("./" + DEFAULT_NAME);
+            InputStream is = classLoader.getResourceAsStream(DEFAULT_NAME);
             Files.copy(is, file.toPath());
             return true;
         } catch (Exception e) {

@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Destination;
@@ -26,10 +26,13 @@ public class TransferRequestPacket extends PlayerPacket {
         ServerPlayer player = getPlayer();
         String name = player.getName();
         String proxy = player.getCurrentProxy().getName();
-        GameServer destination = CoreServer.get().getGameServers().getNode(server);
+        GameServer destination = Core.get().getGameServers().getNode(server);
 
         if (destination != null) {
             new PlayerTransferPacket(name, server).send(Destination.BUNGEE, proxy);
+            System.out.println("transfering..");
+        } else {
+            System.out.println("dest is null(");
         }
     }
 

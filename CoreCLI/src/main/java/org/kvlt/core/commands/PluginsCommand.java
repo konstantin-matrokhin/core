@@ -1,6 +1,6 @@
 package org.kvlt.core.commands;
 
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.plugins.CorePlugin;
 import org.kvlt.core.utils.Printer;
 
@@ -15,7 +15,7 @@ public class PluginsCommand extends Command {
 
     @Override
     protected boolean execute() {
-        Set<CorePlugin> plugins = CoreServer.get().getPluginManager().getPlugins();
+        Set<CorePlugin> plugins = Core.get().getPluginManager().getPlugins();
         StringBuilder plList = new StringBuilder();
         plugins.forEach(p -> plList.append(p.getPluginData().getName()).append(" "));
         Printer.$("Плагины(" + plugins.size() + "):");

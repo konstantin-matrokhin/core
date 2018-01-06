@@ -1,6 +1,7 @@
 package org.kvlt.core.bungee.auth;
 
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.kvlt.core.bungee.CoreDB;
 import org.kvlt.core.bungee.storages.IdMap;
@@ -13,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Auth {
 
-    private static String LOGIN_SQL = "SELECT * FROM authentication WHERE id = ?";
-    private static String INFO_SQL = "SELECT * FROM join_info WHERE id = ?";
+    private static final String LOGIN_SQL = "SELECT * FROM authentication WHERE id = ?";
+    private static final String INFO_SQL = "SELECT * FROM join_info WHERE id = ?";
 
     private static Connection mysqlConnection;
 
@@ -69,22 +70,26 @@ public class Auth {
                 dbPassword = authData.getString("password");
                 dbIp = infoData.getString("ip");
             } else {
-                pp.sendMessage("Вы не зарегистрированы!");
+                pp.sendMessage(new TextComponent("Вы не зарегистрированы!"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        String response;
         if (dbPassword != null && dbIp != null) {
             if (password.equals(dbPassword)) {
                 ProxyLoggedPlayers.logIn(player);
+                pp.sendMessage(new TextComponent("С возвращением!"));
                 return true;
             } else {
-                pp.sendMessage("Неверный пароль!");
+                response = "Неверный пароль!";
             }
         } else {
-            pp.sendMessage("Вы не зарегистрированы!");
+            response = "Вы не зарегистрированы!";
         }
+
+        pp.sendMessage(new TextComponent(response));
 
         return false;
     }
@@ -112,19 +117,26 @@ public class Auth {
             e.printStackTrace();
         }
 
+        String response;
         if (lastAuth != -1 && dbIp != null) {
             if (dbIp.equals(ip)) {
                 long timeInterval = now - lastAuth;
 
                 if (inSessionRange(timeInterval)) {
                     ProxyLoggedPlayers.logIn(player);
+                    pp.sendMessage(new TextComponent("С возвращением!"));
                     return true;
                 } else {
-                    pp.sendMessage("Вас не было слишком давно, введите пароль.");
-                    pp.sendMessage("last auth = " + TimeUnit.MILLISECONDS.toHours(lastAuth) + ", delta = " + TimeUnit.MILLISECONDS.toHours(timeInterval));
+                    response = "Рады видеть тебя снова! Авторизуйся, пожалуйста.";
                 }
+            } else {
+                response = "Рады видеть тебя снова! Авторизуйся, пожалуйста.";
             }
+        } else {
+            response = "Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>";
         }
+
+        pp.sendMessage(new TextComponent(response));
         return false;
     }
 

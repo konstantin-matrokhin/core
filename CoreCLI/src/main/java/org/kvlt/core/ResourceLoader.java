@@ -5,7 +5,7 @@ import java.io.InputStream;
 public class ResourceLoader {
 
     /**
-     * Loads file from root
+     * Loads file from core jar
      */
     public static InputStream newResourceStream(String fileName) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();

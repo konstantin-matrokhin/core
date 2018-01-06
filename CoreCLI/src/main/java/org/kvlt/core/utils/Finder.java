@@ -1,6 +1,6 @@
 package org.kvlt.core.utils;
 
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.nodes.Proxies;
 
@@ -10,14 +10,14 @@ public class Finder {
         boolean patterned = pattern.startsWith("@");
         boolean toAll = pattern.equalsIgnoreCase("@all");
 
-        if (toAll) return CoreServer.get().getProxies();
+        if (toAll) return Core.get().getProxies();
 
         Proxies proxies = new Proxies();
         String searchStr = patterned
                 ? pattern.substring(1, pattern.length())
                 : pattern;
 
-        CoreServer.get().getProxies().forEach(proxy -> {
+        Core.get().getProxies().forEach(proxy -> {
             if (patterned) {
                 if (proxy.getName().startsWith(searchStr)) {
                     proxies.addNode(proxy);
@@ -36,14 +36,14 @@ public class Finder {
         boolean patterned = pattern.startsWith("@");
         boolean toAll = pattern.equalsIgnoreCase("@all");
 
-        if (toAll) return CoreServer.get().getGameServers();
+        if (toAll) return Core.get().getGameServers();
 
         GameServers gameServers = new GameServers();
         String searchStr = patterned
                 ? pattern.substring(1, pattern.length())
                 : pattern;
 
-        CoreServer.get().getGameServers().forEach(gs -> {
+        Core.get().getGameServers().forEach(gs -> {
             if (patterned) {
                 if (gs.getName().startsWith(searchStr)) {
                     gameServers.addNode(gs);

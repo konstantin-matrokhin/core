@@ -1,6 +1,6 @@
 package org.kvlt.core.commands;
 
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 
 public class DieCommand extends Command {
 
@@ -11,7 +11,7 @@ public class DieCommand extends Command {
 
     @Override
     protected boolean execute() {
-        CoreServer.get().stop();
+        Core.get().getServer().stop();
         System.exit(0);
         return false;
     }

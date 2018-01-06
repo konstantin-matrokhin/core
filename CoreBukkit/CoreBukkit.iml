@@ -14,7 +14,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="netty-all-4.1.16.Final" level="project" />
     <orderEntry type="library" name="spigot" level="project" />
-    <orderEntry type="library" name="Maven: net.lastcraft:darta-api:1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />

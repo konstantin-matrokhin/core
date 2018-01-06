@@ -9,8 +9,7 @@ public class CodeGenerator {
             'n', 'p', 'r', 's', 't', 'w', 'z' };
 
     private static final int CODE_LENGTH = 5;
-
-    private static Random random;
+    private static final Random random;
 
     static {
         random = new Random();
@@ -26,7 +25,9 @@ public class CodeGenerator {
                     code[i] = VOWELS[random.nextInt(VOWELS.length)];
                 }
             } else {
-                code[i] = VOWELS[random.nextInt(VOWELS.length)];
+                char[] rndArray = random.nextBoolean() ? VOWELS : CONSONANTS;
+                code[i] = rndArray[random.nextInt(rndArray.length)];
+                //code[i] = VOWELS[random.nextInt(VOWELS.length)];
             }
         }
         return new String(code);

@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerSwitchServerEvent;
 import org.kvlt.core.nodes.GameServer;
@@ -23,10 +23,10 @@ public class PlayerSwitchServerPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer op = CoreServer.get().getOnlinePlayers().get(playerName);
+        ServerPlayer op = Core.get().getOnlinePlayers().get(playerName);
         if (op == null) return;
 
-        GameServer destination = CoreServer.get().getGameServers().getNode(to);
+        GameServer destination = Core.get().getGameServers().getNode(to);
         op.setCurrentServer(destination);
 
         PlayerSwitchServerEvent psse = new PlayerSwitchServerEvent(op, destination);

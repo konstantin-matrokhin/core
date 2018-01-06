@@ -1,6 +1,7 @@
 package org.kvlt.core.protocol;
 
 import java.util.HashMap;
+import java.util.ServiceLoader;
 
 /**
  * Служит для определения класса пакета по ID
@@ -15,6 +16,12 @@ public class PacketResolver {
 
     public void registerPacket(PacketIn packet) {
         packetsMap.put(packet.getId(), packet.getClass());
+    }
+
+    public void registerPackets(PacketIn[] packets) {
+        for (PacketIn packet: packets) {
+            packetsMap.put(packet.getId(), packet.getClass());
+        }
     }
 
     public PacketIn getPacketIn(int id) {

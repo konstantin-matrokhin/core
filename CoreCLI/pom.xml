@@ -30,6 +30,7 @@
                     <plugin>
                         <artifactId>exec-maven-plugin</artifactId>
                         <groupId>org.codehaus.mojo</groupId>
+                        <version>1.2</version>
                         <executions>
                             <execution>
                                 <id>CoreCLI</id>
@@ -107,7 +108,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifest>
+                        <manifest>mv
                             <mainClass>org.kvlt.core.CoreCLI</mainClass>
                         </manifest>
                     </archive>

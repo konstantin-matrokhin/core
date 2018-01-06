@@ -25,3 +25,5 @@ commands:
     usage: /connect
   server:
     usage: /server <server_name>
+  ban:
+    usage: /ban

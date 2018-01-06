@@ -9,8 +9,7 @@ import org.kvlt.core.utils.Finder;
 public abstract class CorePacketOut implements PacketOut {
 
     public void send(Destination dest, String nodeName) {
-        NodeContainer<? extends Node> node = null;
-
+        NodeContainer<? extends Node> node;
         if (dest == null || dest.equals(Destination.BUKKIT)) {
             node = Finder.getGameServers(nodeName);
         } else {

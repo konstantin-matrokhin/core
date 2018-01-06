@@ -41,8 +41,6 @@ public final class PacketDecoder extends ByteToMessageDecoder {
         // Проверяем префикс
         if (Arrays.equals(prefixBytes, ProtocolCommons.PREFIX)) {
 
-            System.out.println("Пришел префикс");
-
             // Валидный ли айди пакета
             byte id = byteBuf.readByte();
             if (id >= MIN_PACKET_ID) {

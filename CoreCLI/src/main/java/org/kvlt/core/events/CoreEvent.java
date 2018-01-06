@@ -1,6 +1,6 @@
 package org.kvlt.core.events;
 
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 
 public interface CoreEvent {
 
@@ -9,7 +9,7 @@ public interface CoreEvent {
     }
 
     default void invoke() {
-        CoreServer.get().getEventManager().invokeEvent(this);
+        Core.get().getEventManager().invokeEvent(this);
     }
 
 }

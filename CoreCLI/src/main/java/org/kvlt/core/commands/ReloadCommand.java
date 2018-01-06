@@ -1,6 +1,6 @@
 package org.kvlt.core.commands;
 
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.plugins.CorePlugin;
 import org.kvlt.core.utils.Log;
 
@@ -13,9 +13,9 @@ public class ReloadCommand extends Command {
     @Override
     protected boolean execute() {
         Log.$("Перезагружаю все плагины...");
-        CoreServer.get().getPluginManager().getPlugins().forEach(CorePlugin::onDisable);
-        CoreServer.get().getPluginManager().getPlugins().clear();
-        CoreServer.get().getPluginLoader().loadPlugins();
+        Core.get().getPluginManager().getPlugins().forEach(CorePlugin::onDisable);
+        Core.get().getPluginManager().getPlugins().clear();
+        Core.get().getPluginLoader().loadPlugins();
         Log.$("Плагины перезагружены!");
         return true;
     }

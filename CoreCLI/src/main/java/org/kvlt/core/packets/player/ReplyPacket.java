@@ -2,7 +2,7 @@ package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.CoreServer;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.Replies;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.MessagePacket;
@@ -27,7 +27,7 @@ public class ReplyPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer fromPlayer = CoreServer.get().getOnlinePlayers().get(from);
+        ServerPlayer fromPlayer = Core.get().getOnlinePlayers().get(from);
 
         ServerPlayer toPlayer;
         String response;
@@ -37,7 +37,7 @@ public class ReplyPacket implements PacketIn {
         if (Replies.hasCompanion(fromPlayer)) {
             toPlayer = Replies.getCompanion(fromPlayer);
             String to = toPlayer.getName();
-            if (CoreServer.get().getOnlinePlayers().contains(toPlayer)) {
+            if (Core.get().getOnlinePlayers().contains(toPlayer)) {
                 MessagePacket msg = new MessagePacket(to, String.format(RECEIVED, from, message));
                 toPlayer.getCurrentProxy().send(msg);
                 response = String.format(RESPONSE, to, message);
