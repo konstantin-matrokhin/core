@@ -18,4 +18,42 @@ public class PacketUtil {
         byteBuf.writeBytes(bytes);
     }
 
+    public static void writeStringArray(String[] array, ByteBuf byteBuf) {
+        byteBuf.writeShort(array.length);
+
+        for (String s: array) {
+            writeString(s, byteBuf);
+        }
+    }
+
+    public static String[] readStringArray(ByteBuf byteBuf) {
+        short length = byteBuf.readShort();
+        String[] array = new String[length];
+
+        for (int i = 0; i < length; i++) {
+            array[i] = readString(byteBuf);
+        }
+
+        return array;
+    }
+
+    public static void writeIntArray(int[] array, ByteBuf byteBuf) {
+        byteBuf.writeShort(array.length);
+
+        for (int element: array) {
+            byteBuf.writeInt(element);
+        }
+    }
+
+    public static int[] readIntArray(ByteBuf byteBuf) {
+        short length = byteBuf.readShort();
+        int[] array = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            array[i] = byteBuf.readInt();
+        }
+
+        return array;
+    }
+
 }

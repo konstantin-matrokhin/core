@@ -4,6 +4,7 @@ package org.kvlt.core.db;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.kvlt.core.config.Config;
+import org.kvlt.core.entities.PremiumPlayers;
 import org.kvlt.core.entities.ServerPlayer;
 
 public final class HibernateInitializer {

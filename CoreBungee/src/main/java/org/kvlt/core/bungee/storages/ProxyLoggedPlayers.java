@@ -12,7 +12,9 @@ public class ProxyLoggedPlayers {
     }
 
     public static void logIn(String player) {
-        players.add(player);
+        if (!player.contains(player)) {
+            players.add(player);
+        }
     }
 
     public static void logOut(String player) {

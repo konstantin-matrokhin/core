@@ -43,4 +43,7 @@ public class Packets {
     public static final int HUB_PACKET = 28;
     public static final int PLAYER_TRANSFER_PACKET = 29;
 
+    public static final int PREMIUM_LIST_PACKET = 30;
+    public static final int PREMIUM_PLAYER_PACKET = 31;
+
 }

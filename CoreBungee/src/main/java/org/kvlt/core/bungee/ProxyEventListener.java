@@ -6,6 +6,7 @@ import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.packets.*;
+import org.kvlt.core.bungee.storages.PremiumQueue;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
 public class ProxyEventListener implements Listener {
@@ -13,20 +14,11 @@ public class ProxyEventListener implements Listener {
     @EventHandler
     public void onPostLogin(PostLoginEvent event) {
         ProxiedPlayer p = event.getPlayer();
-
         String name = p.getName();
 
-//        try {
-//            PreparedStatement statId= CoreDB.get().getConnection()
-//                    .prepareStatement("SELECT id FROM identifier WHERE player_name = ?");
-//
-//            statId.setString(1, name);
-//            ResultSet result = statId.executeQuery();
-//            int id = result.getInt("id");
-//            IdMap.setId(p, id);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        if (PremiumQueue.has(name)) {
+            PremiumQueue.setPremium(name);
+        }
 
         PlayerJoinPacket playerJoinPacket = new PlayerJoinPacket(name);
         playerJoinPacket.send();
@@ -36,8 +28,16 @@ public class ProxyEventListener implements Listener {
     @EventHandler
     public void onPreLogin(PreLoginEvent event) {
         PendingConnection c = event.getConnection();
+        String name = c.getName();
+        String host = c.getAddress().getHostName();
+        boolean isPremium = CoreBungee.get().getPremiumPlayers().contains(name)
+                || PremiumQueue.has(name);
 
-        PreLoginPacket plp = new PreLoginPacket(c.getName(), c.getAddress().getHostName());
+        if (isPremium) {
+            c.setOnlineMode(true);
+        }
+
+        PreLoginPacket plp = new PreLoginPacket(name, host);
         plp.send();
     }
 

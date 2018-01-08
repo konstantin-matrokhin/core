@@ -1,7 +1,9 @@
 package org.kvlt.core;
 
 import org.kvlt.core.commands.CommandListener;
+import org.kvlt.core.db.HibernateInitializer;
 import org.kvlt.core.entities.PlayerList;
+import org.kvlt.core.entities.PremiumPlayers;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.nodes.Proxies;
@@ -14,6 +16,7 @@ public final class Core implements CoreAPI {
     private static CoreAPI instance;
 
     private PlayerList<ServerPlayer> onlinePlayers;
+    private PremiumPlayers premiumPlayers;
 
     private Proxies proxies;
     private GameServers gameServers;
@@ -33,6 +36,11 @@ public final class Core implements CoreAPI {
 
         server = new CoreServer();
         onlinePlayers = new PlayerList<>();
+
+        premiumPlayers = new PremiumPlayers(HibernateInitializer
+                .getSessionFactory().openSession());
+        premiumPlayers.loadFromMySQL();
+
         proxies = new Proxies();
         gameServers = new GameServers();
         eventManager = new EventManager();
@@ -52,6 +60,11 @@ public final class Core implements CoreAPI {
     @Override
     public PlayerList<ServerPlayer> getOnlinePlayers() {
         return onlinePlayers;
+    }
+
+    @Override
+    public PremiumPlayers getPremiumPlayers() {
+        return premiumPlayers;
     }
 
     @Override

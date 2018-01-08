@@ -2,9 +2,11 @@ package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import org.kvlt.core.Core;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.events.proxy.ProxyConnectEvent;
 import org.kvlt.core.nodes.Proxy;
+import org.kvlt.core.packets.player.PremiumListPacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
@@ -24,8 +26,8 @@ public class ProxyConnectPacket implements PacketIn {
         Log.$(String.format("[+] Прокси-севрер присоединен (%s)", name));
         Proxy p = new Proxy(name, channel);
 
-        MotdPacket motdPacket = new MotdPacket(Config.getProxy("motd"));
-        motdPacket.send(channel);
+        new MotdPacket(Config.getProxy("motd")).send(channel);
+        new PremiumListPacket(Core.get().getPremiumPlayers().names()).send(channel);
 
         ProxyConnectEvent pce = new ProxyConnectEvent(p);
         pce.invoke();

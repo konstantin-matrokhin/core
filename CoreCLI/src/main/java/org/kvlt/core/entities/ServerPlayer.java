@@ -7,6 +7,7 @@ import org.kvlt.core.packets.player.KickPacket;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 

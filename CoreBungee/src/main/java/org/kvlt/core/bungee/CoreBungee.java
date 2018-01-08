@@ -1,6 +1,7 @@
 package org.kvlt.core.bungee;
 
 import io.netty.channel.Channel;
+import io.netty.util.internal.ConcurrentSet;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import org.kvlt.core.bungee.net.ConnectionManager;
@@ -10,6 +11,7 @@ import org.kvlt.core.protocol.PacketResolver;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 public class CoreBungee extends Plugin {
 
@@ -19,6 +21,7 @@ public class CoreBungee extends Plugin {
     private Configuration config;
     private PacketResolver packetResolver;
     private ControlManager controlManager;
+    private Set<String> premiumPlayers;
 
     @Override
     public void onEnable() {
@@ -36,7 +39,6 @@ public class CoreBungee extends Plugin {
         }
 
         config = configManager.getConfig();
-
         packetResolver = new PacketResolver();
 
         controlManager = new ControlManager(this);
@@ -50,6 +52,8 @@ public class CoreBungee extends Plugin {
         String username = config.getString("db.username");
         String password= config.getString("db.password");
         String db = config.getString("db.db");
+
+        premiumPlayers = new ConcurrentSet<>();
 
         CoreDB.get().connect(host, port, username, password, db);
 
@@ -98,4 +102,11 @@ public class CoreBungee extends Plugin {
         return config;
     }
 
+    public Set<String> getPremiumPlayers() {
+        return premiumPlayers;
+    }
+
+    public void setPremiumPlayers(Set<String> premiumPlayers) {
+        this.premiumPlayers = premiumPlayers;
+    }
 }

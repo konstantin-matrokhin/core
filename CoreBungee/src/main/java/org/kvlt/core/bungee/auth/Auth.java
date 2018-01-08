@@ -3,9 +3,12 @@ package org.kvlt.core.bungee.auth;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.CoreDB;
 import org.kvlt.core.bungee.storages.IdMap;
+import org.kvlt.core.bungee.storages.PremiumQueue;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
+import org.kvlt.core.entities.PremiumPlayers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,7 +60,13 @@ public class Auth {
         String dbIp = null;
         String dbPassword = null;
 
-        if (ProxyLoggedPlayers.isLogged(player)) return true;
+        boolean alreadyLogged = CoreBungee.get().getPremiumPlayers().contains(player) ||
+                ProxyLoggedPlayers.isLogged(player);
+
+        if (alreadyLogged) {
+            ProxyLoggedPlayers.logIn(player);
+            return true;
+        }
 
         ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
         final String ip = pp.getAddress().getHostString();
@@ -95,10 +104,16 @@ public class Auth {
     }
 
     public static boolean trySessionAuth(String player) {
+        ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
+
+        if (CoreBungee.get().getPremiumPlayers().contains(player)) {
+            ProxyLoggedPlayers.logIn(player);
+            pp.sendMessage(new TextComponent("Дороу!"));
+            return true;
+        }
+
         final int id = IdMap.getId(player);
         final long now = System.currentTimeMillis();
-
-        ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
 
         final String ip = pp.getAddress().getHostString();
 
