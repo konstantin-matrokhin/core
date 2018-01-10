@@ -27,9 +27,12 @@ public class PremiumQueue {
     public static boolean has(String name) {
         if (premiumPlayers.containsKey(name)) {
             long time = premiumPlayers.get(name);
-            if (time < System.currentTimeMillis()) {
+            long now = System.currentTimeMillis();
+            if (time > now) {
                 return true;
             } else {
+                System.out.println(time);
+                System.out.println(now);
                 remove(name);
             }
         }

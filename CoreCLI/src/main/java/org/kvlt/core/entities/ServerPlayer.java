@@ -48,10 +48,11 @@ public class ServerPlayer implements Serializable, Kickable {
     @Column(table = "players_groups", name = "group_id")
     private int group;
 
-    @Column(table = "identifier", name = "uuid", length = 32)
+//    @Column(table = "identifier", name = "uuid", length = 32)
+    @Transient
     private String uuid;
 
-    @Column(table = "join_info", name = "ip", length = 16)
+    @Column(table = "join_info", name = "ip", length = 32)
     private String lastIp;
 
     @Column(table = "authentication", name = "last_authenticated")
@@ -96,7 +97,7 @@ public class ServerPlayer implements Serializable, Kickable {
     @Column(table = "join_info", name = "online_time")
     private long playedTotal;
 
-    @Column(table = "authentication", name = "registration_ip", length = 16)
+    @Column(table = "authentication", name = "registration_ip", length = 32)
     private String registerIp;
 
     @Column(table = "authentication", name = "email", length = 64)
@@ -230,6 +231,7 @@ public class ServerPlayer implements Serializable, Kickable {
         this.group = group;
     }
 
+    @Deprecated
     public String getUuid() {
         return uuid;
     }

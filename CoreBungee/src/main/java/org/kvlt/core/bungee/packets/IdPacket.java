@@ -24,7 +24,9 @@ public class IdPacket implements PacketIn {
     public void execute(Channel channel) {
         IdMap.setId(playerName, id);
         System.out.println("Пришел айдишник " + id);
-        Auth.trySessionAuth(playerName);
+        try {
+            Auth.trySessionAuth(playerName);
+        } catch (Exception ignored) {}
     }
 
     @Override

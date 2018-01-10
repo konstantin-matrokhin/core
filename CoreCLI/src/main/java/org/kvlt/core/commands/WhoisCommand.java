@@ -2,6 +2,7 @@ package org.kvlt.core.commands;
 
 import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
+import org.kvlt.core.entities.Group;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.utils.Printer;
 
@@ -54,6 +55,8 @@ public class WhoisCommand extends Command {
         Printer.$("ID: " + player.getId());
         Printer.$("ВСЕГО СЫГРАНО: " + totalPlayed);
         Printer.$("ПОСЛЕДНЕЕ ВРЕМЯ ОНЛАЙНА: " + lastTimePlayed);
+        Printer.$("EMAIL:" + player.getEmail());
+        Printer.$("ГРУППА:" + Group.getGroup(player.getGroup()).getName());
 //        Printer.$("СЕРВЕР: " + player.getCurrentServer().getName());
 //        Printer.$("ПРОКСИ: " + player.getCurrentProxy().getName());
         Printer.$("IP: " + player.getIp());

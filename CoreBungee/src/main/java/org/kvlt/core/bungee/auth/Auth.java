@@ -13,6 +13,7 @@ import org.kvlt.core.entities.PremiumPlayers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class Auth {
@@ -86,7 +87,7 @@ public class Auth {
         }
 
         String response;
-        if (dbPassword != null && dbIp != null) {
+        if (dbPassword != null) {
             if (password.equals(dbPassword)) {
                 ProxyLoggedPlayers.logIn(player);
                 pp.sendMessage(new TextComponent("С возвращением!"));
@@ -133,8 +134,8 @@ public class Auth {
         }
 
         String response;
-        if (lastAuth != -1 && dbIp != null) {
-            if (dbIp.equals(ip)) {
+        if (lastAuth != -1) {
+            if (Objects.equals(ip, dbIp)) {
                 long timeInterval = now - lastAuth;
 
                 if (inSessionRange(timeInterval)) {
@@ -142,10 +143,10 @@ public class Auth {
                     pp.sendMessage(new TextComponent("С возвращением!"));
                     return true;
                 } else {
-                    response = "Рады видеть тебя снова! Авторизуйся, пожалуйста.";
+                    response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Не попал в интервал";
                 }
             } else {
-                response = "Рады видеть тебя снова! Авторизуйся, пожалуйста.";
+                response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Ип разный";
             }
         } else {
             response = "Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>";

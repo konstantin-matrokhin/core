@@ -32,16 +32,12 @@ public class PlayerRegisterPacket extends PlayerPacket {
         String response;
         String dbPassword = unloggedPlayer.getPassword();
 
-        if (!ensurePlayer()) { // checking if player is logged in TODO: ITS NOT VALID!
-            if (dbPassword == null || dbPassword.isEmpty()) {
-                PlayerFactory.register(unloggedPlayer, password);
-                Log.$(String.format("%s зарегистрировался.", name));
-                response = "Вы успешно зарегистировались!";
-            } else {
-                response = "Вы уже зарегистрированы!";
-            }
+        if (dbPassword == null || dbPassword.isEmpty()) {
+            PlayerFactory.register(unloggedPlayer, password);
+            Log.$(String.format("%s зарегистрировался.", name));
+            response = "Вы успешно зарегистировались!";
         } else {
-            response = "Вы уже в игре!";
+            response = "Вы уже зарегистрированы!";
         }
 
         AuthPacket authPacket = new AuthPacket(name);

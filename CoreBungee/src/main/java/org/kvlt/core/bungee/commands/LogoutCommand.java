@@ -33,6 +33,8 @@ public class LogoutCommand extends Command {
 
                 statement.setInt(1, id);
                 statement.executeUpdate();
+
+                ProxyLoggedPlayers.logOut(name);
             } catch (Exception ignored) {
             }
         } else {

@@ -18,6 +18,8 @@ public class ProxyEventListener implements Listener {
 
         if (PremiumQueue.has(name)) {
             PremiumQueue.setPremium(name);
+        } else {
+            System.out.println("not in q");
         }
 
         PlayerJoinPacket playerJoinPacket = new PlayerJoinPacket(name);
@@ -35,6 +37,8 @@ public class ProxyEventListener implements Listener {
 
         if (isPremium) {
             c.setOnlineMode(true);
+        } else {
+            System.out.println("not premium");
         }
 
         PreLoginPacket plp = new PreLoginPacket(name, host);

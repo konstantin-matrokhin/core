@@ -22,4 +22,5 @@ public class PlayerQuitPacket extends BungeeOutPacket {
     public int getId() {
         return Packets.PLAYER_QUIT_PACKET;
     }
+
 }
