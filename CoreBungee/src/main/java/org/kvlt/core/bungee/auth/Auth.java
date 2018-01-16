@@ -55,105 +55,102 @@ public class Auth {
         return null;
     }
 
-    public static boolean passwordAuth(String player, String password) {
+    public static void passwordAuth(String player, String password) {
         final int id = IdMap.getId(player);
-
-        String dbIp = null;
-        String dbPassword = null;
-
         boolean alreadyLogged = CoreBungee.get().getPremiumPlayers().contains(player) ||
                 ProxyLoggedPlayers.isLogged(player);
 
         if (alreadyLogged) {
             ProxyLoggedPlayers.logIn(player);
-            return true;
+            return;
         }
 
-        ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
+        final ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
         final String ip = pp.getAddress().getHostString();
 
-        ResultSet authData = getAuthData(id);
-        ResultSet infoData = getInfoData(id);
+        ProxyServer.getInstance().getScheduler().runAsync(CoreBungee.get(), () -> {
+            String dbIp = null;
+            String dbPassword = null;
 
-        try {
-            if (authData != null && infoData != null) {
-                dbPassword = authData.getString("password");
-                dbIp = infoData.getString("ip");
-            } else {
-                pp.sendMessage(new TextComponent("Вы не зарегистрированы!"));
+            ResultSet authData = getAuthData(id);
+            ResultSet infoData = getInfoData(id);
+
+            try {
+                if (authData != null && infoData != null) {
+                    dbPassword = authData.getString("password");
+                    dbIp = infoData.getString("ip");
+                } else {
+                    pp.sendMessage(new TextComponent("Вы не зарегистрированы!"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        String response;
-        if (dbPassword != null) {
-            if (password.equals(dbPassword)) {
-                ProxyLoggedPlayers.logIn(player);
-                pp.sendMessage(new TextComponent("С возвращением!"));
-                return true;
+            String response;
+            if (dbPassword != null) {
+                if (password.equals(dbPassword)) {
+                    ProxyLoggedPlayers.logIn(player);
+                    pp.sendMessage(new TextComponent("С возвращением!"));
+                    return;
+                } else {
+                    response = "Неверный пароль!";
+                }
             } else {
-                response = "Неверный пароль!";
+                response = "Вы не зарегистрированы!";
             }
-        } else {
-            response = "Вы не зарегистрированы!";
-        }
-
-        pp.sendMessage(new TextComponent(response));
-
-        return false;
+            pp.sendMessage(new TextComponent(response));
+        });
     }
 
-    public static boolean trySessionAuth(String player) {
+    public static void trySessionAuth(String player) {
         ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
+
+        if (ProxyLoggedPlayers.isLogged(player)) return;
 
         if (CoreBungee.get().getPremiumPlayers().contains(player)) {
             ProxyLoggedPlayers.logIn(player);
             pp.sendMessage(new TextComponent("Дороу!"));
-            return true;
+            return;
         }
 
         final int id = IdMap.getId(player);
         final long now = System.currentTimeMillis();
-
         final String ip = pp.getAddress().getHostString();
 
-        String dbIp = null;
-        long lastAuth = 0;
+        ProxyServer.getInstance().getScheduler().runAsync(CoreBungee.get(), () -> {
+            String dbIp = null;
+            long lastAuth = 0;
 
-        if (ProxyLoggedPlayers.isLogged(player)) return true;
+            ResultSet authData = getAuthData(id);
+            ResultSet infoData = getInfoData(id);
 
-        ResultSet authData = getAuthData(id);
-        ResultSet infoData = getInfoData(id);
+            try {
+                lastAuth = authData.getLong("last_authenticated");
+                dbIp = infoData.getString("ip");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        try {
-            lastAuth = authData.getLong("last_authenticated");
-            dbIp = infoData.getString("ip");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            String response;
+            if (lastAuth != -1) {
+                if (Objects.equals(ip, dbIp)) {
+                    long timeInterval = now - lastAuth;
 
-        String response;
-        if (lastAuth != -1) {
-            if (Objects.equals(ip, dbIp)) {
-                long timeInterval = now - lastAuth;
-
-                if (inSessionRange(timeInterval)) {
-                    ProxyLoggedPlayers.logIn(player);
-                    pp.sendMessage(new TextComponent("С возвращением!"));
-                    return true;
+                    if (inSessionRange(timeInterval)) {
+                        ProxyLoggedPlayers.logIn(player);
+                        pp.sendMessage(new TextComponent("С возвращением!"));
+                        return;
+                    } else {
+                        response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Не попал в интервал";
+                    }
                 } else {
-                    response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Не попал в интервал";
+                    response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Ип разный";
                 }
             } else {
-                response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Ип разный";
+                response = "Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>";
             }
-        } else {
-            response = "Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>";
-        }
-
-        pp.sendMessage(new TextComponent(response));
-        return false;
+            pp.sendMessage(new TextComponent(response));
+        });
     }
 
     public static boolean inSessionRange(long time) {

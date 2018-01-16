@@ -3,6 +3,7 @@ package org.kvlt.core.entities;
 import org.hibernate.annotations.GenericGenerator;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.nodes.Proxy;
+import org.kvlt.core.packets.Destination;
 import org.kvlt.core.packets.player.KickPacket;
 
 import javax.persistence.*;
@@ -154,7 +155,7 @@ public class ServerPlayer implements Serializable, Kickable {
     private Proxy currentProxy;
 
     public void kick(String reason) {
-        new KickPacket(this.name, reason).send();
+        new KickPacket(this.name, reason).send(Destination.BUNGEE);
     }
 
     @Override

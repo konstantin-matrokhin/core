@@ -30,12 +30,12 @@ public class EmailChangePacket extends PlayerPacket {
         String name = player.getName();
         String response;
 
-        if (player.getEmail() != null && player.getEmailConfirmationCode() == null) {
+        if (player.isEmailConfirmed()) {
             if (player.getEmail().equalsIgnoreCase(oldEmail)) {
                 String code1 = CodeGenerator.genNiceCode();
                 String code2 = CodeGenerator.genNiceCode();
                 new Email(oldEmail).sendChangeEmail(name, newEmail, code1);
-                new Email(newEmail).sendChangeConfirmEmail(name, code2);
+                new Email(newEmail).sendEmailConfirmation(name, code2);
 
                 EmailChangeData.setData(name, newEmail, code1, code2);
 

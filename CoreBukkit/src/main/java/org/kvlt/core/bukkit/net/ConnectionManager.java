@@ -25,7 +25,7 @@ public class ConnectionManager {
 
     private String host;
     private int port;
-    private boolean isConnected;
+    private boolean connected;
 
     private ConnectionManager() {}
 
@@ -54,13 +54,13 @@ public class ConnectionManager {
 
         System.out.println("Подключение к кору..");
 
-        if (isConnected) return;
+        if (connected) return;
         try {
             ChannelFuture channelFuture = bootstrap.connect(host, port);
             channel = channelFuture.channel();
             channelFuture.addListener((ChannelFuture future) -> {
-                isConnected = future.isSuccess();
-                if (!isConnected) {
+                connected = future.isSuccess();
+                if (!connected) {
                     System.out.println("Нет связи с главным сервером. Переподключение через 3 сек..");
                     future.channel().eventLoop().schedule(this::connect, RECONNECT_DELAY, TimeUnit.SECONDS);
                 } else {
@@ -81,6 +81,14 @@ public class ConnectionManager {
             channel.write(p, channel.voidPromise());
         }
         channel.flush();
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 
     public static synchronized ConnectionManager get() {

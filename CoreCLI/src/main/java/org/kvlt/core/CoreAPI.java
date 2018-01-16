@@ -13,6 +13,8 @@ public interface CoreAPI {
 
     PlayerList<ServerPlayer> getOnlinePlayers();
 
+    PlayerList<ServerPlayer> getUnloggedPlayers();
+
     PremiumPlayers getPremiumPlayers();
 
     Proxies getProxies();

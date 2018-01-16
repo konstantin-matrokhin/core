@@ -21,9 +21,11 @@ commands:
     aliases: [r, rep]
     usage: /r <message>
   con:
-    aliases: [connect, core, coreconnect, cc]
-    usage: /connect
+    aliases: [core, coreconnect, cc]
+    usage: /con
   server:
     usage: /server <server_name>
   ban:
     usage: /ban
+  send:
+    usage: /send <who> <where>

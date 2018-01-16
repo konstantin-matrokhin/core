@@ -41,14 +41,17 @@ public class PlayerPreLoginPacket implements PacketIn {
             idPacket.send(channel);
 
             if (player.isBanned()) {
-                String reason = player.getBanReason();
-                new KickPacket(playerName, reason).send(channel);
-                Log.$(String.format("%s хотел войти, но забанен (%s)", playerName, reason));
-                return;
+                if (player.getBannedUntil() > System.currentTimeMillis()) {
+                    String reason = player.getBanReason();
+                    new KickPacket(playerName, reason).send(channel);
+                    Log.$(String.format("%s хотел войти, но забанен (%s)", playerName, reason));
+                    return;
+                } else {
+                    PlayerFactory.unban(player);
+                }
             }
 
-            Core.get().getOnlinePlayers().add(player);
-            System.out.println(String.format("[+] Игрок %s подключился", playerName));
+            Core.get().getUnloggedPlayers().add(player);
 
             PlayerPreLoginEvent prle = new PlayerPreLoginEvent(player);
             prle.invoke();

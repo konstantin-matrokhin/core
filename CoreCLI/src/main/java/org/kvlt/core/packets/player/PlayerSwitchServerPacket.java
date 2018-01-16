@@ -29,8 +29,8 @@ public class PlayerSwitchServerPacket implements PacketIn {
         GameServer destination = Core.get().getGameServers().getNode(to);
         op.setCurrentServer(destination);
 
-        PlayerSwitchServerEvent psse = new PlayerSwitchServerEvent(op, destination);
-        psse.invoke();
+//        PlayerSwitchServerEvent psse = new PlayerSwitchServerEvent(op, destination);
+//        psse.invoke();
     }
 
     @Override

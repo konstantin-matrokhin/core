@@ -42,6 +42,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
                 new EmailChangeVerifyPacket(),
                 new TransferRequestPacket(),
                 new PremiumPlayerPacket(),
+                new HubRequestPacket()
         };
 
         resolver.registerPackets(packets);

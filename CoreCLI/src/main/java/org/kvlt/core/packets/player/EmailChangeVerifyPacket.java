@@ -6,6 +6,7 @@ import org.kvlt.core.entities.EmailChangeData;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
+import org.kvlt.core.protocol.Packets;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class EmailChangeVerifyPacket extends PlayerPacket {
         String email = player.getEmail();
         String response;
 
-        if (email != null && player.getEmailConfirmationCode() == null) {
+        if (player.isEmailConfirmed()) {
             if (EmailChangeData.isChanging(name)) {
                 List<String> data = EmailChangeData.getData(name);
                 boolean validCodes = data.get(1).equalsIgnoreCase(code1) && data.get(2).equalsIgnoreCase(code2);
@@ -55,6 +56,6 @@ public class EmailChangeVerifyPacket extends PlayerPacket {
 
     @Override
     public int getId() {
-        return 0;
+        return Packets.EMAIL_CHANGE_VERIFY_PACKET;
     }
 }

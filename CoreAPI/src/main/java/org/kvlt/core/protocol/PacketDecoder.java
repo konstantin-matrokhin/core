@@ -47,13 +47,13 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                 PacketIn p = packetResolver.getPacketIn(id);
                 // Проверяем есть ли такой ID и проверяем длину пакета
                 if (p != null) {
-                    System.out.println(String.format("::%s | %s", p.getId(), p.getClass().getSimpleName()));
+                    System.out.println(String.format("-> %s, NAME: %s", p.getId(), p.getClass().getSimpleName()));
 
                     byteBuf.readerIndex(8);
                     p.read(byteBuf);
                     list.add(p);
                 } else {
-                    System.out.println("Invalid packet with [id = " + id + "]");
+                    System.out.println("ATTENTION: Invalid or unregistered packet with [id = " + id + "]");
                 }
             }
         }

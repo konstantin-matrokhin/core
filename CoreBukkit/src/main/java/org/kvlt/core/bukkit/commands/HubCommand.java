@@ -16,10 +16,6 @@ public class HubCommand implements CommandExecutor {
         String name = p.getName();
 
         new HubRequestPacket(name).send();
-
-//        ProxySwitchServerPacket pssp = new ProxySwitchServerPacket(new OnlinePlayer(p.getName()));
-//        CorePlugin.get().getCoreServer().writeAndFlush(pssp);
-
         return true;
     }
 }

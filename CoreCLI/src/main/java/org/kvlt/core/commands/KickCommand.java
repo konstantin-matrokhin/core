@@ -31,7 +31,7 @@ public class KickCommand extends Command {
 
             Printer.$(String.format("%s кикнут с сервера %s: %s",
                     name,
-                    victim.getCurrentProxy(),
+                    victim.getCurrentProxy().getName(),
                     reason));
         } else {
             Printer.$("Игрок не найден!");

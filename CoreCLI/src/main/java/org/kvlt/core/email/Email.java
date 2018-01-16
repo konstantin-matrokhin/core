@@ -20,7 +20,6 @@ public final class Email {
     private static Session session;
 
     private static String emailChangeEmail;
-    private static String emailChangeConfirmEmail;
     private static String emailConfirmEmail;
     private static String passwordChangeEmail;
     private static String passwordRecoveryEmail;
@@ -46,14 +45,6 @@ public final class Email {
         session = createSession();
 
         loadTemplates();
-    }
-
-    public void sendChangeConfirmEmail(String name, String code) {
-        String formattedEmail = emailChangeConfirmEmail
-                .replace("%name%", name)
-                .replace("%code%", code);
-
-        send("Новый ящик // LastCraft", formattedEmail);
     }
 
     public void sendChangeEmail(String name, String newEmail, String code) {
@@ -97,7 +88,6 @@ public final class Email {
         Log.$("Загрузка шаблонов писем..");
         try {
             emailChangeEmail = loadHTMLTemplate("email_change");
-            emailChangeConfirmEmail = loadHTMLTemplate("email_change_confirmation");
             emailConfirmEmail = loadHTMLTemplate("email_confirmation");
             passwordChangeEmail = loadHTMLTemplate("password_change");
             passwordRecoveryEmail = loadHTMLTemplate("password_recovery");

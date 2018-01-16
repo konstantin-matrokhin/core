@@ -16,6 +16,7 @@ public final class Core implements CoreAPI {
     private static CoreAPI instance;
 
     private PlayerList<ServerPlayer> onlinePlayers;
+    private PlayerList<ServerPlayer> unloggedPlayers;
     private PremiumPlayers premiumPlayers;
 
     private Proxies proxies;
@@ -36,7 +37,7 @@ public final class Core implements CoreAPI {
 
         server = new CoreServer();
         onlinePlayers = new PlayerList<>();
-
+        unloggedPlayers = new PlayerList<>();
         premiumPlayers = new PremiumPlayers(HibernateInitializer
                 .getSessionFactory().openSession());
         premiumPlayers.loadFromMySQL();
@@ -60,6 +61,11 @@ public final class Core implements CoreAPI {
     @Override
     public PlayerList<ServerPlayer> getOnlinePlayers() {
         return onlinePlayers;
+    }
+
+    @Override
+    public PlayerList<ServerPlayer> getUnloggedPlayers() {
+        return unloggedPlayers;
     }
 
     @Override

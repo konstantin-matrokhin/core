@@ -39,12 +39,13 @@ public class EmailCommand extends Command {
         if (sender instanceof ProxiedPlayer) {
             player = (ProxiedPlayer) sender;
         } else {
+            sender.sendMessage(new TextComponent("Команда доступна только для игроков."));
             return;
         }
 
         String name = player.getName();
         String action = args[0].toLowerCase();
-        Optional<String> email = Optional.ofNullable(args[1]);
+        Optional<String> email = Optional.ofNullable(args.length > 1 ? args[1] : null);
 
         switch (action) {
             case "add":
@@ -61,18 +62,15 @@ public class EmailCommand extends Command {
                 }
                 break;
             case "verify":
+                if (args.length < 2) return;
                 if (!ProxyLoggedPlayers.isLogged(name)) {
                     player.sendMessage(new TextComponent("Сначала залогиньтесь!"));
                     return;
                 }
 
                 String code = args[1];
-                if (code == null) return;
-
-                Optional<String> oCode2 = Optional.ofNullable(args[2]);
-
-                if (oCode2.isPresent()) {
-                    String code2 = oCode2.get();
+                if (args.length > 2) {
+                    String code2 = args[2];
                     if (code.length() == CODE_LENGTH && code2.length() == CODE_LENGTH) {
                         new EmailChangeVerifyPacket(name, code, code2).send();
                     } else {

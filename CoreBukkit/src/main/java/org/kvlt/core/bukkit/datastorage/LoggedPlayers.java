@@ -3,6 +3,7 @@ package org.kvlt.core.bukkit.datastorage;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class LoggedPlayers {
 
     private static List<String> loggedPlayers;

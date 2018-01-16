@@ -28,6 +28,7 @@ public class EmailVerifyPacket extends PlayerPacket {
 
         if (confirmationCode != null && getPlayer().getEmailConfirmationCode().equalsIgnoreCase(code)) {
             getPlayer().setEmailConfirmationCode(null);
+            getPlayer().setEmailConfirmed(true);
             PlayerFactory.updatePlayer(getPlayer());
             response = String.format("Email %s успешно привязан!", email);
         } else {

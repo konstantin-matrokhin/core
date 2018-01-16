@@ -43,7 +43,7 @@ public abstract class Command {
     }
 
     protected String getArg(int index) {
-        if (index < 0 || index > args.length || args.length == 0) return "";
+        if (index < 0 || index > args.length - 1 || args.length == 0) return null;
         return args[index];
     }
 

@@ -107,4 +107,12 @@ public class PlayerFactory {
     public static boolean isStaff(ServerPlayer player) {
         return Group.getGroup(player.getGroup()).getLevel() >= Group.JUNIOR.getLevel();
     }
+
+    public static void unban(ServerPlayer player) {
+        player.setBanned(false);
+        player.setBannedUntil(0);
+        player.setBanReason(null);
+        player.setBannedBy(null);
+        updatePlayer(player);
+    }
 }

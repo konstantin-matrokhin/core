@@ -8,6 +8,7 @@ import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.packets.*;
 import org.kvlt.core.bungee.storages.PremiumQueue;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
+import org.kvlt.core.packets.player.HubRequestPacket;
 
 public class ProxyEventListener implements Listener {
 

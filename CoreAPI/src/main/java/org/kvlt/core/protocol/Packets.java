@@ -8,7 +8,6 @@ public class Packets {
     public static final int PROXY_CONNECT_PACKET = 1;
     public static final int PROXY_DISCONNECT_PACKET = 3;
     public static final int PROXY_MOTD_PACKET = 13;
-
     public static final int SERVER_CONNECT_PACKET = 2;
     public static final int SERVER_DISCONNECT_PACKET = 4;
 

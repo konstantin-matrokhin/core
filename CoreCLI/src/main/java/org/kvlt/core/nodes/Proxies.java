@@ -5,6 +5,7 @@ import org.kvlt.core.protocol.Packet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Контейнер, хранящий в себе сущности прокси-серверов
@@ -44,6 +45,11 @@ public class Proxies implements NodeContainer<Proxy>, Iterable<Proxy> {
                 .filter(node -> node.getName().equalsIgnoreCase(nodeName))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public Stream<Proxy> stream() {
+        return proxies.stream();
     }
 
     @Override

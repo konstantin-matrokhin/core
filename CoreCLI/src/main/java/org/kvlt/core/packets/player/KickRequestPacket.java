@@ -41,7 +41,7 @@ public class KickRequestPacket extends PlayerPacket {
             response = "You don't have permission!";
         }
 
-        new MessagePacket(name, response);
+        new MessagePacket(name, response).send(channel);
     }
 
     @Override

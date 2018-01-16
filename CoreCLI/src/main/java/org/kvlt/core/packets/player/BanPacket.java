@@ -63,7 +63,7 @@ public class BanPacket implements PacketIn {
                 victimPlayer.setBanReason(reason);
 
                 PlayerFactory.updatePlayer(victimPlayer);
-                new KickPacket(victim, String.format("БАН: %s", reason)).send();
+                new KickPacket(victim, String.format("БАН: %s", reason)).send(channel);
 
                 Log.$(String.format("%s забанил %s: %s",
                         enforcer,

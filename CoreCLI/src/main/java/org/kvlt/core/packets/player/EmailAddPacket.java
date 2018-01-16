@@ -19,24 +19,16 @@ public class EmailAddPacket extends PlayerPacket {
         playerEmail = PacketUtil.readString(in);
     }
 
-
-    /**
-     ADD:
-         email | code | result
-         null  | null | = allow
-         yes   | yes  | = allow
-         yes   | null | = disallow -- BOOLEAN ALLOWED
-         null  | yes  | = allow
-     */
     @Override
     public void execute(Channel channel) {
         if (ensurePlayer()) {
             String response;
-            boolean allowed = !(getPlayer().getEmailConfirmationCode() == null && getPlayer().getEmail() != null);
-            if (!allowed) {
+            if (!getPlayer().isEmailConfirmed()) {
                 String code = CodeGenerator.genNiceCode().toUpperCase();
+
                 getPlayer().setEmailConfirmationCode(code);
                 getPlayer().setEmail(playerEmail);
+
                 PlayerFactory.updatePlayer(getPlayer());
                 Email email = new Email(playerEmail);
                 email.sendEmailConfirmation(getPlayer().getName(), code);

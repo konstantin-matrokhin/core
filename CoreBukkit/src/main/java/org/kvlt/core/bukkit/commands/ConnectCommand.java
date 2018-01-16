@@ -8,12 +8,20 @@ import org.kvlt.core.bukkit.net.ConnectionManager;
 public class ConnectCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender.isOp()) {
-            ConnectionManager.get().connect();
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+        String response;
+
+        if (sender.isOp()) {
+            if (!ConnectionManager.get().isConnected()) {
+                ConnectionManager.get().connect();
+                response = "Подключаюсь к кору..";
+            } else {
+                response = "Подключение уже установлено.";
+            }
+            sender.sendMessage(response);
             return true;
         } else {
-            commandSender.sendMessage("You don't have permission!");
+            sender.sendMessage("You don't have permission!");
         }
         return false;
     }

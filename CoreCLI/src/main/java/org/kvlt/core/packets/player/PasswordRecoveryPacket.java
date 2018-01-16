@@ -27,7 +27,7 @@ public class PasswordRecoveryPacket extends PlayerPacket {
             if (getPlayer().getEmailConfirmationCode() == null) {
                 Email recoveryMail = new Email(email);
                 String hiddenEmail = email.substring(0, 2) + "***" +
-                        email.substring(email.lastIndexOf("."));
+                        email.substring(email.lastIndexOf("@") + 1);
 
                 recoveryMail.sendPasswordRecovery(name, getPlayer().getPassword());
                 Log.$(String.format("%s запросил пароль на %s",

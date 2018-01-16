@@ -8,6 +8,7 @@ import org.kvlt.core.events.player.PlayerLoginEvent;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.Log;
 
 public class PlayerLoginPacket implements PacketIn {
 
@@ -20,10 +21,12 @@ public class PlayerLoginPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer player = Core.get().getOnlinePlayers().get(playerName);
-
-        PlayerLoginEvent ple = new PlayerLoginEvent(player);
-        ple.invoke();
+        ServerPlayer player = Core.get().getUnloggedPlayers().get(playerName);
+        if (player != null) {
+            
+            PlayerLoginEvent ple = new PlayerLoginEvent(player);
+            ple.invoke();
+        }
     }
 
     @Override
