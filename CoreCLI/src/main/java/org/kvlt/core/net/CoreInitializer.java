@@ -9,6 +9,7 @@ import org.kvlt.core.packets.bukkit.ServerDisconnectPacket;
 import org.kvlt.core.packets.player.*;
 import org.kvlt.core.packets.proxy.ProxyConnectPacket;
 import org.kvlt.core.packets.proxy.ProxyDisconnectPacket;
+import org.kvlt.core.packets.proxy.TransferRequestPacket;
 import org.kvlt.core.protocol.*;
 
 public class CoreInitializer extends ChannelInitializer<SocketChannel> {
@@ -42,7 +43,9 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
                 new EmailChangeVerifyPacket(),
                 new TransferRequestPacket(),
                 new PremiumPlayerPacket(),
-                new HubRequestPacket()
+                new HubRequestPacket(),
+                new PlayerInfoPacket(),
+                new LogoutPacket()
         };
 
         resolver.registerPackets(packets);

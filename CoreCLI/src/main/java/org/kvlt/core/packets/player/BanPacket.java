@@ -30,56 +30,59 @@ public class BanPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        String response;
-        int level;
+        Runnable r = () -> {
+            String response;
+            int level;
 
-        if (!enforcer.equalsIgnoreCase("console")) {
-            ServerPlayer enforcerPlayer = Core.get().getOnlinePlayers().get(enforcer);
-            if (enforcerPlayer != null) {
-                level = Group.getGroup(enforcerPlayer.getGroup()).getLevel();
+            if (!enforcer.equalsIgnoreCase("console")) {
+                ServerPlayer enforcerPlayer = Core.get().getOnlinePlayers().get(enforcer);
+                if (enforcerPlayer != null) {
+                    level = Group.getGroup(enforcerPlayer.getGroup()).getLevel();
+                } else {
+                    return;
+                }
             } else {
-                return;
-            }
-        } else {
-            level = 1000;
-        }
-
-        if (level >= Group.JUNIOR.getLevel()) {
-            ServerPlayer victimPlayer;
-
-            if (Core.get().getOnlinePlayers().contains(victim)) {
-                victimPlayer = Core.get().getOnlinePlayers().get(victim);
-            } else {
-                victimPlayer = PlayerFactory.loadPlayer(victim, false);
+                level = 1000;
             }
 
-            if (victimPlayer != null) {
-                long parsedTime = PlayedTimeCounter.parseTime(time);
+            if (level >= Group.JUNIOR.getLevel()) {
+                ServerPlayer victimPlayer;
 
-                victimPlayer.setBanned(true);
-                victimPlayer.setBannedBy(enforcer);
-                victimPlayer.setBannedUntil(parsedTime);
-                victimPlayer.setBanAmount(victimPlayer.getBanAmount() + 1);
-                victimPlayer.setBanReason(reason);
+                if (Core.get().getOnlinePlayers().contains(victim)) {
+                    victimPlayer = Core.get().getOnlinePlayers().get(victim);
+                } else {
+                    victimPlayer = PlayerFactory.loadPlayer(victim, false);
+                }
 
-                PlayerFactory.updatePlayer(victimPlayer);
-                new KickPacket(victim, String.format("БАН: %s", reason)).send(channel);
+                if (victimPlayer != null) {
+                    long parsedTime = PlayedTimeCounter.parseTime(time);
 
-                Log.$(String.format("%s забанил %s: %s",
-                        enforcer,
-                        victim,
-                        reason));
+                    victimPlayer.setBanned(true);
+                    victimPlayer.setBannedBy(enforcer);
+                    victimPlayer.setBannedUntil(parsedTime);
+                    victimPlayer.setBanAmount(victimPlayer.getBanAmount() + 1);
+                    victimPlayer.setBanReason(reason);
 
-                response = String.format("Вы забанили %s.", victim);
+                    PlayerFactory.updatePlayer(victimPlayer);
+                    new KickPacket(victim, String.format("БАН: %s", reason)).send(channel);
+
+                    Log.$(String.format("%s забанил %s: %s",
+                            enforcer,
+                            victim,
+                            reason));
+
+                    response = String.format("Вы забанили %s.", victim);
+                } else {
+                    response = "Нет такого игрока в базе!";
+                }
             } else {
-                response = "Нет такого игрока в базе!";
+                response = "Недостаточно прав!";
             }
-        } else {
-            response = "Недостаточно прав!";
-        }
 
-        MessagePacket responsePacket = new MessagePacket(enforcer, response);
-        responsePacket.send(channel);
+            MessagePacket responsePacket = new MessagePacket(enforcer, response);
+            responsePacket.send(channel);
+        };
+        PlayerFactory.addTask(r);
     }
 
     @Override

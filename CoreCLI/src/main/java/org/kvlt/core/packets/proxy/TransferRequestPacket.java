@@ -1,4 +1,4 @@
-package org.kvlt.core.packets.player;
+package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -7,6 +7,8 @@ import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerSwitchServerEvent;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.packets.Destination;
+import org.kvlt.core.packets.player.PlayerPacket;
+import org.kvlt.core.packets.player.PlayerTransferPacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.Log;

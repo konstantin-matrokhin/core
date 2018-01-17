@@ -4,12 +4,16 @@ import io.netty.util.internal.ConcurrentSet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.kvlt.core.Core;
 import org.kvlt.core.entities.Group;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
 import org.kvlt.core.utils.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -115,4 +119,86 @@ public class PlayerFactory {
         player.setBannedBy(null);
         updatePlayer(player);
     }
+
+    public static String getPrettyInfo(String name) {
+        ServerPlayer player;
+        String info;
+
+        boolean online = Core.get().getOnlinePlayers().contains(name);
+        if (online) {
+            player = Core.get().getOnlinePlayers().get(name);
+        } else {
+            player = PlayerFactory.loadPlayer(name, false);
+        }
+
+        if (player != null) {
+            List<String> i = Arrays.asList(
+                    "==========================",
+                    "ID: " + player.getId(),
+                    "Онлайн: " + online,
+                    "Последний IP: " + player.getLastIp(),
+                    "Забанен: " + player.isBanned(),
+                    "В муте: " + player.isMuted(),
+                    "Банов: " + player.getBanAmount(),
+                    "Мутов: " + player.getMuteAmount(),
+                    "Репортов: " + player.getTotalReports(),
+                    "Последний сервер: " + player.getLastServer(),
+                    "Почта: " + player.getEmail(),
+                    "Последний вход: " + player.getLastAuth() // TODO normalize
+            );
+
+            if (player.isBanned()) {
+                i.add("==========================");
+                i.add("Кто забанил: " + player.getBannedBy());
+                i.add("Причина бана: " + player.getBanReason());
+                i.add("Конец бана: " + player.getBannedUntil());
+                i.add("==========================");
+            }
+
+            if (player.isMuted()) {
+                i.add("==========================");
+                i.add("Кто замутил: " + player.getMutedBy());
+                i.add("Причина мута: " + player.getMuteReason());
+                i.add("Конец мута: " + player.getMutedUntil());
+                i.add("==========================");
+            }
+
+            if (online) {
+                i.add("==========================");
+                i.add("IP: " + player.getIp());
+                i.add("Сейчас на сервере: " + player.getCurrentServer());
+                i.add("Сейчас на прокси: " + player.getCurrentProxy());
+            }
+            i.add("==========================");
+            info = String.join("\n", i);
+        } else {
+            info = "Игрока нет в БД!";
+        }
+
+        return info;
+    }
+
+    public static String getShortInfo(String name) {
+        ServerPlayer player;
+        List<String> i = new ArrayList<>();
+
+        boolean online = Core.get().getOnlinePlayers().contains(name);
+        i.add("Онлайн: " + online);
+
+        if (online) {
+            player = Core.get().getOnlinePlayers().get(name);
+            i.add("Сервер: " + player.getCurrentServer());
+            i.add("Прокси: " + player.getCurrentProxy());
+        } else {
+            player = PlayerFactory.loadPlayer(name, false);
+            if (player != null) {
+                i.add("Последний сервер: " + player.getLastServer());
+            } else {
+                i.add("Игрока нет в БД!");
+            }
+        }
+
+        return String.join("\n", i);
+    }
+
 }

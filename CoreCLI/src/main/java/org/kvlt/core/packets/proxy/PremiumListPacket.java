@@ -1,4 +1,4 @@
-package org.kvlt.core.packets.player;
+package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import org.kvlt.core.packets.CorePacketOut;

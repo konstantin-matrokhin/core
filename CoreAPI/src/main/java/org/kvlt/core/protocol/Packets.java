@@ -30,6 +30,7 @@ public class Packets {
     public static final int PASSWORD_RECOVERY_PACKET = 21;
     public static final int EMAIL_CHANGE_PACKET = 26;
     public static final int EMAIL_CHANGE_VERIFY_PACKET = 27;
+    public static final int LOGOUT_PACKET = 33;
 
     public static final int PWD_PACKET = 22;
 
@@ -44,5 +45,7 @@ public class Packets {
 
     public static final int PREMIUM_LIST_PACKET = 30;
     public static final int PREMIUM_PLAYER_PACKET = 31;
+
+    public static final int PLAYER_INFO_PACKET = 32;
 
 }

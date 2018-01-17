@@ -35,6 +35,7 @@ public class PlayerPreLoginPacket implements PacketIn {
             player = PlayerFactory.loadPlayer(playerName);
             player.setIp(ip);
             player.setCurrentProxy(proxy);
+            Core.get().getUnloggedPlayers().add(player);
 
             int id = player.getId();
             IdPacket idPacket = new IdPacket(playerName, id);
@@ -51,7 +52,12 @@ public class PlayerPreLoginPacket implements PacketIn {
                 }
             }
 
-            Core.get().getUnloggedPlayers().add(player);
+            Core.get().getUnloggedPlayers().remove(player);
+            Core.get().getOnlinePlayers().add(player);
+
+            player.setJoinTime(System.currentTimeMillis());
+            PlayerFactory.updatePlayer(player);
+            System.out.println(String.format("[+] Игрок %s подключился", playerName));
 
             PlayerPreLoginEvent prle = new PlayerPreLoginEvent(player);
             prle.invoke();

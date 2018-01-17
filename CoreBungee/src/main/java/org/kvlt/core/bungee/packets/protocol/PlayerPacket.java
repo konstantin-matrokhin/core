@@ -1,6 +1,6 @@
 package org.kvlt.core.bungee.packets.protocol;
 
-public abstract class PlayerPacket extends BungeeOutPacket {
+public abstract class PlayerPacket extends BungeePacketOut {
 
     private String playerName;
 

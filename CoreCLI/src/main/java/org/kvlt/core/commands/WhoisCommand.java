@@ -26,20 +26,10 @@ public class WhoisCommand extends Command {
             Printer.$("Введите имя игрока.");
             return false;
         }
-        String name = getArg(0);
+        final String name = getArg(0);
 
         Runnable r = () -> {
-            if (Core.get().getOnlinePlayers().contains(name)) {
-                ServerPlayer player = Core.get().getOnlinePlayers().get(name);
-                printInfo(player);
-            } else {
-                ServerPlayer player = PlayerFactory.loadPlayer(name, false);
-                if (player != null) {
-                    printInfo(player);
-                } else {
-                    Printer.$("Игрок не найден в БД.");
-                }
-            }
+            PlayerFactory.getPrettyInfo(name);
         };
         PlayerFactory.addTask(r);
         return true;

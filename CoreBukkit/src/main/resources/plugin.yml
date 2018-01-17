@@ -12,7 +12,7 @@ commands:
   time:
     usage: /time [player]
   hub:
-    alises: [lobby]
+    alises: lobby
     usage: /hub
   sendcommand:
     aliases: [sc]
@@ -29,3 +29,7 @@ commands:
     usage: /ban
   send:
     usage: /send <who> <where>
+  find:
+    usage: /find <who>
+  whois:
+    usage: /whois <who>

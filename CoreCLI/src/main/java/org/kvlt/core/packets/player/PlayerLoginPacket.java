@@ -23,7 +23,6 @@ public class PlayerLoginPacket implements PacketIn {
     public void execute(Channel channel) {
         ServerPlayer player = Core.get().getUnloggedPlayers().get(playerName);
         if (player != null) {
-            
             PlayerLoginEvent ple = new PlayerLoginEvent(player);
             ple.invoke();
         }

@@ -6,7 +6,6 @@ import org.kvlt.core.Core;
 import org.kvlt.core.config.Config;
 import org.kvlt.core.events.proxy.ProxyConnectEvent;
 import org.kvlt.core.nodes.Proxy;
-import org.kvlt.core.packets.player.PremiumListPacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;

@@ -1,3 +1,4 @@
+
 package org.kvlt.core.commands;
 
 import org.kvlt.core.Core;
@@ -21,15 +22,18 @@ public class BanCommand extends Command {
             return false;
         }
 
-        String name = getArg(0);
-        String until = Optional.ofNullable(getArg(1)).orElse("e");
-        String reason = Optional.ofNullable(getArg(2)).orElse("BANNED!");
-        ServerPlayer player = Optional.ofNullable(Optional
-                .ofNullable(Core.get().getOnlinePlayers().get(name))
-                .orElse(PlayerFactory.loadPlayer(name, false)))
-                .orElseThrow(IllegalArgumentException::new);
+        Runnable r = () -> {
+            String name = getArg(0);
+            String until = Optional.ofNullable(getArg(1)).orElse("e");
+            String reason = Optional.ofNullable(getArg(2)).orElse("BANNED!");
+            ServerPlayer player = Optional.ofNullable(Optional
+                    .ofNullable(Core.get().getOnlinePlayers().get(name))
+                    .orElse(PlayerFactory.loadPlayer(name, false)))
+                    .orElseThrow(IllegalArgumentException::new);
+            PlayerFactory.ban(player, "CONSOLE", until, reason);
+        };
+        PlayerFactory.addTask(r);
 
-        PlayerFactory.ban(player, "CONSOLE", until, reason);
         return true;
     }
 }

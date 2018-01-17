@@ -7,6 +7,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.CoreDB;
+import org.kvlt.core.bungee.packets.LogoutPacket;
 import org.kvlt.core.bungee.storages.IdMap;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
@@ -28,17 +29,7 @@ public class LogoutCommand extends Command {
         if (ProxyLoggedPlayers.isLogged(name)) {
                 int id = IdMap.getId(name);
                 ProxyLoggedPlayers.logOut(name);
-
-                player.disconnect(new TextComponent("Logout."));
-                ProxyServer.getInstance().getScheduler().runAsync(CoreBungee.get(), () -> {
-                    try {
-                        PreparedStatement statement = CoreDB.get().getConnection()
-                                .prepareStatement("UPDATE join_info SET ip = NULL WHERE id = ?");
-                        statement.setInt(1, id);
-                        statement.executeUpdate();
-                    } catch (Exception ignored) {}
-                    ProxyLoggedPlayers.logOut(name);
-                });
+                new LogoutPacket(name).send();
         } else {
             player.sendMessage(new TextComponent("Сначала авторизуйтесь!"));
         }

@@ -12,13 +12,14 @@ public class CorePlugin extends JavaPlugin {
     private Channel server;
     private PacketResolver packetResolver;
 
-    @Override
-    public void onEnable() {
-
+    {
         synchronized (this) {
             instance = this;
         }
+    }
 
+    @Override
+    public void onEnable() {
         packetResolver = new PacketResolver();
 
         getCommand("alert").setExecutor(new AlertCommand());
@@ -31,6 +32,8 @@ public class CorePlugin extends JavaPlugin {
         getCommand("con").setExecutor(new ConnectCommand());
         getCommand("ban").setExecutor(new BanCommand());
         getCommand("server").setExecutor(new ServerCommand());
+        getCommand("find").setExecutor(new FindCommand());
+        getCommand("whois").setExecutor(new WhoisCommand());
 
         ConfigManager.initConfig();
         ConnectionManager.get().startClient();

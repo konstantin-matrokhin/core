@@ -1,11 +1,11 @@
 package org.kvlt.core.bungee.packets;
 
 import io.netty.buffer.ByteBuf;
-import org.kvlt.core.bungee.packets.protocol.BungeeOutPacket;
+import org.kvlt.core.bungee.packets.protocol.BungeePacketOut;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
-public class EmailChangeVerifyPacket extends BungeeOutPacket {
+public class EmailChangeVerifyPacket extends BungeePacketOut {
 
     private String player;
     private String code1;

@@ -22,15 +22,10 @@ public class PlayerJoinPacket extends PlayerPacket {
     public void execute(Channel channel) {
         ServerPlayer player = Core.get().getUnloggedPlayers().get(name);
         if (player != null) {
-            Core.get().getUnloggedPlayers().remove(name);
-            Core.get().getOnlinePlayers().add(player);
-
-            player.setJoinTime(System.currentTimeMillis());
-            PlayerFactory.updatePlayer(player);
-            System.out.println(String.format("[+] Игрок %s подключился", name));
-
             PlayerJoinEvent pje = new PlayerJoinEvent(player);
             pje.invoke();
+        } else {
+            System.out.println("join player is null!");
         }
     }
 

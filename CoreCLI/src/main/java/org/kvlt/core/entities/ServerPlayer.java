@@ -54,7 +54,7 @@ public class ServerPlayer implements Serializable, Kickable {
     private String uuid;
 
     @Column(table = "join_info", name = "ip", length = 32)
-    private String lastIp;
+    private String lastIp = "empty";
 
     @Column(table = "authentication", name = "last_authenticated")
     private long lastAuth = -1;
