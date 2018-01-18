@@ -11,15 +11,17 @@ public class WhoCommand extends Command {
 
     @Override
     public boolean execute() {
-        final StringBuilder players = new StringBuilder();
+        final StringBuilder onlinePlayers = new StringBuilder();
+        final StringBuilder unloggedPlayers = new StringBuilder();
 
-        Core.get().getOnlinePlayers().forEach(p -> players.append(p.getName()).append(", "));
+        Core.get().getOnlinePlayers().forEach(p -> onlinePlayers.append(p.getName()).append(" "));
+        Core.get().getUnloggedPlayers().forEach(p -> unloggedPlayers.append(p.getName()).append(" "));
 
         Printer.$("Подключенные игроки(" + Core.get().getOnlinePlayers().size() + "):");
-        Printer.$(players.toString().isEmpty() ? "Никого нет" : players.toString());
-
+        Printer.$(onlinePlayers.toString().isEmpty() ? "Никого нет" : onlinePlayers.toString());
+        Printer.$("");
         Printer.$("Незалогиневшиеся игроки(" + Core.get().getUnloggedPlayers().size() + "):");
-        Printer.$(players.toString().isEmpty() ? "Никого нет" : players.toString());
+        Printer.$(unloggedPlayers.toString().isEmpty() ? "Никого нет" : unloggedPlayers.toString());
 
         return true;
     }

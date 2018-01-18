@@ -32,8 +32,8 @@ public class EmailAddPacket extends PlayerPacket {
                 PlayerFactory.updatePlayer(getPlayer());
                 Email email = new Email(playerEmail);
                 email.sendEmailConfirmation(getPlayer().getName(), code);
-                response = "На ваш email %s отправлен код подтверждения\n" +
-                        "Введите команду /email verify <код>";
+                response = String.format("На ваш email %s отправлен код подтверждения\n" +
+                        "Введите команду /email verify <код>", email);
             } else {
                 response = "У вас уже привязан email!";
             }

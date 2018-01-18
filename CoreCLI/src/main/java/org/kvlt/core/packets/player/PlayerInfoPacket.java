@@ -25,17 +25,19 @@ public class PlayerInfoPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        String response;
-        ServerPlayer senderPlayer = Core.get().getOnlinePlayers().get(sender);
-        if (senderPlayer != null) {
-            if (PlayerFactory.isStaff(senderPlayer)) {
-                response = full ? PlayerFactory.getPrettyInfo(player) : PlayerFactory.getShortInfo(player);
-            } else {
-                response = "You don't have permission!";
+        Runnable r = () -> {
+            String response;
+            ServerPlayer senderPlayer = Core.get().getOnlinePlayers().get(sender);
+            if (senderPlayer != null) {
+                if (PlayerFactory.isStaff(senderPlayer)) {
+                    response = full ? PlayerFactory.getPrettyInfo(player) : PlayerFactory.getShortInfo(player);
+                } else {
+                    response = "You don't have permission!";
+                }
+                new MessagePacket(sender, response).send(channel);
             }
-
-            new MessagePacket(sender, response).send(channel);
-        }
+        };
+        PlayerFactory.addTask(r);
     }
 
     @Override

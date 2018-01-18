@@ -64,4 +64,8 @@ public class GameServer implements Node {
         return port;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

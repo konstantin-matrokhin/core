@@ -3,6 +3,8 @@ package org.kvlt.core.protocol;
 import io.netty.buffer.ByteBuf;
 import io.netty.util.CharsetUtil;
 
+import java.util.Iterator;
+
 public class PacketUtil {
 
     public static String readString(ByteBuf byteBuf){
@@ -16,6 +18,20 @@ public class PacketUtil {
         byte[] bytes = string.getBytes(CharsetUtil.UTF_8);
         byteBuf.writeInt(bytes.length);
         byteBuf.writeBytes(bytes);
+    }
+
+    public static void writeStrings(Iterable<? super String> iterable, ByteBuf byteBuf) {
+        Iterator iterator = iterable.iterator();
+        if (!iterator.hasNext()) throw new ArrayIndexOutOfBoundsException("array must be not empty!");
+
+        short size = (short) iterable.spliterator().getExactSizeIfKnown();
+        if (size == 0) throw new ArrayIndexOutOfBoundsException("array must be not empty!");
+
+        byteBuf.writeShort(size);
+        while (iterator.hasNext()) {
+            String next = (String) iterator.next();
+            writeString(next, byteBuf);
+        }
     }
 
     public static void writeStringArray(String[] array, ByteBuf byteBuf) {

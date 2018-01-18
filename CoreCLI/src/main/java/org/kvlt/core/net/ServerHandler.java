@@ -41,8 +41,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<PacketIn> {
         Log.err(String.format("Отсоединен %s  %s",
                 ctx.channel().remoteAddress(),
                 cause.getLocalizedMessage()));
-
-        cause.printStackTrace();
+        ctx.fireChannelInactive();
     }
 
 }

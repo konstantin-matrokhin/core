@@ -1,6 +1,5 @@
 package org.kvlt.core.commands;
 
-import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.Group;
 import org.kvlt.core.entities.ServerPlayer;
@@ -29,12 +28,14 @@ public class WhoisCommand extends Command {
         final String name = getArg(0);
 
         Runnable r = () -> {
-            PlayerFactory.getPrettyInfo(name);
+            Printer.$(PlayerFactory.getPrettyInfo(name));
         };
         PlayerFactory.addTask(r);
         return true;
     }
 
+    @Deprecated
+    @SuppressWarnings("unused")
     private void printInfo(ServerPlayer player) {
         SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
         String totalPlayed = format.format(new Date(player.getPlayedTotal()));

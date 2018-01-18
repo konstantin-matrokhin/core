@@ -60,4 +60,8 @@ public class Proxy implements Node {
         return players;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

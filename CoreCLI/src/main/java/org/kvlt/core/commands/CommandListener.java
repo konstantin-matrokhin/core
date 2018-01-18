@@ -1,7 +1,9 @@
 package org.kvlt.core.commands;
 
+import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.UserInterruptException;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
@@ -48,8 +50,9 @@ public class CommandListener {
             try {
                 String line = reader.readLine(">");
                 listenCommands(line);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (UserInterruptException ignored) {
+            } catch (EndOfFileException e) {
+                return;
             }
         }
     }
