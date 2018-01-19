@@ -17,33 +17,32 @@ public class CommandListener {
     private LineReader reader;
 
     public CommandListener() {
+        commands = new HashSet<>();
         try {
             Terminal terminal = TerminalBuilder.builder()
-                    .dumb(true)
+                    .system(true)
                     .build();
-
             reader = LineReaderBuilder.builder()
                     .terminal(terminal)
                     .appName("Core CLI")
                     .build();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        commands = new HashSet<>();
-
-        registerCommand(new WhoCommand());
-        registerCommand(new BroadcastCommand());
-        registerCommand(new DieCommand());
-        registerCommand(new WhoisCommand());
-        registerCommand(new ReloadCommand());
-        registerCommand(new PluginsCommand());
-        registerCommand(new ReloadEmailsCommand());
-        registerCommand(new KickCommand());
-        registerCommand(new BanCommand());
-        registerCommand(new MotdCommand());
-
+        Command[] commandsArray = {
+                new WhoCommand(),
+                new BroadcastCommand(),
+                new DieCommand(),
+                new WhoisCommand(),
+                new ReloadCommand(),
+                new PluginsCommand(),
+                new ReloadEmailsCommand(),
+                new KickCommand(),
+                new BanCommand(),
+                new MotdCommand(),
+        };
+        registerCommands(commandsArray);
     }
 
     public void listen() {
@@ -60,6 +59,10 @@ public class CommandListener {
 
     public void registerCommand(Command command) {
         commands.add(command);
+    }
+
+    public void registerCommands(Command[] commandArray) {
+        commands.addAll(Arrays.asList(commandArray));
     }
 
     private void listenCommands(String inputLine) {
