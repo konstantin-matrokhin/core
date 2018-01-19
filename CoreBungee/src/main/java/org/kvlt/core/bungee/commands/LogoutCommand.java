@@ -25,7 +25,7 @@ public class LogoutCommand extends Command {
                 int id = IdMap.getId(name);
                 ProxyLoggedPlayers.logOut(name);
                 new LogoutPacket(name).send();
-                player.sendMessage(new TextComponent("Вы вышли."));
+                player.disconnect(new TextComponent("Logout."));
         } else {
             player.sendMessage(new TextComponent("Сначала авторизуйтесь!"));
         }

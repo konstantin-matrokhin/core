@@ -25,6 +25,8 @@ public class AuthEventListener implements Listener {
         }};
     }
 
+
+    //TODO COOLDOWN
     @EventHandler
     public void onChat(ChatEvent event) {
         if (!(event.getSender() instanceof ProxiedPlayer)) return;

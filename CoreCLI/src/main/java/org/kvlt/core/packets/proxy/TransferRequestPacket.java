@@ -2,16 +2,18 @@ package org.kvlt.core.packets.proxy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.Core;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerSwitchServerEvent;
-import org.kvlt.core.nodes.GameServer;
+import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.packets.Destination;
 import org.kvlt.core.packets.player.PlayerPacket;
 import org.kvlt.core.packets.player.PlayerTransferPacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.Finder;
 import org.kvlt.core.utils.Log;
+
+import java.util.Random;
 
 public class TransferRequestPacket extends PlayerPacket {
 
@@ -27,7 +29,8 @@ public class TransferRequestPacket extends PlayerPacket {
     public void execute(Channel channel) {
         if (!ensurePlayer()) return;
         ServerPlayer player = getPlayer();
-        GameServer destination = Core.get().getGameServers().getNode(server);
+        GameServers destinations = Finder.getGameServers(server);
+        destinations.stream()//TODO FIX NOW
 
         PlayerSwitchServerEvent switchEvent = new PlayerSwitchServerEvent(player, destination);
         switchEvent.invoke();

@@ -49,4 +49,5 @@ public class Packets {
     public static final int PLAYER_INFO_PACKET = 32;
 
     public static final int PLAYER_PACKET = 34;
+    public static final int G_LIST_PACKET = 35;
 }

@@ -8,7 +8,7 @@ public class SendCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if (args.length < 2) return false;
+        if (args.length != 2) return false;
 
         String who = args[0];
         String where = args[1];

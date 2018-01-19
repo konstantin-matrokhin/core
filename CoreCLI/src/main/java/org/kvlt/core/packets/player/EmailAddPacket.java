@@ -33,7 +33,7 @@ public class EmailAddPacket extends PlayerPacket {
                 Email email = new Email(playerEmail);
                 email.sendEmailConfirmation(getPlayer().getName(), code);
                 response = String.format("На ваш email %s отправлен код подтверждения\n" +
-                        "Введите команду /email verify <код>", email);
+                        "Введите команду /email verify <код>", playerEmail);
             } else {
                 response = "У вас уже привязан email!";
             }

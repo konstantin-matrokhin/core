@@ -7,13 +7,13 @@ import org.jline.reader.UserInterruptException;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CommandListener {
 
-    private List<Command> commands;
+    private Set<Command> commands;
     private LineReader reader;
 
     public CommandListener() {
@@ -31,7 +31,7 @@ public class CommandListener {
             e.printStackTrace();
         }
 
-        commands = new ArrayList<>();
+        commands = new HashSet<>();
 
         registerCommand(new WhoCommand());
         registerCommand(new BroadcastCommand());
@@ -42,6 +42,7 @@ public class CommandListener {
         registerCommand(new ReloadEmailsCommand());
         registerCommand(new KickCommand());
         registerCommand(new BanCommand());
+        registerCommand(new MotdCommand());
 
     }
 
