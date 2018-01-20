@@ -9,7 +9,7 @@ public class BanCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (args.length < 3) return false;
+        if (args.length != 3) return false;
 
         String victim = args[0];
         String time = args[1];

@@ -3,16 +3,17 @@ package org.kvlt.core.bungee.auth;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.scheduler.ScheduledTask;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.CoreDB;
 import org.kvlt.core.bungee.storages.IdMap;
-import org.kvlt.core.bungee.storages.PremiumQueue;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
-import org.kvlt.core.entities.PremiumPlayers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -22,9 +23,11 @@ public class Auth {
     private static final String INFO_SQL = "SELECT * FROM join_info WHERE id = ?";
 
     private static Connection mysqlConnection;
+    private static Map<ProxiedPlayer, ScheduledTask> annoyingMessages;
 
     static {
         mysqlConnection = CoreDB.get().getConnection();
+        annoyingMessages = new HashMap<>();
     }
 
     private static ResultSet getInfoData(int id) {
@@ -131,7 +134,7 @@ public class Auth {
                 e.printStackTrace();
             }
 
-            String response;
+            TextComponent response = new TextComponent();
             if (lastAuth != -1) {
                 if (Objects.equals(ip, dbIp)) {
                     long timeInterval = now - lastAuth;
@@ -141,15 +144,22 @@ public class Auth {
                         pp.sendMessage(new TextComponent("С возвращением!"));
                         return;
                     } else {
-                        response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Не попал в интервал";
+                        response.setText("Рады видеть тебя снова! Авторизуйся, пожалуйста. /login <пароль>");
                     }
                 } else {
-                    response = "Рады видеть тебя снова! Авторизуйся, пожалуйста. Ип разный";
+                    response.setText("Рады видеть тебя снова! Авторизуйся, пожалуйста. /login <пароль>");
                 }
             } else {
-                response = "Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>";
+                response.setText("Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>");
             }
-            pp.sendMessage(new TextComponent(response));
+            Runnable annoyingTask = () -> {
+                pp.sendMessage(response);
+            };
+
+            ScheduledTask task = ProxyServer.getInstance()
+                    .getScheduler().schedule(CoreBungee.get(), annoyingTask,
+                            1L, 2L, TimeUnit.SECONDS);
+            annoyingMessages.put(pp, task);
         });
     }
 
@@ -158,4 +168,7 @@ public class Auth {
         return hours < 24 && time > -1;
     }
 
+    public static Map<ProxiedPlayer, ScheduledTask> getAnnoyingMessages() {
+        return annoyingMessages;
+    }
 }

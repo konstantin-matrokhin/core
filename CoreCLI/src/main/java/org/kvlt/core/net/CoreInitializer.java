@@ -45,7 +45,9 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
                 new PremiumPlayerPacket(),
                 new HubRequestPacket(),
                 new PlayerInfoPacket(),
-                new LogoutPacket()
+                new LogoutPacket(),
+                new GListPacket(),
+
         };
 
         resolver.registerPackets(packets);

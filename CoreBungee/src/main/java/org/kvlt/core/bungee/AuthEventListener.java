@@ -9,13 +9,17 @@ import org.kvlt.core.bungee.storages.Infractions;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AuthEventListener implements Listener {
 
     private static List<String> allowedCmds;
+    private static Map<ProxiedPlayer, Long> cooldowns;
 
     static {
+        cooldowns = new HashMap<>();
         allowedCmds = new ArrayList<String>() {{
             add("/register");
             add("/reg");
@@ -25,8 +29,6 @@ public class AuthEventListener implements Listener {
         }};
     }
 
-
-    //TODO COOLDOWN
     @EventHandler
     public void onChat(ChatEvent event) {
         if (!(event.getSender() instanceof ProxiedPlayer)) return;
@@ -35,22 +37,30 @@ public class AuthEventListener implements Listener {
         String playerName = sender.getName();
         String message = event.getMessage();
 
-        if (Infractions.isMuted(playerName)) {
-            if (!event.isCommand()) {
-                sender.sendMessage(new TextComponent("У вас мут!"));
-                event.setCancelled(true);
+        if (event.isCommand() && !event.isCancelled()) {
+            if (cooldowns.containsKey(sender) && cooldowns.get(sender) < System.currentTimeMillis()) {
+                sender.sendMessage(new TextComponent("Too frequently!"));
+                return;
             }
+            cooldowns.put(sender, System.currentTimeMillis() + 2000L);
         }
 
         if (!ProxyLoggedPlayers.isLogged(playerName)) {
             if (event.isCommand()) {
                 String command = message.trim().split("\\s")[0];
                 if (!allowedCmds.contains(command.toLowerCase())) {
-                    sender.sendMessage(new TextComponent("Авторизуйтесь!"));
                     event.setCancelled(true);
+                    return;
                 }
             } else {
-                sender.sendMessage(new TextComponent("Авторизуйтесь!"));
+                event.setCancelled(true);
+                return;
+            }
+        }
+
+        if (Infractions.isMuted(playerName)) {
+            if (!event.isCommand()) {
+                sender.sendMessage(new TextComponent("У вас мут!"));
                 event.setCancelled(true);
             }
         }

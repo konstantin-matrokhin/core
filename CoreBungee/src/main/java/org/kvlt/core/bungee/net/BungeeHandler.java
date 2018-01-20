@@ -6,7 +6,6 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.packets.ConnectPacket;
-import org.kvlt.core.bungee.packets.PlayerPacket;
 import org.kvlt.core.protocol.PacketIn;
 
 import java.util.Collection;
@@ -20,7 +19,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<PacketIn> {
         new ConnectPacket(CoreBungee.get().getServerName()).send();
         Collection<ProxiedPlayer> players = ProxyServer.getInstance().getPlayers();
         if (players.size() > 0) {
-            new PlayerPacket(players).send();
+//            new PlayerPacket(players).send();
         }
     }
 

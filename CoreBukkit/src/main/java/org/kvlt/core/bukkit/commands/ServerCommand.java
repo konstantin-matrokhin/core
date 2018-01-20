@@ -15,13 +15,8 @@ public class ServerCommand implements CommandExecutor {
 
         Player p = (Player) sender;
         String to = args[0];
-
-        if (to != null) {
-            new TransferRequestPacket(p.getName(), to).send();
-            return true;
-        }
-
-        return false;
+        new TransferRequestPacket(p.getName(), to).send();
+        return true;
     }
 
 }

@@ -8,7 +8,6 @@ import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.packets.*;
 import org.kvlt.core.bungee.storages.PremiumQueue;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
-import org.kvlt.core.packets.player.HubRequestPacket;
 
 public class ProxyEventListener implements Listener {
 
@@ -58,7 +57,6 @@ public class ProxyEventListener implements Listener {
     public void onServerSwitch(ServerSwitchEvent event) {
         ProxiedPlayer player = event.getPlayer();
         String to = player.getServer().getInfo().getName();
-        player.getPendingConnection().isOnlineMode();
         SwitchServerPacket ssp = new SwitchServerPacket(player.getName(), to);
         ssp.send();
     }

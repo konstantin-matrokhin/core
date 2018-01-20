@@ -33,3 +33,6 @@ commands:
     usage: /find <who>
   whois:
     usage: /whois <who>
+  glist:
+    aliases: [online]
+    usage: /glist [@pattern]

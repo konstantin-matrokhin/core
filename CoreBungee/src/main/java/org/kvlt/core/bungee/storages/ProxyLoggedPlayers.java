@@ -2,8 +2,6 @@ package org.kvlt.core.bungee.storages;
 
 import io.netty.util.internal.ConcurrentSet;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class ProxyLoggedPlayers {

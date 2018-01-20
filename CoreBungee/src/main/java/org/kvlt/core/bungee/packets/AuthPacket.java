@@ -2,6 +2,9 @@ package org.kvlt.core.bungee.packets;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import org.kvlt.core.bungee.auth.Auth;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
@@ -20,6 +23,11 @@ public class AuthPacket implements PacketIn {
     @Override
     public void execute(Channel channel) {
         ProxyLoggedPlayers.logIn(name);
+        try {
+            ProxiedPlayer player = ProxyServer.getInstance().getPlayer(name);
+            Auth.getAnnoyingMessages().get(player).cancel();
+            Auth.getAnnoyingMessages().remove(player);
+        } catch (Exception ignored) {}
     }
 
     @Override

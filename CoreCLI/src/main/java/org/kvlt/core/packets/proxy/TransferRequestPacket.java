@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerSwitchServerEvent;
+import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.nodes.GameServers;
 import org.kvlt.core.packets.Destination;
 import org.kvlt.core.packets.player.PlayerPacket;
@@ -17,6 +18,7 @@ import java.util.Random;
 
 public class TransferRequestPacket extends PlayerPacket {
 
+    private static Random rnd = new Random();
     private String server;
 
     @Override
@@ -30,9 +32,10 @@ public class TransferRequestPacket extends PlayerPacket {
         if (!ensurePlayer()) return;
         ServerPlayer player = getPlayer();
         GameServers destinations = Finder.getGameServers(server);
-        destinations.stream()//TODO FIX NOW
+        int randomIndex = rnd.nextInt(destinations.list().size());
+        GameServer selectedServer = destinations.list().get(randomIndex);
 
-        PlayerSwitchServerEvent switchEvent = new PlayerSwitchServerEvent(player, destination);
+        PlayerSwitchServerEvent switchEvent = new PlayerSwitchServerEvent(player, selectedServer);
         switchEvent.invoke();
         if (switchEvent.isCancelled()) {
             Log.$(switchEvent.getName() + " отменено.");
@@ -42,8 +45,8 @@ public class TransferRequestPacket extends PlayerPacket {
         String name = player.getName();
         String proxy = player.getCurrentProxy().getName();
 
-        if (destination != null) {
-            new PlayerTransferPacket(name, server).send(Destination.BUNGEE, proxy);
+        if (selectedServer != null) {
+            new PlayerTransferPacket(name, selectedServer.getName()).send(Destination.BUNGEE, proxy);
             System.out.println("переносим..");
         } else {
             System.out.println("не удалось переместить");

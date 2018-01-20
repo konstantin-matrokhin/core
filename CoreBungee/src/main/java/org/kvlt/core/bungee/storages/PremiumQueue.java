@@ -31,8 +31,6 @@ public class PremiumQueue {
             if (time > now) {
                 return true;
             } else {
-                System.out.println(time);
-                System.out.println(now);
                 remove(name);
             }
         }

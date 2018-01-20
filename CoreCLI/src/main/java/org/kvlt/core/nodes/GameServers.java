@@ -4,6 +4,7 @@ import org.kvlt.core.protocol.Packet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class GameServers implements NodeContainer<GameServer>, Iterable<GameServer> {
@@ -51,4 +52,9 @@ public class GameServers implements NodeContainer<GameServer>, Iterable<GameServ
     public Stream<GameServer> stream() {
         return gameServers.stream();
     }
+
+    public List<GameServer> list() {
+        return gameServers;
+    }
+
 }

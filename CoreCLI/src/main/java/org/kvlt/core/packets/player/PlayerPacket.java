@@ -18,6 +18,10 @@ public abstract class PlayerPacket implements PacketIn {
         return player;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
