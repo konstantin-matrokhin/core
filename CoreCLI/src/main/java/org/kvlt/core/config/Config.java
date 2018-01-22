@@ -1,5 +1,7 @@
 package org.kvlt.core.config;
 
+import com.google.gson.JsonElement;
+
 import java.util.HashMap;
 
 /**
@@ -14,10 +16,10 @@ public final class Config {
     private static final String CORE_SECTION = "core";
 
     private static ConfigManager configManager;
-    private static HashMap<String, String> mysqlData;
-    private static HashMap<String, String> proxyData;
-    private static HashMap<String, String> smtpData;
-    private static HashMap<String, String> coreData;
+    private static HashMap<String, JsonElement> mysqlData;
+    private static HashMap<String, JsonElement> proxyData;
+    private static HashMap<String, JsonElement> smtpData;
+    private static HashMap<String, JsonElement> coreData;
 
     public static void init() {
         configManager = new ConfigManager();
@@ -34,18 +36,18 @@ public final class Config {
     }
 
     public static String getMySQL(String key) {
-        return configManager.getValue(mysqlData, key);
+        return configManager.getValue(mysqlData, key).getAsJsonPrimitive().getAsString();
     }
 
     public static String getProxy(String key) {
-        return configManager.getValue(proxyData, key);
+        return configManager.getValue(proxyData, key).getAsJsonPrimitive().getAsString();
     }
 
     public static String getSMTP(String key) {
-        return configManager.getValue(smtpData, key);
+        return configManager.getValue(smtpData, key).getAsJsonPrimitive().getAsString();
     }
 
-    public static String getCore(String key) {
+    public static JsonElement getCore(String key) {
         return configManager.getValue(coreData, key);
     }
 

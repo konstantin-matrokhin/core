@@ -14,7 +14,7 @@ public class MotdCommand extends Command {
     @Override
     protected boolean execute() {
         Config.init();
-        String motd = Config.getCore("motd");
+        String motd = Config.getCore("motd").getAsString();
         new MotdPacket(motd).send(Destination.BUNGEE);
         return true;
     }

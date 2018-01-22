@@ -1,6 +1,19 @@
 {
   "core": {
-    "port": 3030
+    "port": 3030,
+    "localization": {
+      "url": "http://s1.huesos228.com/lang/",
+      "method": "GET",
+
+      "languages": {
+        "russian": {
+          "file": "ru.yml"
+        },
+        "english": {
+          "file": "en.yml"
+        }
+      }
+    }
   },
 
   "mysql": {

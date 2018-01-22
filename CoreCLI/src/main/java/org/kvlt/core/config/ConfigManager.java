@@ -1,7 +1,7 @@
 package org.kvlt.core.config;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -43,19 +43,19 @@ public class ConfigManager {
         }
     }
 
-    public HashMap<String, String> loadSection(String section) throws Exception {
-        JsonObject jsonSection = parser.parse(
+    public HashMap<String, JsonElement> loadSection(String section) throws Exception {
+        JsonElement jsonSection = parser.parse(
                 new JsonReader(new FileReader(fileName)))
                     .getAsJsonObject()
                     .getAsJsonObject(section);
 
-        Type property = new TypeToken<HashMap<String, String>>(){}.getType();
+        Type property = new TypeToken<HashMap<String, JsonElement>>(){}.getType();
         Log.$("Конфигурация " + section + " загружена");
-        return gson.fromJson(jsonSection.toString(), property);
+        return gson.fromJson(jsonSection, property);
     }
 
-    public String getValue(HashMap<String, String> map, String key) {
-        String val = map.get(key);
+    public JsonElement getValue(HashMap<String, JsonElement> map, String key) {
+        JsonElement val = map.get(key);
         if (val == null) {
             throw new NullPointerException("Вероятно, поле " + key + " отсутсвует в конфиге.");
         }

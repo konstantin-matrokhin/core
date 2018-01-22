@@ -25,7 +25,7 @@ public final class CoreServer implements Server {
 
     CoreServer() {
         packetResolver = new PacketResolver();
-        port = Integer.valueOf(Config.getCore("port"));
+        port = Config.getCore("port").getAsInt();
     }
 
     @Override

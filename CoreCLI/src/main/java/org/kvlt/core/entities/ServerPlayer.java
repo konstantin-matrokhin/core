@@ -5,7 +5,6 @@ import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.Destination;
 import org.kvlt.core.packets.player.KickPacket;
-import org.kvlt.core.utils.Lang;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -61,8 +60,7 @@ public class ServerPlayer implements Serializable, Kickable {
     private int group;
 
     @Column(table = "localization", name = "lang")
-    @Enumerated(EnumType.ORDINAL)
-    private Lang lang = Lang.RUSSIAN;
+    private String lang = "russian";
 
     @Column(table = "join_info", name = "ip", length = 32)
     private String lastIp = "empty";
@@ -483,11 +481,11 @@ public class ServerPlayer implements Serializable, Kickable {
         this.skin = skin;
     }
 
-    public Lang getLang() {
+    public String getLang() {
         return lang;
     }
 
-    public void setLang(Lang lang) {
+    public void setLang(String lang) {
         this.lang = lang;
     }
 }

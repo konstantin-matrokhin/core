@@ -106,61 +106,63 @@ public class Auth {
     }
 
     public static void trySessionAuth(String player) {
-        ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
+        ProxyServer.getInstance().getScheduler().schedule(CoreBungee.get(), () -> {
+            ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
 
-        if (ProxyLoggedPlayers.isLogged(player)) return;
+            if (ProxyLoggedPlayers.isLogged(player)) return;
 
-        if (CoreBungee.get().getPremiumPlayers().contains(player)) {
-            ProxyLoggedPlayers.logIn(player);
-            pp.sendMessage(new TextComponent("Дороу!"));
-            return;
-        }
-
-        final int id = IdMap.getId(player);
-        final long now = System.currentTimeMillis();
-        final String ip = pp.getAddress().getHostString();
-
-        ProxyServer.getInstance().getScheduler().runAsync(CoreBungee.get(), () -> {
-            String dbIp = null;
-            long lastAuth = 0;
-
-            ResultSet authData = getAuthData(id);
-            ResultSet infoData = getInfoData(id);
-
-            try {
-                lastAuth = authData.getLong("last_authenticated");
-                dbIp = infoData.getString("ip");
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (CoreBungee.get().getPremiumPlayers().contains(player)) {
+                ProxyLoggedPlayers.logIn(player);
+                pp.sendMessage(new TextComponent("Дороу!"));
+                return;
             }
 
-            TextComponent response = new TextComponent();
-            if (lastAuth != -1) {
-                if (Objects.equals(ip, dbIp)) {
-                    long timeInterval = now - lastAuth;
+            final int id = IdMap.getId(player);
+            final long now = System.currentTimeMillis();
+            final String ip = pp.getAddress().getHostString();
 
-                    if (inSessionRange(timeInterval)) {
-                        ProxyLoggedPlayers.logIn(player);
-                        pp.sendMessage(new TextComponent("С возвращением!"));
-                        return;
+            ProxyServer.getInstance().getScheduler().runAsync(CoreBungee.get(), () -> {
+                String dbIp = null;
+                long lastAuth = 0;
+
+                ResultSet authData = getAuthData(id);
+                ResultSet infoData = getInfoData(id);
+
+                try {
+                    lastAuth = authData.getLong("last_authenticated");
+                    dbIp = infoData.getString("ip");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                TextComponent response = new TextComponent();
+                if (lastAuth != -1) {
+                    if (Objects.equals(ip, dbIp)) {
+                        long timeInterval = now - lastAuth;
+
+                        if (inSessionRange(timeInterval)) {
+                            ProxyLoggedPlayers.logIn(player);
+                            pp.sendMessage(new TextComponent("С возвращением!"));
+                            return;
+                        } else {
+                            response.setText("Рады видеть тебя снова! Авторизуйся, пожалуйста. /login <пароль>");
+                        }
                     } else {
                         response.setText("Рады видеть тебя снова! Авторизуйся, пожалуйста. /login <пароль>");
                     }
                 } else {
-                    response.setText("Рады видеть тебя снова! Авторизуйся, пожалуйста. /login <пароль>");
+                    response.setText("Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>");
                 }
-            } else {
-                response.setText("Добро пожаловать! Зарегистрируйтесь, пожалуйста. /register <пароль> <повтор_пароля>");
-            }
-            Runnable annoyingTask = () -> {
-                pp.sendMessage(response);
-            };
+                Runnable annoyingTask = () -> {
+                    pp.sendMessage(response);
+                };
 
-            ScheduledTask task = ProxyServer.getInstance()
-                    .getScheduler().schedule(CoreBungee.get(), annoyingTask,
-                            1L, 2L, TimeUnit.SECONDS);
-            annoyingMessages.put(pp, task);
-        });
+                ScheduledTask task = ProxyServer.getInstance()
+                        .getScheduler().schedule(CoreBungee.get(), annoyingTask,
+                                1L, 2L, TimeUnit.SECONDS);
+                annoyingMessages.put(pp, task);
+            });
+        }, 1L, TimeUnit.SECONDS);
     }
 
     public static boolean inSessionRange(long time) {
