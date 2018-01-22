@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.email.Email;
-import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.CodeGenerator;
@@ -32,13 +31,12 @@ public class EmailAddPacket extends PlayerPacket {
                 PlayerFactory.updatePlayer(getPlayer());
                 Email email = new Email(playerEmail);
                 email.sendEmailConfirmation(getPlayer().getName(), code);
-                response = String.format("На ваш email %s отправлен код подтверждения\n" +
-                        "Введите команду /email verify <код>", playerEmail);
-            } else {
-                response = "У вас уже привязан email!";
-            }
 
-            new MessagePacket(getPlayer().getName(), response).send(channel);
+                writeMsg("email-confirmation-sent", playerEmail);
+            } else {
+                writeMsg("already-confirmed", playerEmail);
+            }
+            sendMsg(channel);
         }
     }
 

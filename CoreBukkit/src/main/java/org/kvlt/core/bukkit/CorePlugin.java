@@ -13,7 +13,7 @@ public class CorePlugin extends JavaPlugin {
     private PacketResolver packetResolver;
 
     {
-        synchronized (this) {
+    synchronized (this) {
             instance = this;
         }
     }

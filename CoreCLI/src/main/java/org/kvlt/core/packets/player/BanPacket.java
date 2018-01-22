@@ -11,6 +11,8 @@ import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.LangCommons;
+import org.kvlt.core.utils.Localization;
 import org.kvlt.core.utils.Log;
 
 public class BanPacket implements PacketIn {
@@ -31,11 +33,12 @@ public class BanPacket implements PacketIn {
     @Override
     public void execute(Channel channel) {
         Runnable r = () -> {
+            ServerPlayer enforcerPlayer = null;
             String response;
             int level;
 
             if (!enforcer.equalsIgnoreCase("console")) {
-                ServerPlayer enforcerPlayer = Core.get().getOnlinePlayers().get(enforcer);
+                enforcerPlayer = Core.get().getOnlinePlayers().get(enforcer);
                 if (enforcerPlayer != null) {
                     level = Group.getGroup(enforcerPlayer.getGroup()).getLevel();
                 } else {
@@ -64,19 +67,22 @@ public class BanPacket implements PacketIn {
                     victimPlayer.setBanReason(reason);
 
                     PlayerFactory.updatePlayer(victimPlayer);
-                    new KickPacket(victim, String.format("БАН: %s", reason)).send(channel);
+                    new KickPacket(victim, String.format("%s: %s",
+                            Localization.get(victimPlayer, LangCommons.BAN),
+                            reason
+                    )).send(channel);
 
                     Log.$(String.format("%s забанил %s: %s",
                             enforcer,
                             victim,
                             reason));
 
-                    response = String.format("Вы забанили %s.", victim);
+                    response = Localization.get(enforcerPlayer, "ban-success", victim);
                 } else {
-                    response = "Нет такого игрока в базе!";
+                    response = Localization.get(enforcerPlayer, "no-such-player");
                 }
             } else {
-                response = "Недостаточно прав!";
+                response = Localization.get(enforcerPlayer, LangCommons.NO_PERM);
             }
 
             MessagePacket responsePacket = new MessagePacket(enforcer, response);

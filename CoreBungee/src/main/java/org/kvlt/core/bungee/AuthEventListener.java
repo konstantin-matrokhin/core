@@ -38,11 +38,12 @@ public class AuthEventListener implements Listener {
         String message = event.getMessage();
 
         if (event.isCommand() && !event.isCancelled()) {
-            if (cooldowns.containsKey(sender) && cooldowns.get(sender) < System.currentTimeMillis()) {
+            if (cooldowns.containsKey(sender) && cooldowns.get(sender) > System.currentTimeMillis()) {
                 sender.sendMessage(new TextComponent("Too frequently!"));
+                event.setCancelled(true);
                 return;
             }
-            cooldowns.put(sender, System.currentTimeMillis() + 2000L);
+            cooldowns.put(sender, System.currentTimeMillis() + 500L);
         }
 
         if (!ProxyLoggedPlayers.isLogged(playerName)) {

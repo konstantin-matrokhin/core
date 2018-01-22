@@ -17,7 +17,7 @@ public class PremiumPlayerPacket extends PlayerPacket {
     @Override
     public void execute(Channel channel) {
         if (ensurePlayer()) {
-            Core.get().getOnlinePlayers().add(getPlayer());
+            Core.get().getPremiumPlayers().add(getPlayer());
             new PremiumListPacket(Core.get().getPremiumPlayers().names()).send();
         }
     }

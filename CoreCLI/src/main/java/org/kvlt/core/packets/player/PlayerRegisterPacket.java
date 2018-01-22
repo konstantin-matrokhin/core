@@ -5,7 +5,6 @@ import io.netty.channel.Channel;
 import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.utils.Log;
 
@@ -28,24 +27,19 @@ public class PlayerRegisterPacket extends PlayerPacket {
     public void execute(Channel channel) {
         ServerPlayer unloggedPlayer = Core.get().getOnlinePlayers().get(name);
         if (unloggedPlayer == null) return;
-
-        String response;
         String dbPassword = unloggedPlayer.getPassword();
 
         if (dbPassword == null || dbPassword.isEmpty()) {
             PlayerFactory.register(unloggedPlayer, password);
             Log.$(String.format("%s зарегистрировался.", name));
-            response = "Вы успешно зарегистировались!";
+            writeMsg("registration-successful");
         } else {
-            response = "Вы уже зарегистрированы!";
+            writeMsg("already-registered");
         }
 
         AuthPacket authPacket = new AuthPacket(name);
-        MessagePacket msg = new MessagePacket(name, response);
-
         authPacket.send(channel);
-        msg.send(channel);
-
+        sendMsg(channel);
     }
 
     @Override

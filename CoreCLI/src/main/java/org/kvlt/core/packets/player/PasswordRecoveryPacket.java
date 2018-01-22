@@ -3,7 +3,6 @@ package org.kvlt.core.packets.player;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.email.Email;
-import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.Log;
@@ -21,7 +20,6 @@ public class PasswordRecoveryPacket extends PlayerPacket {
 
         String name = getPlayer().getName();
         String email = getPlayer().getEmail();
-        String response;
 
         if (email != null && !email.isEmpty()) {
             if (getPlayer().getEmailConfirmationCode() == null) {
@@ -34,16 +32,15 @@ public class PasswordRecoveryPacket extends PlayerPacket {
                         name,
                         email));
 
-                response = String.format("На ваш email %s отправлен пароль", hiddenEmail);
+                writeMsg("password-sent", hiddenEmail);
             } else {
-                response = "Вы не подтвердили ваш email!";
+                writeMsg("no-email-confirmed");
             }
         } else {
-            response = "Вы не привязали email";
+            writeMsg("no-email-confirmed");
         }
 
-        MessagePacket responsePacket = new MessagePacket(name, response);
-        responsePacket.send(channel);
+        sendMsg(channel);
     }
 
     @Override

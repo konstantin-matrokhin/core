@@ -9,6 +9,8 @@ import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.LangCommons;
+import org.kvlt.core.utils.Localization;
 
 public class PrivateMessagePacket implements PacketIn {
 
@@ -33,19 +35,20 @@ public class PrivateMessagePacket implements PacketIn {
         String response;
         String recipientsMessage;
 
-        System.out.println(message);
-
         if (to != null) {
-            response = String.format(RESPONSE, sender, message);
-            recipientsMessage = String.format(RECEIVED, recipient, message);
+            String responseTemplate = Localization.get(from, "pm-response");
+            String receiveTemplate = Localization.get(to, "pr-receive");
 
-            if (from != null) Replies.setCompanion(from, to);
+            response = String.format(responseTemplate, sender, message);
+            recipientsMessage = String.format(receiveTemplate, recipient, message);
+
+            Replies.setCompanion(from, to);
             Replies.setCompanion(to, from);
 
             MessagePacket msg = new MessagePacket(recipient, recipientsMessage);
             to.getCurrentProxy().send(msg);
         } else {
-            response = "Игрок не найден.";
+            response = Localization.get(from, LangCommons.PLAYER_NOT_FOUND);
         }
 
         MessagePacket responsePacket = new MessagePacket(sender, response);

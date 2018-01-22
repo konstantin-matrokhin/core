@@ -4,6 +4,4 @@
 
 /src/
 /plugins/
-
-/build/**/*
-!/build/start.bat
+/build/

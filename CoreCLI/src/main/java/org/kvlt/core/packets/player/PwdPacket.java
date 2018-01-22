@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.email.Email;
-import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
@@ -26,7 +25,6 @@ public class PwdPacket extends PlayerPacket {
 
         String name = getPlayer().getName();
         String playerPassword = getPlayer().getPassword();
-        String response;
 
         if (playerPassword.equals(oldPassword)) {
             getPlayer().setPassword(newPassword);
@@ -37,12 +35,11 @@ public class PwdPacket extends PlayerPacket {
                 Email email = new Email(playerEmail);
                 email.sendPasswordChange(name);
             }
-            response = "Пароль успешно изменен!";
+            writeMsg("password-changed");
         } else {
-            response = "Неверный старый пароль!";
+            writeMsg("incorrect-password");
         }
-
-        new MessagePacket(name, response).send(channel);
+        sendMsg(channel);
     }
 
     @Override

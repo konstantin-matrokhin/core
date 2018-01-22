@@ -5,26 +5,37 @@ import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.packets.Destination;
 import org.kvlt.core.packets.player.KickPacket;
+import org.kvlt.core.utils.Lang;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "identifier", uniqueConstraints = @UniqueConstraint(columnNames = "player_name"))
 @SecondaryTables({
-        @SecondaryTable(name = "authentication", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "join_info", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "infractions", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "players_groups", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "premium_auth", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "reports", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "friends", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "ignores", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "custom_prefixes", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
-        @SecondaryTable(name = "selected_skins", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "authentication",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "join_info",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "infractions",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "players_groups",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "premium_auth",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "reports",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "friends",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "ignores",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "custom_prefixes",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "selected_skins",
+                pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")),
+        @SecondaryTable(name = "localization", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id"))
 })
 public class ServerPlayer implements Serializable, Kickable {
 
@@ -49,9 +60,9 @@ public class ServerPlayer implements Serializable, Kickable {
     @Column(table = "players_groups", name = "group_id")
     private int group;
 
-//    @Column(table = "identifier", name = "uuid", length = 32)
-    @Transient
-    private String uuid;
+    @Column(table = "localization", name = "lang")
+    @Enumerated(EnumType.ORDINAL)
+    private Lang lang = Lang.RUSSIAN;
 
     @Column(table = "join_info", name = "ip", length = 32)
     private String lastIp = "empty";
@@ -230,15 +241,6 @@ public class ServerPlayer implements Serializable, Kickable {
 
     public void setGroup(int group) {
         this.group = group;
-    }
-
-    @Deprecated
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public String getLastIp() {
@@ -479,5 +481,13 @@ public class ServerPlayer implements Serializable, Kickable {
 
     public void setSkin(String skin) {
         this.skin = skin;
+    }
+
+    public Lang getLang() {
+        return lang;
+    }
+
+    public void setLang(Lang lang) {
+        this.lang = lang;
     }
 }

@@ -105,6 +105,15 @@
     </build>
 
     <dependencies>
+
+        <!--<dependency>-->
+            <!--<groupId>darta-api</groupId>-->
+            <!--<artifactId>net.lastcraft</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/../libs/DartaAPI.jar</systemPath>-->
+        <!--</dependency>-->
+
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

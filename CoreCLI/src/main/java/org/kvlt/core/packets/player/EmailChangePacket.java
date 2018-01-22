@@ -5,7 +5,6 @@ import io.netty.channel.Channel;
 import org.kvlt.core.email.Email;
 import org.kvlt.core.entities.EmailChangeData;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.CodeGenerator;
@@ -28,7 +27,6 @@ public class EmailChangePacket extends PlayerPacket {
 
         ServerPlayer player = getPlayer();
         String name = player.getName();
-        String response;
 
         if (player.isEmailConfirmed()) {
             if (player.getEmail().equalsIgnoreCase(oldEmail)) {
@@ -38,19 +36,15 @@ public class EmailChangePacket extends PlayerPacket {
                 new Email(newEmail).sendEmailConfirmation(name, code2);
 
                 EmailChangeData.setData(name, newEmail, code1, code2);
-
-                response = "На оба ваших ящика отправлены коды для подтверждениея\n" +
-                        "Используйте команду /email verify <код1> <код2>,\n" +
-                        "где код1 - код со старого ящика, а\n" +
-                        "код2 - код с нового ящика.";
+                writeMsg("email-change-sent");
             } else {
-                response = "Введите правильный старый email!";
+                writeMsg("incorrent-email");
             }
         } else {
-            response = "Сначала привяжите email!";
+            writeMsg("no-email-confirmed");
         }
 
-        new MessagePacket(name, response).send(channel);
+        sendMsg(channel);
     }
 
     @Override

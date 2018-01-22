@@ -5,9 +5,9 @@ import io.netty.channel.Channel;
 import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.LangCommons;
 
 public class KickRequestPacket extends PlayerPacket {
 
@@ -27,21 +27,19 @@ public class KickRequestPacket extends PlayerPacket {
 
         ServerPlayer player = getPlayer();
         String name = player.getName();
-        String response;
 
         if (PlayerFactory.isStaff(player)) {
             ServerPlayer victimPlayer = Core.get().getOnlinePlayers().get(victim);
             if (victimPlayer != null) {
                 victimPlayer.kick(reason);
-                response = String.format("%s кикнут.", victim);
+                writeMsg("kicked", victim);
             } else {
-                response = "Игрок не найден.";
+                writeMsg("player-not-found");
             }
         } else {
-            response = "You don't have permission!";
+            writeMsg(LangCommons.NO_PERM);
         }
-
-        new MessagePacket(name, response).send(channel);
+        sendMsg(channel);
     }
 
     @Override

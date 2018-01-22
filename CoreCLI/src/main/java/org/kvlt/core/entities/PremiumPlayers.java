@@ -2,6 +2,7 @@ package org.kvlt.core.entities;
 
 import org.hibernate.Session;
 import org.hibernate.type.StandardBasicTypes;
+import org.kvlt.core.db.PlayerFactory;
 
 import java.util.*;
 
@@ -15,6 +16,9 @@ public class PremiumPlayers {
             "identifier INNER JOIN premium_auth\n" +
             "ON\n" +
             "premium_auth.id = identifier.id;";
+
+    private static final String INSERT_QUERY =
+            "INSERT INTO premium_auth (id) VALUES (:id)";
 
     private Session session;
     private Map<Integer, String> map;
@@ -32,9 +36,8 @@ public class PremiumPlayers {
                 .addScalar("player_name", StandardBasicTypes.STRING)
                 .list();
 
-        Iterator rows = data.iterator();
-        while (rows.hasNext()) {
-            Object[] row = (Object[]) rows.next();
+        for (Object aData : data) {
+            Object[] row = (Object[]) aData;
 
             int id = (int) row[0];
             String name = (String) row[1];
@@ -46,6 +49,14 @@ public class PremiumPlayers {
         int id = player.getId();
         String name = player.getName();
         map.put(id, name);
+
+        PlayerFactory.addTask(() -> {
+            session
+                .createNativeQuery(INSERT_QUERY)
+                .setParameter("id", id)
+                .executeUpdate();
+            System.out.println("task ran");
+        });
     }
 
     public int[] ids() {

@@ -4,7 +4,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.entities.EmailChangeData;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
@@ -29,7 +28,6 @@ public class EmailChangeVerifyPacket extends PlayerPacket {
         ServerPlayer player = getPlayer();
         String name = player.getName();
         String email = player.getEmail();
-        String response;
 
         if (player.isEmailConfirmed()) {
             if (EmailChangeData.isChanging(name)) {
@@ -40,18 +38,18 @@ public class EmailChangeVerifyPacket extends PlayerPacket {
                     EmailChangeData.removePlayer(name);
                     player.setEmail(newEmail);
 
-                    response = String.format("Вы успешно сменили email на %s", newEmail);
+                    writeMsg("email-change-success", newEmail);
                 } else {
-                    response = "Неверные коды!";
+                    writeMsg("incorrect-codes");
                 }
             } else {
-                response = "Вы не запросили смену почты!";
+                writeMsg("no-change-query");
             }
          } else {
-            response = "Сначала привяжите email!";
+            writeMsg("no-email-confirmed");
         }
 
-        new MessagePacket(name, response).send(channel);
+        sendMsg(channel);
     }
 
     @Override
