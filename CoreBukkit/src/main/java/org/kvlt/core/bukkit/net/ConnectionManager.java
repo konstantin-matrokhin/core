@@ -40,7 +40,7 @@ public class ConnectionManager {
                     .channel(NioSocketChannel.class)
                     .option(ChannelOption.TCP_NODELAY, true)
                     .option(ChannelOption.SO_KEEPALIVE, true)
-                    .handler(new ClientInitializer());
+                    .handler(new BukkitInitializer());
 
             connect();
 
