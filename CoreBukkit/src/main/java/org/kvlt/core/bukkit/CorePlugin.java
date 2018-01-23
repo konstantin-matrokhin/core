@@ -33,6 +33,7 @@ public class CorePlugin extends JavaPlugin {
         getCommand("ban").setExecutor(new BanCommand());
         getCommand("server").setExecutor(new ServerCommand());
         getCommand("find").setExecutor(new FindCommand());
+        getCommand("glist").setExecutor(new GListCommand());
         getCommand("whois").setExecutor(new WhoisCommand());
 
         ConfigManager.initConfig();

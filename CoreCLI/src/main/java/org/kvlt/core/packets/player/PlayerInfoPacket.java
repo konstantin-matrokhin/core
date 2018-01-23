@@ -9,6 +9,8 @@ import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.LangCommons;
+import org.kvlt.core.utils.Localization;
 
 public class PlayerInfoPacket implements PacketIn {
 
@@ -32,7 +34,7 @@ public class PlayerInfoPacket implements PacketIn {
                 if (PlayerFactory.isStaff(senderPlayer)) {
                     response = full ? PlayerFactory.getPrettyInfo(player) : PlayerFactory.getShortInfo(player);
                 } else {
-                    response = "You don't have permission!";
+                    response = Localization.get(senderPlayer.getLang(), LangCommons.NO_PERM);
                 }
                 new MessagePacket(sender, response).send(channel);
             }

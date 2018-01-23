@@ -22,9 +22,11 @@ public class GListPacket extends PlayerPacket {
 
     @Override
     public void execute(Channel channel) {
+        if (!ensurePlayer()) return;
+
         StringBuilder response = new StringBuilder("Игроков онлайн: ");
         if (PlayerFactory.isStaff(getPlayer())) {
-            if (!pattern.equalsIgnoreCase("n")) {
+            if (!pattern.equalsIgnoreCase("none")) {
                 int online = Core.get().getOnlinePlayers().size();
                 response.append("(всего) ");
                 response.append(online);

@@ -9,7 +9,7 @@ public class GListCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        String pattern = "n";
+        String pattern = "none";
 
         if (args.length == 1) {
             pattern = args[0];

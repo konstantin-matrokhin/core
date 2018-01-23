@@ -38,7 +38,7 @@ public class Localization {
                 URL url = new URL(address + "/" + fileName);
                 if (address.startsWith("file")) {
                     URLConnection con = url.openConnection();
-                    load(langName, url.openStream());
+                    load(langName, con.getInputStream());
                 } else {
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     con.setConnectTimeout(5000);
@@ -62,30 +62,6 @@ public class Localization {
         return langArray;
     }
 
-    public static void loadFromURL() {
-        boolean fromURL = Config.getCore("localization-from").getAsString().equalsIgnoreCase("url");
-
-        if (fromURL) {
-            try {
-                String address = Config.getCore("localization-address").getAsString();
-                URL url = new URL(address);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("GET");
-//                load(Lang.RUSSIAN, con.getInputStream());
-
-//                BufferedReader reader= new BufferedReader(new InputStreamReader(con.getInputStream()));
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    response.append(line);
-//                }
-//                reader.close();
-//
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public static void load(String lang, InputStream in) {
         try {
             langMap.put(lang, new YAMLConfig(in));
@@ -103,7 +79,7 @@ public class Localization {
         } else {
             lang = player.getLang();
         }
-        return get(player.getLang(), key);
+        return get(lang, key);
     }
 
     public static String get(ServerPlayer player, String key, Object... format) {
@@ -111,7 +87,10 @@ public class Localization {
     }
 
     public static String get(String lang, String key) {
-        if (langMap == null || langMap.get(lang).getString(key) == null || langMap.size() == 0) {
+        if (langMap == null
+                || langMap.get(lang) == null
+                || langMap.get(lang).getString(key) == null
+                || langMap.size() == 0) {
             //TODO replace with LangCommons
             return String.format("Localization error! Please, contact us to solve the issue.\n" +
                     "KEY = %s\n" +
