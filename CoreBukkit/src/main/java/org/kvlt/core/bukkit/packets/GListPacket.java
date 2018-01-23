@@ -17,6 +17,10 @@ public class GListPacket extends BukkitPacketOut {
     @Override
     public void write(ByteBuf out) {
         PacketUtil.writeString(sender, out);
+
+        if (pattern == null || pattern.isEmpty()) {
+            pattern = "none";
+        }
         PacketUtil.writeString(pattern, out);
     }
 

@@ -8,7 +8,7 @@ public class AlertCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-//        if (args)
+        if (args.length == 0) return false;
         return true;
     }
 }

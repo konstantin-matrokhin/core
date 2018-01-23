@@ -20,24 +20,28 @@ public class EmailAddPacket extends PlayerPacket {
 
     @Override
     public void execute(Channel channel) {
-        if (ensurePlayer()) {
-            String response;
-            if (!getPlayer().isEmailConfirmed()) {
-                String code = CodeGenerator.genNiceCode().toUpperCase();
+        PlayerFactory.addTask(() -> {
+            if (ensurePlayer()) {
+                if (!getPlayer().isEmailConfirmed()) {
+                    if (Email.emailIsAvailable(playerEmail)) {
+                        String code = CodeGenerator.genNiceCode().toUpperCase();
 
-                getPlayer().setEmailConfirmationCode(code);
-                getPlayer().setEmail(playerEmail);
+                        getPlayer().setEmailConfirmationCode(code);
+                        getPlayer().setEmail(playerEmail);
 
-                PlayerFactory.updatePlayer(getPlayer());
-                Email email = new Email(playerEmail);
-                email.sendEmailConfirmation(getPlayer().getName(), code);
+                        PlayerFactory.updatePlayer(getPlayer());
+                        Email email = new Email(playerEmail);
+                        email.sendEmailConfirmation(getPlayer().getName(), code);
 
-                writeMsg("email-confirmation-sent", playerEmail);
-            } else {
-                writeMsg("already-confirmed", playerEmail);
+                        writeMsg("email-confirmation-sent", playerEmail);
+                    } else {
+                        writeMsg("already-confirmed", playerEmail);
+                    }
+                    writeMsg("email-not-available");
+                }
+                sendMsg(channel);
             }
-            sendMsg(channel);
-        }
+        });
     }
 
     @Override

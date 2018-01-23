@@ -10,6 +10,8 @@ import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.Finder;
 
+import java.util.List;
+
 public class GListPacket extends PlayerPacket {
 
     private String pattern;
@@ -26,13 +28,15 @@ public class GListPacket extends PlayerPacket {
 
         StringBuilder response = new StringBuilder("Игроков онлайн: ");
         if (PlayerFactory.isStaff(getPlayer())) {
-            if (!pattern.equalsIgnoreCase("none")) {
+            if (pattern.equalsIgnoreCase("none")) {
                 int online = Core.get().getOnlinePlayers().size();
                 response.append("(всего) ");
                 response.append(online);
             } else {
-                GameServer server = Finder.getGameServers(pattern).list().get(0);
-                if (server != null) {
+                List<GameServer> serverList = Finder.getGameServers(pattern).list();
+                GameServer server;
+                if (serverList != null && serverList.size() > 0) {
+                    server = serverList.get(0);
                     response.append(String.format("(%s) ", server.getName()));
                     response.append(server.getOnlinePlayers().size());
                 } else {

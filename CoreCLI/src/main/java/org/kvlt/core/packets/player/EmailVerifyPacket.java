@@ -3,6 +3,7 @@ package org.kvlt.core.packets.player;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.db.PlayerFactory;
+import org.kvlt.core.email.Email;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
@@ -18,22 +19,29 @@ public class EmailVerifyPacket extends PlayerPacket {
 
     @Override
     public void execute(Channel channel) {
-        if (!ensurePlayer()) return;
+        PlayerFactory.addTask(() -> {
+            if (!ensurePlayer()) return;
 
-        String name = getPlayer().getName();
-        String email = getPlayer().getEmail();
-        String confirmationCode = getPlayer().getEmailConfirmationCode();
+            String name = getPlayer().getName();
+            String email = getPlayer().getEmail();
+            String confirmationCode = getPlayer().getEmailConfirmationCode();
 
-        if (confirmationCode != null && getPlayer().getEmailConfirmationCode().equalsIgnoreCase(code)) {
-            getPlayer().setEmailConfirmationCode(null);
-            getPlayer().setEmailConfirmed(true);
-            PlayerFactory.updatePlayer(getPlayer());
+            if (Email.emailIsAvailable(email)) {
+                if (confirmationCode != null && getPlayer().getEmailConfirmationCode().equalsIgnoreCase(code)) {
+                    getPlayer().setEmailConfirmationCode(null);
+                    getPlayer().setEmailConfirmed(true);
+                    PlayerFactory.updatePlayer(getPlayer());
 
-            writeMsg("email-confirmed", email);
-        } else {
-            writeMsg("incorrect-code");
-        }
-        sendMsg(channel);
+                    writeMsg("email-confirmed", email);
+                } else {
+                    writeMsg("incorrect-code");
+                }
+            } else {
+                getPlayer().setEmail(null);
+                writeMsg("email-not-available");
+            }
+            sendMsg(channel);
+        });
     }
 
     @Override

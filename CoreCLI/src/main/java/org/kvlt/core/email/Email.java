@@ -1,6 +1,7 @@
 package org.kvlt.core.email;
 
 import org.kvlt.core.config.Config;
+import org.kvlt.core.db.HibernateInitializer;
 import org.kvlt.core.utils.Log;
 
 import javax.mail.*;
@@ -45,6 +46,16 @@ public final class Email {
         session = createSession();
 
         loadTemplates();
+    }
+
+    public static boolean emailIsAvailable(String email) {
+        return HibernateInitializer
+                .getSessionFactory()
+                .openSession()
+                .createQuery("FROM authentication WHERE email = :email AND email_confirmed = 0")
+                .setParameter("email", email)
+                .list()
+                .size() == 0;
     }
 
     public void sendChangeEmail(String name, String newEmail, String code) {
