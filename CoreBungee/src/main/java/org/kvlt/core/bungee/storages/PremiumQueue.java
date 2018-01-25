@@ -1,6 +1,6 @@
 package org.kvlt.core.bungee.storages;
 
-import org.kvlt.core.bungee.Core;
+import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.packets.PremiumPlayerPacket;
 
 import java.util.Map;
@@ -19,7 +19,7 @@ public class PremiumQueue {
 
     public static void add(String name) {
         long now = System.currentTimeMillis();
-        if (!Core.getAPI().getPremiumPlayers().contains(name)) {
+        if (!CoreBungee.getAPI().getPremiumPlayers().contains(name)) {
             premiumPlayers.put(name, now + TimeUnit.MINUTES.toMillis(DEFAULT_DURATION));
         }
     }

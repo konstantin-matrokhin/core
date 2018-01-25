@@ -3,7 +3,7 @@ package org.kvlt.core.bungee;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.packets.DisconnectPacket;
 
-public final class Core extends Plugin {
+public final class CoreBungee extends Plugin {
 
     private static Plugin instance;
     private static ProxyCore core;

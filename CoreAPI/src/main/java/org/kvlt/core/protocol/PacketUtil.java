@@ -25,7 +25,7 @@ public class PacketUtil {
         if (!iterator.hasNext()) throw new ArrayIndexOutOfBoundsException("array must be not empty!");
 
         short size = (short) iterable.spliterator().getExactSizeIfKnown();
-        if (size == 0) throw new ArrayIndexOutOfBoundsException("array must be not empty!");
+        if (size < 0) throw new ArrayIndexOutOfBoundsException("array must be not empty!");
 
         byteBuf.writeShort(size);
         while (iterator.hasNext()) {

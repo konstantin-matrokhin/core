@@ -2,7 +2,7 @@ package org.kvlt.core.bungee.packets;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
-import org.kvlt.core.bungee.Core;
+import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 
@@ -19,7 +19,7 @@ public class MotdPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        Core.getAPI().getControlManager().getPingEventListener().setMotd(motd);
+        CoreBungee.getAPI().getControlManager().getPingEventListener().setMotd(motd);
     }
 
     @Override

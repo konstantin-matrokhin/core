@@ -8,11 +8,11 @@ import java.io.File;
 public class ConfigManager {
 
     public static FileConfiguration config() {
-        return CorePlugin.get().getConfig();
+        return CorePlugin.getPlugin().getConfig();
     }
 
     public static void initConfig() {
-        CorePlugin.get().saveDefaultConfig();
+        CorePlugin.getPlugin().saveDefaultConfig();
     }
 
     public static String getClientName() {

@@ -3,12 +3,13 @@ package org.kvlt.core.bukkit;
 import io.netty.channel.Channel;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.*;
-import org.kvlt.core.bukkit.net.ConnectionManager;
 import org.kvlt.core.protocol.PacketResolver;
 
 public class CorePlugin extends JavaPlugin {
 
     private static CorePlugin instance;
+    private static CoreAPI api;
+
     private Channel server;
     private PacketResolver packetResolver;
 
@@ -18,11 +19,9 @@ public class CorePlugin extends JavaPlugin {
         }
     }
 
-    //TODO: API | transfer, change language packets
-
     @Override
     public void onEnable() {
-        packetResolver = new PacketResolver();
+        api = new MainCoreBukkit(this);
 
         getCommand("alert").setExecutor(new AlertCommand());
         getCommand("salert").setExecutor(new ServerAlertCommand());
@@ -41,28 +40,21 @@ public class CorePlugin extends JavaPlugin {
         getCommand("whois").setExecutor(new WhoisCommand());
 
         ConfigManager.initConfig();
-        ConnectionManager.get().startClient();
+        api.connect();
     }
 
     @Override
     public void onDisable() {
-        ConnectionManager.get().disconnect();
+        api.disconnect();
     }
 
-    public Channel getCoreServer() {
-        return server;
+    public static CoreAPI getAPI() {
+        return api;
     }
 
-    public void setServer(Channel ch) {
-        server = ch;
-    }
-
-    public static synchronized CorePlugin get() {
+    public static JavaPlugin getPlugin() {
         return instance;
     }
 
-    public PacketResolver getPacketResolver() {
-        return packetResolver;
-    }
 }
 

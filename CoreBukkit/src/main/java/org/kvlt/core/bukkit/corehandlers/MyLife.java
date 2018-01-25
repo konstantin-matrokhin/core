@@ -19,7 +19,7 @@ public class MyLife {
         DItem item = api.createItem(new ItemStack(Material.BED), (player, clickType, i) -> {
             player.setGameMode(GameMode.CREATIVE);
             if (clickType.isKeyboardClick()) {
-                player.sendMessage("ketyboard");
+                player.sendMessage("keyboard");
             }
         });
         dinv.setItem(5, item);

@@ -6,7 +6,7 @@ import org.kvlt.core.protocol.PacketOut;
 public abstract class BukkitPacketOut implements PacketOut {
 
     public void send() {
-        CorePlugin.get().getCoreServer().writeAndFlush(this);
+        CorePlugin.getAPI().getServer().writeAndFlush(this);
     }
 
 }

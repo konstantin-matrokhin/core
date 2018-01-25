@@ -5,7 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Event;
-import org.kvlt.core.bungee.Core;
+import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.events.ConnectedEvent;
 import org.kvlt.core.bungee.events.PacketEvent;
 import org.kvlt.core.bungee.packets.ConnectPacket;
@@ -18,7 +18,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<PacketIn> {
     private ConnectionManager connectionManager;
 
     {
-        connectionManager = Core.getAPI().getConnectionManager();
+        connectionManager = CoreBungee.getAPI().getConnectionManager();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class BungeeHandler extends SimpleChannelInboundHandler<PacketIn> {
         ProxyServer.getInstance().getPluginManager().callEvent(connectedEvent);
 
 
-        new ConnectPacket(Core.getAPI().getProxyName()).send();
+        new ConnectPacket(CoreBungee.getAPI().getProxyName()).send();
         Collection<ProxiedPlayer> players = ProxyServer.getInstance().getPlayers();
         if (players.size() > 0) {
 //            new PlayerPacket(players).send();
@@ -36,8 +36,8 @@ public class BungeeHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
-        Core.getAPI().getConnectionManager().setConnected(false);
-        Core.getAPI().connect();
+        CoreBungee.getAPI().getConnectionManager().setConnected(false);
+        CoreBungee.getAPI().connect();
     }
 
     @Override

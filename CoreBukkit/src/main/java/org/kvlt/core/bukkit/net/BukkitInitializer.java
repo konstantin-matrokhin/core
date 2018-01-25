@@ -16,7 +16,7 @@ public class BukkitInitializer extends ChannelInitializer<SocketChannel> {
     private static PacketResolver resolver;
 
     static {
-        resolver = CorePlugin.get().getPacketResolver();
+        resolver = CorePlugin.getAPI().getPacketResolver();
 
         PacketIn[] packets = {
                 new MessagePacket(),

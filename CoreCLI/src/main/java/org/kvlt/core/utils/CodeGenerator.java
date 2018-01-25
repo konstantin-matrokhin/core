@@ -27,7 +27,6 @@ public class CodeGenerator {
             } else {
                 char[] rndArray = random.nextBoolean() ? VOWELS : CONSONANTS;
                 code[i] = rndArray[random.nextInt(rndArray.length)];
-                //code[i] = VOWELS[random.nextInt(VOWELS.length)];
             }
         }
         return new String(code);

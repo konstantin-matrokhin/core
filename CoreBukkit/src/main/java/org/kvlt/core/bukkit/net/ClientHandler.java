@@ -14,7 +14,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         Bukkit.getLogger().info(ChatColor.AQUA + "Соединено с главным сервером.");
-        CorePlugin.get().setServer(ctx.channel());
+        CorePlugin.getAPI().setServer(ctx.channel());
 
         String name = ConfigManager.getClientName();
         short port = (short) Bukkit.getPort();
