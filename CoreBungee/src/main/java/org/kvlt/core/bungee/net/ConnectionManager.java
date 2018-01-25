@@ -7,7 +7,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.kvlt.core.bungee.CoreBungee;
+import org.kvlt.core.bungee.Core;
 import org.kvlt.core.bungee.utils.BungeeLog;
 
 import java.util.concurrent.TimeUnit;
@@ -27,11 +27,9 @@ public class ConnectionManager {
     private volatile boolean isConnected;
     private volatile boolean disconnecting;
 
-    private ConnectionManager() {}
-
     public void startClient() {
-        host = CoreBungee.get().getConfig().getString("core.host");
-        port = CoreBungee.get().getConfig().getInt("core.port");
+        host = Core.getAPI().getConfig().getString("core.host");
+        port = Core.getAPI().getConfig().getInt("core.port");
         eventLoopGroup = new NioEventLoopGroup();
 
         try {
@@ -49,7 +47,7 @@ public class ConnectionManager {
         }
     }
 
-    public void connect() {
+    private void connect() {
         if (isConnected) return;
         if (disconnecting) return;
 
@@ -73,10 +71,6 @@ public class ConnectionManager {
 
     public Channel getChannel() {
         return channel;
-    }
-
-    public static synchronized ConnectionManager get() {
-        return instance == null ? instance = new ConnectionManager() : instance;
     }
 
     public boolean isConnected() {

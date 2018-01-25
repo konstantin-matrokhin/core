@@ -18,6 +18,8 @@ public class CorePlugin extends JavaPlugin {
         }
     }
 
+    //TODO: API | transfer, change language packets
+
     @Override
     public void onEnable() {
         packetResolver = new PacketResolver();
@@ -26,7 +28,9 @@ public class CorePlugin extends JavaPlugin {
         getCommand("salert").setExecutor(new ServerAlertCommand());
         getCommand("msg").setExecutor(new MsgCommand());
         getCommand("time").setExecutor(new TimeCommand());
-        getCommand("hub").setExecutor(new HubCommand());
+
+        new HubCommand();
+
         getCommand("sendcommand").setExecutor(new SendCommand());
         getCommand("reply").setExecutor(new ReplyCommand());
         getCommand("con").setExecutor(new ConnectCommand());

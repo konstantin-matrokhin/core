@@ -2,7 +2,6 @@ package org.kvlt.core.utils;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ public class YAMLConfig implements CoreConfig {
     private Yaml yaml;
     private InputStream in;
     private Map<String, Object> map;
-    private FileWriter writer;
 
     {
         yaml = new Yaml();
@@ -31,5 +29,7 @@ public class YAMLConfig implements CoreConfig {
     public String getString(String key) {
         return (String) map.get(key);
     }
+
+    //TODO get list
 
 }

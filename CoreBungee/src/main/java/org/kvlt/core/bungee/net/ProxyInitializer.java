@@ -3,7 +3,7 @@ package org.kvlt.core.bungee.net;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import org.kvlt.core.bungee.CoreBungee;
+import org.kvlt.core.bungee.Core;
 import org.kvlt.core.bungee.packets.*;
 import org.kvlt.core.protocol.*;
 
@@ -12,7 +12,7 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
     private static PacketResolver resolver;
 
     static {
-        resolver = CoreBungee.get().getPacketResolver();
+        resolver = Core.getAPI().getPacketResolver();
 
         PacketIn[] packets = {
                 new KickPacket(),
@@ -23,6 +23,7 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
                 new BroadcastPacket(),
                 new TransferPacket(),
                 new PremiumListPacket(),
+
         };
 
         resolver.registerPackets(packets);

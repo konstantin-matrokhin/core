@@ -4,7 +4,7 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
-import org.kvlt.core.bungee.CoreBungee;
+import org.kvlt.core.bungee.Core;
 import org.kvlt.core.bungee.CoreDB;
 import org.kvlt.core.bungee.storages.IdMap;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
@@ -60,7 +60,7 @@ public class Auth {
 
     public static void passwordAuth(String player, String password) {
         final int id = IdMap.getId(player);
-        boolean alreadyLogged = CoreBungee.get().getPremiumPlayers().contains(player) ||
+        boolean alreadyLogged = Core.getAPI().getPremiumPlayers().contains(player) ||
                 ProxyLoggedPlayers.isLogged(player);
 
         if (alreadyLogged) {
@@ -71,7 +71,7 @@ public class Auth {
         final ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
         final String ip = pp.getAddress().getHostString();
 
-        ProxyServer.getInstance().getScheduler().runAsync(CoreBungee.get(), () -> {
+        ProxyServer.getInstance().getScheduler().runAsync(Core.getPlugin(), () -> {
             String dbIp = null;
             String dbPassword = null;
 
@@ -106,12 +106,12 @@ public class Auth {
     }
 
     public static void trySessionAuth(String player) {
-        ProxyServer.getInstance().getScheduler().schedule(CoreBungee.get(), () -> {
+        ProxyServer.getInstance().getScheduler().schedule(Core.getPlugin(), () -> {
             ProxiedPlayer pp = ProxyServer.getInstance().getPlayer(player);
 
             if (ProxyLoggedPlayers.isLogged(player)) return;
 
-            if (CoreBungee.get().getPremiumPlayers().contains(player)) {
+            if (Core.getAPI().getPremiumPlayers().contains(player)) {
                 ProxyLoggedPlayers.logIn(player);
                 pp.sendMessage(new TextComponent("Дороу!"));
                 return;
@@ -121,7 +121,7 @@ public class Auth {
             final long now = System.currentTimeMillis();
             final String ip = pp.getAddress().getHostString();
 
-            ProxyServer.getInstance().getScheduler().runAsync(CoreBungee.get(), () -> {
+            ProxyServer.getInstance().getScheduler().runAsync(Core.getPlugin(), () -> {
                 String dbIp = null;
                 long lastAuth = 0;
 
@@ -158,14 +158,14 @@ public class Auth {
                 };
 
                 ScheduledTask task = ProxyServer.getInstance()
-                        .getScheduler().schedule(CoreBungee.get(), annoyingTask,
+                        .getScheduler().schedule(Core.getPlugin(), annoyingTask,
                                 1L, 2L, TimeUnit.SECONDS);
                 annoyingMessages.put(pp, task);
             });
         }, 1L, TimeUnit.SECONDS);
     }
 
-    public static boolean inSessionRange(long time) {
+    private static boolean inSessionRange(long time) {
         long hours = TimeUnit.MILLISECONDS.toHours(time);
         return hours < 24 && time > -1;
     }

@@ -25,6 +25,9 @@ public class PlayerQuitPacket implements PacketIn {
         ServerPlayer op = Core.get().getOnlinePlayers().get(playerName);
         if (op == null) return;
 
+        PlayerQuitEvent pqe = new PlayerQuitEvent(op);
+        pqe.invoke();
+
         op.setPlayedLastTime(PlayedTimeCounter.stop(op));
         op.setPlayedTotal(op.getPlayedLastTime() + op.getPlayedLastTime());
         op.setLastIp(op.getIp());
@@ -33,9 +36,6 @@ public class PlayerQuitPacket implements PacketIn {
         Core.get().getOnlinePlayers().remove(playerName);
 
         System.out.println(String.format("[-] %s вышел.", playerName));
-
-        PlayerQuitEvent pqe = new PlayerQuitEvent(op);
-        pqe.invoke();
     }
 
     @Override

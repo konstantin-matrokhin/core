@@ -1,4 +1,5 @@
 name: CoreBungee
-main: org.kvlt.core.bungee.CoreBungee
+main: org.kvlt.core.bungee.Core
 version: 0.1
 author: kvlt
+depends: []

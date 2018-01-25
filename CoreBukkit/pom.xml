@@ -111,11 +111,13 @@
 
     <dependencies>
 
-        <!--<dependency>-->
-            <!--<groupId>net.lastcraft</groupId>-->
-            <!--<artifactId>darta-api</artifactId>-->
-            <!--<version>1.0</version>-->
-        <!--</dependency>-->
+        <dependency>
+        <groupId>darta-api</groupId>
+        <artifactId>net.lastcraft</artifactId>
+        <version>1.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/../libs/DartaAPI.jar</systemPath>
+        </dependency>
 
         <dependency>
             <groupId>org.spigotmc</groupId>

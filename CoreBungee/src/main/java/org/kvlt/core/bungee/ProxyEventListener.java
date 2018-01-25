@@ -24,7 +24,7 @@ public class ProxyEventListener implements Listener {
         PlayerJoinPacket playerJoinPacket = new PlayerJoinPacket(name);
         playerJoinPacket.send();
 
-        ProxyServer.getInstance().getScheduler().schedule(CoreBungee.get(), () -> {
+        ProxyServer.getInstance().getScheduler().schedule(Core.getPlugin(), () -> {
             if (PremiumQueue.has(name)) {
                 PremiumQueue.setPremium(name);
                 p.sendMessage(new TextComponent("Вы успешно привязали премиум-аккаунт!"));
@@ -37,7 +37,7 @@ public class ProxyEventListener implements Listener {
         PendingConnection c = event.getConnection();
         String name = c.getName();
         String host = c.getAddress().getHostName();
-        boolean isPremium = CoreBungee.get().getPremiumPlayers().contains(name)
+        boolean isPremium = Core.getAPI().getPremiumPlayers().contains(name)
                 || PremiumQueue.has(name);
 
         if (isPremium) {

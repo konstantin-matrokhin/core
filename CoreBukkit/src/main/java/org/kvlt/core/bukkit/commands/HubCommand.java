@@ -1,21 +1,23 @@
 package org.kvlt.core.bukkit.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import net.lastcraft.api.command.CommandInterface;
+import net.lastcraft.api.command.SpigotCommand;
+import net.lastcraft.entity.GamerEntity;
 import org.kvlt.core.bukkit.packets.HubRequestPacket;
 
-public class HubCommand implements CommandExecutor {
+public class HubCommand implements CommandInterface {
+
+    private SpigotCommand command;
+
+    public HubCommand() {
+        command = getCommandsAPI().register("hub", this, "lobby");
+        command.setOnlyPlayers(true);
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!(sender instanceof Player)) return false;
-
-        Player p = (Player) sender;
-        String name = p.getName();
-
+    public void execute(GamerEntity gamer, String s, String[] args) {
+        String name = gamer.getName();
         new HubRequestPacket(name).send();
-        return true;
     }
+
 }

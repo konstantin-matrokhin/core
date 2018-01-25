@@ -2,7 +2,7 @@ package org.kvlt.core.bungee.commands;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
-import org.kvlt.core.bungee.net.ConnectionManager;
+import org.kvlt.core.bungee.Core;
 
 public class ReconnectCommand extends Command {
 
@@ -12,7 +12,7 @@ public class ReconnectCommand extends Command {
 
     @Override
     public void execute(CommandSender commandSender, String[] args) {
-        ConnectionManager.get().connect();
+        Core.getAPI().connect();
     }
 
 }

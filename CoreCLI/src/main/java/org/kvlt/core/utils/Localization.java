@@ -92,6 +92,7 @@ public class Localization {
                 || langMap.get(lang).getString(key) == null
                 || langMap.size() == 0) {
             //TODO replace with LangCommons
+            //TODO send from russian
             return String.format("Localization error! Please, contact us to solve the issue.\n" +
                     "KEY = %s\n" +
                     "LANG = %s",
