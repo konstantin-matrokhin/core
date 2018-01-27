@@ -1,36 +1,27 @@
 package org.kvlt.core.utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.logging.Logger;
 
 public class Log {
 
-    private static SimpleDateFormat simpleDateFormat;
+//    private static SimpleDateFormat simpleDateFormat;
+    private static final Logger logger;
 
     static {
-        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        logger = Logger.getLogger("CoreCLI");
+//        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
     }
 
     public static void $(String str) {
-        $(LogType.INFO, str);
+        logger.info(str);
     }
 
     public static void err(String str) {
-        $(LogType.ERROR, str);
+        logger.severe(str);
     }
 
     public static void warn(String str) {
-        $(LogType.WARN, str);
+        logger.warning(str);
     }
-
-    public static void $(LogType level, String str) {
-        String time = simpleDateFormat.format(new Date());
-        System.out.println("[" + time + "][" + level + "] " + str);
-    }
-
-    public enum LogType {
-        ERROR, WARN, INFO
-    }
-
 
 }

@@ -19,9 +19,11 @@ public class ReloadCommand extends Command {
         Core.get().getPluginManager().getPlugins().forEach(CorePlugin::onDisable);
         Core.get().getPluginManager().getPlugins().clear();
         Core.get().getPluginLoader().loadPlugins();
+
         Config.init();
         Localization.load();
         Email.init();
+
         Log.$("Перезагрузка завершена!");
         return true;
     }

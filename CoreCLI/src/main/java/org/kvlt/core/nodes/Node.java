@@ -10,10 +10,15 @@ import org.kvlt.core.protocol.Packet;
 public interface Node {
 
     void send(Packet packet);
+
     void send(Packet... packets);
+
     void setName(String name);
+
     String getName();
+
     void setChannel(Channel channel);
+
     Channel getChannel();
 
 }

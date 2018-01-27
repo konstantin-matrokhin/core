@@ -18,7 +18,10 @@ public class Packets {
     public static final int PLAYER_CHAT_PACKET = 9;
     public static final int PLAYER_AUTH_PACKET = 10;
     public static final int PLAYER_REG_PACKET = 11;
+
+    @Deprecated
     public static final int PLAYER_PRELOGIN_PACKET = 15;
+
     public static final int ID_PACKET = 16;
 
     public static final int MESSAGE_PACKET = 14;
@@ -50,4 +53,6 @@ public class Packets {
 
     public static final int PLAYER_PACKET = 34;
     public static final int G_LIST_PACKET = 35;
+    public static final int SERVER_LIST_PACKET = 36;
+
 }

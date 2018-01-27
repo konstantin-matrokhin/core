@@ -18,4 +18,5 @@ public class PlayerLoginEvent extends PlayerEvent implements Cancellable {
     public boolean isCancelled() {
         return false;
     }
+
 }

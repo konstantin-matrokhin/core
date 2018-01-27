@@ -22,4 +22,5 @@ public class ConnectPacket extends BungeePacketOut {
     public int getId() {
         return Packets.PROXY_CONNECT_PACKET;
     }
+
 }

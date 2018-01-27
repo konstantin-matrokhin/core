@@ -5,6 +5,7 @@ import org.kvlt.core.bungee.packets.protocol.PlayerPacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
+@Deprecated
 public class LoginPacket extends PlayerPacket {
 
     private String uuid;
