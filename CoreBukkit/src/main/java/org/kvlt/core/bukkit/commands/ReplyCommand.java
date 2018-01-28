@@ -1,25 +1,26 @@
 package org.kvlt.core.bukkit.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import net.lastcraft.api.command.CommandInterface;
+import net.lastcraft.api.command.SpigotCommand;
+import net.lastcraft.entity.GamerEntity;
 import org.kvlt.core.bukkit.packets.ReplyPacket;
 
-public class ReplyCommand implements CommandExecutor {
+public class ReplyCommand implements CommandInterface {
+
+    public ReplyCommand() {
+        SpigotCommand command = getCommandsAPI()
+                .register("r", this, "reply");
+        command.setOnlyPlayers(true);
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!(sender instanceof Player) || args.length < 1) return false;
-        Player p = (Player) sender;
+    public void execute(GamerEntity sender, String s, String[] args) {
+        if (args.length < 1) return;
 
-        String from = p.getName();
+        String from = sender.getName();
         String message = String.join(" ", args);
 
         ReplyPacket replyPacket = new ReplyPacket(from, message);
         replyPacket.send();
-
-        return true;
     }
-
 }

@@ -1,20 +1,27 @@
 package org.kvlt.core.bukkit.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.kvlt.core.bukkit.packets.BroadcastPacket;
+import net.lastcraft.api.command.CommandInterface;
+import net.lastcraft.api.command.SpigotCommand;
+import net.lastcraft.entity.GamerEntity;
+import org.kvlt.core.bukkit.packets.BroadcastRequestPacket;
 
-public class AlertCommand implements CommandExecutor {
+public class AlertCommand implements CommandInterface {
+
+    public AlertCommand() {
+        SpigotCommand command = getCommandsAPI()
+                .register("alert", this);
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (args.length == 0) return false;
+    public void execute(GamerEntity sender, String s, String[] args) {
+        if (args.length == 0) {
+            sender.sendMessage("/alert <message>");
+            return;
+        }
 
-        String senderName = sender.getName();
+        String name = sender.getName();
         String words = String.join(" ", args);
-        new BroadcastPacket(senderName, words).send();
 
-        return true;
+        new BroadcastRequestPacket(name, words).send();
     }
 }

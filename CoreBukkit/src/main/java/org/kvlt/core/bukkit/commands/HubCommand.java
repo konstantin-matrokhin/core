@@ -7,10 +7,8 @@ import org.kvlt.core.bukkit.packets.HubRequestPacket;
 
 public class HubCommand implements CommandInterface {
 
-    private SpigotCommand command;
-
     public HubCommand() {
-        command = getCommandsAPI().register("hub", this, "lobby");
+        SpigotCommand command = getCommandsAPI().register("hub", this, "lobby");
         command.setOnlyPlayers(true);
     }
 

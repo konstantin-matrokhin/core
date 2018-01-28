@@ -4,7 +4,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.bukkit.CorePlugin;
-import org.kvlt.core.bukkit.commands.BroadcastPacket;
+import org.kvlt.core.bukkit.packets.BroadcastPacket;
 import org.kvlt.core.bukkit.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;

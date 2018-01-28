@@ -7,6 +7,8 @@ import java.util.Iterator;
 
 public class PacketUtil {
 
+    public static final String EMPTY_STRING = "_";
+
     public static String readString(ByteBuf byteBuf){
         byte[] bytes = new byte[byteBuf.readInt()];
         byteBuf.readBytes(bytes);

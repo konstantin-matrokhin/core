@@ -1,35 +1,24 @@
 package org.kvlt.core.bukkit.packets;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
+import org.bukkit.Bukkit;
+import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
-public class BroadcastPacket extends BukkitPacketOut {
+public class BroadcastPacket implements PacketIn {
 
-    private String sender;
     private String message;
-    private String server;
 
-    public BroadcastPacket(String sender, String message, String server) {
-        this.sender = sender;
-        this.message = message;
-        this.server = server;
-    }
-
-    public BroadcastPacket(String sender, String message) {
-        this.sender = sender;
-        this.message = message;
+    @Override
+    public void read(ByteBuf in) {
+        message = PacketUtil.readString(in);
     }
 
     @Override
-    public void write(ByteBuf out) {
-        PacketUtil.writeString(sender, out);
-        PacketUtil.writeString(message, out);
-
-        if (server == null || server.isEmpty()) {
-            server = "none";
-        }
-        PacketUtil.writeString(server, out);
+    public void execute(Channel channel) {
+        Bukkit.broadcastMessage(message);
     }
 
     @Override

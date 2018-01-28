@@ -23,21 +23,18 @@ public class CorePlugin extends JavaPlugin {
     public void onEnable() {
         api = new MainCoreBukkit(this);
 
-        getCommand("alert").setExecutor(new AlertCommand());
-        getCommand("salert").setExecutor(new ServerAlertCommand());
-        getCommand("msg").setExecutor(new MsgCommand());
-        getCommand("time").setExecutor(new TimeCommand());
-
+        new AlertCommand();
+        new ServerAlertCommand();
+        new MsgCommand();
+        new TimeCommand();
         new HubCommand();
-
-        getCommand("sendcommand").setExecutor(new SendCommand());
-        getCommand("reply").setExecutor(new ReplyCommand());
-        getCommand("con").setExecutor(new ConnectCommand());
-        getCommand("ban").setExecutor(new BanCommand());
-        getCommand("server").setExecutor(new ServerCommand());
-        getCommand("find").setExecutor(new FindCommand());
-        getCommand("glist").setExecutor(new GListCommand());
-        getCommand("whois").setExecutor(new WhoisCommand());
+        new SendCommand();
+        new ReplyCommand();
+        new BanCommand();
+        new ServerCommand();
+        new FindCommand();
+        new GListCommand();
+        new WhoisCommand();
 
         ConfigManager.initConfig();
         api.connect();

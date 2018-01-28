@@ -1,15 +1,22 @@
 package org.kvlt.core.bukkit.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import net.lastcraft.api.command.CommandInterface;
+import net.lastcraft.entity.GamerEntity;
+import net.lastcraft.group.Group;
 import org.kvlt.core.bukkit.packets.GListPacket;
+import org.kvlt.core.protocol.PacketUtil;
 
-public class GListCommand implements CommandExecutor {
+public class GListCommand implements CommandInterface {
+
+    public GListCommand() {
+        getCommandsAPI()
+                .register("glist", this, "online")
+                .setMinimalGroup(Group.ADMIN);
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        String pattern = "none";
+    public void execute(GamerEntity sender, String s, String[] args) {
+        String pattern = PacketUtil.EMPTY_STRING;
 
         if (args.length == 1) {
             pattern = args[0];
@@ -17,6 +24,5 @@ public class GListCommand implements CommandExecutor {
 
         String senderName = sender.getName();
         new GListPacket(senderName, pattern).send();
-        return true;
     }
 }

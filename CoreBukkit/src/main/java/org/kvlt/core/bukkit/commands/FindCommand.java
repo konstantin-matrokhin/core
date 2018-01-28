@@ -1,21 +1,26 @@
 package org.kvlt.core.bukkit.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import net.lastcraft.api.command.CommandInterface;
+import net.lastcraft.api.command.SpigotCommand;
+import net.lastcraft.entity.GamerEntity;
+import net.lastcraft.group.Group;
 import org.kvlt.core.bukkit.packets.PlayerInfoPacket;
 
-public class FindCommand implements CommandExecutor {
+public class FindCommand implements CommandInterface {
+
+    public FindCommand() {
+        SpigotCommand command = getCommandsAPI()
+                .register("find", this);
+        command.setMinimalGroup(Group.HELPER);
+    }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (args.length != 1) return false;
+    public void execute(GamerEntity sender, String s, String[] args) {
+        if (args.length == 0) return;
+
         String senderName = sender.getName();
         String playerName = args[0];
 
         new PlayerInfoPacket(senderName, playerName, false).send();
-
-        return true;
     }
-
 }

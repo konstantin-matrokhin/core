@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.kvlt.core.bukkit.net.ConnectionManager;
 
+@Deprecated
 public class ConnectCommand implements CommandExecutor {
 
     @Override
