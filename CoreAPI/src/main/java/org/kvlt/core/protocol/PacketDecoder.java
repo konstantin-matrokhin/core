@@ -1,7 +1,6 @@
 package org.kvlt.core.protocol;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 
@@ -23,7 +22,8 @@ public final class PacketDecoder extends ByteToMessageDecoder {
     }
 
     @Override
-    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
+    protected void decode(ChannelHandlerContext channelHandlerContext,
+                          ByteBuf byteBuf, List<Object> list) throws Exception {
         byteBuf.markReaderIndex();
 
         ByteBuf prefix = byteBuf.readBytes(5);
@@ -53,7 +53,7 @@ public final class PacketDecoder extends ByteToMessageDecoder {
                     p.read(byteBuf);
                     list.add(p);
                 } else {
-                    System.out.println("ATTENTION: Invalid or unregistered packet with [id = " + id + "]");
+                    System.out.println("Ошибка! Неизвестный пакет [id = " + id + "]");
                 }
             }
         }

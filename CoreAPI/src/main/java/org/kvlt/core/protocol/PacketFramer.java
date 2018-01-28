@@ -7,6 +7,9 @@ import io.netty.handler.codec.ByteToMessageCodec;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Этот класс делит пакеты, определяя по байтам их начало и конец
+ */
 public class PacketFramer extends ByteToMessageCodec<ByteBuf> {
 
     private static final int MAX_BYTES = 65_535;

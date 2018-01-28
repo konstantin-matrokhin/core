@@ -5,6 +5,10 @@ package org.kvlt.core.protocol;
  */
 public interface Packet {
 
+    /**
+     * При переопределении метода верните ID пакета
+     * @return ID пакета
+     */
     int getId();
 
 }
