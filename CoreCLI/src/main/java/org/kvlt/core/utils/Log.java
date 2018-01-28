@@ -1,6 +1,7 @@
 package org.kvlt.core.utils;
 
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Log {
 
@@ -8,7 +9,7 @@ public class Log {
     private static final Logger logger;
 
     static {
-        logger = Logger.getLogger("CoreCLI");
+        logger = LogManager.getLogger(Log.class);
 //        simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
     }
 
@@ -17,11 +18,11 @@ public class Log {
     }
 
     public static void err(String str) {
-        logger.severe(str);
+        logger.error(str);
     }
 
     public static void warn(String str) {
-        logger.warning(str);
+        logger.warn(str);
     }
 
 }

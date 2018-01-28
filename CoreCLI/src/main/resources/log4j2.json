@@ -1,0 +1,54 @@
+{
+  "configuration": {
+    "name": "log-config",
+    "properties": [
+      {
+        "name": "log-path",
+        "value": "logs"
+      }
+    ],
+    "Appenders": {
+      "Console": {
+        "name": "Console",
+        "target": "SYSTEM_OUT",
+        "PatternLayout": {
+          "pattern": "[%level][%d{HH:mm:ss}] %msg%n"
+        }
+      },
+      "RollingFile": {
+        "name": "RollingFile",
+        "fileName": "latest.log",
+        "filePattern": "logs/log-%d{dd-MM-yyyy}-%i.log",
+        "PatternLayout": {
+          "pattern": "[%level][%d{HH:mm:ss}] %msg%n"
+        },
+        "Policies": {
+          "SizeBasedTriggeringPolicy": {
+            "size":"10 MB"
+          }
+        },
+        "DefaultRolloverStrategy": {
+          "max":"10"
+        }
+      }
+    },
+    "Loggers": {
+      "Root": {
+        "AppenderRef": [
+          {
+            "ref": "Console"
+          },
+          {
+            "ref": "RollingFile"
+          }
+        ],
+        "level": "trace"
+      },
+      "logger": {
+        "name": "org.hibernate",
+        "level": "off",
+        "additivity": "false"
+      }
+    }
+  }
+}
