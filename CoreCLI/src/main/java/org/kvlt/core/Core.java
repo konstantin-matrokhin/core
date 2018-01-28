@@ -2,6 +2,7 @@ package org.kvlt.core;
 
 import org.kvlt.core.commands.CommandListener;
 import org.kvlt.core.db.HibernateInitializer;
+import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.entities.PremiumPlayers;
 import org.kvlt.core.entities.ServerPlayer;
@@ -56,6 +57,21 @@ public final class Core implements CoreAPI {
 
         server.start();
         commandListener.listen();
+    }
+
+    @Override
+    public ServerPlayer getOnlinePlayer(String name) {
+        return onlinePlayers.get(name);
+    }
+
+    @Override
+    public ServerPlayer getUnloggedPlayer(String name) {
+        return unloggedPlayers.get(name);
+    }
+
+    @Override
+    public ServerPlayer getOfflinePlayer(String name) {
+        return PlayerFactory.loadPlayer(name, false);
     }
 
     @Override

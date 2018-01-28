@@ -2,7 +2,6 @@ package org.kvlt.core.entities;
 
 import io.netty.util.internal.ConcurrentSet;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -17,7 +16,7 @@ public class PlayerList<T extends ServerPlayer> implements Iterable<T> {
     private Set<T> players;
 
     {
-        players = new HashSet<>();
+        players = new ConcurrentSet<>();
     }
 
     public boolean add(T player) {

@@ -6,11 +6,11 @@ import org.kvlt.core.bungee.packets.protocol.PlayerPacket;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
-public class PlayerLoginPacket extends PlayerPacket {
+public class PreLoginPacket extends PlayerPacket {
 
     private String ip;
 
-    public PlayerLoginPacket(String playerName, String ip) {
+    public PreLoginPacket(String playerName, String ip) {
         setPlayerName(playerName);
         this.ip = ip;
     }
@@ -24,6 +24,6 @@ public class PlayerLoginPacket extends PlayerPacket {
 
     @Override
     public int getId() {
-        return Packets.PLAYER_LOGIN_PACKET;
+        return Packets.PLAYER_PRELOGIN_PACKET;
     }
 }

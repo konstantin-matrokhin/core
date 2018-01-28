@@ -5,22 +5,22 @@ import org.kvlt.core.bungee.packets.protocol.BungeePacketOut;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
-public class LoginPacket extends BungeePacketOut {
+public class AuthedPacket extends BungeePacketOut {
 
-    private String name;
+    private String player;
 
-    public LoginPacket(String name) {
-        this.name = name;
+    public AuthedPacket(String player) {
+        this.player = player;
     }
 
     @Override
-    public void write(ByteBuf out) {
-        PacketUtil.writeString(name, out);
+    public void write(ByteBuf in) {
+        PacketUtil.writeString(player, in);
     }
 
     @Override
     public int getId() {
-        return Packets.PLAYER_LOGIN_PACKET;
+        return Packets.SUCCESS_AUTH_PACKET;
     }
 
 }

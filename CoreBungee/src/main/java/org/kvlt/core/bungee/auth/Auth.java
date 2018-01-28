@@ -12,6 +12,7 @@ import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -173,4 +174,5 @@ public class Auth {
     public static Map<ProxiedPlayer, ScheduledTask> getAnnoyingMessages() {
         return annoyingMessages;
     }
+
 }

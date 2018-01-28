@@ -3,6 +3,7 @@ package org.kvlt.core.packets.player;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import org.kvlt.core.Core;
+import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.player.PlayerSwitchServerEvent;
 import org.kvlt.core.nodes.GameServer;
@@ -23,20 +24,22 @@ public class PlayerSwitchServerPacket implements PacketIn {
 
     @Override
     public void execute(Channel channel) {
-        ServerPlayer op = Core.get().getOnlinePlayers().get(playerName);
-        if (op == null) return;
+        PlayerFactory.addTask(() -> {
+            ServerPlayer op = Core.get().getOnlinePlayer(playerName);
+            if (op == null) return;
 
-        GameServer destination = Core.get().getGameServers().getNode(to);
+            GameServer destination = Core.get().getGameServers().getNode(to);
 
-        if (op.getCurrentServer() != null) {
-            op.getCurrentServer().getOnlinePlayers().remove(op);
-        }
+            if (op.getCurrentServer() != null) {
+                op.getCurrentServer().getOnlinePlayers().remove(op);
+            }
 
-        op.setCurrentServer(destination);
-        destination.getOnlinePlayers().add(op);
+            op.setCurrentServer(destination);
+            destination.getOnlinePlayers().add(op);
 
-        PlayerSwitchServerEvent psse = new PlayerSwitchServerEvent(op, destination);
-        psse.invoke();
+            PlayerSwitchServerEvent psse = new PlayerSwitchServerEvent(op, destination);
+            psse.invoke();
+        });
     }
 
     @Override

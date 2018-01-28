@@ -30,8 +30,9 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
                 new PlayerSwitchServerPacket(),
                 new PlayerChatPacket(),
                 new PlayerRegisterPacket(),
-                //new PlayerLoginPacketDeprecated(),
-                new PlayerLoginPacket(),
+                new PreLoginPacket(),
+                new LoginPacket(),
+                new AuthedPacket()
                 new PrivateMessagePacket(),
                 new ReplyPacket(),
                 new EmailAddPacket(),

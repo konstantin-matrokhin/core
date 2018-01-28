@@ -12,7 +12,7 @@ import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.Log;
 
-public class PlayerLoginPacket implements PacketIn {
+public class PreLoginPacket implements PacketIn {
 
     private String playerName;
     private String ip;
@@ -52,13 +52,6 @@ public class PlayerLoginPacket implements PacketIn {
                 }
             }
 
-            Core.get().getUnloggedPlayers().remove(player);
-            Core.get().getOnlinePlayers().add(player);
-
-            player.setJoinTime(System.currentTimeMillis());
-            PlayerFactory.updatePlayer(player);
-            System.out.println(String.format("[+] Игрок %s подключился", playerName));
-
             PlayerPreLoginEvent prle = new PlayerPreLoginEvent(player);
             prle.invoke();
         };
@@ -68,6 +61,6 @@ public class PlayerLoginPacket implements PacketIn {
 
     @Override
     public int getId() {
-        return Packets.PLAYER_LOGIN_PACKET;
+        return Packets.PLAYER_PRELOGIN_PACKET;
     }
 }

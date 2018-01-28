@@ -2,12 +2,16 @@ package org.kvlt.core.bungee;
 
 import net.md_5.bungee.api.connection.PendingConnection;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.*;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.md_5.bungee.api.event.PostLoginEvent;
+import net.md_5.bungee.api.event.PreLoginEvent;
+import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.kvlt.core.bungee.auth.Auth;
-import org.kvlt.core.bungee.packets.PlayerLoginPacket;
+import org.kvlt.core.bungee.packets.LoginPacket;
 import org.kvlt.core.bungee.packets.PlayerQuitPacket;
+import org.kvlt.core.bungee.packets.PreLoginPacket;
 import org.kvlt.core.bungee.packets.SwitchServerPacket;
 import org.kvlt.core.bungee.storages.PremiumQueue;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
@@ -18,9 +22,12 @@ public class ProxyEventListener implements Listener {
     public void onPreLogin(PreLoginEvent event) {
         PendingConnection c = event.getConnection();
         String name = c.getName();
+        String host = c.getAddress().getHostName();
+
+        new PreLoginPacket(name, host).send();
+
         boolean isPremium = CoreBungee.getAPI().getPremiumPlayers().contains(name)
                 || PremiumQueue.has(name);
-
         if (isPremium) {
             c.setOnlineMode(true);
         }
@@ -30,9 +37,8 @@ public class ProxyEventListener implements Listener {
     public void onPostLogin(PostLoginEvent event) {
         ProxiedPlayer player = event.getPlayer();
         String name = player.getName();
-        String host = player.getAddress().getHostName();
 
-        PlayerLoginPacket plp = new PlayerLoginPacket(name, host);
+        LoginPacket plp = new LoginPacket(name);
         plp.send();
     }
 
