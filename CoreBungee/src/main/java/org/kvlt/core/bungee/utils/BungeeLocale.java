@@ -4,6 +4,7 @@ import net.md_5.bungee.config.Configuration;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.localization.Localization;
 
+@Deprecated
 public class BungeeLocale {
 
     private static Localization localization;

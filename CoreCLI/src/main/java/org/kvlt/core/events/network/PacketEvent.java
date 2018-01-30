@@ -24,8 +24,8 @@ public class PacketEvent implements CoreEvent {
         return packet;
     }
 
+
     public Channel getChannel() {
         return channel;
     }
-
 }

@@ -5,8 +5,10 @@ import org.kvlt.core.events.Cancellable;
 
 public class PlayerLoginEvent extends PlayerEvent implements Cancellable {
 
+    //todo сделать причину отмены входа
+
     public PlayerLoginEvent(ServerPlayer player) {
-        setPlayer(player);
+        super(player);
     }
 
     @Override

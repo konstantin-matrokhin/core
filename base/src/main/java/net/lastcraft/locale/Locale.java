@@ -1,12 +1,5 @@
 package net.lastcraft.locale;
 
-import net.lastcraft.sql.Connection;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,11 +9,11 @@ public class Locale {
 
     public Locale(String name) {
         this.name = name;
-        try {
-            loadFromSite();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    //loadFromSite();
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     public Map<String, String> getMessages() {
@@ -50,20 +43,20 @@ public class Locale {
         }
     }
 
-    private void loadFromSite() throws IOException {
-        URL oracle = new URL("http://s1" + Connection.domane + "/lang/" + name + ".yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(new InputStreamReader(oracle.openStream()));
-        for (String string : config.getConfigurationSection("").getKeys(false)) {
-            if (config.getList(string) == null && config.get(string) == null) {
-                System.out.println("ОШИБКА! Файла нет или он заполнен не правильно!");
-            } else {
-                if(!config.isList(string)) {
-                    add(string, config.getString(string));
-                } else {
-                    add(string, config.getStringList(string));
-                }
-            }
-        }
-    }
+    //private void loadFromSite() throws IOException {
+    //    URL oracle = new URL("http://s1" + Connection.domane + "/lang/" + name + ".yml");
+    //    FileConfiguration config = YamlConfiguration.loadConfiguration(new InputStreamReader(oracle.openStream()));
+    //    for (String string : config.getConfigurationSection("").getKeys(false)) {
+    //        if (config.getList(string) == null && config.get(string) == null) {
+    //            System.out.println("ОШИБКА! Файла нет или он заполнен не правильно!");
+    //        } else {
+    //            if(!config.isList(string)) {
+    //                add(string, config.getString(string));
+    //            } else {
+    //                add(string, config.getStringList(string));
+    //            }
+    //        }
+    //    }
+    //}
 
 }

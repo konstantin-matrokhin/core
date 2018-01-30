@@ -11,7 +11,9 @@ public class PlayerJoinEvent extends PlayerEvent implements Cancellable, Resulta
     private Proxy proxy;
     private boolean cancelled;
 
+    //todo заюзать прокси и эвент почему-то вызывается в 2х местах
     public PlayerJoinEvent(ServerPlayer player) {
+        super(player);
     }
 
     public Proxy getProxy() {
@@ -30,6 +32,7 @@ public class PlayerJoinEvent extends PlayerEvent implements Cancellable, Resulta
 
     @Override
     public void setResult(EventResult result, String response) {
+        //todo кикать после инвока эвента и отсюда вообще его убрать
         if (result == EventResult.KICK) {
             getPlayer().kick(response);
         }

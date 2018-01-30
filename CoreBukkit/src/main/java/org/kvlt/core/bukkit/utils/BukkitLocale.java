@@ -4,6 +4,7 @@ import org.bukkit.configuration.Configuration;
 import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.localization.Localization;
 
+@Deprecated
 public class BukkitLocale {
 
     private static Localization localization;

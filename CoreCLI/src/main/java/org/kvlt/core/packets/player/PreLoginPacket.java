@@ -5,7 +5,6 @@ import io.netty.channel.Channel;
 import org.kvlt.core.Core;
 import org.kvlt.core.db.PlayerFactory;
 import org.kvlt.core.entities.ServerPlayer;
-import org.kvlt.core.events.player.PlayerPreLoginEvent;
 import org.kvlt.core.nodes.Proxy;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
@@ -51,9 +50,6 @@ public class PreLoginPacket implements PacketIn {
                     PlayerFactory.unban(player);
                 }
             }
-
-            PlayerPreLoginEvent prle = new PlayerPreLoginEvent(player);
-            prle.invoke();
         };
 
         PlayerFactory.addTask(r);

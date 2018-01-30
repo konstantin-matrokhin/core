@@ -1,6 +1,7 @@
 package org.kvlt.core.bukkit;
 
 import io.netty.channel.Channel;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.net.ConnectionManager;
@@ -12,15 +13,17 @@ import java.util.Objects;
 
 public class MainCoreBukkit implements CoreAPI {
 
-    private final JavaPlugin plugin;
     private final PacketResolver packetResolver;
 
     private Channel server;
 
-    public MainCoreBukkit(JavaPlugin plugin) {
-        this.plugin = plugin;
-
+    MainCoreBukkit() {
         packetResolver = new PacketResolver();
+    }
+
+    @Override
+    public String getName() {
+        return ConfigManager.getClientName();
     }
 
     @Override
@@ -45,16 +48,6 @@ public class MainCoreBukkit implements CoreAPI {
 
         String name = player.getName();
         new TransferRequestPacket(name, serverPattern).send();
-    }
-
-    @Override
-    public void setLanguage(Player player, String lang) {
-
-    }
-
-    @Override
-    public String getLanguage(Player player) {
-        return null;
     }
 
     @Override

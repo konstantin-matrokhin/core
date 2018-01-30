@@ -10,7 +10,7 @@ import org.kvlt.core.packets.player.*;
 import org.kvlt.core.packets.proxy.BroadcastInPacket;
 import org.kvlt.core.packets.proxy.ProxyConnectPacket;
 import org.kvlt.core.packets.proxy.ProxyDisconnectPacket;
-import org.kvlt.core.packets.proxy.TransferRequestPacket;
+import org.kvlt.core.packets.player.TransferRequestPacket;
 import org.kvlt.core.protocol.*;
 
 public class CoreInitializer extends ChannelInitializer<SocketChannel> {
@@ -27,8 +27,6 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
                 new ServerDisconnectPacket(),
                 new PlayerJoinPacket(),
                 new PlayerQuitPacket(),
-                new PlayerSwitchServerPacket(),
-                new PlayerChatPacket(),
                 new PlayerRegisterPacket(),
                 new PreLoginPacket(),
                 new LoginPacket(),

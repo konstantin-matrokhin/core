@@ -6,6 +6,7 @@ import org.kvlt.core.protocol.PacketOut;
 import org.kvlt.core.protocol.PacketResolver;
 
 public interface CoreAPI {
+    String getName();
 
     void connect();
 
@@ -15,16 +16,10 @@ public interface CoreAPI {
 
     void transfer(Player player, String serverPattern);
 
-    void setLanguage(Player player, String lang);
-
-    String getLanguage(Player player);
-
     Channel getServer();
 
     void setServer(Channel channel);
 
     PacketResolver getPacketResolver();
-
-
 
 }

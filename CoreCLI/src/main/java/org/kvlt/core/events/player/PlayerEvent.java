@@ -7,11 +7,11 @@ public abstract class PlayerEvent implements CoreEvent {
 
     private ServerPlayer player;
 
-    public ServerPlayer getPlayer() {
-        return player;
+    protected PlayerEvent(ServerPlayer serverPlayer) {
+        this.player = serverPlayer;
     }
 
-    protected void setPlayer(ServerPlayer player) {
-        this.player = player;
+    public ServerPlayer getPlayer() {
+        return player;
     }
 }

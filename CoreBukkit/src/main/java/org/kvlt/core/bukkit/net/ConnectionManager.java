@@ -7,7 +7,8 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.kvlt.core.bukkit.ConfigManager;
+import org.kvlt.core.bukkit.CorePlugin;
+import org.kvlt.core.bukkit.packets.ServerDisconnectPacketOut;
 import org.kvlt.core.bukkit.utils.Log;
 import org.kvlt.core.protocol.PacketOut;
 
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConnectionManager {
 
-    public static final long RECONNECT_DELAY = 3L;
+    private static final long RECONNECT_DELAY = 3L;
 
     private static ConnectionManager instance;
 
@@ -23,15 +24,11 @@ public class ConnectionManager {
     private Bootstrap bootstrap;
     private Channel channel;
 
-    private String host;
-    private int port;
     private boolean connected;
 
     private ConnectionManager() {}
 
     public void startClient() {
-        host = ConfigManager.config().getString("host");
-        port = ConfigManager.config().getInt("port");
         eventLoopGroup = new NioEventLoopGroup();
 
         try {
@@ -56,7 +53,7 @@ public class ConnectionManager {
 
         if (connected) return;
         try {
-            ChannelFuture channelFuture = bootstrap.connect(host, port);
+            ChannelFuture channelFuture = bootstrap.connect("build.huesos228.com", 3030); //куда коннект
             channel = channelFuture.channel();
             channelFuture.addListener((ChannelFuture future) -> {
                 connected = future.isSuccess();
@@ -96,6 +93,7 @@ public class ConnectionManager {
     }
 
     public void disconnect() {
+        new ServerDisconnectPacketOut(CorePlugin.getAPI().getName()).send();
         try {
             if (eventLoopGroup.shutdownGracefully().sync().isSuccess()) {
                 Log.$("Отключено от главного сервера");
