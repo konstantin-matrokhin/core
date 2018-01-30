@@ -2,6 +2,7 @@ package org.kvlt.core.bungee;
 
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.packets.DisconnectPacket;
+import org.kvlt.core.bungee.utils.BungeeLocale;
 
 public final class CoreBungee extends Plugin {
 
@@ -12,8 +13,10 @@ public final class CoreBungee extends Plugin {
     public void onEnable() {
         instance = this;
         core = new MainProxyCore(this);
+
+        BungeeLocale.load();
+
         core.connect();
-        System.out.println("MAIN: " + (getAPI() == null));
     }
 
     @Override

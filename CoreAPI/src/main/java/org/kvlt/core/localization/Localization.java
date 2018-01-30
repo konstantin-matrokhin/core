@@ -27,7 +27,7 @@ public class Localization {
             InputStream listStream = getStreamFromPath(listPath);
             YamlConfig langList = new YamlConfig(listStream);
             List<String> languages = langList.getList(String.class, "languages");
-            System.out.println(String.format("Найдено %d локализаций.", languages.size()));
+            System.out.println(String.format("Найдено локализаций: %d.", languages.size()));
 
             languages.stream().parallel().forEach((lang) -> {
                 try {
