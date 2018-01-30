@@ -41,8 +41,6 @@ public abstract class GamerBase implements IBaseGamer {
         GamerAPI.getGamers().put(name.toLowerCase(), this);
     }
 
-    public abstract GamerType getGamerType();
-
     public long getStart() {
         return start;
     }

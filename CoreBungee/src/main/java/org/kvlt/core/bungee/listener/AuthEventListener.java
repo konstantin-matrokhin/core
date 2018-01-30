@@ -3,8 +3,10 @@ package org.kvlt.core.bungee.listener;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import org.kvlt.core.bungee.GamerBungee;
 import org.kvlt.core.bungee.storages.Infractions;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
@@ -65,9 +67,12 @@ public class AuthEventListener implements Listener {
                 event.setCancelled(true);
             }
         }
+    }
 
-//        PlayerChatPacket pcp = new PlayerChatPacket(sender.getName(), message, isCommand);
-//        pcp.send();
+    @EventHandler
+    public void onQuit(PlayerDisconnectEvent e) {
+        ProxiedPlayer proxiedPlayer = e.getPlayer();
+        GamerBungee.remove(proxiedPlayer.getName());
     }
 
 }
