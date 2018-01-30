@@ -2,7 +2,7 @@ package org.kvlt.core.bukkit.commands;
 
 import net.lastcraft.api.command.CommandInterface;
 import net.lastcraft.api.command.SpigotCommand;
-import net.lastcraft.entity.GamerEntity;
+import net.lastcraft.api.player.GamerEntity;
 import org.kvlt.core.bukkit.packets.ReplyPacket;
 
 public class ReplyCommand implements CommandInterface {

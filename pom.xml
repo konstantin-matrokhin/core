@@ -22,6 +22,7 @@
         <module>CoreCLI</module>
         <module>CoreBungee</module>
         <module>CoreBukkit</module>
+        <module>base</module>
     </modules>
 
 </project>

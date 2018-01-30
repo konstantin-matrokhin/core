@@ -10,7 +10,7 @@ import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 import org.kvlt.core.utils.LangCommons;
-import org.kvlt.core.utils.Localization;
+import org.kvlt.core.utils.CoreLocale;
 
 public class PlayerInfoPacket implements PacketIn {
 
@@ -34,7 +34,7 @@ public class PlayerInfoPacket implements PacketIn {
                 if (PlayerFactory.isStaff(senderPlayer)) {
                     response = full ? PlayerFactory.getPrettyInfo(player) : PlayerFactory.getShortInfo(player);
                 } else {
-                    response = Localization.get(senderPlayer.getLang(), LangCommons.NO_PERM);
+                    response = CoreLocale.get(senderPlayer.getLang(), LangCommons.NO_PERM);
                 }
                 new MessagePacket(sender, response).send(channel);
             }

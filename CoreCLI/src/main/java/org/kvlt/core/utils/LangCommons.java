@@ -6,5 +6,6 @@ public class LangCommons {
     public static final String NO_PERM = "no-permission";
     public static final String BAN = "ban";
 
-    public static final String RUSSAIN = "russian";
+    public static final String RUSSIAN = "russian";
+
 }

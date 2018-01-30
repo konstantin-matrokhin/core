@@ -35,6 +35,13 @@
             <version>4.0.54.Final</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.19</version>
+        </dependency>
+
     </dependencies>
 
 </project>

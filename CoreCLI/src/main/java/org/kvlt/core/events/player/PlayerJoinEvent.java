@@ -1,6 +1,5 @@
 package org.kvlt.core.events.player;
 
-import com.sun.istack.internal.Nullable;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.events.Cancellable;
 import org.kvlt.core.events.EventResult;
@@ -30,7 +29,7 @@ public class PlayerJoinEvent extends PlayerEvent implements Cancellable, Resulta
     }
 
     @Override
-    public void setResult(EventResult result, @Nullable String response) {
+    public void setResult(EventResult result, String response) {
         if (result == EventResult.KICK) {
             getPlayer().kick(response);
         }

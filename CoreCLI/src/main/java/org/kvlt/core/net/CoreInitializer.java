@@ -32,7 +32,7 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
                 new PlayerRegisterPacket(),
                 new PreLoginPacket(),
                 new LoginPacket(),
-                new AuthedPacket()
+                new AuthedPacket(),
                 new PrivateMessagePacket(),
                 new ReplyPacket(),
                 new EmailAddPacket(),

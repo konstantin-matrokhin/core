@@ -2,7 +2,7 @@ package org.kvlt.core.bukkit.commands;
 
 import net.lastcraft.api.command.CommandInterface;
 import net.lastcraft.api.command.SpigotCommand;
-import net.lastcraft.entity.GamerEntity;
+import net.lastcraft.api.player.GamerEntity;
 import net.lastcraft.group.Group;
 import org.kvlt.core.bukkit.packets.BanPacket;
 import org.kvlt.core.protocol.PacketUtil;

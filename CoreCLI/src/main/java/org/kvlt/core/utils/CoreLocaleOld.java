@@ -14,7 +14,8 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Localization {
+@Deprecated
+public class CoreLocaleOld {
 
     private static final Map<String, CoreConfig> langMap;
 
@@ -62,7 +63,7 @@ public class Localization {
         return langArray;
     }
 
-    public static void load(String lang, InputStream in) {
+    private static void load(String lang, InputStream in) {
         try {
             langMap.put(lang, new YAMLConfig(in));
             Log.$(String.format("Локализация %s загружена", lang));
@@ -75,11 +76,11 @@ public class Localization {
     public static String get(ServerPlayer player, String key) {
         String lang;
         if (player == null) {
-            lang = LangCommons.RUSSAIN;
+            lang = LangCommons.RUSSIAN;
         } else {
             lang = player.getLang();
         }
-        return get(lang, key);
+        return get(lang, key.toUpperCase());
     }
 
     public static String get(ServerPlayer player, String key, Object... format) {
@@ -93,7 +94,7 @@ public class Localization {
                 || langMap.size() == 0) {
             //TODO replace with LangCommons
             //TODO send from russian
-            return String.format("Localization error! Please, contact us to solve the issue.\n" +
+            return String.format("CoreLocale error! Please, contact us to solve the issue.\n" +
                     "KEY = %s\n" +
                     "LANG = %s",
                     key, lang);

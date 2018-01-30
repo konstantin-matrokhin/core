@@ -1,7 +1,7 @@
 package org.kvlt.core.bukkit.commands;
 
 import net.lastcraft.api.command.CommandInterface;
-import net.lastcraft.entity.GamerEntity;
+import net.lastcraft.api.player.GamerEntity;
 import net.lastcraft.group.Group;
 import org.kvlt.core.bukkit.packets.GListPacket;
 import org.kvlt.core.protocol.PacketUtil;

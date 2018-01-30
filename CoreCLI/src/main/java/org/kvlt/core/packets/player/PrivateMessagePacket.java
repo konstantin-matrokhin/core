@@ -9,13 +9,10 @@ import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.CoreLocale;
 import org.kvlt.core.utils.LangCommons;
-import org.kvlt.core.utils.Localization;
 
 public class PrivateMessagePacket implements PacketIn {
-
-    public static final String RESPONSE = "Я -> %s: %s";
-    public static final String RECEIVED = "%s -> вам: %s";
 
     private String sender;
     private String recipient;
@@ -36,8 +33,8 @@ public class PrivateMessagePacket implements PacketIn {
         String recipientsMessage;
 
         if (to != null) {
-            String responseTemplate = Localization.get(from, "pm-response");
-            String receiveTemplate = Localization.get(to, "pr-receive");
+            String responseTemplate = CoreLocale.get(from, "pm-response");
+            String receiveTemplate = CoreLocale.get(to, "pr-receive");
 
             response = String.format(responseTemplate, sender, message);
             recipientsMessage = String.format(receiveTemplate, recipient, message);
@@ -48,7 +45,7 @@ public class PrivateMessagePacket implements PacketIn {
             MessagePacket msg = new MessagePacket(recipient, recipientsMessage);
             to.getCurrentProxy().send(msg);
         } else {
-            response = Localization.get(from, LangCommons.PLAYER_NOT_FOUND);
+            response = CoreLocale.get(from, LangCommons.PLAYER_NOT_FOUND);
         }
 
         MessagePacket responsePacket = new MessagePacket(sender, response);

@@ -12,7 +12,8 @@
         "name": "Console",
         "target": "SYSTEM_OUT",
         "PatternLayout": {
-          "pattern": "[%level][%d{HH:mm:ss}] %msg%n"
+          "pattern": "[%level][%d{HH:mm:ss}] %msg%n",
+          "charset": "UTF-8"
         }
       },
       "RollingFile": {
@@ -20,7 +21,8 @@
         "fileName": "latest.log",
         "filePattern": "logs/log-%d{dd-MM-yyyy}-%i.log",
         "PatternLayout": {
-          "pattern": "[%level][%d{HH:mm:ss}] %msg%n"
+          "pattern": "[%level][%d{HH:mm:ss}] %msg%n",
+          "charset": "UTF-8"
         },
         "Policies": {
           "SizeBasedTriggeringPolicy": {

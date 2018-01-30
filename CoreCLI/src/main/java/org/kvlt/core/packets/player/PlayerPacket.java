@@ -5,7 +5,7 @@ import org.kvlt.core.Core;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketIn;
-import org.kvlt.core.utils.Localization;
+import org.kvlt.core.utils.CoreLocale;
 
 public abstract class PlayerPacket implements PacketIn {
 
@@ -31,7 +31,7 @@ public abstract class PlayerPacket implements PacketIn {
     }
 
     protected void writeMsg(String response) {
-        this.response = Localization.get(getPlayer(), response);
+        this.response = CoreLocale.get(getPlayer(), response);
     }
 
     protected void writeMsg(String response, Object... format) {

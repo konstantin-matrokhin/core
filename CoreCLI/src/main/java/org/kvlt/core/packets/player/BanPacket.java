@@ -11,8 +11,8 @@ import org.kvlt.core.packets.MessagePacket;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
+import org.kvlt.core.utils.CoreLocale;
 import org.kvlt.core.utils.LangCommons;
-import org.kvlt.core.utils.Localization;
 import org.kvlt.core.utils.Log;
 
 public class BanPacket implements PacketIn {
@@ -68,7 +68,7 @@ public class BanPacket implements PacketIn {
 
                     PlayerFactory.updatePlayer(victimPlayer);
                     new KickPacket(victim, String.format("%s: %s",
-                            Localization.get(victimPlayer, LangCommons.BAN),
+                            CoreLocale.get(victimPlayer, LangCommons.BAN),
                             reason
                     )).send(channel);
 
@@ -77,12 +77,12 @@ public class BanPacket implements PacketIn {
                             victim,
                             reason));
 
-                    response = Localization.get(enforcerPlayer, "ban-success", victim);
+                    response = CoreLocale.get(enforcerPlayer, "ban-success", victim);
                 } else {
-                    response = Localization.get(enforcerPlayer, "no-such-player");
+                    response = CoreLocale.get(enforcerPlayer, "no-such-player");
                 }
             } else {
-                response = Localization.get(enforcerPlayer, LangCommons.NO_PERM);
+                response = CoreLocale.get(enforcerPlayer, LangCommons.NO_PERM);
             }
 
             MessagePacket responsePacket = new MessagePacket(enforcer, response);
