@@ -3,6 +3,7 @@ package org.kvlt.core.bukkit;
 import io.netty.channel.Channel;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.*;
+import org.kvlt.core.bukkit.utils.BukkitLocale;
 import org.kvlt.core.protocol.PacketResolver;
 
 public class CorePlugin extends JavaPlugin {
@@ -22,6 +23,8 @@ public class CorePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         api = new MainCoreBukkit(this);
+
+        BukkitLocale.load();
 
         new AlertCommand();
         new ServerAlertCommand();
