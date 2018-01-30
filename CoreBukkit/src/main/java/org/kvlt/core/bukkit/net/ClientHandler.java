@@ -3,7 +3,6 @@ package org.kvlt.core.bukkit.net;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.kvlt.core.bukkit.ConfigManager;
 import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.bukkit.packets.ConnectPacket;
@@ -13,7 +12,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<PacketIn> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        Bukkit.getLogger().info(ChatColor.AQUA + "Соединено с главным сервером.");
+        Bukkit.getLogger().info("§bСоединено с главным сервером.");
         CorePlugin.getAPI().setServer(ctx.channel());
 
         String name = ConfigManager.getClientName();

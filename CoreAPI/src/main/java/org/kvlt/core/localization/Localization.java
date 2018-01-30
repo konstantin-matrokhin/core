@@ -6,14 +6,19 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Localization {
 
     private static final String LOCALES_LIST = "list.yml";
+    static final String ERROR = "§cNot found";
+
+    private static List<String> format(List<String> list, Object... objects) {
+        String string = list.stream().collect(Collectors.joining("±"));
+        string = String.format(string, objects);
+        return Arrays.asList(string.split("±"));
+    }
 
     private final Map<String, LocaleConfig> langMap;
 
@@ -46,7 +51,6 @@ public class Localization {
     }
 
     private InputStream getStreamFromPath(String path) throws IOException {
-        InputStream in;
         URL url = new URL(path);
 
         if (path.startsWith("file")) {
@@ -64,6 +68,15 @@ public class Localization {
         }
     }
 
+    public List<String> getList(String lang, String key) {
+        LocaleConfig config = langMap.get(lang);
+        return config.getList(String.class, key);
+    }
+
+    public List<String> getList(String lang, String key, Object... format) {
+        return format(getList(lang, key), format);
+    }
+
     public String get(String lang, String key, Object... format) {
         return get(lang, String.format(key, format));
     }
@@ -75,7 +88,8 @@ public class Localization {
             lang = "ru";
         }
         if (!langMap.containsKey(lang)) {
-            return String.format("Локализация %s не загружена", lang);
+            return ERROR;
+            //return String.format("Локализация %s не загружена", lang);
         }
         return langMap.get(lang).getString(key);
     }

@@ -3,6 +3,9 @@ package org.kvlt.core.bungee;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 import org.kvlt.core.bungee.commands.*;
+import org.kvlt.core.bungee.listener.AuthEventListener;
+import org.kvlt.core.bungee.listener.PingEventListener;
+import org.kvlt.core.bungee.listener.ProxyEventListener;
 
 import java.util.ArrayList;
 import java.util.List;

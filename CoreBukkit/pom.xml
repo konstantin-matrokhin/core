@@ -84,7 +84,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <outputDirectory>D:\swlobby-1\plugins\</outputDirectory>
+                    <outputDirectory>C:\Users\Alex\Desktop\</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>

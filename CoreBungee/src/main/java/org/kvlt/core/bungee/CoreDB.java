@@ -10,11 +10,6 @@ public class CoreDB {
     private static CoreDB instance;
 
     private Connection connection;
-    private String host;
-    private String port;
-    private String username;
-    private String password;
-    private String db;
 
     public void connect(String host, int port, String username, String password, String db) {
         BungeeLog.$("Соединяюсь с базой данных..");

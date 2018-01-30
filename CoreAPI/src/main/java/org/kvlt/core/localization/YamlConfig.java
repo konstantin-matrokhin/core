@@ -4,21 +4,15 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class YamlConfig {
 
-    private Yaml yaml;
+    private Yaml yaml = new Yaml();;
     private InputStream in;
     private Writer out = null;
 
     private Map<String, Object> map;
-
-    {
-        yaml = new Yaml();
-    }
 
     public YamlConfig(InputStream in) {
         this.in = in;
@@ -58,6 +52,9 @@ public class YamlConfig {
     }
 
     public <T> List<T> getList(Class<T> type, String key) {
+        if (map.get(key) == null) {
+            return Collections.singletonList((T) Localization.ERROR);
+        }
         return (ArrayList<T>) map.get(key);
     }
 
