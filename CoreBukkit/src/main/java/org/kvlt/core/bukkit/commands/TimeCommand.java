@@ -16,7 +16,7 @@ public class TimeCommand implements CommandExecutor {
 //        }
 //
 //        PlayerTimePacket ptp = new PlayerTimePacket(p.getName());
-//        CorePlugin.get().getServer().writeAndFlush(ptp);
+//        CorePlugin.get().getPlayerInfo().writeAndFlush(ptp);
 
         return true;
     }

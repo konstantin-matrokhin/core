@@ -6,6 +6,8 @@ import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.bukkit.CorePlugin;
 import org.kvlt.core.bukkit.packets.BroadcastPacket;
 import org.kvlt.core.bukkit.packets.MessagePacket;
+import org.kvlt.core.bukkit.packets.PlayerDataPacket;
+import org.kvlt.core.bukkit.packets.ServerListPacket;
 import org.kvlt.core.protocol.PacketDecoder;
 import org.kvlt.core.protocol.PacketEncoder;
 import org.kvlt.core.protocol.PacketIn;
@@ -20,7 +22,9 @@ public class BukkitInitializer extends ChannelInitializer<SocketChannel> {
 
         PacketIn[] packets = {
                 new MessagePacket(),
-                new BroadcastPacket()
+                new BroadcastPacket(),
+                new PlayerDataPacket(),
+                new ServerListPacket()
         };
 
         resolver.registerPackets(packets);

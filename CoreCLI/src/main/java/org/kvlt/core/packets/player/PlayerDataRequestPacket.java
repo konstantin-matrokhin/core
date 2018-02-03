@@ -1,31 +1,34 @@
-package org.kvlt.core.packets.bukkit;
+package org.kvlt.core.packets.player;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import org.kvlt.core.db.PlayerFactory;
+import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.protocol.PacketIn;
 import org.kvlt.core.protocol.PacketUtil;
 import org.kvlt.core.protocol.Packets;
 
-public class ServerListRequestPacket implements PacketIn {
+public class PlayerDataRequestPacket implements PacketIn {
 
-    private String pattern;
+    private String playerName;
     private int key;
 
     @Override
     public void read(ByteBuf in) {
-        pattern = PacketUtil.readString(in);
+        playerName = PacketUtil.readString(in);
     }
 
     @Override
     public void execute(Channel channel) {
-        ServerListPacket packet = new ServerListPacket(pattern);
-        packet.setKey(key);
+        ServerPlayer player = PlayerFactory.getPlayer(playerName);
+        PlayerDataPacket packet = new PlayerDataPacket(player);
+        packet.setKey(getKey());
         packet.send(channel);
     }
 
     @Override
     public int getId() {
-        return Packets.SERVER_LIST_PACKET;
+        return Packets.PLAYER_DATA_PACKET;
     }
 
     @Override

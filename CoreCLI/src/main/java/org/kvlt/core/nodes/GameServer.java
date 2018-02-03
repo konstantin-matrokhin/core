@@ -6,9 +6,11 @@ import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.protocol.Packet;
 
-public class GameServer implements Node {
+import java.io.Serializable;
 
-    private Channel channel;
+public class GameServer implements Node, Serializable {
+
+    private transient Channel channel;
     private String name;
     private short port;
     private PlayerList<ServerPlayer> onlinePlayers;

@@ -42,14 +42,19 @@ public final class PacketDecoder extends ByteToMessageDecoder {
             // Валидный ли айди пакета
             byte id = byteBuf.readByte();
             if (id >= MIN_PACKET_ID) {
-
+                int key = byteBuf.readInt();
                 // Находим пакет по ID
                 PacketIn p = packetResolver.getPacketIn(id);
                 // Проверяем есть ли такой ID и проверяем длину пакета
                 if (p != null) {
-                    System.out.println(String.format("-> %s, NAME: %s", p.getId(), p.getClass().getSimpleName()));
+                    if (key != 0) {
+                        p.setKey(key);
+                        packetResolver.addToResponses(p, key);
+                    }
+                    System.out.println(String.format("-> %s, NAME: %s | key: %d",
+                            p.getId(), p.getClass().getSimpleName(), key));
 
-                    byteBuf.readerIndex(8);
+                    byteBuf.readerIndex(12);
                     p.read(byteBuf);
                     list.add(p);
                 } else {

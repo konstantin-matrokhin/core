@@ -6,6 +6,7 @@ import io.netty.channel.socket.SocketChannel;
 import org.kvlt.core.Core;
 import org.kvlt.core.packets.bukkit.ServerConnectPacket;
 import org.kvlt.core.packets.bukkit.ServerDisconnectPacket;
+import org.kvlt.core.packets.bukkit.ServerListRequestPacket;
 import org.kvlt.core.packets.player.*;
 import org.kvlt.core.packets.proxy.BroadcastInPacket;
 import org.kvlt.core.packets.proxy.ProxyConnectPacket;
@@ -48,7 +49,9 @@ public class CoreInitializer extends ChannelInitializer<SocketChannel> {
                 new LogoutPacket(),
                 new GListPacket(),
                 new BroadcastInPacket(),
-                //
+                new IpBanRequestPacket(),
+                new PlayerDataRequestPacket(),
+                new ServerListRequestPacket()
         };
 
         resolver.registerPackets(packets);

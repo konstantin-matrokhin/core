@@ -84,7 +84,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <outputDirectory>C:\Users\Alex\Desktop\</outputDirectory>
+                    <outputDirectory>D:\swlobby-1\plugins</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -112,11 +112,11 @@
     <dependencies>
 
         <dependency>
-        <groupId>darta-api</groupId>
-        <artifactId>net.lastcraft</artifactId>
-        <version>1.0</version>
-        <scope>system</scope>
-        <systemPath>${project.basedir}/../libs/DartaAPI.jar</systemPath>
+            <groupId>darta-api</groupId>
+            <artifactId>net.lastcraft</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../libs/DartaAPI.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -137,6 +137,13 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.16.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

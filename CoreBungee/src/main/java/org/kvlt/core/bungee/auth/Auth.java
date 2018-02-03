@@ -6,13 +6,13 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
 import org.kvlt.core.bungee.CoreBungee;
 import org.kvlt.core.bungee.CoreDB;
+import org.kvlt.core.bungee.packets.IpBanRequestPacket;
 import org.kvlt.core.bungee.storages.IdMap;
 import org.kvlt.core.bungee.storages.ProxyLoggedPlayers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -22,13 +22,16 @@ public class Auth {
 
     private static final String LOGIN_SQL = "SELECT * FROM authentication WHERE id = ?";
     private static final String INFO_SQL = "SELECT * FROM join_info WHERE id = ?";
+    private static final int MAX_ATTEMPTS = 5;
 
     private static Connection mysqlConnection;
     private static Map<ProxiedPlayer, ScheduledTask> annoyingMessages;
+    public static Map<ProxiedPlayer, Integer> attempts;
 
     static {
         mysqlConnection = CoreDB.get().getConnection();
         annoyingMessages = new HashMap<>();
+        attempts = new HashMap<>();
     }
 
     private static ResultSet getInfoData(int id) {
@@ -97,7 +100,12 @@ public class Auth {
                     pp.sendMessage(new TextComponent("С возвращением!"));
                     return;
                 } else {
+                    if (attemptsOf(pp) > MAX_ATTEMPTS) {
+                        new IpBanRequestPacket(ip).send();
+                        pp.disconnect(new TextComponent("Слишком много попыток входа!"));
+                    }
                     response = "Неверный пароль!";
+                    addAttempt(pp);
                 }
             } else {
                 response = "Вы не зарегистрированы!";
@@ -169,6 +177,23 @@ public class Auth {
     private static boolean inSessionRange(long time) {
         long hours = TimeUnit.MILLISECONDS.toHours(time);
         return hours < 24 && time > -1;
+    }
+
+    private static void addAttempt(ProxiedPlayer player) {
+        if (attempts.containsKey(player)) {
+            attempts.put(player, attempts.get(player) + 1);
+        } else {
+            attempts.put(player, 0);
+        }
+    }
+
+    private static int attemptsOf(ProxiedPlayer player) {
+        if (attempts.containsKey(player)) {
+            return attempts.get(player);
+        } else {
+            attempts.put(player, 0);
+            return 0;
+        }
     }
 
     public static Map<ProxiedPlayer, ScheduledTask> getAnnoyingMessages() {

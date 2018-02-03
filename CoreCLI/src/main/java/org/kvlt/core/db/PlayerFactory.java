@@ -8,6 +8,8 @@ import org.kvlt.core.Core;
 import org.kvlt.core.entities.Group;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.metrics.PlayedTimeCounter;
+import org.kvlt.core.packets.player.IpBanPacket;
+import org.kvlt.core.packets.player.IpBanRequestPacket;
 import org.kvlt.core.utils.Log;
 
 import java.util.ArrayList;
@@ -67,6 +69,15 @@ public class PlayerFactory {
 
         s.close();
         return player;
+    }
+
+    public static ServerPlayer getPlayer(String player) {
+        ServerPlayer onlinePlayer = Core.get().getOnlinePlayer(player);
+        if (onlinePlayer == null) {
+            return loadPlayer(player, false);
+        } else {
+            return onlinePlayer;
+        }
     }
 
     public static void updatePlayer(ServerPlayer player) {
@@ -132,7 +143,7 @@ public class PlayerFactory {
         }
 
         if (player != null) {
-            List<String> i = Arrays.asList(
+            List<String> i = new ArrayList<>(Arrays.asList(
                     "==========================",
                     "ID: " + player.getId(),
                     "Онлайн: " + online,
@@ -145,7 +156,7 @@ public class PlayerFactory {
                     "Последний сервер: " + player.getLastServer(),
                     "Почта: " + player.getEmail(),
                     "Последний вход: " + player.getLastAuth() // TODO normalize
-            );
+            ));
 
             if (player.isBanned()) {
                 i.add("==========================");
@@ -199,6 +210,11 @@ public class PlayerFactory {
         }
 
         return String.join("\n", i);
+    }
+
+    public static void banIp(String ip) {
+        Core.get().getProxies().send(new IpBanPacket(ip));
+        Log.warn(String.format("IP %s has been banned!", ip));
     }
 
 }

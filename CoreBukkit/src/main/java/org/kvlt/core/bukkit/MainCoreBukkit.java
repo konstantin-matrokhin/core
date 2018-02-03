@@ -1,14 +1,16 @@
 package org.kvlt.core.bukkit;
 
 import io.netty.channel.Channel;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.net.ConnectionManager;
+import org.kvlt.core.bukkit.net.JsonPacketWorker;
 import org.kvlt.core.bukkit.packets.TransferRequestPacket;
+import org.kvlt.core.json.PlayerInfo;
+import org.kvlt.core.json.ServerInfo;
 import org.kvlt.core.protocol.PacketOut;
 import org.kvlt.core.protocol.PacketResolver;
 
+import java.util.List;
 import java.util.Objects;
 
 public class MainCoreBukkit implements CoreAPI {
@@ -51,7 +53,7 @@ public class MainCoreBukkit implements CoreAPI {
     }
 
     @Override
-    public Channel getServer() {
+    public Channel getPlayerInfo() {
         return server;
     }
 
@@ -64,4 +66,20 @@ public class MainCoreBukkit implements CoreAPI {
     public PacketResolver getPacketResolver() {
         return packetResolver;
     }
+
+    @Override
+    public PlayerInfo getPlayerInfo(String playerName) {
+        return JsonPacketWorker.getPlayerInfo(playerName);
+    }
+
+    @Override
+    public ServerInfo getServerInfo(String serverName) {
+        return JsonPacketWorker.getServerInfo(serverName);
+    }
+
+    @Override
+    public List<ServerInfo> getServers(String pattern) {
+        return JsonPacketWorker.getServers(pattern);
+    }
+
 }

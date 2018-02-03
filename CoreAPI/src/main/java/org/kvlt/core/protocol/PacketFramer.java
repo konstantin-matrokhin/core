@@ -14,7 +14,7 @@ public class PacketFramer extends ByteToMessageCodec<ByteBuf> {
 
     private static final int MAX_BYTES = 65_535;
     private static final int MIN_BYTES = 8;
-    private static final int LENGTH_INDEX = 6;
+    private static final int LENGTH_INDEX = 10;
 
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, ByteBuf out) throws Exception {

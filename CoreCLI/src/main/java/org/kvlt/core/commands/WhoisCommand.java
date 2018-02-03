@@ -27,10 +27,15 @@ public class WhoisCommand extends Command {
         }
         final String name = getArg(0);
 
-        Runnable r = () -> {
-            Printer.$(PlayerFactory.getPrettyInfo(name));
-        };
-        PlayerFactory.addTask(r);
+        PlayerFactory.addTask(() -> {
+            String info = PlayerFactory.getPrettyInfo(name);
+            Printer.$(info);
+        });
+        Printer.$(PlayerFactory.getPrettyInfo(name));
+//        Runnable r = () -> {
+//            Printer.$(PlayerFactory.getShortInfo(name));
+//        };
+//        PlayerFactory.addTask(r);
         return true;
     }
 

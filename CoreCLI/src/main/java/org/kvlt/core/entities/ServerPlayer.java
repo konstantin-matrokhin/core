@@ -1,5 +1,6 @@
 package org.kvlt.core.entities;
 
+import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.GenericGenerator;
 import org.kvlt.core.nodes.GameServer;
 import org.kvlt.core.nodes.Proxy;
@@ -125,13 +126,15 @@ public class ServerPlayer implements Serializable, Kickable {
     @Column(table = "custom_prefixes", name = "prefix", length = 32)
     private String prefix;
 
-    @ElementCollection
-    @Column(table = "friends", name = "friend_id")
-    private Set<Integer> friends;
+    @Transient
+//    @ElementCollection
+//    @Column(table = "friends", name = "friend_id")
+    private transient Set<Integer> friends;
 
-    @ElementCollection
-    @Column(table = "ignores", name = "ignored_id")
-    private Set<Integer> ignores;
+    @Transient
+//    @ElementCollection
+//    @Column(table = "ignores", name = "ignored_id")
+    private transient Set<Integer> ignores;
 
     @Column(table = "reports", name = "total_reports")
     private int totalReports;

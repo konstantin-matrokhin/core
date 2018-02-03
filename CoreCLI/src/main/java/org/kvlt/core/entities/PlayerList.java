@@ -2,6 +2,7 @@ package org.kvlt.core.entities;
 
 import io.netty.util.internal.ConcurrentSet;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
  * Список игроков
  * @param <T> должен содержать класс игроков из CoreAPI
  */
-public class PlayerList<T extends ServerPlayer> implements Iterable<T> {
+public class PlayerList<T extends ServerPlayer> implements Iterable<T>, Serializable {
 
     private Set<T> players;
 
@@ -36,7 +37,7 @@ public class PlayerList<T extends ServerPlayer> implements Iterable<T> {
     }
 
     public boolean contains(String name) {
-        return players.contains(get(name));
+        return get(name) != null;
     }
 
     /**

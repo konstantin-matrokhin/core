@@ -11,4 +11,12 @@ public interface Packet {
      */
     int getId();
 
+    default int getKey() {
+        return 0;
+    }
+
+    default void setKey(int key) {
+
+    }
+
 }

@@ -23,6 +23,7 @@ public class ProxyInitializer extends ChannelInitializer<SocketChannel> {
                 new BroadcastPacket(),
                 new TransferPacket(),
                 new PremiumListPacket(),
+                new IpBanPacket(),
 
         };
 

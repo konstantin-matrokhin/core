@@ -53,7 +53,7 @@ public class Packets {
     public static final int G_LIST_PACKET = 35;
     public static final int SERVER_LIST_PACKET = 36;
     public static final int SUCCESS_AUTH_PACKET = 37;
-
-
+    public static final int BAN_IP = 38;
+    public static final int PLAYER_DATA_PACKET = 39;
 
 }

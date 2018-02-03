@@ -55,7 +55,6 @@ public class PremiumPlayers {
                 .createNativeQuery(INSERT_QUERY)
                 .setParameter("id", id)
                 .executeUpdate();
-            System.out.println("task ran");
         });
     }
 

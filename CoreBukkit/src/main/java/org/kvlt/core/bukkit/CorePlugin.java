@@ -1,7 +1,9 @@
 package org.kvlt.core.bukkit;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kvlt.core.bukkit.commands.*;
+import org.kvlt.core.bukkit.events.EventListener;
 import org.kvlt.core.bukkit.utils.BukkitLocale;
 
 public class CorePlugin extends JavaPlugin {
@@ -21,18 +23,21 @@ public class CorePlugin extends JavaPlugin {
 
         BukkitLocale.load();
 
-        new AlertCommand();
-        new ServerAlertCommand();
-        new MsgCommand();
-        new TimeCommand();
-        new HubCommand();
-        new SendCommand();
-        new ReplyCommand();
-        new BanCommand();
-        new ServerCommand();
-        new FindCommand();
-        new GListCommand();
-        new WhoisCommand();
+//        new AlertCommand();
+//        new ServerAlertCommand();
+//        new MsgCommand();
+//        new TimeCommand();
+//        new HubCommand();
+//        new SendCommand();
+//        new ReplyCommand();
+//        new BanCommand();
+//        new ServerCommand();
+//        new FindCommand();
+//        new GListCommand();
+//        new WhoisCommand();
+//        new TestCommand();
+
+        Bukkit.getPluginManager().registerEvents(new EventListener(), this);
 
         ConfigManager.initConfig();
         api.connect();

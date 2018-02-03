@@ -6,15 +6,17 @@ import org.kvlt.core.entities.PlayerList;
 import org.kvlt.core.entities.ServerPlayer;
 import org.kvlt.core.protocol.Packet;
 
+import java.io.Serializable;
+
 /**
  * Сущность, представляющая собой прокси-сервер
  * Хранит имя и канал, по которому можно отправить пакет
  */
-public class Proxy implements Node {
+public class Proxy implements Node, Serializable {
 
     private String name;
-    private Channel channel;
-    private PlayerList<ServerPlayer> players;
+    private transient Channel channel;
+    private transient PlayerList<ServerPlayer> players;
 
     public Proxy(String name, Channel channel) {
         players = new PlayerList<>();

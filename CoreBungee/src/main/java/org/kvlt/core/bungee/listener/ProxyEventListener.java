@@ -43,13 +43,13 @@ public class ProxyEventListener implements Listener {
         plp.send();
     }
 
-    @EventHandler
-    public void onServerSwitch(ServerSwitchEvent event) {
-        ProxiedPlayer player = event.getPlayer();
-        String to = player.getServer().getInfo().getName();
-        SwitchServerPacket ssp = new SwitchServerPacket(player.getName(), to);
-        ssp.send();
-    }
+//    @EventHandler
+//    public void onServerSwitch(ServerSwitchEvent event) {
+//        ProxiedPlayer player = event.getPlayer();
+//        String to = player.getServer().getInfo().getName();
+//        SwitchServerPacket ssp = new SwitchServerPacket(player.getName(), to);
+//        ssp.send();
+//    }
 
     @EventHandler
     public void onDisconnect(PlayerDisconnectEvent event) {

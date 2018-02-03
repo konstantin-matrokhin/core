@@ -53,7 +53,7 @@ public class ConnectionManager {
 
         if (connected) return;
         try {
-            ChannelFuture channelFuture = bootstrap.connect("build.huesos228.com", 3030); //куда коннект
+            ChannelFuture channelFuture = bootstrap.connect("localhost", 3030); //куда коннект
             channel = channelFuture.channel();
             channelFuture.addListener((ChannelFuture future) -> {
                 connected = future.isSuccess();

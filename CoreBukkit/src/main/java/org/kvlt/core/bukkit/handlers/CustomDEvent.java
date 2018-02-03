@@ -1,4 +1,4 @@
-package org.kvlt.core.bukkit.corehandlers;
+package org.kvlt.core.bukkit.handlers;
 
 import net.lastcraft.api.event.DEvent;
 
