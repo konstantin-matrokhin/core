@@ -21,50 +21,6 @@
         </repository>
     </repositories>
 
-    <profiles>
-        <profile>
-            <id>deploy_bukkit</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <id>scp-to-remote</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <scp localFile="D:\swlobby-1\plugins\CoreBukkit-1.0-jar-with-dependencies.jar"
-                                             remoteToFile="root@build.huesos228.com:/home/core/swlobby-1/plugins/" verbose="true"
-                                             password="hubqdoFDG34SDG1" trust="true" port="1">
-                                        </scp>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.jcraft</groupId>
-                                <artifactId>jsch</artifactId>
-                                <version>0.1.53</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>ant</groupId>
-                                <artifactId>ant-jsch</artifactId>
-                                <version>1.6.5</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <plugins>
             <plugin>
@@ -84,7 +40,6 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <outputDirectory>D:\swlobby-1\plugins</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -124,6 +79,13 @@
             <artifactId>spigot-api</artifactId>
             <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kvlt</groupId>
+            <artifactId>base</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

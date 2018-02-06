@@ -22,50 +22,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <profiles>
-        <profile>
-            <id>deploy_core</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.8</version>
-                        <executions>
-                            <execution>
-                                <id>scp-to-remote</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <scp localFile="${project.basedir}/../build/CoreCLI-1.0-jar-with-dependencies.jar"
-                                             remoteToFile="root@build.huesos228.com:/home/core/core/" verbose="true"
-                                             password="hubqdoFDG34SDG1" trust="true" port="1">
-                                        </scp>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.jcraft</groupId>
-                                <artifactId>jsch</artifactId>
-                                <version>0.1.53</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>ant</groupId>
-                                <artifactId>ant-jsch</artifactId>
-                                <version>1.6.5</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <build>
         <directory>../build/</directory>
         <plugins>
@@ -83,7 +39,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifest>mv
+                        <manifest>
                             <mainClass>org.kvlt.core.CoreCLI</mainClass>
                         </manifest>
                     </archive>
